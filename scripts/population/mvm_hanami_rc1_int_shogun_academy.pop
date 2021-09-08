@@ -1,0 +1,1212 @@
+//Intermediate mission for Hanami by Super Somario
+//Intermediate - Shogun Academy
+//This one is for you Tindall 
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_hanami.pop
+
+population
+{
+	StartingCurrency	5000
+	RespawnWaveTime		4
+	CanBotsAttackWhileInSpawnRoom	no
+	Templates
+	{
+		T_TFBot_Giant_Heavyweapons_Deflector_Warmup //Template made by someone else
+		{
+			ClassIcon	Heavy_deflector
+			Health	8000
+			Name	"Giant Warmup Deflector"
+			Class	HeavyWeapons
+			Skill	Expert
+			MaxVisionRange	1200
+			WeaponRestrictions	PrimaryOnly
+			Attributes	"MiniBoss"
+			Attributes	"UseBossHealthBar"
+			ItemAttributes
+			{
+				ItemName	warbird_minigun_butcherbird
+				"set_item_texture_wear"	.8
+				"attack projectiles"	1
+				"damage bonus"	.5
+				"fire rate bonus"	.6
+				"fire rate bonus with reduced health"	.15
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction"	0.3
+				"airblast vulnerability multiplier"	0.3
+				"override footstep sound set"	2
+			}
+			Item	"warbird_minigun_butcherbird"
+			Item	"the u-clank-a"
+			Item	"commissar's coat"
+		}
+		T_TFBot_Giant_Soldier_Spammer_Force //An basic template from Sergeant Crits, but NO crit
+		{
+			Class Soldier
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Name "Giant Force Fire Soldier"
+			ClassIcon soldier_burstfire
+			Health 4000
+			Scale 1.8
+			Item "soldier samurai hat"
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"faster reload rate" 0.6
+				"fire rate bonus" 0.2
+				"clip size upgrade atomic" 7.0
+				"Projectile speed increased" 1.3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"airblast vertical vulnerability multiplier" 0.1
+				"rage giving scale" 0.1
+			}
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Hanami_SentryBuster
+		}
+	}
+	Mission // Wave 2 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	2
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper
+			Skill	Easy
+		}
+	}
+	Mission // Wave 3 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy
+			Skill	Easy
+		}
+	}
+	Mission // Wave 4 Sleeper Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper_Sleeper
+			Skill	Easy
+		}
+	}
+	Mission // Wave 4 Kunai Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy_Kunai
+			Skill	Easy
+		}
+	}
+	Mission // Wave 5 HoK Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper_HealOnKill
+			Skill	Easy
+		}
+	}
+	Mission // Wave 5 Sentry Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot_river
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	20
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Engineer_Sentry_Battle
+		}
+	}
+	Mission // Wave 6 Battle Engineers
+	{
+		Objective	Sniper
+		Where	spawnbot_river
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Engineer_Sentry_Battle
+		}
+	}
+	Mission // Wave 6 YER Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy_YER
+			Skill	Easy
+		}
+	}
+	Mission // Wave 7 Razorback Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper_Razorback
+			Skill	Easy
+		}
+	}
+	Mission // Wave 7 RandomChoice of YER, Kunai and Basic Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	5
+		RandomChoice
+		{
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Spy
+				Skill	Easy
+				ClassIcon	spy
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Spy_Kunai
+				Skill	Easy
+				ClassIcon	spy
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Spy_YER
+				Skill	Easy
+				ClassIcon	spy
+			}
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	20
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave01a
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot
+			WaitBeforeStarting	3
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Melee
+				Skill	Easy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave01b
+			WaitForAllDead	wave01a
+			TotalCurrency	100
+			TotalCount	45
+			MaxActive	9
+			SpawnCount	9
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Knight
+				Skill	Easy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave01b
+			WaitForAllDead	wave01a
+			TotalCurrency	50
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			WaitBeforeStarting	3
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Shotgun
+				Skill	Easy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave01b
+			WaitForAllDead	wave01a
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			Where	spawnbot
+			WaitBeforeStarting	10
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Soldier_Giant
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+					Skill	Easy
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave01c
+			WaitForAllDead	wave01b
+			TotalCurrency	50
+			TotalCount	15
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier
+				Skill	Easy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave01c
+			WaitForAllDead	wave01b
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	4
+			Where	spawnbot_flank
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Demoman_Giant_Knight	
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+					Skill	Easy
+				}
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave02a
+			TotalCurrency	100
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot
+			WaitBeforeStarting	1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro
+					Attributes	AlwaysFireWeapon
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Sniper_Bow
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02a
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot_flank
+			WaitBeforeStarting	10
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Soldier_Giant_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_Kritzkrieg
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02b
+			WaitForAllDead	wave02a
+			TotalCurrency	50
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02b
+			WaitForAllDead	wave02a
+			TotalCurrency	50
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02b
+			WaitForAllDead	wave02a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Giant
+				Skill	Easy
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02c
+			WaitForAllDead	wave02b
+			TotalCurrency	100
+			TotalCount	50
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot_invasion
+			RandomSpawn	1
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave02c
+			WaitForAllDead	wave02b
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_Giant
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave03a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave03a
+			TotalCurrency	50
+			TotalCount	15
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			WaitBeforeStarting	10
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Mangler
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave03a
+			TotalCurrency	50
+			TotalCount	15
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			WaitBeforeStarting	10
+			TFBot
+			{
+				Class Pyro
+				Name "Phlogistinator Pyro"
+				ClassIcon pyro_phlog
+				Skill Normal
+				Health 175
+				WeaponRestrictions PrimaryOnly
+				Item "The Phlogistinator"
+				Item "The Bubble Pipe"
+				ItemAttributes
+				{
+					ItemName "The Phlogistinator"
+					"burn damage earns rage"		0
+					"mod soldier buff type"			0
+					"damage bonus"					1.5
+					"weapon burn time reduced"		0.2
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave03b
+			WaitForAllDead	wave03a
+			TotalCurrency	100
+			TotalCount	50
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Heavy_KGB
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Heavy_GRU
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave03b
+			WaitForAllDead	wave03a
+			TotalCurrency	50
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	2
+			Where	spawnbot_flank
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_ApocoFist
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave03b
+			WaitForAllDead	wave03a
+			TotalCurrency	150
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Giant_Bomber
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave04a
+			TotalCurrency	50
+			TotalCount	30
+			MaxActive	6
+			SpawnCount	6
+			Where 	spawnbot
+			TFBot
+			{
+				Class	Soldier
+				Skill	Easy
+				Name	"Direct Hit Soldier"
+				ClassIcon	soldier_directhit
+				Item	"The Direct Hit"
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04a
+			TotalCurrency	50
+			TotalCount	12
+			MaxActive	4
+			SpawnCount	4
+			Where	spawnbot_river
+			WaitBeforeStarting	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_BlackBox
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Giant_Sandman
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04b
+			WaitForAllDead	wave04a
+			TotalCurrency	100
+			TotalCount	35
+			MaxActive	7
+			SpawnCount	7
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro_Flare
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro_Detonator
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Pyro_ScorchShot
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04b
+			WaitForAllDead	wave04a
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Heavy_Giant_Booster
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04c
+			WaitForAllDead	wave04b
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Soldier_Giant_Charged
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave04s
+			WaitForAllDead	wave04b
+			TotalCurrency	150
+			TotalCount	100
+			MaxActive	5
+			SpawnCount	5
+			Where	spawnbot
+			Support	1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Jump
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Sniper_Bow
+				}
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave05a
+			TotalCurrency	100
+			TotalCount	75
+			MaxActive	15
+			SpawnCount	5
+			Where	spawnbot
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	2
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_FaN
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Blast
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05b
+			WaitForAllDead	wave05a
+			TotalCurrency	100
+			TotalCount	35
+			MaxActive	7
+			SpawnCount	7
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Beggars
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05b
+			WaitForAllDead	wave05a
+			TotalCurrency	200
+			TotalCount	5
+			MaxActive	3
+			SpawnCount	1
+			Where	spawnbot_river_slow
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	8
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Giant
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05c
+			WaitForAllDead	wave05b
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	15
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Conch
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05c
+			WaitForAllDead	wave05b
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	25
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Buff
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave05s
+			WaitForAllDead	wave05b
+			TotalCurrency	0
+			TotalCount	100
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot_flank
+			WaitBetweenSpawns	5
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_DirectHit_Spammer
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave06a
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Tank
+			{
+				Health	15000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06a
+			TotalCurrency	50
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot
+			WaitBeforeStarting	10
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Combat
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06b
+			WaitForAllDead	wave06a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Giant_Sandman_Armoured
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06b
+			WaitForAllDead	wave06a
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	10
+			SpawnCount	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Burst_Heal
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06b
+			WaitForAllDead	wave06a
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	1
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_BurstFire_Light
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06miniboss
+			WaitForAllDead	wave06b
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_Giant
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06s
+			WaitForAllDead	wave06b
+			TotalCurrency	25
+			TotalCount	100
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_Deflector
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave06s
+			WaitForAllDead	wave06b
+			TotalCurrency	25
+			TotalCount	100
+			MaxActive	7
+			SpawnCount	7
+			Where	spawnbot
+			Support	1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Bonk
+					WeaponRestrictions	PrimaryOnly
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Cola
+				}
+			}
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	wave07
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	30000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				Skin 1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave07
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	20
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier_Spammer_Force
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave07
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			Where	spawnbot_river_slow
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	20
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Giant_Knight
+			}
+		}
+		WaveSpawn //I had to remove the Chief Die-On-Kill, because it didn't worked anymore after many updates
+		{
+			Name	wavefinalboss
+			WaitForAllDead	wave07
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_chief
+			WaitBeforeStarting	5
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_Chief_SteelFist
+				Health	22500
+				
+			}
+		}
+		WaveSpawn
+		{
+			Name	wave07s
+			TotalCurrency	0
+			TotalCount	100
+			MaxActive	2
+			SpawnCount	2
+			Where	spawnbot
+			WaitBeforeStarting	30
+			Support 1
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Sniper_Bow
+				ClassIcon	sniper_bow_ignite
+				ItemAttributes
+				{
+					ItemName	"The Huntsman"
+					"Set DamageType Ignite" 1
+				}
+			}
+		}
+	}
+}

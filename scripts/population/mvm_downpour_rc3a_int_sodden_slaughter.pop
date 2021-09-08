@@ -1,0 +1,1738 @@
+// Sodden Slaughter (Intermediate 1)
+// By Tindall Berry
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_downpour.pop
+population
+{
+	StartingCurrency	5000
+	RespawnWaveTime	3
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Mission // Sentry Busters
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentry_buster
+		BeginAtWave	1
+		RunForThisManyWaves	8
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Downpour_SentryBuster
+		}
+	}
+	Mission // Waves 2 and 3 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	2
+		RunForThisManyWaves	2
+		InitialCooldown	20
+		CooldownTime	30
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Sniper
+		}
+	}
+	Mission // Wave 4 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	15
+		CooldownTime	40
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Sniper
+		}
+	}
+	Mission // Wave 5 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Sniper
+		}
+	}
+	Mission // Waves 6 and 7 Sleeper Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	6
+		RunForThisManyWaves	2
+		InitialCooldown	15
+		CooldownTime	30
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Sniper_Sleeper
+		}
+	}
+	Mission // Wave 8 Sleeper Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	30
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Sniper_Sleeper
+		}
+	}
+	Mission // Wave 1 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Spy
+		}
+	}
+	Mission // Wave 4 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	40
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Spy
+		}
+	}
+	Mission // Wave 5 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Spy
+		}
+	}
+	Mission // Wave 7 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Spy
+		}
+	}
+	Mission // Wave 8 Eternal Reward Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Spy_YER
+		}
+	}
+	Mission // Waves 2 and 3 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	2
+		RunForThisManyWaves	2
+		InitialCooldown	60
+		CooldownTime	60
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Engineer_Teleport
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_left
+			TeleportWhere	spawnbot_right
+			TeleportWhere	spawnbot_invasion
+		}
+	}
+	Mission // Waves 5 and 6 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	5
+		RunForThisManyWaves	2
+		InitialCooldown	60
+		CooldownTime	60
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Downpour_Engineer_Teleport
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_left
+			TeleportWhere	spawnbot_right
+			TeleportWhere	spawnbot_invasion
+		}
+	}
+/////////////////
+//WAVES
+//POPFILE PAYOUT
+//START $900
+//DROP W1 $600 / W2 $700 / W3 $700 / W4 $700 / W5 $500 / W6 $700 / W7 $700 / W8 $800
+//START: $900 / DROP: $5400 / TOTAL: $6300 / TOTAL PLUS BONUS: $7000
+/////////////////	
+
+//WAVE 1  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 70 Random Spawned Scouts, Melee Scouts, (250)
+// 1 Tank, (200)
+// Support - GRU Heavyweight Champs, (150)
+// Spy mission active
+// Cash at start is $900
+// Total cash in this wave is $600
+// Running Total cash plus bonus cash is $1600
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 70 Random Spawned Scouts, Melee Scouts
+		{
+			TotalCurrency	250
+			TotalCount	70
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot_invasion
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Tag	flank_front
+					Tag	flank_back
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Melee
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Melee
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_path_1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Lightweight Champs
+		{
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot_invasion
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+					Tag	flank_front
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+					Tag	flank_mid1
+					Tag	flank_back
+				}
+			}
+		}
+	}
+//WAVE 2  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 5 Giant Pyros, (200)
+// A - 28 Direct Hit Soldiers, (150)
+// B - 48 Gas Passer Pyros, (250)
+// Support - Bowmen, (100)
+// Sniper mission active
+// Engineer mission active
+// Cash at start is $1600
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $2400
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 5 Giant Pyros
+		{
+			TotalCurrency	200
+			TotalCount	5
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	40
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_Giant
+					Attributes	AlwaysFireWeapon
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_Giant
+					Attributes	AlwaysFireWeapon
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // A - 28 Direct Hit Soldiers
+		{
+			Name	Wave2a
+			TotalCurrency	150
+			TotalCount	28
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			LastSpawnOutput
+			{
+				Target	bomb_relay2
+				Action	Trigger
+			}
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_DirectHit
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_DirectHit
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_DirectHit
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // B - 48 Gas Passer Pyros
+		{
+			Name	Wave2b
+			WaitForAllSpawned	Wave2a
+			TotalCurrency	250
+			TotalCount	48
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	5
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_GasPasser
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_GasPasser
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_GasPasser
+					Tag	flank_front
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_GasPasser
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // Support - Bowmen
+		{
+			TotalCurrency	100
+			TotalCount	48
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			Support	1
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+					Tag	flank_mid1
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+					Tag	flank_back
+				}
+			}
+		}
+	}
+//WAVE 3  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 16 Axemen, (160)
+// B - 1 Squad; 1 Giant Burst Fire Demo, 4 Scorch Shot Pyros, 4 Quick Fix Medics, (135)
+// C - 1 Squad; 1 Giant Burst Fire Soldier, 4 Scorch Shot Pyros, 4 Quick Fix Medics, (135)
+// D - 1 Squad; 1 Giant Heater Heavy, 4 Scorch Shot Pyros, 4 Quick Fix Medics, (135)
+// B Support - Random Spawned Demoknights, Bowmen, (135)
+// Sniper mission active
+// Engineer mission active
+// Cash at start is $2400
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $3200
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 16 Axemen
+		{
+			Name	Wave3a
+			TotalCurrency	160
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Skullcutter
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Skullcutter
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Skullcutter
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 1 Squad; 1 Giant Burst Fire Demo, 4 Scorch Shot Pyros, 4 Quick Fix Medics
+		{
+			Name	Wave3b
+			WaitForAllDead	Wave3a
+			TotalCurrency	135
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	9
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Where	spawnbot_left
+			StartWaveOutput
+			{
+				Target	downpour_start_relay
+				Action	Trigger
+			}
+			FirstSpawnOutput
+			{
+				Target	bomb_relay2
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_BurstFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn // C - 1 Squad; 1 Giant Burst Fire Soldier, 4 Scorch Shot Pyros, 4 Quick Fix Medics
+		{
+			Name	Wave3c
+			WaitForAllDead	Wave3b
+			TotalCurrency	135
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	9
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Giant_BurstFire_Light
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn // D - 1 Squad; 1 Giant Heater Heavy, 4 Scorch Shot Pyros, 4 Quick Fix Medics
+		{
+			Name	Wave3d
+			WaitForAllDead	Wave3c
+			TotalCurrency	135
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	9
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	0
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Giant_Heater
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_ScorchShot
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn // B Support - Random Spawned Demoknights, Bowmen
+		{
+			WaitForAllDead	Wave3a
+			TotalCurrency	135
+			TotalCount	60
+			MaxActive	10
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot_invasion
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Knight
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Knight
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+	}
+//WAVE 4  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - Conquistador Concussion, (100)
+// B - 2 Tanks, (200)
+// B - 2 Giant Rapid Fire Demos, (50)
+// B - 72 Heavyweight Champs, (140)
+// B - 2 Giant Rapid Fire Demos, (50)
+// B - 35 Demos, (70)
+// B - 2 Giant Rapid Fire Demos, (50)
+// B Support - Rapid Fire Bowmen, (40)
+// Sniper mission active
+// Spy mission active
+// Cash at start is $3200
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $4000
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - Conquistador Concussion
+		{
+			Name	Wave4a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	0
+			Where	spawnbot_chief
+			TFBot
+			{
+				Template	T_TFBot_Downpour_Scout_Chief_Sandman
+			}
+		}
+		WaveSpawn // B - 2 Tanks
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	100
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_path_1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // B - 2 Giant Rapid Fire Demos
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	90
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 72 Heavyweight Champs
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	140
+			TotalCount	72
+			MaxActive	12
+			SpawnCount	8
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Where	spawnbot_left
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+					Tag	flank_front
+					Tag	flank_back
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // B - 2 Giant Rapid Fire Demos
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	90
+			Where	spawnbot_left
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 35 Demos
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	70
+			TotalCount	35
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	50
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman
+					Skill	Hard
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 2 Giant Rapid Fire Demos
+		{
+			Name	Wave4b
+			WaitForAllDead	Wave4a
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	70
+			WaitBetweenSpawns	90
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant_RapidFire
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B Support - Rapid Fire Bowmen
+		{
+			WaitForAllDead	Wave4a
+			TotalCurrency	40
+			TotalCount	40
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	20
+			Support	1
+			Where	spawnbot
+			FirstSpawnOutput
+			{
+				Target	bomb_relay2
+				Action	Trigger
+			}
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow_RapidFire
+					Tag	flank_front
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Sniper_Bow_RapidFire
+					Tag	flank_mid1
+					Tag	flank_mid2
+					Tag	flank_back
+				}
+			}
+		}
+	}
+//WAVE 5  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 54 Scouts, (250)
+// A - 10 Heater Heavies, (50)
+// A - 16 Demos, (45)
+// B - 12 Heater Heavies, (35)
+// B - 1 Squad; 1 Giant Barrage Soldier, 5 Kritzkrieg Medics, (90)
+// Support - Airblast Pyros, (30)
+// Sniper mission active
+// Spy mission active
+// Engineer mission active
+// Cash at start is $4000
+// Total cash in this wave is $500
+// Running Total cash plus bonus cash is $4600
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn  // A - 54 Scouts
+		{
+			Name	Wave5a
+			TotalCurrency	250
+			TotalCount	54
+			MaxActive	10
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+					Tag	flank_front
+					Tag	flank_back
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // A - 10 Heater Heavies
+		{
+			Name	Wave5a
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	5
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Heater
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Heater
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // A - 16 Demos
+		{
+			Name	Wave5a
+			TotalCurrency	45
+			TotalCount	16
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			FirstSpawnOutput
+			{
+				Target	downpour_start_relay
+				Action	Trigger
+			}
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman
+					Skill	Hard
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 12 Heater Heavies
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a
+			TotalCurrency	35
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Heater
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Heater
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Heater
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - 1 Squad; 1 Giant Barrage Soldier, 5 Kritzkrieg Medics
+		{
+			Name	Wave5b
+			WaitForAllDead	Wave5a
+			TotalCurrency	90
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Giant_Barrage
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Kritzkrieg
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Kritzkrieg
+				}
+			}
+		}
+		WaveSpawn // Support - Airblast Pyros
+		{
+			TotalCurrency	30
+			TotalCount	15
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Downpour_Pyro_AirBlast
+			}
+		}
+	}
+//WAVE 6  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 30 Squads; 1 Heavyweight Champ, 1 Quick Uber Medic, (300)
+// B - 16 Squads; 1 Lightweight Champ, 1 Quick Uber Medic, (150)
+// C - 48 Sandman Scouts, (150)
+// D - 10 Squads; 1 Lightweight Champ, 1 Quick Uber Medic, (100)
+// Sleeper Sniper mission active
+// Engineer mission active
+// Cash at start is $4600
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $5400
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 30 Squads; 1 Heavyweight Champ, 1 Quick Uber Medic
+		{
+			Name	Wave6a
+			TotalCurrency	300
+			TotalCount	60
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			LastSpawnOutput
+			{
+				Target	bomb_relay2
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_KGB
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber_Quick
+				}
+			}
+		}
+		WaveSpawn // B - 16 Squads; 1 Lightweight Champ, 1 Quick Uber Medic
+		{
+			Name	Wave6b
+			WaitForAllSpawned	Wave6a
+			TotalCurrency	150
+			TotalCount	32
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	1
+			Where	spawnbot_right
+			LastSpawnOutput
+			{
+				Target	bomb_relay3
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber_Quick
+				}
+			}
+		}
+		WaveSpawn // C - 48 Sandman Scouts
+		{
+			Name	Wave6c
+			WaitForAllSpawned	Wave6b
+			TotalCurrency	150
+			TotalCount	48
+			MaxActive	20
+			SpawnCount	16
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot_invasion
+			RandomSpawn	1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Sandman
+					Tag	flank_front
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Sandman
+					Tag	flank_mid1
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Sandman
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout_Sandman
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // D - 10 Squads; 1 Lightweight Champ, 1 Quick Uber Medic
+		{
+			Name	Wave6d
+			WaitForAllSpawned	Wave6c
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	20
+			SpawnCount	20
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_GRU
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber_Quick
+				}
+			}
+		}
+	}
+//WAVE 7  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A1 - 3 Squads; 1 Giant Rapid Fire Soldier, 2 Uber Medics, (180)
+// A2 - 75 Random Spawned Scouts, Demoknights, (225)
+// A2 - 8 Squads; 1 Heavy, 2 Blast Soldiers, 1 Uber Medic, (100)
+// B1 - 3 Squads; 1 Giant Demo, 3 Heavies, 1 Uber Medic, (150)
+// B2 - 12 Blast Soldiers, (45)
+// Sleeper Sniper mission active
+// Spy mission active
+// Cash at start is $5400
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $6200
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A1 - 3 Squads; 1 Giant Rapid Fire Soldier, 2 Uber Medics
+		{
+			Name	Wave7a1
+			TotalCurrency	180
+			TotalCount	9
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	45
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Giant_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn // A2 - 75 Random Spawned Scouts, Demoknights
+		{
+			Name	Wave7a2
+			TotalCurrency	225
+			TotalCount	75
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+					Tag	flank_front
+					Tag	flank_back
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Knight
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Knight
+					Tag	flank_front
+					Tag	flank_mid1
+					Tag	flank_mid2
+				}
+			}
+		}
+		WaveSpawn // A2 - 8 Squads; 1 Heavy, 2 Blast Soldiers, 1 Uber Medic
+		{
+			Name	Wave7a2
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn // B1 - 3 Squads; 1 Giant Demo, 3 Heavies, 1 Uber Medic
+		{
+			Name	Wave7b1
+			WaitForAllDead	Wave7a1
+			TotalCurrency	150
+			TotalCount	15
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	35
+			Where	spawnbot
+			FirstSpawnOutput
+			{
+				Target	bomb_relay3
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Demoman_Giant
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn // B2 - 12 Blast Soldiers
+		{
+			Name	Wave7b2
+			WaitForAllDead	Wave7a2
+			TotalCurrency	45
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	6
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Blast
+					Tag	flank_mid2
+					Tag	flank_back
+				}
+			}
+		}
+	}
+//WAVE 8  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 2 Tanks, (100)
+// 8 Super Scouts, (160)
+// A - 12 Squads; 1 Conch Soldier, 1 Quick Fix Medic, (240)
+// A - 60 Heal on Kill Pyros, (120)
+// B - Final Tank, (100)
+// B - 1 Squad; Major Ignition, 1 Giant Regen Medic, (80)
+// B Support - Scouts, (0)
+// Sleeper Sniper mission active
+// Eternal Reward Spy mission active
+// Cash at start is $6200
+// Total cash in this wave is $800
+// Running Total cash plus bonus cash is $7000
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 2 Tanks
+		{
+			Name	Wave8a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	45
+			Tank
+			{
+				Health	25000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_path_1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 8 Super Scouts
+		{
+			TotalCurrency	160
+			TotalCount	8
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	30
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Downpour_Scout_Giant_Fast
+			}
+		}
+		WaveSpawn // A - 12 Squads; 1 Conch Soldier, 1 Quick Fix Medic
+		{
+			Name	Wave8a
+			TotalCurrency	240
+			TotalCount	24
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	15
+			Where	spawnbot_left
+			LastSpawnOutput
+			{
+				Target	bomb_relay2
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Soldier_Conch
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn // A - 60 Heal on Kill Pyros
+		{
+			Name	Wave8a
+			TotalCurrency	120
+			TotalCount	60
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	5
+			Where	spawnbot_right
+			LastSpawnOutput
+			{
+				Target	downpour_start_relay
+				Action	Trigger
+			}
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_HealOnKill
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_HealOnKill
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_HealOnKill
+					Tag	flank_front
+					Tag	flank_mid2
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Pyro_HealOnKill
+					Tag	flank_mid1
+					Tag	flank_back
+				}
+			}
+		}
+		WaveSpawn // B - Final Tank
+		{
+			Name	Wave8b
+			WaitForAllSpawned	Wave8a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	35000
+				Name	"tankboss"
+				Speed	75
+				Skin	1
+				StartingPathTrackNode	tank_path_1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // B - 1 Squad; Major Ignition, 1 Giant Regen Medic
+		{
+			Name	Wave8b
+			WaitForAllSpawned	Wave8a
+			TotalCurrency	80
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Where	spawnbot_chief
+			FirstSpawnOutput
+			{
+				Target	bomb_relay3
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Heavy_Chief_Heater
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Medic_Giant_Regen
+				}
+			}
+		}
+		WaveSpawn // B Support - Scouts
+		{
+			WaitForAllDead	Wave8a
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot_invasion
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+				}
+				TFBot
+				{
+					Template	T_TFBot_Downpour_Scout
+					Skill	Hard
+					Tag	flank_front
+					Tag	flank_back
+				}
+			}
+		}
+	}
+}

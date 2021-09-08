@@ -1,0 +1,1303 @@
+// Time Window (Normal)
+// Hanami Mission Set 1 (Payday 2 names)
+// By Tindall Berry
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_hanami.pop
+population
+{
+	StartingCurrency	5000
+	RespawnWaveTime	2
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Mission // Sentry Busters
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	8
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	1
+		RandomChoice
+		{
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster_Bomber
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster_Bomber
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster_Charge
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_SentryBuster_Charge
+			}
+		}
+	}
+	Mission // Wave 2 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	2
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper
+		}
+	}
+	Mission // Wave 4 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	4
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper
+		}
+	}
+	Mission // Wave 6 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime	30
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper
+		}
+	}
+	Mission // Wave 7 Razorback Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	60
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper_Razorback
+		}
+	}
+	Mission // Wave 8 Razorback Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	90
+		CooldownTime	45
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Sniper_Razorback
+		}
+	}
+	Mission // Wave 3 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy
+		}
+	}
+	Mission // Wave 5 Kunai Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	40
+		CooldownTime	20
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy_Kunai
+		}
+	}
+	Mission // Wave 7 Eternal Reward Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Spy_YER
+		}
+	}
+	Mission // Wave 2 Mini Sentry Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	2
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Engineer_MiniSentry
+		}
+	}
+	Mission // Waves 4, 5, and 6 Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	4
+		RunForThisManyWaves	3
+		InitialCooldown	60
+		CooldownTime	60
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Engineer_Teleport
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_flank
+			TeleportWhere	spawnbot_river
+			TeleportWhere	spawnbot_river_slow
+			TeleportWhere	spawnbot_invasion
+		}
+	}
+	Mission // Wave 7 Sentry Engineers
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Hanami_Engineer_Sentry
+		}
+	}
+/////////////////
+//WAVES
+//POPFILE PAYOUT
+//START $500
+//DROP W1 $800 / W2 $500 / W3 $600 / W4 $700 / W5 $700 / W6 $700 / W7 $900 / W8 $800
+//START: $500 / DROP: $5700 / TOTAL: $6200 / TOTAL PLUS BONUS: $6900
+/////////////////	
+
+//WAVE 1  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 28 Heavyweight Champs, (280)
+// B - 16 Lightweight Champs, (80)
+// B - 10 Heavyweight Champs, (100)
+// C - 32 Lightweight Champs, (160)
+// D - 1 Giant Conch Soldier, (100)
+// D - 4 Lightweight Champs, (20)
+// Support - Fan O'War Scouts, (60)
+// Cash at start is $500
+// Total cash in this wave is $800
+// Running Total cash plus bonus cash is $1400
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 28 Heavyweight Champs
+		{
+			Name	Wave1a
+			TotalCurrency	280
+			TotalCount	28
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_KGB
+				Skill	Easy
+			}
+		}
+		WaveSpawn // B - 16 Lightweight Champs
+		{
+			Name	Wave1b
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	80
+			TotalCount	16
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			LastSpawnOutput
+			{
+				Target	bomb2_spawn_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_GRU
+				Skill	Easy
+			}
+		}
+		WaveSpawn // B - 10 Heavyweight Champs
+		{
+			Name	Wave1b
+			WaitForAllSpawned	Wave1a
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	5
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_KGB
+				Skill	Normal
+			}
+		}
+		WaveSpawn // C - 32 Lightweight Champs
+		{
+			Name	Wave1c
+			WaitForAllSpawned	Wave1b
+			TotalCurrency	160
+			TotalCount	32
+			MaxActive	16
+			SpawnCount	8
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_GRU
+				Skill	Easy
+			}
+		}
+		WaveSpawn // D - 1 Giant Conch Soldier
+		{
+			Name	Wave1d
+			WaitForAllDead	Wave1c
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			Where	spawnbot_river_slow
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Conch
+			}
+		}
+		WaveSpawn // D - 4 Lightweight Champs
+		{
+			Name	Wave1d
+			WaitForAllDead	Wave1c
+			TotalCurrency	20
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	0
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_GRU
+				Skill	Normal
+			}
+		}
+		WaveSpawn // Support - Fan O'War Scouts
+		{
+			TotalCurrency	60
+			TotalCount	12
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawnsAfterDeath	5
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_FanOWar
+				Skill	Easy
+			}
+		}
+	}
+//WAVE 2  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 3 Giant Rapid Fire Demos, (300)
+// Support - Bat Scouts, (200)
+// Sniper mission active
+// Mini Sentry Engineer mission active
+// Cash at start is $1400
+// Total cash in this wave is $500
+// Running Total cash plus bonus cash is $2000
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 3 Giant Rapid Fire Demos
+		{
+			TotalCurrency	300
+			TotalCount	3
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawnsAfterDeath	20
+			Where	spawnbot
+			StartWaveOutput
+			{
+				Target	engiehints_enable_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Giant_RapidFire
+			}
+		}
+		WaveSpawn // Support - Bat Scouts
+		{
+			TotalCurrency	200
+			TotalCount	40
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	5
+			Support	1
+			Where	spawnbot_invasion
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Melee
+				Skill	Normal
+			}
+		}
+	}
+//WAVE 3  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 1 Tank, (200)
+// 1 Tank, (200)
+// Support - Samurai Demoknights, (200)
+// Spy mission active
+// Cash at start is $2000
+// Total cash in this wave is $600
+// Running Total cash plus bonus cash is $2700
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	22500
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	22500
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Samurai Demoknights
+		{
+			TotalCurrency	200
+			TotalCount	40
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman_Knight_Samurai
+			}
+		}
+	}
+//WAVE 4  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 4 Giant Pyros, (100)
+// A - 24 Scouts, (120)
+// A - 12 Squads; 1 Bowman, 1 Big Heal Medic, (240)
+// B - 28 Soldiers, (140)
+// C - 1 Squad; 1 Giant Heavy, 2 Big Heal Medics, (60)
+// Support - Lightweight Champs, (40)
+// Sniper mission active
+// Engineer mission active
+// Cash at start is $2700
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $3500
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 4 Giant Pyros
+		{
+			TotalCurrency	100
+			TotalCount	4
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	45
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Giant
+				Attributes	AlwaysFireWeapon
+			}
+		}
+		WaveSpawn // A - 24 Scouts
+		{
+			Name	Wave4a
+			TotalCurrency	120
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout
+				Skill	Easy
+			}
+		}
+		WaveSpawn // A - 12 Squads; 1 Bowman, 1 Big Heal Medic
+		{
+			Name	Wave4a
+			TotalCurrency	240
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Where	spawnbot_flank
+			LastSpawnOutput
+			{
+				Target	bomb2_spawn_relay
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Sniper_Bow
+					Skill	Normal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_BigHeal
+				}
+			}
+		}
+		WaveSpawn // B - 28 Soldiers
+		{
+			Name	Wave4b
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	140
+			TotalCount	28
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier
+				Skill	Easy
+			}
+		}
+		WaveSpawn // C - 1 Squad; 1 Giant Heavy, 2 Big Heal Medics
+		{
+			Name	Wave4c
+			WaitForAllSpawned	Wave4b
+			TotalCurrency	60
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Where	spawnbot_river_slow
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Heavy_Giant
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_BigHeal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_BigHeal
+				}
+			}
+		}
+		WaveSpawn // Support - Lightweight Champs
+		{
+			TotalCurrency	40
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawnsAfterDeath	5
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_GRU
+			}
+		}
+	}
+//WAVE 5  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 40 Random Spawned Scouts, Force-a-Nature Scouts, Bonk Scouts, (200)
+// 1 Tank, (125)
+// B - 5 Giant Detonator Pyros, (100)
+// B - 1 Tank, (125)
+// Support - Demos, (50)
+// B Support - Demos, (100)
+// Kunai Spy mission active
+// Engineer mission active
+// Cash at start is $3500
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $4300
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 40 Random Spawned Scouts, Force-a-Nature Scouts, Bonk Scouts
+		{
+			Name	Wave5a
+			TotalCurrency	200
+			TotalCount	40
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_FaN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_FaN
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Scout_Bonk
+				}
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	125
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	30000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // B - 5 Giant Detonator Pyros
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a
+			TotalCurrency	100
+			TotalCount	5
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Giant_Detonator
+			}
+		}
+		WaveSpawn // B - 1 Tank
+		{
+			Name	Wave5b
+			WaitForAllSpawned	Wave5a
+			TotalCurrency	125
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	25000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Demos
+		{
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawnsAfterDeath	5
+			Support	1
+			Where	spawnbot_river
+			FirstSpawnOutput
+			{
+				Target	bomb2_spawn_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman
+				Skill	Easy
+			}
+		}
+		WaveSpawn // B Support - Demos
+		{
+			WaitForAllDead	Wave5a
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	3
+			Support	1
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman
+				Skill	Easy
+			}
+		}
+	}
+//WAVE 6  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 20 Heavies, (100)
+// 4 Squads; 1 Giant Demoknight, 2 Uber Medics, (240)
+// B - 12 Eviction Heavies, (120)
+// B - 35 Detonator Pyros, (175)
+// Support - Bat Scouts, (65)
+// Sniper mission active
+// Engineer mission active
+// Cash at start is $4300
+// Total cash in this wave is $700
+// Running Total cash plus bonus cash is $5100
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 20 Heavies
+		{
+			Name	Wave6a
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			LastSpawnOutput
+			{
+				Target	bomb2_spawn_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy
+				Skill	Easy
+			}
+		}
+		WaveSpawn // 4 Squads; 1 Giant Demoknight, 2 Uber Medics
+		{
+			TotalCurrency	240
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	35
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Demoman_Giant_Knight
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_Uber
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn // B - 12 Eviction Heavies
+		{
+			Name	Wave6b
+			WaitForAllSpawned	Wave6a
+			TotalCurrency	120
+			TotalCount	12
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	15
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Heavy_Eviction
+			}
+		}
+		WaveSpawn // B - 35 Detonator Pyros
+		{
+			Name	Wave6b
+			WaitForAllSpawned	Wave6a
+			TotalCurrency	175
+			TotalCount	35
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Detonator
+			}
+		}
+		WaveSpawn // Support - Bat Scouts
+		{
+			TotalCurrency	65
+			TotalCount	13
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawnsAfterDeath	5
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Melee
+			}
+		}
+	}
+//WAVE 7  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// A - 30 Jumping Scouts, (150)
+// A - 15 Dragon's Fury Pyros, (75)
+// 3 Giant Sandman Scouts, (90)
+// B - 28 Demos, (140)
+// B - 2 Giant Blast Soldiers, (100)
+// C - 3 Giant Blast Soldiers, (150)
+// Support - Scouts, (30)
+// C Support - Scouts, (165)
+// Razorback Sniper mission active
+// Eternal Reward Spy mission active
+// Sentry Engineer mission active
+// Cash at start is $5100
+// Total cash in this wave is $900
+// Running Total cash plus bonus cash is $6100
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_1bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - 30 Jumping Scouts
+		{
+			Name	Wave7a
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	12
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Where	spawnbot
+			StartWaveOutput
+			{
+				Target	engiehints_enable_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Jump
+			}
+		}
+		WaveSpawn // A - 15 Dragon's Fury Pyros
+		{
+			Name	Wave7a
+			TotalCurrency	75
+			TotalCount	15
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot_flank
+			LastSpawnOutput
+			{
+				Target	bomb2_spawn_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Fury
+			}
+		}
+		WaveSpawn // 3 Giant Sandman Scouts
+		{
+			TotalCurrency	90
+			TotalCount	3
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawnsAfterDeath	15
+			Where	spawnbot_river_slow
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout_Giant_Sandman
+			}
+		}
+		WaveSpawn // B - 28 Demos
+		{
+			Name	Wave7b
+			WaitForAllSpawned	Wave7a
+			TotalCurrency	140
+			TotalCount	28
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Demoman
+			}
+		}
+		WaveSpawn // B - 2 Giant Blast Soldiers
+		{
+			Name	Wave7b
+			WaitForAllDead	Wave7a
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	30
+			Where	spawnbot_river
+			LastSpawnOutput
+			{
+				Target	bomb3_spawn_relay
+				Action	Trigger
+			}
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Blast
+			}
+		}
+		WaveSpawn // C - 3 Giant Blast Soldiers
+		{
+			Name	Wave7c
+			WaitForAllSpawned	Wave7b
+			TotalCurrency	150
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	30
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier_Giant_Blast
+			}
+		}
+		WaveSpawn // Support - Scouts
+		{
+			TotalCurrency	30
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawnsAfterDeath	5
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout
+				Skill	Easy
+			}
+		}
+		WaveSpawn // C Support - Scouts
+		{
+			WaitForAllSpawned	Wave7b
+			TotalCurrency	165
+			TotalCount	55
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	1
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Scout
+				Skill	Easy
+			}
+		}
+	}
+//WAVE 8  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 1 Tank, (100)
+// 5 Squads; 1 Giant Bomber Demo, 1 Quick Fix Medic, (250)
+// 1 Tank, (100)
+// Final Tank, (0)
+// Support - Manmelter Pyros, (100)
+// Support - Bowmen, (150)
+// Support - Soldiers, (100)
+// Razorback Sniper mission active
+// Cash at start is $6100
+// Total cash in this wave is $800
+// Running Total cash plus bonus cash is $6900
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_2bomb_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 5 Squads; 1 Giant Bomber Demo, 1 Quick Fix Medic
+		{
+			TotalCurrency	250
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	25
+			Where	spawnbot_river_slow
+			FirstSpawnOutput
+			{
+				Target	bomb3_spawn_relay
+				Action	Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Demoman_Giant_Bomber
+				}
+				TFBot
+				{
+					Template	T_TFBot_Hanami_Medic_QuickFix
+				}
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	20000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Final Tank
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	150
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	35000
+				Name	"tankboss"
+				Speed	75
+				Skin	1
+				StartingPathTrackNode	tank_start_main
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Manmelter Pyros
+		{
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Support	1
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Pyro_Manmelter
+			}
+		}
+		WaveSpawn // Support - Bowmen
+		{
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Support	1
+			Where	spawnbot_flank
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Sniper_Bow
+				Skill	Normal
+			}
+		}
+		WaveSpawn // Support - Soldiers
+		{
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	0
+			Support	1
+			Where	spawnbot_river
+			TFBot
+			{
+				Template	T_TFBot_Hanami_Soldier
+			}
+		}
+	}
+}
