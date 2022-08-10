@@ -385,8 +385,8 @@ WaveSchedule
 			Name "Ashley"
 			Class Scout
 			Skill Expert
-			Health 13000
-			ClassIcon aas_ashley
+			Health 15000
+			ClassIcon ashley_aas
 			Item "Sun-on-a-Stick"
 			Attributes MiniBoss
 			Attributes UseBossHealthBar
@@ -394,7 +394,7 @@ WaveSchedule
 			ItemAttributes
 			{
 				ItemName "Sun-on-a-Stick"
-				"Set DamageType Ignite" 1
+				"damage bonus" "2.0"
 			}
 			CharacterAttributes
 			{
@@ -411,7 +411,7 @@ WaveSchedule
 			Class Heavyweapons
 			Skill Expert
 			Health 40500 //Reference to how much money was donated.
-			ClassIcon aas_epsilon
+			ClassIcon epsilon_aas
 			Item "Upgradeable TF_WEAPON_FISTS"
 			Item "Tough Guy's Toque"
 			Attributes MiniBoss
@@ -444,7 +444,7 @@ WaveSchedule
 			Skill Expert
 			WeaponRestrictions MeleeOnly
 			Name "Santa Claws"
-			ClassIcon aas_santa
+			ClassIcon santa_aas
 			Health 30000
 			Item "Warrior's Spirit"
 			Item "The B.M.O.C."

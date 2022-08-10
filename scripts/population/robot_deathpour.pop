@@ -1,0 +1,985 @@
+// Robots using stock weapons wield the "upgradeable" variants so that any attributes they may (or may not) have will appear in the kill cam
+// All custom robots created by Tindall Berry
+
+WaveSchedule
+{
+	Templates
+	{
+		// Scout
+		T_TFBot_Downpour_Scout
+		{
+			Class Scout
+			Name "Scout"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 125
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Item "Upgradeable TF_WEAPON_SCATTERGUN"
+			Item "Point and Shoot"
+		}
+		T_TFBot_Downpour_Scout_Crit
+		{
+			Class Scout
+			Name "Crit Scout"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 125
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_SCATTERGUN"
+			Item "Point and Shoot"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SCATTERGUN"
+				"damage bonus" 			2
+				"faster reload rate"	-0.8
+			}
+		}
+		T_TFBot_Downpour_Scout_FaN
+		{
+			Class Scout
+			Name "Force-a-Nature Scout"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 125
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Item "The Force-a-Nature"
+			Item "The Fed-Fightin' Fedora"
+		}
+		T_TFBot_Downpour_Scout_Melee
+		{
+			Class Scout
+			Name "Melee Scout"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 125
+			WeaponRestrictions MeleeOnly
+			Item "Upgradeable TF_WEAPON_BAT"
+			Item "Point and Shoot"
+		}
+		T_TFBot_Downpour_Scout_Bonk
+		{
+			Class Scout
+			Name "Bonk Scout"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 125
+			WeaponRestrictions MeleeOnly
+			Item "Bonk! Atomic Punch"
+			Item "Upgradeable TF_WEAPON_BAT"
+			Item "Bonk Helm"
+			ItemAttributes
+			{
+				ItemName "Bonk! Atomic Punch"
+				"effect bar recharge rate increased"	0.8
+			}
+		}
+
+		T_TFBot_Downpour_Scout_Giant_FaN
+		{
+			Class Scout
+			Name "Force-a-Nature Super Scout"
+			ClassIcon scout_fan_giant
+			Skill Expert
+			Health 1600
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes "Miniboss"
+			Item "The Force-a-Nature"
+			Item "The Fed-Fightin' Fedora"
+			ItemAttributes
+			{
+				ItemName "The Force-a-Nature"
+				"scattergun knockback mult" 1.2
+				"bullets per shot bonus"	1.5
+				"damage penalty"			1
+			}
+			CharacterAttributes
+			{
+				"damage force reduction"			0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"		5
+			}
+		}
+		T_TFBot_Downpour_Scout_Giant_Jump
+		{
+			Class scout
+			Name "Giant Jumping Scout"
+			ClassIcon scout_jumping_g
+			Skill Expert
+			Health 1600
+			WeaponRestrictions MeleeOnly
+			MaxVisionRange 1200
+			Attributes "Miniboss"
+			Attributes "AlwaysCrit"
+			Attributes "AutoJump"
+				AutoJumpMin 3
+				AutoJumpMax 5
+			Item "The Sandman"
+			Item "The Hanger-on Hood"
+			Item "The Flight of the Monarch"
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased"	0.25
+				"damage bonus"							2
+			}
+			CharacterAttributes
+			{
+				"increased jump height"				2
+				"damage force reduction"			0.6
+				"airblast vulnerability multiplier"	0.6
+				"override footstep sound set"		5
+			}
+		}
+		
+		// Soldier
+		T_TFBot_Downpour_Soldier
+		{
+			Class Soldier
+			Name "Soldier"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "Defiant Spartan"
+		}
+		T_TFBot_Downpour_Soldier_Crit
+		{
+			Class Soldier
+			Name "Crit Soldier"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "Defiant Spartan"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+				"damage bonus"			2
+				"fire rate bonus"		0.6
+				"faster reload rate"	-0.8
+			}
+		}
+		T_TFBot_Downpour_Soldier_DirectHit
+		{
+			Class Soldier
+			Name "Direct Hit Soldier"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "The Direct Hit"
+			Item "Defiant Spartan"
+		}
+		T_TFBot_Downpour_Soldier_BlackBox
+		{
+			Class Soldier
+			Name "Black Box Soldier"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "The Black Box"
+			Item "The War Pig"
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"damage penalty"					0.33
+				"fire rate bonus"					0.01
+				"projectile spread angle penalty"	3
+				"heal on hit for rapidfire"			60
+			}
+		}
+		T_TFBot_Downpour_Soldier_Buff
+		{
+			Class Soldier
+			Name "Buff Soldier"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 200
+			Attributes "HoldFireUntilFullReload"
+			Attributes "SpawnWithFullCharge"
+			Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+			Item "The Buff Banner"
+			Item "Chieftain's Challenge"
+			ItemAttributes
+			{
+				ItemName "The Buff Banner"
+				"increase buff duration"	8
+			}
+		}
+
+		T_TFBot_Downpour_Soldier_Giant_BurstFire
+		{
+			Class Soldier
+			Name "Giant Burst Fire Soldier"
+			ClassIcon soldier_burstfire
+			Skill Expert
+			Health 4000
+			WeaponRestrictions PrimaryOnly
+			Attributes "MiniBoss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "AlwaysCrit"
+			Item "warbird_rocketlauncher_warhawk"
+			Item "Defiant Spartan"
+			ItemAttributes
+			{
+				ItemName "warbird_rocketlauncher_warhawk"
+				"set_item_texture_wear"			0
+				"attach particle effect"		704
+				"damage bonus"					2
+				"faster reload rate"			0.4
+				"fire rate bonus"				0.2
+				"clip size upgrade atomic"		6
+				"Projectile speed decreased"	0.75
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+			}
+		}
+		T_TFBot_Downpour_Soldier_Giant_DirectHit
+		{
+			Class Soldier
+			Name "Giant Direct Hit Soldier"
+			ClassIcon soldier_directhit_giant
+			Skill Expert
+			Health 4000
+			WeaponRestrictions PrimaryOnly
+			Attributes "Miniboss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "AlwaysCrit"
+			Item "The Direct Hit"
+			Item "Defiant Spartan"
+			ItemAttributes
+			{
+				ItemName "The Direct Hit"
+				"damage bonus"					3
+				"Projectile speed increased"	2.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		3
+			}
+		}
+
+		// Pyro
+		T_TFBot_Downpour_Pyro
+		{
+			Class Pyro
+			Name "Pyro"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+			Item "The Flamboyant Flamenco"
+		}
+		T_TFBot_Downpour_Pyro_Crit
+		{
+			Class Pyro
+			Name "Crit Pyro"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+			Item "The Flamboyant Flamenco"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+				"damage bonus"	2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	1.5
+			}
+		}
+		T_TFBot_Downpour_Pyro_AirBlast
+		{
+			Class Pyro
+			Name "Airblast Pyro"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+			Item "Pyro Helm"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+				"mult airblast refire time"	0.01
+				"damage penalty"			0.5
+			}
+		}
+		T_TFBot_Downpour_Pyro_Fury
+		{
+			Class Pyro
+			Name "Dragon's Fury Pyro"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 600
+			Item "The Dragon's Fury"
+			Item "Pyromancer's Mask"
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"airblast disabled"	1
+			}
+		}
+		T_TFBot_Downpour_Pyro_Flare
+		{
+			Class Pyro
+			Name "Flare Pyro"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions SecondaryOnly
+			Item "The Flare Gun"
+			Item "Old Guadalajara"
+		}
+
+		T_TFBot_Downpour_Pyro_Giant_Fury
+		{
+			Class Pyro
+			Name "Giant Dragon's Fury Pyro"
+			ClassIcon pyro_dragonfury_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 600
+			Tag	bot_giant
+			Attributes "Miniboss"
+			Attributes "AlwaysCrit"
+			Item "The Dragon's Fury"
+			Item "Pyromancer's Mask"
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"damage bonus"		1.5
+				"airblast disabled"	1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		6
+			}
+		}
+		T_TFBot_Downpour_Pyro_Giant_Flare
+		{
+			Class Pyro
+			Name "Giant Flare Pyro"
+			ClassIcon pyro_detonator_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions SecondaryOnly
+			Attributes "Miniboss"
+			Item "The Detonator"
+			Item "Old Guadalajara"
+			ItemAttributes
+			{
+				ItemName "The Detonator"
+				"fire rate bonus"				0.3
+				"blast dmg to self increased"	0
+				"damage penalty"				1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.5
+				"airblast vulnerability multiplier" 	0.5
+				"override footstep sound set"			6
+			}
+		}
+
+		// Demoman
+		T_TFBot_Downpour_Demoman
+		{
+			Class Demoman
+			Name "Demoman"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "Spine-Chilling Skull"
+		}
+		T_TFBot_Downpour_Demoman_Crit
+		{
+			Class Demoman
+			Name "Crit Demoman"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "Spine-Chilling Skull"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"damage bonus"					2
+				"faster reload rate"			-0.8
+				"Projectile speed increased"	2
+			}
+		}
+		T_TFBot_Downpour_Demoman_RapidFire
+		{
+			Class Demoman
+			Name "Rapid Fire Demoman"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 175
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "The Tavish Degroot Experience"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus" 		0.5
+				"faster reload rate"	0.5
+				"damage penalty"		0.75
+			}
+		}
+		T_TFBot_Downpour_Demoman_Bomber
+		{
+			Class Demoman
+			Name "Bomber Demoman"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 200
+			WeaponRestrictions PrimaryOnly
+			Attributes "HoldFireUntilFullReload"
+			Item "The Iron Bomber"
+			Item "Conjurer's Cowl"
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"fire rate bonus"					0.01
+				"damage penalty"					0.75
+				"projectile spread angle penalty"	3
+			}
+		}
+		T_TFBot_Downpour_Demoman_Knight
+		{
+			Class Demoman
+			Name "Demoknight"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 175
+			WeaponRestrictions MeleeOnly
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			Item "Prince Tavish's Crown"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"critboost on kill"	3
+			}
+		}
+
+		T_TFBot_Downpour_Demoman_Giant_BurstFire
+		{
+			Class Demoman
+			Name "Giant Burst Fire Demoman"
+			ClassIcon demo_burst_giant
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes "MiniBoss"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Item "Spine-Chilling Skull"
+			Item "The Juggernaut Jacket"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"faster reload rate"				0.6
+				"fire rate bonus"					0.1
+				"clip size upgrade atomic"			8
+				"Projectile speed increased"		1.2
+				"projectile spread angle penalty"	3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		4
+			}
+		}
+		T_TFBot_Downpour_Demoman_Giant_Nuke
+		{
+			Class Demoman
+			Name "Giant Nuke Demoman"
+			ClassIcon demo_atomic
+			Skill Expert
+			Health 3300
+			WeaponRestrictions PrimaryOnly
+			Attributes "MiniBoss"
+			Attributes "AlwaysCrit"
+			Item "The Loose Cannon"
+			Item "The Buccaneer's Bicorne"
+			ItemAttributes
+			{
+				ItemName	"The Loose Cannon"
+				"grenade launcher mortar mode"		0
+				"damage bonus"						5
+				"faster reload rate"				-0.8
+				"Blast radius increased"			1.5
+				"use large smoke explosion"			1
+				"fire rate penalty"					3
+				"projectile spread angle penalty"	3
+				"projectile speed decreased"		0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		4
+			}
+		}
+
+		// Heavy
+		T_TFBot_Downpour_Heavy
+		{
+			Class Heavyweapons
+			Name "Heavy"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+			Item "The Crone's Dome"
+		}
+		T_TFBot_Downpour_Heavy_Crit
+		{
+			Class Heavyweapons
+			Name "Crit Heavy"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1000
+			Attributes "AlwaysCrit"
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+			Item "The Crone's Dome"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MINIGUN"
+				"damage bonus"	1.5
+			}
+		}
+		T_TFBot_Downpour_Heavy_Heater
+		{
+			Class Heavyweapons
+			Name "Heater Heavy"
+			ClassIcon heavy_chief
+			Skill Normal
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Item "The Huo Long Heatmaker"
+			Item "The Crone's Dome"
+		}
+		T_TFBot_Downpour_Heavy_Deflector
+		{
+			Class Heavyweapons
+			Name "Deflector Heavy"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 300
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1000
+			Item "Deflector"
+			Item "The U-Clank-A"
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"attack projectiles"	1
+			}
+		}
+		T_TFBot_Downpour_Heavy_KGB
+		{
+			Class Heavyweapons
+			Name "Heavyweight Champ"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 300
+			WeaponRestrictions MeleeOnly
+			Item "The Killing Gloves Of Boxing"
+			Item "Pugilist's Protector"
+		}
+
+		T_TFBot_Downpour_Heavy_Giant_Heater
+		{
+			Class Heavyweapons
+			Name "Giant Heater Heavy"
+			ClassIcon heavy_heater_giant
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Attributes "Miniboss"
+			Item "The Huo Long Heatmaker"
+			Item "The Crone's Dome"
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"damage penalty"	1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		2
+			}
+		}
+		T_TFBot_Downpour_Heavy_Giant_Deflector_HealOnKill
+		{
+			Class Heavyweapons
+			Name "Giant Heal On Kill Deflector"
+			ClassIcon heavy_deflector_healonkill
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes "Miniboss"
+			Item "Deflector"
+			Item "The Eliminators Safeguard"
+			ItemAttributes
+			{
+				ItemName "The Eliminators Safeguard"
+				"item style override"	1
+			}
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"attack projectiles"	2
+				"heal on kill"			5000
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		2
+			}
+		}
+
+		// Engineer
+		T_TFBot_Downpour_Engineer_Teleport
+		{
+			Class Engineer
+			Name "Engineer"
+			ClassIcon engineer_telein
+			Skill Expert
+			Health 400
+			Attributes "TeleportToHint"
+			TeleportWhere spawnbot
+			Item "Upgradeable TF_WEAPON_WRENCH"
+			Item "Ghostly Gibus"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_WRENCH"
+				"damage bonus"	10
+			}
+			CharacterAttributes
+			{
+				"health regen"					1
+				"cannot pick up intelligence"	1
+			}
+		}
+
+		// Medic
+		T_TFBot_Downpour_Medic_Uber
+		{
+			Class Medic
+			Name "Uber Medic"
+			ClassIcon medic_uber
+			Skill Hard
+			Health 150
+			Attributes "SpawnWithFullCharge"
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "Upgradeable TF_WEAPON_MEDIGUN"
+			Item "The Warsworn Helmet"
+		}
+
+		T_TFBot_Downpour_Medic_Giant_Regen
+		{
+			Class Medic
+			Name "Giant Regen Medic"
+			ClassIcon medic_quickfix_giant
+			Skill Expert
+			Health 4000
+			Attributes "MiniBoss"
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			Item "The Quick-Fix"
+			Item "The Surgeon's Stahlhelm"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage bonus"	2
+			}
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"ubercharge rate bonus"	0.01
+				"heal rate bonus"		200
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"health regen"						50
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+			}
+		}
+		// Sniper
+		T_TFBot_Downpour_Sniper_Crit
+		{
+			Class Sniper
+			Name "Crit Sniper"
+			ClassIcon sniper
+			Skill Expert
+			Health 125
+			Attributes "AlwaysCrit"
+			MaxVisionRange 2000
+			Item "Upgradeable TF_WEAPON_SNIPERRIFLE"
+			Item "Upgradeable TF_WEAPON_CLUB"
+			Item "Ghostly Gibus"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SNIPERRIFLE"
+				"damage bonus"	1.2
+			}
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_CLUB"
+				"damage bonus"	1.2
+			}
+		}
+		T_TFBot_Downpour_Sniper_Bow
+		{
+			Class Sniper
+			Name "Bowman"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 150
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 2000
+			Item "The Huntsman"
+			Item "The Anger"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage penalty"	0.5
+			}
+		}
+		T_TFBot_Downpour_Sniper_Bow_Crit
+		{
+			Class Sniper
+			Name "Crit Bowman"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 150
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Attributes "AlwaysCrit"
+			Item "The Huntsman"
+			Item "The Anger"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus"			1.5
+				"faster reload rate"	0.2
+			}
+		}
+		T_TFBot_Downpour_Sniper_Bow_RapidFire
+		{
+			Class Sniper
+			Name "Rapid Fire Bowman"
+			ClassIcon heavy_chief
+			Skill Hard
+			Health 150
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 2000
+			Item "The Huntsman"
+			Item "Larrikin Robin"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage penalty"		0.5
+				"faster reload rate"	0.2
+			}
+		}
+
+		T_TFBot_Downpour_Sniper_Giant_Bow_RapidFire
+		{
+			Class Sniper
+			Name "Giant Rapid Fire Bowman"
+			ClassIcon sniper_bow_multi
+			Skill Expert
+			Health 3000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 2500
+			Attributes "Miniboss"
+			Attributes "AlwaysCrit"
+			Item "The Huntsman"
+			Item "The Anger"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"faster reload rate"	0.2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction" 			0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 		5
+			}
+		}
+
+		// Spy
+		T_TFBot_Downpour_Spy_YER
+		{
+			Class Spy
+			Name "Eternal Reward Spy"
+			ClassIcon spy
+			Skill Expert
+			Health 125
+			Item "L'etranger"
+			Item "Your Eternal Reward"
+			Item "Ghostly Gibus"
+			CharacterAttributes
+			{
+				"cannot pick up intelligence"	1
+			}
+		}
+
+		//Mini Giants
+		T_TFBot_Downpour_Heavy_SteelFist
+		{
+			Class Heavyweapons
+			Name "Steel Gauntlet"
+			ClassIcon heavy_steelfist
+			Skill Hard
+			Health 900
+			Scale 1.5
+			WeaponRestrictions MeleeOnly
+			Item "Fists Of Steel"
+			Item "The Crone's Dome"
+			CharacterAttributes
+			{
+				"health regen"	1
+			}
+		}
+
+		//Bosses
+		T_TFBot_Downpour_Demoman_Chief_Bomber_Light
+		{
+			Class Demoman
+			Name "CL5TR-BM8 Mk.II"
+			ClassIcon demo_clusterbomb_giant
+			Skill Expert
+			Health 24000
+			Scale 1.8
+			WeaponRestrictions PrimaryOnly
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Attributes "HoldFireUntilFullReload"
+			Attributes "AlwaysCrit"
+			Item "The Iron Bomber"
+			Item "Spine-Chilling Skull"
+			Item "The Juggernaut Jacket"
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"faster reload rate"				0.2
+				"fire rate bonus"					0.1
+				"clip size upgrade atomic"			16
+				"projectile spread angle penalty"	5
+				"fuse bonus"						3
+				"grenade not explode on impact"		1
+				"projectile speed increased"		1.2
+			}
+			CharacterAttributes
+			{
+				"rage giving scale"								0.2
+				"move speed bonus"								0.5
+				"damage force reduction"						0.2
+				"airblast vulnerability multiplier" 			0.2
+				"override footstep sound set"					4
+				"airblast vertical vulnerability multiplier"	0.1
+			}
+		}
+		T_TFBot_Downpour_Heavy_Chief_Combo
+		{
+			Class Heavyweapons
+			Name "Z3-US Mk.IV"
+			ClassIcon heavy_deflector_push
+			Skill Expert
+			Health 60000
+			Scale 1.8
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes "MiniBoss"
+			Attributes "UseBossHealthBar"
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+			Item "Teufort Knight"
+			Item "Batter's Bracers"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MINIGUN"
+				"slow enemy on hit"				1		// Natascha
+				"damage bonus"					1.5		// Giant Minigun and Brass Beast
+				"spunup_damage_resistance"		0.75	// Natascha and Brass Beast
+				"weapon spread bonus"			0.75	// Tomsilav
+				"minigun spinup time decreased"	0.8		// Tomislav
+				"ring of fire while aiming"		20		// Heater
+				"damage bonus vs burning"		1.5		// Heater
+				"attack projectiles"			2		// Deflector
+				"critboost on kill"				5		// Booster
+				"speed_boost_on_kill"			5		// Booster
+				"heal on kill"					5000	// Heal on Kill
+			}
+			CharacterAttributes
+			{
+				"rage giving scale"								0.2
+				"move speed bonus"								0.5
+				"damage force reduction" 						0.2
+				"airblast vulnerability multiplier" 			0.2
+				"airblast vertical vulnerability multiplier" 	0.1
+				"override footstep sound set" 					2
+			}
+		}
+	}
+}
