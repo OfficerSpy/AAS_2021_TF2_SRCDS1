@@ -1,0 +1,1869 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+//Silicon Society
+//Made by CreatorForce
+//Map by Sntr And Erk
+//Advanced
+
+WaveSchedule
+{
+	StartingCurrency 				5000
+	RespawnWaveTime 				5
+	CanBotsAttackWhileInSpawnRoom 	no
+	
+
+    //Cash
+    //Wave 1: $700
+    //Wave 2: $750
+    //Wave 3: $750
+    //Wave 4: $800
+    //Wave 5: $900
+    //Wave 6: $900
+
+    // Wave 1: //Wave 1 - $700
+    // 1A: 16 Heavy						                    |NONE
+    // 1B: 18 Demoman						                |NONE
+    // 1C: 02 Giant Pyro + 06 Quick-Fix			            |NONE
+    // 1D: 25 Bowman						                |WaitForAllDead	1B
+    // 1E: 30 Demoknight					                |WaitForAllDead 1C
+    // 1F: 02 Giant Soldier Rapid Fire + 04 Quick-Fix	    |WaitForAllSpawned 1E
+    // Support:
+    // 1S: 06 Pyro						                    |WaitForAllDead	1C
+    // 1S: 06 Demoman						                |WaitForAllDead	1E
+
+	//Feedback:
+	//Wave 6: botrot :  'mod medic healed damage bonus' 2 put this on giant chad burst [No]
+	//Wave 6: Fix long pause break [FIX]
+
+    Templates
+    {
+		T_TFBot_SentryBuster_Grapple
+		{
+			Template   	T_TFBot_SentryBuster
+			Item   		"TF_WEAPON_GRAPPLINGHOOK"
+			Item 		"eotl_demopants"
+			Attributes   AlwaysFireWeapon
+			Attributes   AutoJump
+			AutoJumpMin  3
+			AutoJumpMax  4
+			ItemAttributes 
+			{
+				ItemName   "TF_WEAPON_GRAPPLINGHOOK"
+				"is_passive_weapon"     1
+				"cancel falling damage" 1
+			}
+		}
+        T_TFBot_Force_Sniper_Huntsman_Fire
+		{
+			Name		"Fire Bowman"
+			Class		Sniper
+			ClassIcon	sniper_bow_ignite
+			Skill		Hard
+			Health		125
+			Item		"The Huntsman"
+			ItemAttributes
+			{
+				ItemName					"The Huntsman"
+				"killstreak tier" 			2
+				"attach particle effect" 	13
+				"set damagetype ignite"		1
+				// "fire rate penalty" 		1.25
+			}
+		}
+        T_TFBot_Force_Heavyweapons_Heater
+		{
+			Name				"Heater Heavy"
+			Class 				Heavyweapons
+			Skill 				Easy
+			ClassIcon 			heavy_heater
+			Item 				"The Huo Long Heatmaker"
+			Item				"Tough Guy's Toque"
+			Item				"EOTL_hiphunter_jacket"
+			WeaponRestrictions 	PrimaryOnly
+		}
+		T_TFBot_Force_Pyro_Reflector
+		{
+			Class	Pyro
+			Skill	Expert
+			ClassIcon	pyro_reflect_daan
+			Name	"Reflector Pyro"
+			WeaponRestrictions	PrimaryOnly
+			Item	"The Degreaser"
+			Item	"Traffic Cone"
+		}
+		T_TFBot_Force_Demoman_Loch_n_Lord
+		{
+			Name "Loch-n-Load Demoman"
+			Class Demoman
+			ClassIcon demo_loch_nys
+			Item "The Loch-n-Load"
+			Skill Hard
+			Item			"The Black Watch"
+			Item			"The Gaelic Golf Bag"
+			Item			"The Gaelic Garb"
+		}
+		T_TFBot_Force_Demoman_Swordfighter
+		{
+			Name				"Swordfighter"
+			Class				Demoman
+			ClassIcon			demoknight
+			Skill				Hard
+			Item				"Stylish DeGroot"
+			Item				"The Sole Saviors"
+			Item				"The Merc's Muffler"
+			Item				"The Toowoomba Tunic"
+			Item 				"The Eyelander"
+			Health				650
+			Scale				1.3
+			WeaponRestrictions	MeleeOnly
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"critboost on kill" 5
+			}
+		}
+		T_TFBot_Force_Demoman_Swordfighter_Fire
+		{
+			Name				"Fire Swordfighter"
+			Class				Demoman
+			ClassIcon			demoknight_fire
+			Skill				Hard
+			Item				"Stylish DeGroot"
+			Item				"The Sole Saviors"
+			Item				"The Merc's Muffler"
+			Item				"The Toowoomba Tunic"
+			Item 				"The Eyelander"
+			Health				650
+			Scale				1.3
+			WeaponRestrictions	MeleeOnly
+			ItemAttributes
+			{
+				ItemName				"The Merc's Muffler"
+				"set item tint rgb"		5801378
+			}
+			ItemAttributes
+			{
+				ItemName 					"The Eyelander"
+				//"critboost on kill" 		5
+				"attach particle effect" 	1
+				"set damagetype ignite"	1
+			}
+		}
+		T_TFBot_Demoman_Burst_FixVersion
+		{
+			Class Demoman
+            Name "Burst Fire Demo"
+            ClassIcon demo_burst
+            Skill Expert
+            WeaponRestrictions PrimaryOnly
+            Attributes HoldFireUntilFullReload
+            Item "Tartan Tyrolean"
+            Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+            ItemAttributes
+            {
+                ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+                "reload time increased" 1.059
+                "fire rate bonus" 0.05
+                "damage penalty" 0.5
+                "projectile spread angle penalty" 3
+            }
+        }
+		T_TFBot_Force_Giant_Pyro_DragonFury
+		{
+			Name 				"Giant Dragon's Fury Pyro"
+			ClassIcon			pyro_dragon_fury_swordstone
+			Class 				Pyro
+			Skill 				Expert
+			Health 				3500
+			WeaponRestrictions 	PrimaryOnly
+			MaxVisionRange 		600
+			Attributes 			MiniBoss
+			Item 				"The Dragon's Fury"
+			Item 				"Pyromancer's Mask"
+			Item            	"dec2014 2014_pyromancer_hood"
+			Item            	"dec2014 Pyromancer's Raiments"
+			ItemAttributes
+			{
+				ItemName 			"The Dragon's Fury"
+				"damage bonus"		1.5
+				"airblast disabled"	1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		6
+			}
+		}
+		T_TFBot_Force_Giant_Demoman_Ironbomber
+		{
+			Name "Giant Bomber Demoman"
+			Class Demoman
+			Skill Expert
+			Health 3500
+			ClassIcon demo_giant
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Item	"The Black Watch"
+			Item	"The Gaelic Golf Bag"
+			Item	"The Gaelic Garb"
+			Item	"The Iron Bomber"
+			ItemAttributes
+			{
+				ItemName "The Iron Bomber"
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.5
+				"damage force reduction" 0.5
+				"move speed bonus" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		T_TFBot_Force_Giant_Demoman_Loch_n_Load
+		{
+			Name "Giant Loch-n-Load Demoman"
+			Class Demoman
+			Skill Expert
+			Health 3500
+			ClassIcon demo_giant
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Item	"The Black Watch"
+			Item	"The Gaelic Golf Bag"
+			Item	"The Gaelic Garb"
+			Item 	"The Loch-n-Load"
+			ItemAttributes
+			{
+				ItemName "The Loch-n-Load"
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.5
+				"damage force reduction" 0.5
+				"move speed bonus" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		T_TFBot_Force_Giant_Demoman_Loose_Cannon
+		{
+			Name "Giant Cannon Demoman"
+			Class Demoman
+			Skill Expert
+			Health 3500
+			ClassIcon demo_giant
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			WeaponRestrictions PrimaryOnly
+			Item	"The Black Watch"
+			Item	"The Gaelic Golf Bag"
+			Item	"The Gaelic Garb"
+			Item 	"The Loose Cannon"
+			ItemAttributes
+			{
+				ItemName "The Loose Cannon"
+				"damage bonus" 1.5
+				"fire rate penalty" 0.8
+				"grenade launcher mortar mode" 0
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.5
+				"damage force reduction" 0.5
+				"move speed bonus" 0.5
+				"override footstep sound set" 4
+			}
+		}
+		T_TFBot_Force_Giant_Bowman
+        {
+            Name                    "Giant Bowman"
+            Health                  3000
+            Class                   Sniper
+            Skill                   Hard
+            ClassIcon               sniper_bow
+            Tag                     bot_giant
+            Attributes              MiniBoss
+            WeaponRestrictions      PrimaryOnly
+            Item		            "Corona Australis"
+			Item		            "The Toowoomba Tunic"
+			Item					"The Merc's Muffler"
+            Item                    "The Huntsman"
+			MaxVisionRange			1500
+            ItemAttributes
+            {
+                ItemName            "The Huntsman"
+                "damage bonus"      1.2
+            }
+            CharacterAttributes
+			{
+				"move speed bonus" 0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 4
+			}
+        }
+		T_TFBot_Force_Medic_Shield
+		{
+			Class 				Medic
+			Name 				"Shield Medic"
+			ClassIcon			medic_shield_qf
+			Skill 				Hard
+			Item 				"The Surgeon's Stahlhelm"
+			Item 				"The Quick-Fix"
+			WeaponRestrictions 	SecondaryOnly
+			Attributes 			ProjectileShield
+			Attributes 			SpawnWithFullCharge
+			Attributes			IgnoreEnemies
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 2
+			}
+		}
+        T_TFBot_Force_Sniper_Rapid_Jumping_Huntsman
+        {
+            Template        T_TFBot_Sniper_Huntsman
+            Name            "Pit Bowman"
+            Item            "Wings of Purity"
+            Item            "The Hardy Laurel"
+            Item            "Olympic Leapers"
+            AutoJumpMin     5
+			AutoJumpMax     5
+            Scale           0.9
+            Attributes      AutoJump
+            Skill           Hard
+            Item            "The Huntsman"
+            ItemAttributes
+            {
+                ItemName                        "The Huntsman"
+                "override projectile type"      1
+                "sniper fires tracer HIDDEN"    1
+                "ragdolls become ash"           1
+                "dmg penalty vs players"        0.25
+                "dmg penalty vs buildings"      0.25
+                "fire rate bonus"               0.1
+            }
+            CharacterAttributes
+            {
+                "increased jump height" 2
+                "cancel falling damage" 1
+            }
+        }
+    }
+
+	Mission //Engineer - Wave 1=2
+	{
+		Objective			Sniper
+		Where				spawnbot_mission_sniper
+		BeginAtWave			1
+		RunForThisManyWaves	2
+		InitialCooldown		35
+		CooldownTime		35
+		DesiredCount		2
+		TFBot
+		{
+			Template		T_TFBot_Sniper
+			Skill			Normal
+		}
+	}
+    Mission //Spy - Wave 4
+	{
+		Objective			Spy
+		Where				spawnbot_mission_spy
+		BeginAtWave			4
+		RunForThisManyWaves	1
+		InitialCooldown		30
+		CooldownTime		30
+		DesiredCount		2
+		TFBot
+		{
+			Template		T_TFBot_Spy
+		}
+	}
+
+	Mission // Engineer - wave 5
+	{
+		Objective 			Engineer  
+		InitialCooldown 	45
+		Where 				spawnbot
+		BeginAtWave 		5
+		RunForThisManyWaves 1
+		CooldownTime 		45
+		DesiredCount 		1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+		}
+	}	
+
+	Mission //Spy - Wave 6
+	{
+		Objective			Spy
+		Where				spawnbot_mission_spy
+		BeginAtWave			6
+		RunForThisManyWaves	1
+		InitialCooldown		30
+		CooldownTime		30
+		DesiredCount		2
+		TFBot
+		{
+			Template		T_TFBot_Spy
+		}
+	}
+
+	Mission
+	{
+		Objective DestroySentries
+		Where spawnbot
+		InitialCooldown 35
+		CooldownTime 35
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		DesiredCount 1
+		RandomChoice
+		{
+			TFBot
+			{
+				Class 				Scout
+				Skill 				Expert
+				Name 				"Super Buster"
+				Item				"Batter's Helmet"
+				Item 				"eotl_demopants"
+				Health 				2500
+				WeaponRestrictions 	MeleeOnly
+				Attributes			DisableDodge
+				Attributes 			MiniBoss
+				CharacterAttributes
+				{
+					"move speed bonus" 3
+					"damage force reduction" 0.5
+					"airblast vulnerability multiplier" 0.5
+					"override footstep sound set" 7
+					"cannot be backstabbed" 1
+					"head scale"			2
+				}
+			}
+			TFBot
+			{
+				Template	T_TFBot_SentryBuster
+			}
+		}
+	}
+
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+
+        WaveSpawn
+		{
+            Name                1A
+			Where 				spawnbot
+			TotalCount 			14
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	5
+			TotalCurrency 		50
+			TFBot
+			{
+                Template        T_TFBot_Force_Heavyweapons_Heater
+                Skill           Easy
+			}
+		}
+        WaveSpawn
+		{
+            Name                1B
+			Where 				spawnbot_lowerflank
+			TotalCount 			18
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Demoman
+				Item			"The Black Watch"
+				Item			"The Gaelic Golf Bag"
+				Item			"The Gaelic Garb"
+                Skill           Easy
+			}
+		}
+        WaveSpawn
+		{
+            Name                1C
+			Where 				spawnbot
+			TotalCount 			6
+			MaxActive 			3
+			SpawnCount 			3
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	20
+			TotalCurrency 		200
+            Squad
+            {
+                TFBot
+                {
+                    Template		T_TFBot_Giant_Pyro
+                    Item 			"Pyromancer's Mask"
+                    Item            "dec2014 2014_pyromancer_hood"
+                    Item            "dec2014 Pyromancer's Raiments"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Medic_BigHeal
+					Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Medic_BigHeal
+					Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+            }
+		}
+        WaveSpawn
+		{
+            Name                1D
+            WaitForAllDead      1B
+			Where 				spawnbot_sidebuilding
+			TotalCount 			20
+			MaxActive 			8
+			SpawnCount 			5
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		75
+			TFBot
+			{
+				Template		T_TFBot_Sniper_Huntsman
+				Item		    "The Fruit Shoot"
+				Item		    "Merc's Pride Scarf"
+			}
+		}
+        WaveSpawn
+		{
+            Name                1E
+            WaitForAllDead      1C
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			30
+			MaxActive 			12
+			SpawnCount 			6
+			WaitBeforeStarting 	2
+			WaitBetweenSpawns 	5
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Demoman_Knight
+				Item			"The Stormin' Norman"
+                Item            "The Toowoomba Tunic"
+			}
+		}
+        WaveSpawn
+		{
+            Name                1F
+            WaitForAllDead      1E
+			Where 				spawnbot
+			TotalCount 			6
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	1
+			WaitBetweenSpawns 	25
+			TotalCurrency 		125
+            Squad
+            {
+                TFBot
+                {
+                    Template		T_TFBot_Giant_Soldier_Spammer
+					Item			"Chieftain's Challenge"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Medic_BigHeal
+					Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Medic_BigHeal
+					Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+            }
+		}
+        WaveSpawn
+		{
+            Name                1S1
+            WaitForAllDead      1A
+			Where 				spawnbot
+            Where               spawnbot_side
+			TotalCount 			25
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	3
+			WaitBetweenSpawns 	10
+			TotalCurrency 		50
+            Support             1
+            TFBot
+                {
+                    Template		T_TFBot_Pyro
+					Skill			Easy
+                    Item 			"Pyromancer's Mask"
+                    Item            "dec2014 2014_pyromancer_hood"
+                    Item            "dec2014 Pyromancer's Raiments"
+                }
+		}
+        WaveSpawn
+		{
+            Name                1S2
+            WaitForAllDead      1E
+			Where 				spawnbot_sidebuilding
+            Where               spawnbot_lowerflank
+			Where				spawnbot
+			TotalCount 			25
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	7
+			TotalCurrency 		50
+            Support             1
+            TFBot
+            {
+                Template        T_TFBot_Demoman
+				Item			"The Black Watch"
+				Item			"The Gaelic Golf Bag"
+				Item			"The Gaelic Garb"
+                Skill           Normal
+            }
+		}
+    }
+
+    //Wave 2 - $800
+    //2A: 28 Soldier									|NONE
+	//2B: 12 Shortstop Scout							|NONE
+	//2C: 22 Pyro Flare Gun								|WaitForAllSpawned	2A
+	//2D: 02 Giant Demo Burst Fire + 04 Pyro Airblast	|WaitForAllSpawned	2A		
+	//2E: 40 Scout Melee (Crits)						|WaitForAllDead		2E
+	//2F: 20 Loch Demoman								|WaitForAllDead		2E
+	//2G: 04 Giant Demoman (Random)						|WaitForAllSpawned	2G
+	//Support:
+	//2S: 12 Pyro Flare Gun								|WaitForAllDead		2E
+	//2S1: 02 Sniper									|NONE
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+            Name                2A
+			Where 				spawnbot
+			TotalCount 			28
+			MaxActive 			8
+			SpawnCount 			4
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	5
+			TotalCurrency 		100
+			TFBot
+			{
+				Class			Soldier
+				Skill			Easy
+                //Item			"The Merc's Muffler" //Can't use on Soldier (WHY!)
+                Item            "The Slo-Poke"
+			}
+		}
+		WaveSpawn
+		{
+            Name                2B
+			Where 				spawnbot_sidebuilding
+			TotalCount 			12
+			MaxActive 			2
+			SpawnCount 			2
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	10
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Scout_Shortstop
+				Item			"Dillinger's Duffel"
+				Item			"Blizzard Britches"
+				Item			"Airborne Attire"
+                Item			"The Merc's Muffler"
+			}
+		}
+		WaveSpawn
+		{
+            Name                2C
+			WaitForAllSpawned	2A
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			22
+			MaxActive 			9
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Pyro_FlareGun
+                Item 			"Pyromancer's Mask"
+                Item           	"dec2014 2014_pyromancer_hood"
+                Item           	"dec2014 Pyromancer's Raiments"
+			}
+		}
+		WaveSpawn
+		{
+            Name                2D
+			WaitForAllSpawned	2A
+			Where 				spawnbot_side
+			TotalCount 			8
+			MaxActive 			8
+			SpawnCount 			4
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	20
+			TotalCurrency 		200
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Giant_Demoman
+					Name			"Giant Demoman"
+					Item			"The Black Watch"
+					Item			"The Gaelic Golf Bag"
+					Item			"The Gaelic Garb"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Pyro_Reflector
+                    Item			"The Merc's Muffler"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Pyro_Reflector
+                    Item			"The Merc's Muffler"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Pyro_Reflector
+                    Item			"The Merc's Muffler"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                2E
+			WaitForAllDead		2D
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			Where				spawnbot
+			TotalCount 			40
+			MaxActive 			12
+			SpawnCount 			3
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	3
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Scout_Melee
+                Item			"Death Racer's Helmet"
+				Item			"Dillinger's Duffel"
+				Item			"Blizzard Britches"
+				Item			"Airborne Attire"
+                Item		    "The Merc's Muffler"
+				Attributes		AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+            Name                2F
+			WaitForAllDead		2D
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			Where				spawnbot
+			TotalCount 			21
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	6
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Force_Demoman_Loch_n_Lord
+                Item			"The Merc's Muffler"
+			}
+		}
+		WaveSpawn
+		{
+            Name                2G
+			WaitForAllDead		2D
+			Where				spawnbot_side
+			TotalCount 			4
+			MaxActive 			4
+			SpawnCount 			1
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	15
+			TotalCurrency 		175
+			RandomChoice
+			{
+				TFBot
+				{
+					Template		T_TFBot_Giant_Demoman
+					Name			"Giant Demoman"
+					Item			"The Black Watch"
+					Item			"The Gaelic Golf Bag"
+					Item			"The Gaelic Garb"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Demoman_Ironbomber
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Demoman_Loch_n_Load
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Demoman_Loose_Cannon
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                2S1
+			WaitForAllSpawned	2E
+			Where				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			25
+			MaxActive 			8
+			SpawnCount 			4
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	5
+			TotalCurrency 		75
+			Support				1
+			TFBot
+			{
+				Template			T_TFBot_Pyro_FlareGun
+                Item 				"Pyromancer's Mask"
+                Item            	"dec2014 2014_pyromancer_hood"
+                Item            	"dec2014 Pyromancer's Raiments"
+			}
+		}
+    }
+
+	//Wave 3
+    //3A: 02 Giant Heavy 								|NONE
+	//3B: 24 Soldier Blackbox							|NONE
+	//3C: 18 Pyro Kill On Heal							|WaitForAllDead		3B
+	//3D: 04 Giant Bowman + 02 Uber Medic				|WaitForAllDead		3A		
+	//3E: 21 Heavy Natascha								|WaitForAllDead		3A
+	//3F: 18 Fan Scout									|WaitForAllSpawned	3C
+	//3G: 01 Giant Heavy + 02 Giant Bowman				|WaitForAllDead		3D
+	//3H: 01 Tank										|WaitForAllDead		3H
+	//Support:
+	//3S: 04 Pyro
+	//3S: 06 League Scout
+	//3S: 03 Soldier
+
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+            Name                3A
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			1
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	25
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Giant_Heavyweapons
+				Item			"Tough Guy's Toque"
+				Item			"The All-Father"
+				Item			"Siberian Sweater"
+			}
+		}
+		WaveSpawn
+		{
+            Name                3B
+			Where 				spawnbot
+			TotalCount 			24
+			MaxActive 			8
+			SpawnCount 			3
+			WaitBeforeStarting 	1
+			WaitBetweenSpawns 	5
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Soldier_RocketShotgun
+                Item            "The Slo-Poke"
+			}
+		}
+		WaveSpawn
+		{
+            Name                3C
+			WaitForAllSpawned	3A
+			Where				spawnbot_lowerflank
+			TotalCount 			18
+			MaxActive 			6
+			SpawnCount 			2
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	3
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Pyro
+				ClassIcon		pyro_heal
+				Name			"Heal-On-Kill Pyro"
+				Attributes		AlwaysFireWeapon
+				Item			"concealedkiller_flamethrower_forestfire" 
+                Item 			"Pyromancer's Mask"
+                Item            "dec2014 2014_pyromancer_hood"
+                Item            "dec2014 Pyromancer's Raiments"
+				ItemAttributes
+				{
+					ItemName		"concealedkiller_flamethrower_forestfire" 
+					"heal on kill"	175
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                3D
+			WaitForAllDead		3A
+			Where 				spawnbot
+			TotalCount 			8
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	10
+			WaitBetweenSpawns 	15
+			TotalCurrency 		100
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Bowman
+				}
+				TFBot
+				{
+					Template		T_TFBot_Medic
+                    Item            "The Warsworn Helmet"
+					Item			"The Chronoscarf"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                3E
+			WaitForAllDead		3A
+			Where				spawnbot_sidebuilding
+			TotalCount 			18
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	2
+			WaitBetweenSpawns 	7
+			TotalCurrency 		50
+			TFBot
+			{
+				Class			Heavy
+				Skill			Normal
+				Name			"Natascha Heavy"
+				Item			"Natascha"
+				ClassIcon       heavy_natascha_nys
+                Item			"Tough Guy's Toque"
+                Item			"The Merc's Muffler"
+			}
+		}
+		// WaveSpawn
+		// {
+        //     Name                3F
+		// 	WaitForAllDead		3E
+		// 	Where 				spawnbot
+		// 	Where				spawnbot_sidebuilding
+		// 	TotalCount 			18
+		// 	MaxActive 			6
+		// 	SpawnCount 			3
+		// 	WaitBeforeStarting 	0
+		// 	WaitBetweenSpawns 	5
+		// 	TotalCurrency 		50
+		// 	TFBot
+		// 	{
+		// 		Template		T_TFBot_Scout_FaN
+        //         Attributes      AlwaysCrit
+		// 		Skill			Hard
+		// 	}
+		// }
+		WaveSpawn
+		{
+            Name                3G
+			WaitForAllDead		3D
+			Where 				spawnbot
+			TotalCount 			3
+			MaxActive 			3
+			SpawnCount 			3
+			WaitBeforeStarting 	21
+			WaitBetweenSpawns 	0
+			TotalCurrency 		200
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Giant_Heavyweapons
+					Item			"Tough Guy's Toque"
+					Item			"The All-Father"
+					Item			"Siberian Sweater"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Bowman
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Bowman
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                3H
+			WaitForAllDead		3D
+			Where 				spawnbot
+			Where				spawnbot_sidebuilding
+			TotalCount 			1
+			MaxActive 			1
+			SpawnCount 			1
+			WaitBeforeStarting 	1
+			WaitBetweenSpawns 	0
+			TotalCurrency 		100
+			Tank
+			{
+				Health                  14000
+				Speed                   75
+				StartingPathTrackNode   "tank_start"
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                3S
+			WaitForAllDead		3C
+			Where 				spawnbot
+			TotalCount 			10
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	10
+			TotalCurrency 		15
+			Support				1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template		T_TFBot_Pyro
+					Skill			Easy
+					Item 			"Pyromancer's Mask"
+					Item            "dec2014 2014_pyromancer_hood"
+					Item            "dec2014 Pyromancer's Raiments"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Pyro
+					Skill			Normal
+					Item 			"Pyromancer's Mask"
+					Item            "dec2014 2014_pyromancer_hood"
+					Item            "dec2014 Pyromancer's Raiments"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                3S1
+			WaitForAllDead		3E
+			Where				spawnbot_sidebuilding
+			TotalCount 			10
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		15
+			Support				1
+			TFBot
+			{
+				Template		T_TFBot_Scout_Sandman_FastCharge
+				Attributes		AlwaysCrit
+                Item            "Merc's Pride Scarf"
+			}
+		}
+		WaveSpawn
+		{
+            Name                3S2
+			WaitForAllDead		3D
+			Where 				spawnbot_lowerflank
+			TotalCount 			10
+			MaxActive 			3
+			SpawnCount 			3
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	10
+			TotalCurrency 		20
+			Support				1
+			TFBot
+			{
+				Class			Soldier
+				Skill			Normal
+                Item            "Merc's Pride Scarf"
+			}
+		}
+    }
+
+	//Wave 4 - $700
+    //4A: 28 Shotgun Heavy
+	//4B: 16 Demoman
+	//4C: 02 Giant Demoman + 02 Shield Medic
+	//4D: 18 Pyro Scorchshot
+	//4E: 04 Giant Scout FaN
+	//4F: 01 Giant Heavy Deflector + 01 Giant Medic Regen
+	//4G: 08 Heavy Hard + 08 Shield Medic
+	//Support:
+	//4S1: 06 Shotgun Heavy 
+	//4S2: 02 Machina Sniper
+
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+            Name                4A
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			28
+			MaxActive 			8
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	2
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Heavyweapons_Shotgun
+				Name			"Shotgun Heavy"
+                Item            "Merc's Pride Scarf"
+			}
+		}
+		WaveSpawn
+		{
+            Name                4B
+			Where 				spawnbot
+			TotalCount 			33
+			MaxActive 			8
+			SpawnCount 			3
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	4
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Demoman
+				Item			"The Black Watch"
+				Item			"The Gaelic Golf Bag"
+				Item			"The Gaelic Garb"
+			}
+		}
+		WaveSpawn
+		{
+            Name                4C
+			WaitForAllSpawned	4A
+			Where 				spawnbot
+			TotalCount 			4
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	15
+			TotalCurrency 		150
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Force_Giant_Pyro_DragonFury
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Medic_Shield
+                    Item            "Grimm Hatte"
+                    Health          650
+                    Scale           1.3
+                    Name            "Shield Medic"
+                    Item			"The Chronoscarf"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                4D
+			WaitForAllDead		4B
+			Where 				spawnbot
+			TotalCount 			24
+			MaxActive 			16
+			SpawnCount 			8
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	8
+			TotalCurrency 		50
+			RandomChoice
+			{
+				TFBot
+				{
+					Template		T_TFBot_ScorchShot_FastShot
+					Attributes		AlwaysCrit
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Pyro_FlareGun
+					Attributes		AlwaysCrit
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Pyro_FlareGun
+					Attributes		AlwaysCrit
+					Item			"The Detonator"
+					Name			"Detonator Pyro"
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Pyro_FlareGun
+					Attributes		AlwaysCrit
+					Item			"The Manmelter"
+					Name			"Manmelter Pyro"
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                4E
+			WaitForAllSpawned	4C
+			Where 				spawnbot
+			TotalCount 			4
+			MaxActive 			2
+			SpawnCount 			1
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	20
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Giant_Scout_FaN
+				Attributes		AlwaysCrit
+                Item			"Death Racer's Helmet"
+				Item			"Dillinger's Duffel"
+				Item			"Blizzard Britches"
+				Item			"Airborne Attire"
+			}
+		}
+		WaveSpawn
+		{
+            Name                4F
+			WaitForAllDead		4D
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			2
+			WaitBeforeStarting 	15
+			WaitBetweenSpawns 	0
+			TotalCurrency 		175
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Giant_Heavyweapons_Deflector
+                    Item			"Tough Guy's Toque"
+                    Item			"The Merc's Muffler"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Giant_Medic_Regen
+                    Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                4G
+			WaitForAllDead		4D
+			Where 				spawnbot_lowerflank
+			TotalCount 			16
+			MaxActive 			8
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	5
+			TotalCurrency 		75
+			Squad
+			{
+				TFBot
+				{
+					Class			Heavy
+					Skill			Normal
+                    Item			"The Merc's Muffler"
+                    
+				}
+				TFBot
+				{
+					Template		T_TFBot_Force_Medic_Shield
+                    Item            "Grimm Hatte"
+					Item			"The Chronoscarf"
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                4S1
+			WaitForAllDead		4B
+			Where 				spawnbot_sidebuilding
+			Where				spawnbot_lowerflank
+			TotalCount 			20
+			MaxActive 			7
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	10
+			TotalCurrency 		50
+			Support				1
+			TFBot
+			{
+				Template		T_TFBot_Heavyweapons_Shotgun
+                Item            "Merc's Pride Scarf"
+                Name			"Shotgun Heavy"
+			}
+		}
+    }
+
+	//Wave 5 - $1000
+    //5A: 16 Swordfighter
+	//5B: 22 Soldier Blast
+	//5C: 03 Giant Soldier Spammer
+	//5D: 18 Meme Burst Fire
+	//5E: 02 Giant Shotgun Heavy
+	//5F: 08 Samurai Demo
+	//5G: 06 Giant Soldier Spammer
+	//Support:
+    //5S: 24 Buff Banner Pyro
+	//5S: 03 Swordfighter
+	//5S: 08 Pyro
+
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+            Name                5A
+			Where 				spawnbot
+			TotalCount 			16
+			MaxActive 			4
+			SpawnCount 			4
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	10
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Force_Demoman_Swordfighter_Fire
+				Attributes		AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+            Name                5B
+			Where 				spawnbot_sidebuilding
+			Where				spawnbot_lowerflank
+			TotalCount 			32
+			MaxActive 			8
+			SpawnCount 			4
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	8
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Soldier_RocketPush
+                Item            "Merc's Pride Scarf"
+			}
+		}
+		WaveSpawn
+		{
+            Name                5C
+			Where 				spawnbot
+			TotalCount 			3
+			MaxActive 			2
+			SpawnCount 			1
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	20
+			TotalCurrency 		150
+			TFBot
+			{
+				Template		T_TFBot_Giant_Soldier_Spammer
+                Item            "Soldier Drill Hat"
+                Item            "Merc's Pride Scarf"
+                Item            "The Colonial Clogs"
+			}
+		}
+		WaveSpawn
+		{
+            Name                5D
+			WaitForAllSpawned	5A
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			18
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	10
+			TotalCurrency 		100
+			TFBot
+			{
+				Template		T_TFBot_Demoman_Burst_FixVersion
+                Item            "Merc's Pride Scarf"
+			}
+		}
+		WaveSpawn
+		{
+            Name                5E
+			WaitForAllDead		5C
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			1
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	20
+			TotalCurrency 		75
+			TFBot
+			{
+				Template		T_TFBot_Giant_Heavyweapons_Shotgun
+                Item            "The Sinner's Shade"
+                Item            "Commissar's Coat"
+			}
+		}
+		WaveSpawn
+		{
+            Name                5F
+			WaitForAllSpawned	5C
+			Where 				spawnbot
+			TotalCount 			9
+			MaxActive 			3
+			SpawnCount 			1
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		75
+			TFBot
+			{
+				Template		T_TFBot_Demoman_Samurai
+				Attributes		AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+            Name                5G
+			WaitForAllSpawned	5E
+			Where 				spawnbot
+			TotalCount 			10
+			MaxActive 			6
+			SpawnCount 			2
+			WaitBeforeStarting 	25
+			WaitBetweenSpawns 	13
+			TotalCurrency 		75
+			Squad
+			{
+				TFBot
+				{
+					Template		T_TFBot_Giant_Soldier_Spammer_Reload
+					Item            "Soldier Drill Hat"
+					Item            "Merc's Pride Scarf"
+					Item            "The Colonial Clogs"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+            Name                5H
+			WaitForAllDead		5D
+			Where 				spawnbot_sidebuilding
+            Where               spawnbot_lowerflank
+			TotalCount 			35
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	5
+			TotalCurrency 		125
+            Support             1
+			TFBot
+			{
+				Template		T_TFBot_Soldier_Extended_Buff_Banner
+                Item            "The Colonial Clogs"
+                Item            "Merc's Pride Scarf"
+			}
+		}
+		WaveSpawn
+		{
+            Name                5S1
+			WaitForAllDead		5A
+			Where 				spawnbot
+			TotalCount 			15
+			MaxActive 			2
+			SpawnCount 			2
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns 	20
+			TotalCurrency 		75
+			Support				1
+			TFBot
+			{
+				Template		T_TFBot_Force_Demoman_Swordfighter
+			}
+		}
+		WaveSpawn
+		{
+            Name                5S2
+			WaitForAllSpawned	5E
+			Where 				spawnbot_lowerflank
+			TotalCount 			25
+			MaxActive 			6
+			SpawnCount 			3
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns 	10
+			TotalCurrency 		75
+			Support				1
+			TFBot
+			{
+				Template		T_TFBot_Pyro
+				Skill			Normal
+                Item 			"Pyromancer's Mask"
+                Item           	"dec2014 2014_pyromancer_hood"
+                Item           	"dec2014 Pyromancer's Raiments"
+			}
+		}
+    }
+
+    //Wave 6 - $1000
+    //6A: 01 Tank (Health 25000)
+	//6B: 02 Giant Jumping Scout Crits
+	//6C: 01 Giant Brass Heavy + 01 Giant Medic
+	//6D: 27 Bowman Fire Crits
+	//6E: 42 Pyro // 21 Pyro (AlwaysFireWeapon) // 21 Pyro (Normal/Hard)
+	//6F: 04 Giant Pyro Crits + 04 Giant Rapid Fire Demoman
+    //6G: 08 Armored Battalion Soldier + 16 Pyro Airblast + 08 Uber Medic
+    //6H: 01 Giant Brass Heavy + 01 Giant Shield Regen Medic
+
+    Wave
+	{
+		StartWaveOutput
+		{	
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        WaveSpawn
+		{
+            Name                6A
+			Where 				spawnbot
+			TotalCount 			1
+			MaxActive 			1
+			SpawnCount 			1
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns 	0
+			TotalCurrency 		100
+			Tank
+			{
+				Health                  40000
+				Speed                   70
+				StartingPathTrackNode   "tank_start"
+				Skin					1
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+        WaveSpawn
+		{
+            Name                6B
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			1
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns   20
+			TotalCurrency 		50
+			TFBot
+			{
+				Template		T_TFBot_Giant_Scout_Jumping_Sandman
+				Attributes		AlwaysCrit
+                Health          1600
+			}
+		}
+        WaveSpawn
+		{
+            Name                6C
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			2
+			WaitBeforeStarting 	20
+			WaitBetweenSpawns   0
+			TotalCurrency 		150
+            Squad
+            {
+                TFBot
+                {
+                    Template		T_TFBot_Giant_Heavyweapons_Deflector
+                    Item			"Tough Guy's Toque"
+                    Item			"The All-Father"
+                    Item			"Siberian Sweater"
+                }
+                TFBot
+                {
+                    Template		T_TFBot_Giant_Medic_Regen
+                    Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+            }
+		}
+        WaveSpawn
+		{
+            Name                6D
+            WaitForAllSpawned   6B
+			Where 				spawnbot_sidebuilding
+            Where               spawnbot_lowerflank
+			TotalCount 			27
+			MaxActive 			9
+			SpawnCount 			3
+			WaitBeforeStarting 	10
+			WaitBetweenSpawns   2
+			TotalCurrency 		50
+            TFBot
+            {
+                Template        T_TFBot_Force_Sniper_Rapid_Jumping_Huntsman
+				Attributes		AlwaysCrit
+            }
+		}
+        WaveSpawn
+		{
+            Name                6E
+            WaitForAllDead      6D
+			Where 				spawnbot_lowerflank
+			Where				spawnbot_sidebuilding
+			TotalCount 			42
+			MaxActive 			12
+			SpawnCount 			6
+			WaitBeforeStarting 	5
+			WaitBetweenSpawns   10
+			TotalCurrency 		50
+			RandomChoice
+			{
+				TFBot
+				{
+					Template		T_TFBot_Soldier_RocketShotgun
+					Item			"Chieftain's Challenge"
+				}
+				TFBot
+				{
+					Template		T_TFBot_Soldier_Extended_Concheror
+					Item			"Chieftain's Challenge"
+				}
+			}
+		}
+        WaveSpawn
+		{
+            Name                6F
+            WaitForAllDead      6D
+			Where 				spawnbot
+			TotalCount 			8
+			MaxActive 			4
+			SpawnCount 			2
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns   15
+			TotalCurrency 		100
+            Squad
+            {
+                TFBot
+                {
+                    Template        T_TFBot_Force_Giant_Pyro_DragonFury
+                    Attributes      AlwaysCrit
+                    Item 			"Pyromancer's Mask"
+                    Item            "dec2014 2014_pyromancer_hood"
+                    Item            "dec2014 Pyromancer's Raiments"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Giant_Demo_Burst
+                    Item			"The Black Watch"
+					Item			"The Gaelic Golf Bag"
+					Item			"The Gaelic Garb"
+                }
+            }
+		}
+        WaveSpawn
+		{
+            Name                6G
+            WaitForAllDead      6F
+			Where 				spawnbot_sidebuilding
+            Where               spawnbot_lowerflank
+			TotalCount 			32
+			MaxActive 			12
+			SpawnCount 			4
+			WaitBeforeStarting 	0
+			WaitBetweenSpawns   8
+			TotalCurrency 		150
+			Support				1
+            Squad
+            {
+                TFBot
+                {
+                    Template		T_TFBot_Soldier_RocketPush
+					Item			"Chieftain's Challenge"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Medic
+                    Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Pyro
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+                }
+                TFBot
+                {
+                    Template        T_TFBot_Pyro
+                    Item 			"Pyromancer's Mask"
+                    Item           	"dec2014 2014_pyromancer_hood"
+                    Item           	"dec2014 Pyromancer's Raiments"
+                }
+            }
+		}
+        WaveSpawn
+		{
+            Name                6H
+            WaitForAllDead      6F
+			Where 				spawnbot
+			TotalCount 			2
+			MaxActive 			2
+			SpawnCount 			2
+			WaitBeforeStarting 	1
+			WaitBetweenSpawns   0
+			TotalCurrency 		250
+            Squad
+            {
+                TFBot
+                {
+                    Template		T_TFBot_Soldier_BurstFire
+                    Name            "Chad Burst Fire Soldier"
+                    Item			"Chieftain's Challenge"
+                    Item            "Merc's Pride Scarf"
+                }
+                TFBot
+                {
+                    Template		T_TFBot_Giant_Medic_Regen
+                    Item 			"The Surgeon's Stahlhelm"
+					Item			"The Chronoscarf"
+                }
+            }
+		}
+    }
+}
+
+// [Victory] Time spent on Wave 1: 4 min 5 sec
+// [Victory] Time spent on Wave 2: 3 min 31 sec
+// [Victory] Time spent on Wave 3: 4 min 29 sec
+// [Victory] Time spent on Wave 4: 3 min 14 sec
+// [Victory] Time spent on Wave 5: 4 min 56 sec
+// [Victory] Time spent on Wave 6: 4 min 10 sec
+// Total success time in mission: 24 min 25 sec (100%)
+// Total time spent in mission: 24 min 25 sec
+
+// Sntr :  chad got from front to hatch without taking any damage mainly because the support clumped up around the giant med
+// Sntr :  while mr bigrock does what he usually does and kills everyone
+// Sntr :  couldve used better crowd clearing to slap the support but that's why we had soldier there, I guess
+// Sntr :  yeah it's the only bit that had anything worth saying about
+// Sntr :  rest of mission is ok
+
+
