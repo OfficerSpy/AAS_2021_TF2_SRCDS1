@@ -1,0 +1,709 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+// Jolly Joyride - Normal
+// Made by PDA Expert at the request of Alox.
+
+WaveSchedule
+{
+    StartingCurrency 5000 //800
+	CanBotsAttackWhileInSpawnRoom no
+	RespawnWaveTime 5
+	
+	Mission // Sentry buster
+	{
+		Objective DestroySentries
+		
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 6
+
+		CooldownTime 35        
+
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Name "Cozy Buster"
+			
+			Item "Tough Guy's Toque"
+			Item EOTL_demopants
+		}
+	}
+	
+	// Wave 1/6 ($1000)
+	// Beatable in solo as : Sniper
+	
+	// 26 Pyros
+	// 12 Mittens Heavies
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 26
+			MaxActive 10
+			SpawnCount 1
+			
+			WaitBetweenSpawns 1.75
+			Where spawnbot
+			TotalCurrency 400
+			TFBot
+			{
+			    Class Pyro
+				Name "Skier Pyro"
+				Skill Easy
+				
+				Item "The Winter Wonderland Wrap"
+				Item "The Sub Zero Suit"
+				Item "The Trail-Blazer"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 12
+			MaxActive 6
+			SpawnCount 1
+			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			Where spawnbot
+			TotalCurrency 600
+			TFBot
+			{
+			    Template T_TFBot_Heavyweapons_Gnome
+				Name "Mall Santa"
+				
+		    	Item "The Gift Bringer"
+				Item "The All-Father"
+				Item "The B.M.O.C."
+			}
+		}
+	}
+	
+	// Wave 2/6 ($1300)
+	// Beatable in solo as : Demoknight (Samurai)
+	
+	// 30 Bat Scouts
+	// 16 Soldiers (Normal Skill)
+	
+	// 1 Tank (10k HP)
+	// 8 Shotgun Heavies
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 30
+			MaxActive 10
+			SpawnCount 2
+			
+			WaitBetweenSpawns 4
+			Where spawnbot
+			TotalCurrency 200
+			TFBot
+			{
+			    Class Scout
+				Name "Elf Scout"
+				ClassIcon scout_bat_nys
+				Skill Hard
+				
+				WeaponRestrictions MeleeOnly
+				
+				Item "The Big Elfin Deal"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 16
+			MaxActive 4
+			SpawnCount 1
+			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 8
+			Where spawnbot
+			TotalCurrency 400
+			TFBot
+			{
+			    Class Soldier
+				Name "Nutcracker"
+				Skill Normal
+				
+				Item "The Toy Soldier"
+				Item "The Diplomat"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 1
+			
+			Where spawnbot
+			TotalCurrency 300
+			WaitForAllDead "wave01"
+			
+			Tank
+			{
+				Health 10000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+		    TotalCount 8
+			MaxActive 4
+			SpawnCount 4
+			
+			WaitBetweenSpawns 15
+			WaitBeforeStarting 20
+			WaitForAllDead "wave01"
+			Where spawnbot
+			TotalCurrency 400
+			TFBot
+			{
+			    Template T_TFBot_Heavyweapons_Shotgun
+				Name "Reindeer Hunter"
+				Skill Normal
+				
+				Item "The Outdoorsman"
+				Item "The Apparatchik's Apparel"
+			}
+		}
+	}
+	
+	// Wave 3/6 ($1200)
+	// Beatable in solo as : Spy
+	
+	// 3 Giant Pyros
+	
+	// 2 Giant Soldiers
+	
+	// 1 Giant Heavy
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "part1"
+		    TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			
+			WaitBetweenSpawns 20
+			Where spawnbot_giant
+			
+			TotalCurrency 300
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Pyro
+				Name "Giant Skier Pyro"
+				
+				Item "The Winter Wonderland Wrap"
+				Item "The Sub Zero Suit"
+				Item "The Trail-Blazer"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "part2"
+		    TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			
+			WaitForAllDead "part1"
+			WaitBetweenSpawns 30
+			Where spawnbot_giant
+			
+			TotalCurrency 300
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Soldier
+				Name "Giant Nutcracker"
+				
+				Item "The Toy Soldier"
+				Item "The Diplomat"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "part3"
+		    TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			
+			WaitForAllSpawned "part2"
+			WaitBeforeStarting 30
+			Where spawnbot_giant
+			
+			TotalCurrency 600
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Heavyweapons
+				Name "Giant Cozy Heavy"
+				
+				Item "Tough Guy's Toque"
+				Item "Weight Room Warmer"
+				Item "The Breakneck Baggies"
+			}
+		}
+	}
+	
+	// Wave 4/6 ($1400)
+	// Beatable in solo as : Pyro (Phlog)
+	
+	// 1 Tank (25k HP)
+	// 32 Melee Heavies
+	
+	// 24 Sandmen Scouts
+	// 16 Scouts (Normal Skill Alerta)
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+			TotalCount 1
+			
+			Where spawnbot
+			TotalCurrency 400
+			
+			Tank
+			{
+				Health 25000
+				Speed 60
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 32
+			MaxActive 9
+			SpawnCount 1
+			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			Where spawnbot
+			TotalCurrency 400
+			TFBot
+			{
+			    Class Heavy
+				Name "Drunk Mall Santa"
+				ClassIcon heavy_fist_nys
+				Skill Hard
+				
+				WeaponRestrictions MeleeOnly
+				
+		    	Item "The Gift Bringer"
+				Item "The All-Father"
+				Item "The B.M.O.C."
+				
+				ItemAttributes
+				{
+				    ItemName "The B.M.O.C."
+					"attach particle effect" 39
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 2
+			
+			Where spawnbot
+			
+			WaitBetweenSpawns 3.5
+			WaitBeforeStarting 15
+			WaitForAllSpawned "wave01"			
+			TotalCurrency 200
+			
+			TFBot
+			{
+			    Template T_TFBot_Scout_Sandman
+				Name "Snowball Fight Scout"
+				
+				Item "Weight Room Warmer"
+				Item "Blizzard Britches"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 1
+			
+			Where spawnbot
+			
+			WaitBetweenSpawns 2
+			TotalCurrency 400
+			WaitForAllDead "wave01"
+			
+			TFBot
+			{
+			    Class Scout
+				Name "Winter Break Scout"
+				Skill Normal
+				
+				Item "Runner's Warm-Up"
+				Item "Wipe Out Wraps"
+				Item "Blizzard Britches"
+			}
+		}
+	}
+	
+	// Wave 5/6 ($1000)
+	// Beatable in solo as : Heavy (warrior's spirit + steak for tank)
+	
+	// 3 Giant Charged Soldiers & 2 Big Heal Medics & 3 Demomen
+	// 1 Tank (15k HP)
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 18
+			MaxActive 18
+			SpawnCount 6
+			
+			Where spawnbot
+			WaitBetweenSpawns 15
+			TotalCurrency 600
+			
+			Squad
+			{
+			    TFBot
+				{
+				    Template T_TFBot_Giant_Soldier_Crit
+					Name "Giant Charged Nutcracker"
+					
+					Item "The Toy Soldier"
+					Item "The Diplomat"
+				}
+			    TFBot
+				{
+				    Template T_TFBot_Medic_BigHeal
+					Name "Helpful Reindeer"
+					
+					Item "Exquisite Rack"
+				}
+			    TFBot
+				{
+				    Template T_TFBot_Medic_BigHeal
+					Name "Helpful Reindeer"
+					
+					Item "Exquisite Rack"
+				}
+			    TFBot
+				{
+				    Class Demoman
+					Skill Normal
+					Name "Elf Demoman"
+					
+					Item "Elf Esteem"
+				}
+			    TFBot
+				{
+				    Class Demoman
+					Skill Normal
+					Name "Elf Demoman"
+					
+					Item "Elf Esteem"
+				}
+			    TFBot
+				{
+				    Class Demoman
+					Skill Normal
+					Name "Elf Demoman"
+					
+					Item "Elf Esteem"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+			TotalCount 1
+			
+			Where spawnbot
+			TotalCurrency 400
+			WaitForAllSpawned "wave01"
+			WaitBeforeStarting 35
+			
+			Tank
+			{
+				Health 15000
+				Speed 75
+				Skin 1
+				Name "tankboss"
+				StartingPathTrackNode "boss_path_a1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+	}
+	
+	// Wave 6/6
+	// Beatable in solo as : Sniper
+	
+	// 48 Demoknights
+	// 4 Giant Pyros
+	
+	// 2 Giant Rapid-Fire Demomen with 2 Big Heal Medics
+	// 26 Heavies
+	
+	// 2 Giant Heavies
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 48
+			MaxActive 12
+			SpawnCount 2
+			
+			WaitBetweenSpawns 3
+			Where spawnbot
+			TotalCurrency 400
+			TFBot
+			{
+			    Template T_TFBot_Demoman_Knight
+				Name "Elf Knight"
+				
+		    	Item EOTL_demopants
+				Item "The Dark Age Defender"
+				Item "Elf Esteem"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave01"
+		    TotalCount 4
+			MaxActive 2
+			SpawnCount 2
+			
+			WaitBetweenSpawns 25
+			WaitBeforeStarting 15
+			Where spawnbot
+			TotalCurrency 250
+			TFBot
+			{
+			    Template T_TFBot_Giant_Pyro
+				Name "Giant Skier Pyro"
+				
+				Item "The Winter Wonderland Wrap"
+				Item "The Sub Zero Suit"
+				Item "The Trail-Blazer"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+		    TotalCount 6
+			MaxActive 6
+			SpawnCount 3
+			
+			WaitBetweenSpawns 20
+			WaitForAllDead "wave01"
+			Where spawnbot
+			TotalCurrency 400
+			Squad
+			{
+			    TFBot
+			    {
+			        Template T_TFBot_Giant_Demoman
+					Name "Giant Elf Demoman"
+					
+					Item EOTL_demopants
+					Item "Elf Esteem"
+				}
+			    TFBot
+				{
+				    Template T_TFBot_Medic_BigHeal
+					Name "Helpful Reindeer"
+					
+					Item "Exquisite Rack"
+				}
+			    TFBot
+				{
+				    Template T_TFBot_Medic_BigHeal
+					Name "Helpful Reindeer"
+					
+					Item "Exquisite Rack"
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave02"
+		    TotalCount 26
+			MaxActive 8
+			SpawnCount 1
+			
+			WaitBetweenSpawns 2
+			WaitForAllDead "wave01"
+			Where spawnbot
+			TotalCurrency 350
+			TFBot
+			{
+			    Class Heavy
+				Name "Ugly Sweater Heavy"
+				Skill Easy
+				
+				Item "Siberian Sweater"
+				Item "The Chill Chullo"
+			}
+		}
+		
+		WaveSpawn
+		{
+		    Name "wave03"
+		    TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			
+			WaitForAllSpawned "wave02"
+			WaitBeforeStarting 45
+			Where spawnbot_giant
+			
+			TotalCurrency 600
+			
+			TFBot
+			{
+			    Template T_TFBot_Giant_Heavyweapons
+				Name "Giant Cozy Heavy"
+				
+				Item "Tough Guy's Toque"
+				Item "Weight Room Warmer"
+				Item "The Breakneck Baggies"
+			}
+		}
+	}
+}
