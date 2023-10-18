@@ -1,0 +1,82 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/bots/skeleton/cosa_nostra_suit"
+	"$bumpmap" "models/player/spy/spy_normal"
+		"$detail" "effects/tiledfire/fireLayeredSlowTiled512.vtf"	
+	"$detailscale" "5"
+	"$detailblendfactor" .01
+	"$detailblendmode" 6
+
+	"$yellow" "0"
+	"$one" "1"
+
+
+	">=DX90"
+	{
+		"$selfillum" "1"
+	}
+	
+	"$selfillum_envmapmask_alpha" "1"
+	"$selfillumtint" "[142 220 41]"
+	"$selfIllumFresnel" "1"
+	"$selfIllumFresnelMinMaxExp" "[.05 0 25]" // 0.0 1.0 1.0 is the default
+	//"$selfIllumFresnelMinMaxExp" "[0 10 20]" // 0.0 1.0 1.0 is the default
+
+	
+	
+	
+	"$phong" "1"
+	"$phongexponent" "20"
+	"$phongboost" ".3"	
+	"$lightwarptexture" "models/player/pyro/pyro_lightwarp"
+	"$phongfresnelranges"	"[.3 1 8]"
+	"$halflambert" "0"
+
+	// Rim lighting parameters
+	"$rimlight" "1"												// To enable rim lighting (requires phong)
+	"$rimlightexponent" "4"										// Exponent for phong component of rim lighting	
+	"$rimlightboost" "2"										// Boost for ambient cube component of rim lighting
+
+
+	"Proxies"
+	{
+		
+		
+		"BurnLevel"
+		{
+			"resultVar" "$detailblendfactor"
+		}
+		"YellowLevel"
+		{
+			"resultVar" "$yellow"
+		}
+		"Equals"
+		{
+			"srcVar1" "$yellow"
+			"resultVar" "$color2"
+		}
+		"Sine"
+		{
+			"sineperiod" "2"
+			"sinemin" ".02"
+			"sinemax" ".1"
+			"resultVar" "$selfillumfresnelminmaxexp[1]"
+		}
+		
+		"Sine"
+		{
+			"sineperiod" "2"
+			"sinemin" "25"
+			"sinemax" "35"
+			"resultVar" "$selfillumfresnelminmaxexp[3]"
+		}
+		
+		"Sine"
+		{
+			"sineperiod" "1"
+			"sinemin" "25"
+			"sinemax" "5"
+			"resultVar" "$rimlightboost" 
+		}
+	}
+}

@@ -1,0 +1,66 @@
+"VertexlitGeneric"
+{
+	"$nodecal" "1"
+	"$baseTexture" "models/bots/skeleton/skeleton_cosa_nostra"
+
+	"$detail" "effects/tiledfire/fireLayeredSlowTiled512"
+	"$detailscale" ".5"
+	"$detailblendfactor" .01
+	"$detailblendmode" 1
+	"$color2" "[.3 .7 .9]"
+	
+	"$yellow" "0"
+	"$lightwarptexture" "models/player/pyro/pyro_lightwarp"
+
+	">=DX90"
+	{
+		"$selfillum" "1"
+	}
+	
+	"$selfillumtint" "[142 220 41]"
+	"$selfIllumFresnel" "1"
+	"$selfIllumFresnelMinMaxExp" "[.05 0 25]" // 0.0 1.0 1.0 is the default
+	//"$selfIllumFresnelMinMaxExp" "[0 10 20]" // 0.0 1.0 1.0 is the default
+
+	"$phong" "1"
+	"$phongexponent" "15"
+	"$phongboost" ".1"
+	"$phongfresnelranges" "[.25 .5 1]"
+	"$basemapalphaphongmask" "1"
+	"$rimlight" "1"
+	"$rimlightexponent" "0"
+	"$rimlightboost" ".1"
+
+
+	"Proxies"
+	{
+		
+
+
+// -------------------------
+
+		"Sine"
+		{
+			"sineperiod" "2"
+			"sinemin" ".02"
+			"sinemax" ".1"
+			"resultVar" "$selfillumfresnelminmaxexp[1]"
+		}
+		
+		"Sine"
+		{
+			"sineperiod" "2"
+			"sinemin" "25"
+			"sinemax" "35"
+			"resultVar" "$selfillumfresnelminmaxexp[3]"
+		}
+		
+		"Sine"
+		{
+			"sineperiod" "1"
+			"sinemin" "25"
+			"sinemax" "5"
+			"resultVar" "$rimlightboost" 
+		}
+	}
+}
