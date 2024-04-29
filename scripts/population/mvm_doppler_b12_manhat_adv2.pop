@@ -7,7 +7,7 @@
 
 WaveSchedule
 {
-	StartingCurrency 5000
+	StartingCurrency 800
 	CanBotsAttackWhileInSpawnRoom No
 	RespawnWaveTime 8
 	Advanced	1

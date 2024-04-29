@@ -8,7 +8,7 @@
 
 WaveSchedule
 {
-	StartingCurrency 5000
+	StartingCurrency 600
 	RespawnWaveTime 6
 	CanBotsAttackWhileInSpawnRoom no
 	// SentryBuster

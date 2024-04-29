@@ -10,7 +10,7 @@
 WaveSchedule
 {
     //Initial Money  $800
-	StartingCurrency	5000
+	StartingCurrency	800
 	RespawnWaveTime	3
 	CanBotsAttackWhileInSpawnRoom	no
     Advanced   1

@@ -3,7 +3,7 @@
 #base robot_standard.pop
 population
 {
-	StartingCurrency	5000 //600
+	StartingCurrency	800 //600
 	RespawnWaveTime	6
 	CanBotsAttackWhileInSpawnRoom	no
 	Advanced	1

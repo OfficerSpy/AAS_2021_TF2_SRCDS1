@@ -9,7 +9,7 @@ WaveSchedule
 {
 	CanBotsAttackWhileInSpawnRoom no
 	RespawnWaveTime	4
-	StartingCurrency 5000 
+	StartingCurrency 600 
 	Advanced 1
 	AddSentryBusterWhenDamageDealtExceeds 4000
 	AddSentryBusterWhenKillCountExceeds	25

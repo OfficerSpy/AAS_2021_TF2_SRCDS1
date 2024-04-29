@@ -6,7 +6,7 @@
 #base robot_downpour.pop
 population
 {
-	StartingCurrency	5000
+	StartingCurrency	900
 	RespawnWaveTime	3
 	CanBotsAttackWhileInSpawnRoom	no
 	FixedRespawnWaveTime	Yes
