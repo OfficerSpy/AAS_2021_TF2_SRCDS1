@@ -1,0 +1,497 @@
+//Bot templates by Idolon for TF2M 2017 MVM Contest entry.
+//Feel free to use these. Credit me if you want.
+
+WaveSchedule
+{
+	Templates
+	{
+		T_TFBot_Piss_Boy
+		{
+			Class Sniper
+			Name "Piss Boy"
+			Skill Hard
+			WeaponRestrictions SecondaryOnly
+			Item "Jarate"
+			ClassIcon "sniper_jarate"
+			ItemAttributes
+			{
+				ItemName "Jarate"
+				"throwable recharge time" 6
+			}
+		}
+		
+		
+		
+		T_TFBot_Pyro_Neon
+		{
+			Template T_TFBot_Pyro
+			WeaponRestrictions MeleeOnly
+			Item "The Neon Annihilator"
+		}
+		
+		
+		
+		T_TFBot_Pyro_NoReflect
+		{
+			Template T_TFBot_Pyro
+			Attributes AlwaysFireWeapon
+		}
+		
+		
+		
+		T_TFBot_Pyro_Fast
+		{
+			Template T_TFBot_Pyro_NoReflect
+			Name "Quick Pyro"
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+			}
+		}
+		
+		
+		
+		T_TFBot_Pyro_Crit
+		{
+			Template T_TFBot_Pyro_NoReflect
+			Name "Crit Pyro"
+			Attributes AlwaysCrit
+		}
+		
+		
+		
+		T_TFBot_Giant_Pyro_NoReflect
+		{
+			Template T_TFBot_Giant_Pyro
+			Attributes AlwaysFireWeapon
+		}
+		
+		
+		
+		T_TFBot_Giant_Pyro_Crit
+		{
+			Template T_TFBot_Giant_Pyro_NoReflect
+			Name "Giant Crit Pyro"
+			Attributes AlwaysCrit
+		}
+		
+		
+		
+		T_TFBot_Scout_Crit
+		{
+			Class Scout
+			Skill Normal
+			Name "Crit Scout"
+			Attributes AlwaysCrit
+		}
+		
+		
+		
+		T_TFBot_Scout_Melee_Fix
+		{
+			Template T_TFBot_Scout_Melee
+			ClassIcon "scout_bat"
+			Name "Bat Scout"
+		}
+		
+		
+		
+		T_TFBot_Scout_Melee_Crit
+		{
+			Template T_TFBot_Scout_Melee_Fix
+			Name "Crit Bat Scout"
+			Attributes AlwaysCrit
+		}
+		
+		
+		
+		T_TFBot_Heavyweapons_Heater_Ido
+		{
+			Class Heavyweapons
+			Skill Normal
+			Name "Heater Heavy"
+			ClassIcon "heavy_heater"
+			Item "The Huo Long Heatmaker"
+			WeaponRestrictions PrimaryOnly
+		}
+		
+		
+		
+		T_TFBot_Heavyweapons_Heavyweight_Champ_Crit
+		{
+			Template T_TFBot_Heavyweapons_Heavyweight_Champ
+			Attributes AlwaysCrit
+			Name "Crit Heavyweight Champ"
+		}
+		
+		
+		
+		T_TFBot_Heavyweapons_Heavyweight_Champ_Crit_Fast
+		{
+			Template T_TFBot_Heavyweapons_Heavyweight_Champ
+			Attributes AlwaysCrit
+			Name "Quick Crit Heavyweight Champ"
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+			}
+		}
+		
+		
+		
+		T_TFBot_Heavyweapons_Shotgun_Fast
+		{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Name "Fat Scout"
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+			}
+		}
+		
+		
+		
+		T_TFBot_Giant_Demoman_Crit
+		{
+			Template T_TFBot_Giant_Demoman
+			Attributes AlwaysCrit
+			Name "Giant Crit Demoman"
+		
+		}
+		
+		
+		
+		T_TFBot_Soldier_Crit
+		{
+			Class Soldier
+			Skill Normal
+			Name "Crit Soldier"
+			Attributes AlwaysCrit
+		}
+		
+		
+		
+		T_TFBot_Soldier_Fast
+		{
+			Class Soldier
+			Skill Normal
+			Name "Quick Soldier"
+			CharacterAttributes
+			{
+				"move speed bonus" 1.8
+			}
+		}
+		
+		
+		
+		T_TFBot_Giant_Soldier_DirectHit
+		{
+			Template T_TFBot_Giant_Soldier
+			Name "Giant Direct Hit Soldier"
+			Item "Direct Hit"
+		}
+		
+		
+		
+		T_TFBot_Soldier_Impossible
+		{
+			Class Soldier
+			Skill Expert
+			ClassIcon "soldier_sergeant_crits"
+			Health 999999
+			Scale 1.9
+			Name "Unbeatable Soldier"
+			Attributes AlwaysCrit HoldFireUntilReload MiniBoss
+			Item "The Black Box"
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"damage bonus" 5
+				"damage causes airblast" 1
+				"faster reload rate" 3
+				"fire rate bonus" 2
+				"projectile spread angle penalty" 1
+				"use large smoke explosion" 1
+				"blast radius increased" 2
+				"projectile speed increased" 1
+			}
+			CharacterAttributes
+			{
+				"health regen" 5
+				"move speed bonus" 0.4
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"airblast vertical vulnerability multiplier" 0.1
+			}
+		}
+		
+		//Medics taken from robot_isolation.pop
+		
+		T_TFBot_Medic_Shield
+		{
+			Name "Shield Medic"
+			Class Medic
+			Skill Normal
+			ClassIcon medic_shield_qf
+			WeaponRestrictions SecondaryOnly
+			Item "Das Metalmeatencasen"
+			Item "The Quick-Fix"
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 1
+				"increase buff duration" 1.25
+				"ubercharge rate penalty" 0
+			}
+			CharacterAttributes
+			{
+				"uber duration bonus" -8
+			}
+		}
+		T_TFBot_Blast_Vaccinator
+		{
+			Name "Blast Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_blast
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBlast
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 10
+				"medigun blast resist deployed" 2
+				"medigun blast resist passive" 2
+				"medigun charge is resists" 4
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Bullet_Vaccinator
+		{
+			Name "Bullet Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_bullet
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBullets
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 10
+				"medigun bullet resist deployed" 2
+				"medigun bullet resist passive" 2
+				"medigun charge is resists" 3
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Fire_Vaccinator
+		{
+			Name "Fire Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_fire
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorFire
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 10
+				"medigun charge is resists" 5
+				"medigun fire resist deployed" 2
+				"medigun fire resist passive" 2
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Medic_Shield_Extended
+		{
+			Class Medic
+			Skill Expert
+			ClassIcon medic_shield_uber
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MEDIGUN"
+				"generate rage on heal" 2
+				"heal rate bonus" 5
+				"increase buff duration" 2
+				"ubercharge rate bonus" 2
+			}
+		}
+		T_TFBot_Giant_Blast_Vaccinator_Medic
+		{
+			Name "Giant Blast Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			Health 4500
+			ClassIcon medic_blast
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBlast
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 200
+				"medigun blast resist deployed" 1
+				"medigun blast resist passive" 1
+				"medigun charge is resists" 4
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"bot medic uber health threshold" 10000
+				"damage force reduction" 0.6
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Giant_Bullet_Vaccinator_Medic
+		{
+			Name "Giant Bullet Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			Health 4500
+			ClassIcon medic_bullet
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBullets
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 200
+				"medigun bullet resist deployed" 1
+				"medigun bullet resist passive" 1
+				"medigun charge is resists" 3
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"bot medic uber health threshold" 10000
+				"damage force reduction" 0.6
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Giant_Fire_Vaccinator_Medic
+		{
+			Name "Giant Fire Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			Health 4500
+			ClassIcon medic_fire
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorFire
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"heal rate bonus" 200
+				"medigun charge is resists" 5
+				"medigun fire resist deployed" 1
+				"medigun fire resist passive" 1
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"bot medic uber health threshold" 10000
+				"damage force reduction" 0.6
+				"move speed bonus" 0.6
+			}
+		}
+		T_TFBot_Giant_Medic_Shield
+		{
+			Name "Giant Shield Medic"
+			Class Medic
+			Skill Expert
+			Health 4500
+			ClassIcon medic_shield_qf_giant
+			WeaponRestrictions SecondaryOnly
+			Item "Das Metalmeatencasen"
+			Item "The Quick-Fix"
+			Attributes MiniBoss
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 2
+				"increase buff duration" 1.25
+				"ubercharge rate penalty" 0
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"damage force reduction" 0.6
+				"move speed bonus" 0.5
+				"uber duration bonus" -8
+			}
+		}
+		T_TFBot_Giant_Medic_Kritzkrieg
+		{
+			Name "Kritzkrieg Medic"
+			Class Medic
+			Skill Normal
+			Health 4500
+			ClassIcon medic_kritz
+			WeaponRestrictions SecondaryOnly
+			Item "Mecha-Medes"
+			Item "The Kritzkrieg"
+			Item "Vintage Tyrolean"
+			Attributes AlwaysCrit
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"uber duration bonus" 200
+				"ubercharge rate bonus" 100
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"bot medic uber health threshold" 5000
+				"damage force reduction" 0.6
+				"move speed bonus" 0.5
+			}
+		}
+	}
+}

@@ -1,0 +1,1626 @@
+///////////////////////////////////////////////////////////////////////////
+// BEGIN POP FILE
+///////////////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base mvm_steep_templates.pop
+
+WaveSchedule													
+{
+
+	StartingCurrency 700
+	RespawnWaveTime 7
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced	1
+	
+/////////////////
+//MISSIONS
+/////////////////
+
+
+///////////////////////////////////////////////////////////////////////////
+//SENTRY BUSTER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission	// Sentry Busters - all
+	{
+		Objective DestroySentries
+
+		InitialCooldown 15
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		CooldownTime 30
+
+            TFBot
+			{
+				Template T_TFBot_SentryBuster
+            }
+	}
+
+///////////////////////////////////////////////////////////////////////////
+//SNIPER MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission	// Sniper wave 3
+	{
+		Objective Sniper
+
+		InitialCooldown 60
+		Where spawnbot_mission_sniper
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 30
+		DesiredCount 4
+
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Skill hard
+			CharacterAttributes
+			{
+				"damage bonus"	1.0
+			}
+		}
+	}
+	
+	
+	
+	Mission	// Sniper wave 6
+	{
+		Objective Sniper
+
+		InitialCooldown 45
+		Where spawnbot_mission_sniper
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		CooldownTime 30
+		DesiredCount 2
+
+		TFBot
+		{
+			Template T_TFBot_Sniper
+			Skill hard
+			CharacterAttributes
+			{
+				"damage bonus"	1.0
+			}
+		}
+	}	
+	
+///////////////////////////////////////////////////////////////////////////
+//SPY MISSIONS
+///////////////////////////////////////////////////////////////////////////
+	
+	Mission // Spy wave 2
+	{
+		Objective Spy  
+
+		InitialCooldown 60
+		Where spawnbot_mission_spy
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 3
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}
+	
+///////////////////////////////////////////////////////////////////////////	
+//ENGINEER MISSIONS
+///////////////////////////////////////////////////////////////////////////	
+		
+	Mission // Engineer wave 2
+	{
+		Objective Engineer  
+
+		InitialCooldown 30
+		Where spawnbot
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere spawnbot
+			TeleportWhere spawnbot
+			Attributes TeleportToHint
+			Health 600
+		}
+	}
+	
+	Mission // Engineer wave 5
+	{
+		Objective Engineer  
+
+		InitialCooldown 30
+		Where spawnbot
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 45
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere spawnbot
+			TeleportWhere spawnbot
+			Attributes TeleportToHint
+			Health 600
+		}
+	}
+	
+/////////////////
+//WAVES
+//POPFILE PAYOUT
+//START $700
+//DROP W1 $600 / W2 $600 / W3 $900 / W4 $800 / W5 $800 / W6 $700 <- this is wildly inaccurate
+/////////////////	
+
+//WAVE 1  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 36 Scouts (100)
+// 24 Fast Crit Champ Heavies (100)
+// 4 Squad 1 Giant Soldier with 2 Medics (100)
+//
+// 12 Squad 1 Heavy with 1 Bullet Vacc Medic (150)
+// Support Burst Demo (100)
+// Support Melee Scout (50)
+//
+// Cash at start is $700
+// Total cash in this wave is $600
+// Running Total cash is $1300
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+	
+	
+	
+		// SUBWAVE 1
+	
+	
+	
+		WaveSpawn // 36 Scouts (100)
+		{
+			Where spawnbot	
+			Name "W1_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 36											
+			SpawnCount 6
+			MaxActive 8
+									
+			TotalCurrency 100	
+				
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+			}
+		}
+	
+	
+	
+		WaveSpawn // 24 Fast Crit Champ Heavies (100)
+		{
+			Where spawnbot
+			Name "W1_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 24											
+			SpawnCount 4
+			MaxActive 8
+									
+			TotalCurrency 100
+				
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ_Crit_Fast
+			}
+		}	
+		
+		
+		
+		WaveSpawn // 4 Squad 1 Giant Soldier with 2 Medics (100)
+		{
+			Where spawnbot
+			Name "W1_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 12
+			
+			TotalCount 12											
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 100	
+				
+			Squad 
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic                                
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic                                
+				}
+			}
+		}
+		
+		
+		
+		//SUBWAVE 2
+
+		
+		
+		WaveSpawn // 12 Squad 1 Heavy with 1 Bullet Vacc Medic (150)
+		{
+			Where spawnbot
+			Name "W1_02"
+			WaitForAllDead "W1_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 10
+			
+			TotalCount 24
+			SpawnCount 2
+			MaxActive 12
+			
+			TotalCurrency 150	
+				
+			Squad 
+			{
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator                                
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // Support Burst Demo (100)
+		{
+			Where spawnbot
+			WaitForAllDead "W1_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 10
+			
+			TotalCount 20											
+			SpawnCount 2
+			MaxActive 4
+			
+			Support 1
+									
+			TotalCurrency 100
+				
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+			}
+		}
+		
+		
+		
+		WaveSpawn // Support Melee Scout (50)
+		{
+			Where spawnbot
+			WaitForAllDead "W1_01"
+			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 5
+			
+			TotalCount 24											
+			SpawnCount 2
+			MaxActive 6
+			
+			Support 1
+									
+			TotalCurrency 50
+				
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee_Fix
+			}
+		}
+	}
+
+	
+//WAVE 2  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 24 Buff Banner Soldiers (150)
+// 2 Squad 1 Giant Pyro with 4 Flare Pyros [low] (100)
+// Support Demoknight (100)
+//
+// 18 Fat Scouts (150)
+// 2 Squad 1 Crit Demo with 3 Medics (100)
+// 
+// Mission: Spies (3/40), Engineer (1/45)
+//
+// Cash at start is $1300
+// Total cash in this wave is $600
+// Running Total cash is $1900
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+		
+		
+		
+		//SUBWAVE 1
+		
+		
+		
+		WaveSpawn // 24 Buff Banner Soldiers (150)
+		{
+			Where spawnbot
+			Name "W2_01"
+			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCount 30										
+			SpawnCount 6
+			MaxActive 8
+									
+			TotalCurrency 150
+				
+			TFBot
+			{
+				Template T_TFBot_Soldier_Buff_Banner
+			}
+		}
+		
+		
+		
+		WaveSpawn // Support Demoknight (100)
+		{
+			Where spawnbot
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 30
+			
+			TotalCount 12										
+			SpawnCount 3
+			MaxActive 8
+			
+			Support 1
+									
+			TotalCurrency 100
+				
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Giant Pyro with 4 Flare Pyros (100)
+		{
+			Where spawnbot_low
+			Name "W2_01"
+			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 20
+			
+			TotalCount 10										
+			SpawnCount 5
+			MaxActive 5
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 2
+		
+		
+		
+		WaveSpawn // 18 Fat Scouts (150)
+		{
+			Where spawnbot
+			Name "W2_02"
+			WaitForAllDead "W2_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			
+			TotalCount 18										
+			SpawnCount 6
+			MaxActive 8
+									
+			TotalCurrency 150
+				
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Shotgun_Fast
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Crit Demo with 3 Medics (100)
+		{
+			Where spawnbot
+			Name "W2_02"
+			WaitForAllDead "W2_01"
+			
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 0
+			
+			TotalCount 8										
+			SpawnCount 4
+			MaxActive 8
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+	}
+	
+
+//WAVE 3  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 36 Pyros (100)
+// 24 Flare Pyros [high] (75)
+// 4 Squad 1 Giant Crit Pyro with 2 Blast Vacc Medics (75)
+//
+// Tank [A] (100)
+// Support Scouts or Heavies (100)
+//
+// 2 Squad 1 Giant Spammer Soldier with 2 Bullet Vacc Medics (75)
+// 2 Giant Crit Soldier (75)
+//
+// Mission: Snipers (4/30)
+//
+// Cash at start is $1900
+// Total cash in this wave is $600
+// Running Total cash is $2500
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+		
+		
+		
+		// SUBWAVE 1
+		
+		
+		
+		WaveSpawn // 36 Pyros (100)
+		{
+			Where spawnbot
+			Name "W3_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 36										
+			SpawnCount 6
+			MaxActive 10
+									
+			TotalCurrency 100
+				
+			TFBot
+			{
+				Template T_TFBot_Pyro_NoReflect
+			}
+		}
+		
+		
+		
+		WaveSpawn // 24 Flare Pyros (75)
+		{
+			Where spawnbot_high
+			Name "W3_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 12
+			
+			TotalCount 24										
+			SpawnCount 6
+			MaxActive 10
+									
+			TotalCurrency 75
+				
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+			}
+		}
+		
+		
+		
+		WaveSpawn // 4 Squad 1 Giant Crit Pyro with 2 Blast Vacc Medics (75)
+		{
+			Where spawnbot
+			Name "W3_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 12
+			
+			TotalCount 12										
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 75
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 2
+		
+		
+		
+		WaveSpawn // Support Scouts or Heavies (100)
+		{
+			Where spawnbot
+			WaitForAllDead "W3_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 24
+			SpawnCount 4
+			MaxActive 12
+			
+			Support 1
+									
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Heavy
+					Skill Easy
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // Tank (100)
+		{						
+			Name "W3_02"
+			WaitForAllDead "W3_01"
+			
+			WaitBeforeStarting 10
+			
+			TotalCount 1
+			
+			TotalCurrency 100
+			
+			FirstSpawnOutput 
+			
+			{
+				Target boss_spawn_relay                       
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 40000					
+				Speed 75								
+				Name "TankBossA"
+				StartingPathTrackNode "tank_path_a_1"
+				
+				OnKilledOutput                              
+				{
+					Target boss_dead_relay					
+					Action Trigger                
+				}
+					
+				OnBombDroppedOutput                       
+				{
+					Target boss_deploy_relay 	
+					Action Trigger                  
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 3
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Giant Spammer Soldier with 2 Medics (75)
+		{
+			Where spawnbot
+			Name "W3_03"
+			WaitForAllDead "W3_02"
+			
+			WaitBetweenSpawns 24
+			WaitBeforeStarting 6
+			
+			TotalCount 6										
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 75
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Giant Crit Soldier (75)
+		{
+			Where spawnbot
+			Name "W3_03"
+			WaitForAllDead "W3_02"
+			
+			WaitBetweenSpawns 24
+			WaitBeforeStarting 18
+			
+			TotalCount 2										
+			SpawnCount 1
+			MaxActive 2
+									
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Crit
+			}
+		}
+	}
+
+
+//WAVE 4  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Support Scouts (100)
+// 2 Squad 1 Giant Heavy with 1 Giant Medic (100)
+// 2 Giant Crit Demomen (100)
+//
+// Support Demoknight, Flare Pyro (60)
+// Support Burst Demomen (40)
+// Tank [A] (150)
+// Tank [B] (150)
+//
+// Max cash at start is $2500
+// Total cash in this wave is $600
+// Running Total cash is $3100
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+		
+		
+		
+		WaveSpawn // Support Scouts (100)
+		{
+			Where spawnbot
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 24									
+			SpawnCount 4
+			MaxActive 6
+			
+			Support 1
+									
+			TotalCurrency 100
+				
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Giant Heavy with 1 Giant Medic (100)
+		{
+			Where spawnbot
+			Name "W4_01"
+			
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 5
+			
+			TotalCount 4										
+			SpawnCount 2
+			MaxActive 4
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Giant Crit Demomen (100)
+		{
+			Where spawnbot
+			Name "W4_01"
+			
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 20
+			
+			TotalCount 2										
+			SpawnCount 1
+			MaxActive 2
+									
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman_Crit
+			}
+		}
+		
+		
+		
+		// SUBWAVE 2
+		
+		
+		
+		WaveSpawn // Tank [A] (100)
+		{						
+			Name "W4_02"
+			WaitForAllDead "W4_01"
+			
+			WaitBeforeStarting 2
+			
+			TotalCount 1
+			
+			TotalCurrency 150
+			
+			FirstSpawnOutput 
+			
+			{
+				Target boss_spawn_relay                       
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 25000					
+				Speed 75								
+				Name "TankBossA"
+				StartingPathTrackNode "tank_path_a_1"
+				
+				OnKilledOutput                              
+				{
+					Target boss_dead_relay					
+					Action Trigger                
+				}
+					
+				OnBombDroppedOutput                       
+				{
+					Target boss_deploy_relay 	
+					Action Trigger                  
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // Tank [B] (100)
+		{						
+			Name "W4_02"
+			WaitForAllDead "W4_01"
+			
+			WaitBeforeStarting 20
+			
+			TotalCount 1
+			
+			TotalCurrency 150
+			
+			FirstSpawnOutput 
+			
+			{
+				Target boss_spawn_relay                       
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 25000					
+				Speed 75								
+				Name "TankBossB"
+				StartingPathTrackNode "tank_path_b_1"
+				
+				OnKilledOutput                              
+				{
+					Target boss_dead_relay					
+					Action Trigger                
+				}
+					
+				OnBombDroppedOutput                       
+				{
+					Target boss_deploy_relay 	
+					Action Trigger                  
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // Support Demoknight, Flare Pyro (60)
+		{
+			Where spawnbot
+			Name "W4_02"
+			WaitForAllDead "W4_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 24									
+			SpawnCount 6
+			MaxActive 12
+			
+			Support 1
+									
+			TotalCurrency 60
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // Support Burst Demoman (40)
+		{
+			Where spawnbot
+			Name "W4_02"
+			WaitForAllDead "W4_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 8										
+			SpawnCount 2
+			MaxActive 4
+			
+			Support 1
+									
+			TotalCurrency 40
+			
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+			}
+		}
+	}
+
+
+//WAVE 5  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 48 Soldiers (150)
+// 4 Super Scouts (100)
+//
+// 42 Fat Scouts or Pyros (150)
+// 4 Squad 1 Giant Crit Soldier with 2 Blast Vacc Medics (100)
+//
+// Support Fast Crit Champs or Buff Banner Soldiers (100)
+// 2 Squad 1 Giant FaN Scout with 2 Blast Vacc Medics (100)
+//
+// 2 Squad 1 Giant Rapid Fire Demoman with 1 Giant Medic (100)
+//
+// Mission: Snipers (4/30), Engineer (1/45)
+//
+// Cash at start is $3100
+// Total cash in this wave is $800
+// Running Total cash is $3900
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+		
+		
+		
+		// SUBWAVE 1
+		
+		
+		
+		WaveSpawn // 48 Soldiers (150)
+		{
+			Where spawnbot
+			Name "W5_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 48										
+			SpawnCount 6
+			MaxActive 12
+									
+			TotalCurrency 150
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+		
+		
+		
+		WaveSpawn // 4 Super Scouts (100)
+		{
+			Where spawnbot
+			Name "W5_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 12
+			
+			TotalCount 4										
+			SpawnCount 1
+			MaxActive 2
+									
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		
+		
+		
+		// SUBWAVE 2
+		
+		
+		
+		WaveSpawn // 42 Fat Scouts or Pyros (150)
+		{
+			Where spawnbot
+			Name "W5_02"
+			WaitForAllDead "W5_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			
+			TotalCount 42
+			SpawnCount 6
+			MaxActive 8
+									
+			TotalCurrency 150
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_NoReflect
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 4 Squad 1 Giant Crit Soldier with 2 Blast Vacc Medics (100)
+		{
+			Where spawnbot
+			Name "W5_02"
+			WaitForAllDead "W5_01"
+			
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 5
+			
+			TotalCount 12										
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 3
+		
+		
+		
+		WaveSpawn // Support Fast Crit Champs or Buff Banner Soldiers (100)
+		{
+			Where spawnbot
+			WaitForAllDead "W5_02"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 0
+			
+			TotalCount 24										
+			SpawnCount 6
+			MaxActive 12
+			
+			Support 1
+									
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ_Crit_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Buff_Banner
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Giant FaN Scout with 2 Blast Vacc Medics (100)
+		{
+			Where spawnbot
+			Name "W5_03"
+			WaitForAllDead "W5_02"
+			
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 12
+			
+			TotalCount 6									
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Scout_FAN
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 4
+		
+		
+		
+		WaveSpawn // 2 Squad 1 Giant Rapid Fire Demoman with 1 Giant Medic (100)
+		{
+			Where spawnbot
+			Name "W5_04"
+			WaitForAllDead "W5_03"
+			
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 10
+			
+			TotalCount 4									
+			SpawnCount 2
+			MaxActive 2
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_RapidFire
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+	}
+
+
+//WAVE 6  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// Support Tank [A] every 30 seconds ($400/8)
+//
+// 72 Crit Melee Scouts (75)
+//
+// 32 Scouts or Buff Banner Soldiers (50)
+// 6 Giant Crit Spammer Soldiers (50)
+//
+// 42 Pyros or Flares (100)
+// 3 Squad 1 Giant Pyro with 1 Blast Vacc Medic and 1 Bullet Vacc Medic [low] (50)
+//
+// Support Fat Scouts, Crit Soldiers (75)
+// 1 Squad 1 Chief Blast Soldier with 1 Giant Medic [high] (100)
+//
+// Mission: Snipers (2/30)
+//
+// Max cash at start is $3800
+// Total cash in this wave is $700
+// Running Total cash is $4500
+///////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+
+		Checkpoint Yes
+		
+		
+		
+		// SUBWAVE 1
+		
+		
+		
+		WaveSpawn // Tank [A] (400/8)
+		{									
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 30
+			
+			TotalCount 8
+			MaxActive 3
+			
+			Support 1
+			
+			TotalCurrency 400
+			
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay                       
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 10000					
+				Speed 75								
+				Name "TankBossA"
+				StartingPathTrackNode "tank_path_a_1"
+				
+				OnKilledOutput                              
+				{
+					Target boss_dead_relay					
+					Action Trigger                
+				}
+					
+				OnBombDroppedOutput                       
+				{
+					Target boss_deploy_relay 	
+					Action Trigger                  
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 72 Crit Melee Scouts (75)
+		{
+			Where spawnbot
+			Name "W6_01"
+			
+			WaitBetweenSpawns 1
+			WaitBeforeStarting 0
+			
+			TotalCount 72
+			SpawnCount 3
+			MaxActive 24
+									
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee_Crit
+			}
+		}
+		
+		
+		
+		// SUBWAVE 2
+		
+		
+		
+		WaveSpawn // 32 Scouts or Buff Banner Soldiers (50)
+		{
+			Where spawnbot
+			Name "W6_02"
+			WaitForAllDead "W6_01"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			
+			TotalCount 32
+			SpawnCount 4
+			MaxActive 12
+									
+			TotalCurrency 50
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Normal
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Buff_Banner
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 6 Giant Crit Spammer Soldiers (50)
+		{
+			Where spawnbot
+			Name "W6_02"
+			WaitForAllDead "W6_01"
+			
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 5
+			
+			TotalCount 6
+			SpawnCount 1
+			MaxActive 4
+									
+			TotalCurrency 50
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Spammer
+				Name "Giant Rapid Fire Crit Soldier"
+				Attributes AlwaysCrit
+			}
+		}
+		
+		
+		
+		// SUBWAVE 3
+		
+		
+		
+		WaveSpawn // 42 Pyros or Flares (100)
+		{
+			Where spawnbot
+			Name "W6_03"
+			WaitForAllDead "W6_02"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			
+			TotalCount 42
+			SpawnCount 6
+			MaxActive 12
+									
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Pyro_NoReflect
+				}
+				TFBot
+				{
+					Template T_TFBot_Pyro_Flaregun
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 3 Squad 1 Giant Demoknight with 1 Blast Vacc Medic and 1 Bullet Vacc Medic [low] (50)
+		{
+			Where spawnbot_low
+			Name "W6_03"
+			WaitForAllDead "W6_02"
+			
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 5
+			
+			TotalCount 9
+			SpawnCount 3
+			MaxActive 6
+									
+			TotalCurrency 50
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator
+				}
+			}
+		}
+		
+		
+		
+		// SUBWAVE 4
+		
+		
+		
+		WaveSpawn // Support Fat Scouts, Crit Soldiers (75)
+		{
+			Where spawnbot
+			WaitForAllDead "W6_03"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 5
+			
+			TotalCount 24
+			SpawnCount 4
+			MaxActive 18
+			
+			Support 1
+									
+			TotalCurrency 75
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Crit
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn // 1 Squad 1 Chief Blast Soldier with 1 Medic [high] (100)
+		{
+			Where spawnbot_high
+			Name "W6_04"
+			WaitForAllDead "W6_03"
+			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 10
+			
+			TotalCount 2
+			SpawnCount 2
+			MaxActive 2
+									
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Chief_Soldier_RocketPush
+					Health 45000
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Attributes UseBossHealthBar
+				}
+			}
+		}
+	}
+}
