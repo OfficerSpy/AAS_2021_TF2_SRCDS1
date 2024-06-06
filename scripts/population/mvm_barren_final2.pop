@@ -1,0 +1,930 @@
+#base robot_giant.pop
+#base robot_standard.pop
+//Barren Normal2
+//Made By Hell-met http://steamcommunity.com/id/hell-met/
+//Normal (easy?) Skill
+
+WaveSchedule
+{
+
+	StartingCurrency		400
+	RespawnWaveTime 		4
+	CanBotsAttackWhileInSpawnRoom no
+	NoReanimators 1				[$SIGSEGV]
+	NoMvMDeathTune 1 			[$SIGSEGV]
+	RespecEnabled 0				[$SIGSEGV]
+	BonusRatioHalf 1			[$SIGSEGV]
+	SniperHideLasers 1 			[$SIGSEGV]
+	AllowJoinTeamBlue 0			[$SIGSEGV]
+	
+	Mission // Buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 20
+		Where spawnbot_flank
+		BeginAtWave 1
+		RunForThisManyWaves 7
+		CooldownTime 60   
+		
+			TFBot
+			{
+			Template T_TFBot_SentryBuster
+			Skill Easy
+			Attributes DisableDodge
+			Attributes IgnoreEnemies
+			}		
+	}
+	
+	Mission // Sniper 3
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 15
+		Where spawnbot
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 4
+		
+			TFBot
+			{
+			Class Sniper
+			Skill Easy
+			}		
+	}
+	
+	Mission // Spy 4
+	
+	{
+		Objective Spy
+		
+		InitialCooldown 15
+		Where spawnbot
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 1
+		
+			TFBot
+			{
+			Class Spy
+			Skill Easy
+			}		
+	}
+	
+	Mission // Engineer 5
+	
+	{
+		Objective Engineer
+		
+		InitialCooldown 0
+		Where spawnbot
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 60   
+		DesiredCount 1
+		
+			TFBot
+			{
+			Class Engineer
+			Health 125
+			Skill Easy
+			TeleportWhere spawnbot
+			Attributes TeleportToHint
+			}		
+	}
+	
+	Mission // Spy 7
+	
+	{
+		Objective Spy
+		
+		InitialCooldown 15
+		Where spawnbot
+		BeginAtWave 7
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 1
+		
+			TFBot
+			{
+			Class Spy
+			Skill Expert
+			}		
+	}
+	
+	//WAVE 1
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitForAllDead "part01"
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part02"
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 8
+			WaitForAllDead "part03"
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot
+			TotalCount 16
+			MaxActive 16
+			SpawnCount 16
+			WaitForAllDead "part04"
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part06"
+			Where spawnbot
+			TotalCount 22
+			MaxActive 22
+			SpawnCount 22
+			WaitForAllDead "part05"
+			TotalCurrency 150
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Shotgun
+			Skill Easy
+			}
+		}
+		
+	}	
+	
+	//WAVE 2
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 30
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 1
+			TotalCurrency 300
+		
+			TFBot
+			{
+			Class Demoman
+			Name "Persian Demo"
+			Health 200
+			Item "Sultan's Ceremonial"	
+			Item "Ali Baba's Wee Booties"
+			Item "The Persian Persuader"
+			Item "The Splendid Screen"	
+			Skill Easy
+			Classicon demoknight_giant
+			Attributes DisableDodge
+			WeaponRestrictions MeleeOnly
+			ItemAttributes
+			{
+			ItemName "The Splendid Screen"
+			"charge time increased" -10
+			}		
+			ItemAttributes
+			{
+			ItemName "Ali Baba's Wee Booties"
+			"max health additive penalty" -25
+			}
+			}
+		}	
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 6
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			WaitBetweenSpawnsAfterDeath 4
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Demoman_Knight
+			Attributes AlwaysCrit
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitForAllDead "part01"
+			WaitBeforeStarting 4
+			TotalCurrency 50
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Giant_Soldier
+			}
+			
+			TFBot
+			{
+			Class Medic
+			Name "Shield Medic"
+			Health 150
+			Classicon "medshield"
+			Item "Platinum Pickelhaube"
+			Skill Hard
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MEDIGUN"
+				"generate rage on heal" 2
+				"increase buff duration" 2
+			}
+			CharacterAttributes
+			{
+				"bot medic uber deploy delay duration" 1337
+			}
+			}
+		}	
+		}
+		
+	}	
+	
+	//WAVE 3
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part02"
+			TotalCurrency 200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			
+				Tank
+				{
+					Health	25000
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode "tank_path_1"
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+		}
+		
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 200
+		
+			TFBot
+			{
+				Template T_TFBot_Demoman_Samurai
+				Attributes AlwaysCrit
+				CharacterAttributes
+				{
+				"cancel falling damage" 1
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 4
+			TotalCurrency 0
+			Support 1
+		
+			TFBot
+			{
+			Class Scout
+			Item "The Force-a-Nature"
+			Skill Easy
+			Classicon scout_fan
+			}
+		}
+		
+	}	
+	
+	//WAVE 4
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 7
+			MaxActive 7
+			SpawnCount 7
+			WaitBeforeStarting 1
+			TotalCurrency 100
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Giant_Heavyweapons_Shotgun
+			Skill Easy
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			WeaponRestrictions MeleeOnly
+			}
+		}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 6
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 6
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Expert
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part01"
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Heavyweight_Champ
+			Attributes AlwaysCrit
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part01"
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Class HeavyWeapons
+			Item "Natascha"
+			Skill Easy
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "part04"
+			WaitBeforeStarting 4
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Heavyweapons
+			Skill Easy
+			Attributes AlwaysFireWeapon
+			}
+			
+		}
+		
+	}	
+	
+	//WAVE 5
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 12
+			TotalCurrency 200
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Easy
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Heavyweapons_Fist
+			}
+		}
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 200
+			MaxActive 6
+			SpawnCount 1
+			WaitBeforeStarting 6
+			TotalCurrency 200
+			Support 1
+		
+			TFBot
+			{
+			Class Medic
+			Skill Easy
+			Item "The Quick-Fix"
+			Attributes SpawnWithFullCharge
+			}
+			
+		}
+		
+	}	
+	
+	//WAVE 6
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawnsAfterDeath 8
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Sniper_Huntsman_Spammer
+			Item "MvM GateBot Light Sniper"
+			Classicon sniper_bow_multi
+			Skill Expert
+			}
+
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 4
+			TotalCurrency 150
+		
+			TFBot
+			{
+			Class Scout
+			Skill Easy
+			Classicon scout_shortstop
+			Item "The Shortstop"
+			MaxVisionRange 500
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot_flank
+			TotalCount 2
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 12
+			WaitForAllDead "part02"
+			WaitBetweenSpawnsAfterDeath 6
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Soldier_Crit
+			Skill Easy
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 4
+			WaitForAllDead "part02"
+			TotalCurrency 150
+		
+			TFBot
+			{
+			Class Pyro
+			Skill Easy
+			MaxVisionRange 100
+			}
+			
+		}
+		
+	}	
+	
+	//WAVE 7
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			TotalCurrency 25
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Scout_Fast
+			}
+
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part01"
+			TotalCurrency 50
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Soldier_Extended_Buff_Banner
+			Attributes IgnoreEnemies
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}	
+		}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part01"
+			WaitBeforeStarting 5
+			TotalCurrency 50
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Soldier_Extended_Battalion
+			Attributes IgnoreEnemies
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}
+			
+			TFBot
+			{
+			Class Scout
+			Skill Expert
+			}	
+		}
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 12
+			WaitForAllDead "part02"
+			WaitBetweenSpawns 8
+			TotalCurrency 125
+		
+			TFBot
+			{
+			Class Demoman
+			Skill Easy
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"fuse bonus" 2
+			}
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			WaitForAllDead "part03"
+			TotalCurrency 75
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Heavyweapons
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot_flank
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			WaitForAllDead "part03"
+			TotalCurrency 75
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Heavyweapons
+			}
+			
+		}
+		
+	}	
+	
+	}

@@ -1,0 +1,1174 @@
+#base robot_giant.pop
+#base robot_standard.pop
+//Barren Intermediate1
+//Made By Hell-met http://steamcommunity.com/id/hell-met/
+//Intermediate Skill
+
+WaveSchedule
+{
+
+	StartingCurrency		400
+	RespawnWaveTime 		8
+	CanBotsAttackWhileInSpawnRoom no
+	NoReanimators 1				[$SIGSEGV]
+	NoMvMDeathTune 1 			[$SIGSEGV]
+	RespecEnabled 0				[$SIGSEGV]
+	BonusRatioHalf 1			[$SIGSEGV]
+	SniperHideLasers 1 			[$SIGSEGV]
+	AllowJoinTeamBlue 0			[$SIGSEGV]
+	
+	Mission // Buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 0
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 7
+		CooldownTime 40   
+		
+			TFBot
+			{
+			Template T_TFBot_SentryBuster
+			Skill Easy
+			Attributes DisableDodge
+			Attributes IgnoreEnemies
+			}		
+	}
+	
+	Mission // Sniper 1
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 30
+		Where spawnbot_flank
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 2
+		
+			TFBot
+			{
+			Class Sniper
+			Name "Bowman"
+			Skill Hard
+			ClassIcon sniper_bow
+			Item "The Huntsman"
+			Attributes Disabledodge
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 0.5
+			}
+			Attributes DisableDodge
+			}			
+	}
+	
+	Mission // Sniper 2
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 30
+		Where spawnbot_flank
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 2
+		
+			TFBot
+			{
+			Class Sniper
+			Skill Expert
+			Item "The Classic"
+			}		
+	}
+	
+	Mission // Sniper 3
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 30
+		Where Behind
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 2
+		
+			TFBot
+			{
+			Class Sniper
+			Skill Easy
+			}		
+	}
+	
+	Mission // Sniper 5
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 30
+		Where spawnbot
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 2
+		
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Easy
+			Attributes DisableDodge
+			Attributes AlwaysCrit
+			}		
+	}
+	
+	Mission // Spy 4
+	
+	{
+		Objective Spy
+		
+		InitialCooldown 100
+		Where spawnbot
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		CooldownTime 30  
+		DesiredCount 1
+		
+			TFBot
+			{
+			Class Spy
+			Skill Expert
+			}		
+	}
+	
+	Mission // Sniper 7
+	
+	{
+		Objective Sniper
+		
+		InitialCooldown 30
+		Where spawnbot_flank
+		BeginAtWave 7
+		RunForThisManyWaves 1
+		CooldownTime 30   
+		DesiredCount 2
+		
+			TFBot
+			{
+			Class Sniper
+			Name "Bowman"
+			Skill Hard
+			ClassIcon sniper_bow
+			Item "The Huntsman"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 0.5
+			}
+			}		
+	}
+	
+	Mission // Engineer 5
+	
+	{
+		Objective Engineer
+		
+		InitialCooldown 30
+		Where spawnbot
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 60   
+		DesiredCount 1
+		
+			TFBot
+			{
+			Class Engineer
+			Health 500
+			Skill Easy
+			TeleportWhere spawnbot
+			Attributes TeleportToHint
+			}	
+			
+	}
+	
+	//WAVE 1
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 1
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Template T_TFBot_Giant_Soldier_RocketPush
+			Skill Easy
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 36
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 18
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Class Heavyweapons
+			Name "Beastly Champ"
+			Skill Expert
+			ClassIcon heavy_gru
+			Attributes DisableDodge
+			WeaponRestrictions MeleeOnly
+			Item "the killing gloves of boxing"
+			Item "Pugilist's Protector"
+			Item "The Buffalo Steak Sandvich"
+			Itemattributes
+			{
+			Itemname "Pugilist's Protector"
+			"set item tint RGB" 8626083
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 36
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 18
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Class Heavyweapons
+			Name "Beastly Champ"
+			Skill Expert
+			ClassIcon heavy_gru
+			BehaviorModifiers Mobber
+			WeaponRestrictions MeleeOnly
+			Item "the killing gloves of boxing"
+			Item "Pugilist's Protector"
+			Item "The Buffalo Steak Sandvich"
+			Itemattributes
+			{
+			Itemname "Pugilist's Protector"
+			"set item tint RGB" 8626083
+			}
+			}
+		}
+		
+	}	
+	
+	//WAVE 2
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 1
+			WaitBetweenSpawns 3
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Class Scout
+			Name "Armored Scout"
+			ClassIcon scout_stun_giant_armored
+			Skill Expert
+			Health 300
+			Item "Batter's Helmet"
+			Item "The Sandman"
+			Item "EOTL_demopants"
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"mod bat launches balls" 0
+			}
+			CharacterAttributes
+			{
+				"move speed penalty" 0.65
+			}
+			}
+		}	
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 8
+			TotalCurrency 200
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Heavy_IronFist_Airblast
+			Attributes DisableDodge
+			Item "MvM Gatebot Light Heavy"
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Easy
+			Item "The Brass Beast"
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Easy
+			Item "The Brass Beast"
+			}
+			
+			TFBot
+			{
+			Class HeavyWeapons
+			Skill Easy
+			Item "The Brass Beast"
+			}
+		}	
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot_flank
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 1
+			WaitForAllDead "part02"
+			WaitBetweenSpawns 3
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class Soldier
+			Item "The Direct Hit"
+			}
+
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4
+			WaitForAllDead "part01"
+			WaitBeforeStarting 5
+			TotalCurrency 100
+		
+		Squad
+		{
+			TFBot
+			{
+			Class Demoman
+			Name "Giant Demoman"
+			ClassIcon demo_giant
+			Skill Expert
+			Health 3800
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 4
+			}
+			}
+			
+			TFBot
+			{
+			Class Medic
+			Name "Kritzkrieg Medic"
+			Item "The Kritzkrieg"
+			Attributes AlwaysCrit
+			ClassIcon MeDiC_UBER
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			}
+			
+			TFBot
+			{
+			Class Medic
+			Name "Kritzkrieg Medic"
+			Item "The Kritzkrieg"
+			Attributes AlwaysCrit
+			ClassIcon MeDiC_UBER
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			}
+			
+			TFBot
+			{
+			Class Medic
+			Name "Kritzkrieg Medic"
+			Item "The Kritzkrieg"
+			Attributes AlwaysCrit
+			ClassIcon MeDiC_UBER
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			}
+		}		
+		}
+		
+	}	
+	
+	//WAVE 3
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 1
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class Heavyweapons
+			Name "Steel Mitten"
+			Skill Normal
+			ClassIcon heavy_mittens
+			Health 900
+			Scale 1.5
+			WeaponRestrictions MeleeOnly
+			Item "The Holiday Punch"
+			ItemAttributes
+			{
+				ItemName "The Holiday Punch"
+				"damage bonus" 1.5
+			}	
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot_flank
+			TotalCount 48
+			MaxActive 12
+			SpawnCount 12
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 24
+			TotalCurrency 200
+			
+			TFBot
+			{
+			Class Scout
+			Skill Easy
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			TotalCurrency 100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	6
+			
+				Tank
+				{
+					Health	15000
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode "tank_path_1"
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitForAllDead "part02"
+			WaitBetweenSpawns 12
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class Soldier
+			Skill Easy
+			MaxVisionRange 500
+			BehaviorModifiers Mobber
+			Item "The B.A.S.E. Jumper"
+			Attributes HoldFireUntilFullReload
+			Attributes Parachute
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "part04"
+			WaitBeforeStarting 6
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Scout_Shortstop
+			Skill Expert
+			Attributes AlwaysCrit
+			Item "MvM Gatebot Light Scout"
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot_flank
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "part04"
+			WaitBeforeStarting 7
+			TotalCurrency 50
+		
+			TFBot
+			{
+			Template T_TFBot_Scout_Shortstop
+			Skill Expert
+			Attributes AlwaysCrit
+			Item "MvM Gatebot Light Scout"
+			}
+		}
+		
+	}	
+	
+	//WAVE 4
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			TotalCurrency 200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	1
+			
+				Tank
+				{
+					Health	30000
+					Name	Tank
+					Speed	75
+					Skin	1
+					StartingPathTrackNode "tank_path_1"
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 12
+			TotalCurrency 200
+			
+			TFBot
+			{
+			Class Spy
+			Skill Easy
+			}
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			WaitForAllDead "part01"
+			WaitBeforeStarting 20
+			TotalCurrency 200
+		
+		Squad
+		{	
+		FormationSize 200
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Expert
+			Attributes DisableDodge
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Easy
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Easy
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Easy
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Giant_Pyro
+			Skill Easy
+			}
+		
+		}
+		}
+		
+	}	
+	
+	//WAVE 5
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 1
+			TotalCurrency 300
+		
+		Squad
+		{
+			TFBot
+			{
+			Template T_TFBot_Giant_Soldier
+			Name "Unarmed Giant Soldier"
+			Attributes SuppressFire
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"hand scale" 0
+			}
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Giant_Medic
+			}
+		}
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 4
+			WaitForAllDead "part01"
+			TotalCurrency 300
+		
+		Squad
+		{
+			TFBot
+			{
+			Class Soldier
+			Name "Unarmed Soldier"
+			Attributes SuppressFire
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"hand scale" 0
+			}
+			}
+			
+			TFBot
+			{
+			Template T_TFBot_Medic_QuickUber
+			}
+		}
+		
+		}
+		
+	}	
+	
+	//WAVE 6
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 1
+		
+			TFBot
+			{
+			Template T_TFBot_Pyro_Flaregun
+			Attributes AlwaysCrit
+			Skill Easy
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 74
+			MaxActive 11
+			SpawnCount 1
+			WaitForAllDead "part01"
+			TotalCurrency 299
+		
+			TFBot
+			{
+			Template T_TFBot_Pyro_Flaregun
+			Attributes AlwaysCrit
+			Skill Easy
+			}
+			
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot_flank
+			TotalCount 75
+			MaxActive 11
+			SpawnCount 1
+			WaitForAllDead "part01"
+			TotalCurrency 300
+		
+			TFBot
+			{
+			Template T_TFBot_Pyro_Flaregun
+			Attributes AlwaysCrit
+			Skill Easy
+			}
+			
+		}
+		
+	}	
+	
+	//WAVE 7
+	
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target bombpath_arrows_clear_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}	
+
+		WaveSpawn
+		{
+			Name "part01"
+			Where spawnbot_flank
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 12
+			Support 1
+		
+			TFBot
+			{
+			Template T_TFBot_Engineer_Sentry_Tele_Battle
+			}
+
+		
+		}
+		
+		WaveSpawn
+		{
+			Name "part02"
+			Where spawnbot
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 1
+			WaitBeforeStarting 1
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Class Heavyweapons
+			Skill Easy
+			Name "Heal-On-Kill Heavy"
+			Classicon heavy_deflector_healonkill
+			Health 300
+			Item "The Tungsten Toque"
+			Item "MvM Gatebot Light Heavy"
+			Item "Deflector"
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"attack projectiles" 2
+				"heal on kill" 300
+			}
+			}
+				
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllSpawned "part02"
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class heavyweapons
+			Name "Super Beastly Champ"
+			ClassIcon heavy_gru
+			Skill expert
+			Health 5000
+			Item "the killing gloves of boxing"
+			Item "Pugilist's Protector"
+			Item "The Buffalo Steak Sandvich"
+			Attributes DisableDodge
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Itemattributes
+			{
+			Itemname "Pugilist's Protector"
+			"set item tint RGB" 8626083
+			}
+			ItemAttributes
+			{
+				ItemName "the killing gloves of boxing"
+				"fire rate bonus" 0.6
+				"damage bonus" 1.2
+
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part03"
+			Where spawnbot_flank
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllSpawned "part02"
+			TotalCurrency 100
+		
+			TFBot
+			{
+			Class heavyweapons
+			Name "Super Beastly Champ"
+			ClassIcon heavy_gru
+			Skill expert
+			Health 5000
+			Item "the killing gloves of boxing"
+			Item "Pugilist's Protector"
+			Item "The Buffalo Steak Sandvich"
+			Attributes DisableDodge
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Itemattributes
+			{
+			Itemname "Pugilist's Protector"
+			"set item tint RGB" 8626083
+			}
+			ItemAttributes
+			{
+				ItemName "the killing gloves of boxing"
+				"fire rate bonus" 0.6
+				"damage bonus" 1.2
+
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part04"
+			Where spawnbot
+			TotalCount 80
+			MaxActive 16
+			SpawnCount 8
+			WaitForAllDead "part02"
+			WaitBeforeStarting 12
+			TotalCurrency 200
+		
+			TFBot
+			{
+			Class Scout
+			Skill Easy
+			Item "MvM GateBot Light Scout"
+			Attributes AlwaysCrit
+			Attributes DisableDodge
+			Classicon scout_bat
+			WeaponRestrictions MeleeOnly
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "part04"
+			WaitBeforeStarting 6
+			TotalCurrency 0
+		
+			TFBot
+			{
+			Class Soldier
+			Name "Giant Plasma Soldier"
+			Item "MvM Gatebot Light Soldier"
+			Item "The Cow Mangler 5000"
+			ClassIcon pyro_D
+			Skill Expert
+			Health 4200
+			Attributes MiniBoss
+			Attributes DisableDodge
+			MaxVisionRange 5000
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "The Cow Mangler 5000"
+				"set item tint rgb" 15185211
+				"override projectile type" 18
+				"damage bonus" 4
+				"dmg bonus vs buildings" 1337
+				"faster reload rate" 0.1
+				"ragdolls become ash" 1
+				"projectile penetration" 1
+			}
+			ItemAttributes
+			{
+				ItemName "dec2014 Skullcap"
+				"set item tint rgb" 15185211
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "part05"
+			Where spawnbot_flank
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitForAllDead "part04"
+			WaitBeforeStarting 6
+			TotalCurrency 0
+		
+			TFBot
+			{
+			Class Soldier
+			Name "Giant Plasma Soldier"
+			Item "MvM Gatebot Light Soldier"
+			Item "The Cow Mangler 5000"
+			ClassIcon pyro_D
+			Skill Expert
+			Health 4200
+			Attributes MiniBoss
+			Attributes DisableDodge
+			MaxVisionRange 5000
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "The Cow Mangler 5000"
+				"set item tint rgb" 15185211
+				"override projectile type" 18
+				"damage bonus" 4
+				"dmg bonus vs buildings" 1337
+				"faster reload rate" 0.1
+				"ragdolls become ash" 1
+				"projectile penetration" 1
+			}
+			ItemAttributes
+			{
+				ItemName "dec2014 Skullcap"
+				"set item tint rgb" 15185211
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+			}
+		}
+		
+	}	
+	
+	}

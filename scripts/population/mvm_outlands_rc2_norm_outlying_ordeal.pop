@@ -1,0 +1,762 @@
+// Outlying Ordeal (Normal)
+// By Tindall Berry
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_outlands.pop
+population
+{
+	StartingCurrency	400
+	RespawnWaveTime	3
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Mission // Sentry Busters
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentry_buster
+		BeginAtWave	1
+		RunForThisManyWaves	8
+		InitialCooldown	45
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Outlands_SentryBuster
+		}
+	}
+	Mission // Wave 3 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Outlands_Sniper
+		}
+	}
+	Mission // Wave 7 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	7
+		RunForThisManyWaves	1
+		InitialCooldown	45
+		CooldownTime	45
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Outlands_Sniper
+		}
+	}
+	Mission // Wave 8 Snipers
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	20
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Outlands_Sniper
+		}
+	}
+	Mission // Wave 5 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	5
+		RunForThisManyWaves	1
+		InitialCooldown	10
+		CooldownTime	35
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Outlands_Spy
+		}
+	}
+	Mission // Wave 8 Spies
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	25
+		CooldownTime	25
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Outlands_Spy
+		}
+	}
+	Wave // Wave 1 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 48 Melee Scouts
+		{
+			Where	spawnbot
+			TotalCurrency	240
+			TotalCount	48
+			MaxActive	12
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	15
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Scout_Melee
+				Skill	Normal
+			}
+		}
+		WaveSpawn // 24 Pyros
+		{
+			Where	spawnbot_left
+			TotalCurrency	240
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	15
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Pyro
+				Skill	Easy
+			}
+		}
+		WaveSpawn // Support - Lightweight Champs
+		{
+			Where	spawnbot
+			TotalCurrency	120
+			TotalCount	12
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	15
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Heavy_GRU
+			}
+		}
+	}
+	Wave // Wave 2 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 12 Squads; 1 Heavy, 1 Fire Resist Medic
+		{
+			Where	spawnbot
+			TotalCurrency	240
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Heavy
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+			}
+		}
+		WaveSpawn // 2 Squads; 1 Giant Pyro, 2 Heavies, 2 Fire Resist Medics
+		{
+			Where	spawnbot
+			TotalCurrency	200
+			TotalCount	10
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	35
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Pyro_Giant
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Heavy
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Heavy
+					Skill	Easy
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+			}
+		}
+		WaveSpawn // Support - Melee Scouts
+		{
+			Where	spawnbot_left
+			TotalCurrency	60
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Scout_Melee
+			}
+		}
+	}
+	Wave // Wave 3 of 8
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	15000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tankpath_river_same
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 1 Tank
+		{
+			TotalCurrency	150
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	15000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tankpath_river_alt
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Heavyweight Champs
+		{
+			Where	spawnbot
+			TotalCurrency	150
+			TotalCount	50
+			MaxActive	7
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Heavy_KGB
+			}
+		}
+		WaveSpawn // Support - 2 Engineers
+		{
+			Where	spawnbot_right
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	40
+			Support	Limited
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Engineer
+			}
+		}
+	}
+	Wave // Wave 4 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 32 Soldiers
+		{
+			Where	spawnbot
+			TotalCurrency	160
+			TotalCount	32
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Soldier
+			}
+		}
+		WaveSpawn // A - 3 Giant Rapid Fire Demos
+		{
+			Name	Wave4a
+			Where	spawnbot_right
+			TotalCurrency	60
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	25
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Demoman_Giant_RapidFire
+			}
+		}
+		WaveSpawn // B - 1 Tank
+		{
+			Name	Wave4b
+			WaitForAllSpawned	Wave4a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	0
+			StartWaveOutput
+			{
+				Target	tank_spawn_forward_relay
+				Action	Trigger
+			}
+			Tank
+			{
+				Health	15000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tankpath_garage_same
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // Support - Scouts
+		{
+			Where	spawnbot
+			TotalCurrency	80
+			TotalCount	16
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	15
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Scout
+				Skill	Easy
+			}
+		}
+	}
+	Wave // Wave 5 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // 3 Squads; 1 Giant Burst Fire Soldier, 4 Blast Resist Medics
+		{
+			Where	spawnbot
+			TotalCurrency	300
+			TotalCount	15
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	35
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Soldier_Giant_BurstFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Blast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Blast
+				}
+			}
+		}
+		WaveSpawn // Support - Demos
+		{
+			Where	spawnbot_left
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Demoman
+			}
+		}
+		WaveSpawn // Support - 2 Engineers
+		{
+			Where	spawnbot_right
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	40
+			Support	Limited
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Engineer
+			}
+		}
+	}
+	Wave // Wave 6 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - Chief Dragon's Fury Pyro
+		{
+			Name	Wave6a
+			Where	spawnbot_chief
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Pyro_Chief_Fury
+			}
+		}
+		WaveSpawn // B - 36 Flare Pyros
+		{
+			Name	Wave6b
+			WaitForAllDead	Wave6a
+			Where	spawnbot
+			TotalCurrency	180
+			TotalCount	36
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Pyro_Flare
+			}
+		}
+		WaveSpawn // B - 12 Heavies
+		{
+			Name	Wave6b
+			WaitForAllDead	Wave6a
+			Where	spawnbot_left
+			TotalCurrency	60
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	15
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Heavy
+			}
+		}
+		WaveSpawn // C - 1 Giant Soldier
+		{
+			Name	Wave6c
+			WaitForAllSpawned	Wave6b
+			Where	spawnbot
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Soldier_Giant
+			}
+		}
+		WaveSpawn // C - 1 Giant Soldier
+		{
+			Name	Wave6c
+			WaitForAllSpawned	Wave6b
+			Where	spawnbot_left
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Soldier_Giant
+			}
+		}
+		WaveSpawn // Support - Burst Fire Demos
+		{
+			Where	spawnbot
+			TotalCurrency	60
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	15
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Demoman_BurstFire
+			}
+		}
+	}
+	Wave // Wave 7 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // A - Final Tank
+		{
+			Name	Wave7a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Tank
+			{
+				Health	25000
+				Name	"tankboss"
+				Speed	75
+				StartingPathTrackNode	tankpath_river_same
+				Skin	1
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn // 48 Bowmen
+		{
+			Where	spawnbot
+			TotalCurrency	240
+			TotalCount	48
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	20
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Sniper_Bow
+			}
+		}
+		WaveSpawn // B - 2 Squads; 1 Giant Airblast Pyro, 2 Fire Resist Medics
+		{
+			Name	Wave7b
+			WaitForAllDead	Wave7a
+			Where	spawnbot
+			TotalCurrency	120
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	40
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Pyro_Giant_AirBlast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+			}
+		}
+		WaveSpawn // B - 2 Squads; 1 Giant Airblast Pyro, 2 Fire Resist Medics
+		{
+			Name	Wave7b
+			WaitForAllDead	Wave7a
+			Where	spawnbot_left
+			TotalCurrency	120
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	40
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Pyro_Giant_AirBlast
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Outlands_Medic_Vaccinator_Fire
+				}
+			}
+		}
+		WaveSpawn // Support - Demoknights
+		{
+			Where	spawnbot
+			TotalCurrency	120
+			TotalCount	24
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	15
+			Support	1
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Demoman_Knight
+			}
+		}
+	}
+	Wave // Wave 8 of 8
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_ironman_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	mission_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn // Chief Barrage Soldier
+		{
+			Where	spawnbot_chief
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TFBot
+			{
+				Template	T_TFBot_Outlands_Soldier_Chief_Barrage
+			}
+		}
+	}
+}
