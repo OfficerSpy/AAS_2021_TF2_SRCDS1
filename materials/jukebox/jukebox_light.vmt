@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "jukebox/jukebox_light"
+	$selfillum 1
+	"$phong" "1"
+	"$phongexponent" "10" 
+	"$phongboost" ".125"	
+	"$phongfresnelranges"	"[.7 15 20]"
+	"$basemapalphaphongmask" "1"
+}
