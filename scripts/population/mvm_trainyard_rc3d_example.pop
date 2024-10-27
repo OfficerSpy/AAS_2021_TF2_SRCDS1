@@ -1,0 +1,860 @@
+////////////////////////////////////////////////////////////////
+//
+//	mvm_trainyard example pop file
+//	map created by 42 - http://steamcommunity.com/profiles/76561198166835059
+//	tf2maps - https://tf2maps.net/downloads/trainyard.1572/
+//	steam workshop - https://steamcommunity.com/sharedfiles/filedetails/?id=1160890619
+//
+//	this pop file is an example on how to make a working pop file for mvm_trainyard with train/gatebot gimmik
+//
+////////////////////////////////////////////////////////////////
+//
+//	list of robot spawns:
+//
+//	spawns at left side of main area
+//	- spawnbot
+//	- gatebot
+//	- spawnbot_left
+//	- gatebot_left
+//	- spawnbot_mission_spy
+//	
+//	spawns at right side of main area
+//	- spawnbot
+//	- gatebot
+//	- spawnbot_middle
+//	- gatebot_middle
+//	- spawnbot_boss
+//	- gatebot_boss
+//	- spawnbot_mission_sentrybuster
+//
+//	spawns at right side flank
+//	- spawnbot_right
+//	- gatebot_right
+//	- spawnbot_mission_sniper
+//
+//	Note that spawnbot and gatebot spawns at both sides of main area
+//
+////////////////////////////////////////////////////////////////
+//
+//	list of relays you can trigger:
+//
+//	wave_start_relay - must be triggered from StartWaveOutput every waves
+//	wave_finished_relay - must be triggered from DoneOutput every waves
+//	boss_deploy_relay - must be triggered from OnBombDroppedOutput from tanks
+//
+//	train_spawnrelay_A - Summons a train for gatebots to capture at A
+//	train_spawnrelay_B - Summons a train for gatebots to capture at B
+//	train_spawnrelay_C - Summons a train for gatebots to capture at C
+//	train_spawnrelay_D - Summons a train for gatebots to capture at D
+//
+//	train_resetrelay_A - Resets train A and allows train_spawnrelay_A to be triggered again
+//	train_resetrelay_B - Resets train B and allows train_spawnrelay_B to be triggered again
+//	train_resetrelay_C - Resets train C and allows train_spawnrelay_C to be triggered again
+//	train_resetrelay_D - Resets train D and allows train_spawnrelay_D to be triggered again
+//	train_resetrelay_all - Triggeres all 4 relays above (Map automatically fires this relay on wave end)
+//
+//	boss_relay_start - Disables random trains and closes gate at water, use when boss get spawned
+//	boss_relay_end - Reverts changes above, use when boss get killed (Map automatically fires this relay on wave end if not triggered yet)
+//
+//	engi_relay_enable - Enables engi hints outside of train cap area once any trains captured
+//	engi_relay_disable - Disables engi hints outside of train cap area (Map automatically fires this relay on wave end)
+//
+////////////////////////////////////////////////////////////////
+//
+//	list of starting tank path:
+//	tank_path_LL_1 - spawns in left side and takes lower path
+//	tank_path_RL_1 - spawns in right side and takes lower path
+//	tank_path_LU_1 - spawns in left side and takes upper path
+//	tank_path_RU_1 - spawns in right side and takes upper path
+//
+////////////////////////////////////////////////////////////////
+//
+//	list of robot tags to use
+//	bot_gatebot - whenever if bot is a gatebot or not
+//	bot_giant - whenever if bot is a giant/mini giant or not
+//	bot_flank - robot with this tag takes extra flank paths, excluding flank at station
+//
+//	bot_right - robot with this tag takes right/main path next to station
+//	bot_left - robot with this tag takes left/flank path above station
+//
+//	if bots dont have either bot_right or bot_left: 
+//	- non-gatebot takes right/main path next to station
+//	- gatebot spawned from main area takes right/main path next to station
+//	- gatebot spawned from right/flank area takes left/flank path above station
+//
+//	robot holding bomb will ignore bot_left and takes right/main path next to station
+//
+////////////////////////////////////////////////////////////////
+//
+//	This mission popfile shows an example on those features and how to use it correctly
+//	W1 - basic infromation on spawning all 4 trains
+//	W2 - advanced infromation on spawning A train twice, should only be used on very long/hard waves
+//	W3 - shows all 4 tank paths
+//	W4 - shows how to use engi bots
+//	W5 - shows different tag paths and boss relays
+//
+////////////////////////////////////////////////////////////////
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+#base robot_trainyard.pop		//custom robots template for mvm_trainyard
+
+population
+{
+	StartingCurrency	30000
+	RespawnWaveTime	0
+	CanBotsAttackWhileInSpawnRoom	no
+	
+	Wave									//this wave shows how to summon train with robots
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn	//this WaveSpawn is purely for "A" sign in support robots hud, to hint the current wave have train A
+		{
+			WaitForAllDead	"w1_D"			//starts once all robots killed, so it would never spawns in map
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000		//alternately, dont let him spawn for a very long time
+			Support 1						//must be support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_a			//sets his custom icon to A sign
+			}
+		}
+		
+		WaveSpawn							//repeat same for train B
+		{
+			WaitForAllDead	"w1_D"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_b			//sets his custom icon to B sign
+			}
+		}
+		
+		WaveSpawn							//repeat same for train C
+		{
+			WaitForAllDead	"w1_D"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_c			//sets his custom icon to C sign
+			}
+		}
+		
+		WaveSpawn							//repeat same for train D
+		{
+			WaitForAllDead	"w1_D"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_d			//sets his custom icon to D sign
+			}
+		}
+		
+		WaveSpawn							//this is an example gatebot to capture train
+		{
+			Name	"w1_D"					//to prevent all custom icon robots to spawn
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			Where	gatebot_right
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee
+			}
+		}
+		
+		WaveSpawn							//this robot calls train A to spawn in map once robot is spawned
+		{
+			Name	"w1_A"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput				//When a robot spawned this relay fires
+			{
+				Target train_spawnrelay_A	//this relay triggeres train A to spawn in map for getbot to capture it
+				Action Trigger				//action to fire the relay
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn							//repeat for train B to spawn
+		{
+			Name	"w1_B"
+			WaitForAllDead	"w1_A"			//start spawns once robot triggeres train A is killed
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_B	//relay to spawn train B
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn							//repeat for train C to spawn
+		{
+			Name	"w1_C"
+			WaitForAllDead	"w1_B"			//start spawns once robot triggeres train B is killed
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_C	//relay to spawn train C
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn							//repeat for train D to spawn
+		{
+			Name	"w1_D"
+			WaitForAllDead	"w1_C"			//start spawns once robot triggeres train C is killed
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_D	//relay to spawn train D
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+	}
+	
+	Wave							//this wave shows how to summon same train twice in one wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead	"w2_3"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_a
+			}
+		}
+		
+		WaveSpawn					//this robot summons first train
+		{
+			Name	"w2_1"
+			TotalCurrency	0
+			TotalCount	3
+			MaxActive	1
+			SpawnCount	1
+			Where	gatebot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_A	//relay to spawn first train
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee
+			}
+		}
+		
+		WaveSpawn					//this robot resets first train
+		{
+			Name	"w2_2"
+			WaitForAllSpawned	"w2_1"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	25	//allow atleast 22 seconds after spawning first train to reset first train (map refuses to fire relay if less than 22 seconds)
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_resetrelay_A	//relay to reset first train
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn					//this robot summons second train
+		{
+			Name	"w2_3"
+			WaitForAllSpawned	"w2_2"
+			TotalCurrency	0
+			TotalCount	2
+			MaxActive	1
+			SpawnCount	1
+			Where	gatebot_middle
+			WaitBeforeStarting	10	//allow atleast 7 seconds after reseting first train to spawn second train (map refuses to fire relay if less than 7 seconds)
+			WaitBetweenSpawns	25	//allow atleast 22 seconds again after spawning second train to end the wave as map need to trigger again
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_A	//relay to spawn second train
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee
+			}
+		}
+	}
+	
+	Wave	//this wave shows each 4 tank paths
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			Squad
+			{
+				Tank
+				{
+					Health	200
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode	tank_path_LL_1	//spawns in left side and takes lower path
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	0
+			Squad
+			{
+				Tank
+				{
+					Health	200
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode	tank_path_RL_1	//spawns in right side and takes lower path
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	35
+			WaitBetweenSpawns	0
+			Squad
+			{
+				Tank
+				{
+					Health	200
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode	tank_path_LU_1	//spawns in left side and takes upper path
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot
+			WaitBeforeStarting	60
+			WaitBetweenSpawns	0
+			Squad
+			{
+				Tank
+				{
+					Health	200
+					Name	Tank
+					Speed	75
+					StartingPathTrackNode	tank_path_RU_1	//spawns in right side and takes upper path
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+	}
+	
+	Wave							//this wave shows on how to use engi bots correctly
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		
+		WaveSpawn
+		{
+			WaitForAllDead	"w4_all"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_d
+			}
+		}
+		
+		WaveSpawn					//example bot to use for teleporters
+		{
+			Name	"w4_all"
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle	//spawnbot to follow TeleportWhere
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn					//example gatebot to use for teleporters
+		{
+			Name	"w4_all"
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	1
+			SpawnCount	1
+			Where	gatebot_middle	//gatebot to follow TeleportWhere
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_D
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w4_engi"
+			TotalCurrency	0
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target engi_relay_enable	//relay to enable engi hints outside of train capture area
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template T_TFBot_Engineer_Sentry_Tele_Battle	//Only allow spawnbot or normal bots to teleport as we dont want gatebots to spawn outside of train capture area
+				TeleportWhere spawnbot
+				TeleportWhere spawnbot_left
+				TeleportWhere spawnbot_middle
+				TeleportWhere spawnbot_right
+				Attributes IgnoreFlag
+				Health 50
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w4_all"
+			WaitForAllDead	"w4_engi"
+			TotalCurrency	0
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target engi_relay_disable	//relay to disable engi hints outside of train capture area
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template T_TFBot_Engineer_Sentry_Tele_Battle	//Now we disabled engi hints outside of train capture area, we can allow normal and gatebots to teleport
+				TeleportWhere spawnbot
+				TeleportWhere gatebot
+				TeleportWhere spawnbot_left
+				TeleportWhere gatebot_left
+				TeleportWhere spawnbot_middle
+				TeleportWhere gatebot_middle
+				TeleportWhere spawnbot_right
+				TeleportWhere gatebot_right
+				Attributes IgnoreFlag
+				Health 50
+			}
+		}
+	}
+	
+	Wave									//this wave shows different tags bot can use to take paths, and triggering boss relay
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+				
+		WaveSpawn
+		{
+			WaitForAllDead	"w5_last"
+			TotalCurrency 0
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBetweenSpawnsAfterDeath 0
+			WaitBeforeStarting 1000000
+			Support 1
+
+			TFBot
+			{
+				Class Scout
+				ClassIcon	sign_c
+			}
+		}
+				
+		WaveSpawn
+		{
+			Name	"w5_normal_right"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_right	//spawnpoint bot will spawn
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				//non-gatebot without either tags will take right/main path
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w5_normal_left"
+			WaitForAllDead	"w5_normal_right"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_left	//spawnpoint bot will spawn
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				Tag bot_left	//bot will ignore main path and instead takes flank above station
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w5_gatebot_right"
+			WaitForAllDead	"w5_normal_left"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_right	//spawnpoint bot will spawn
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target train_spawnrelay_C
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee_Right	//This robot template from robot_trainyard.pop have tag bot_right in both Default and RevertGateBotsBehavior
+				//bot will ignore flank path and instead takes main path next to station
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w5_gatebot_left"
+			WaitForAllDead	"w5_gatebot_right"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_left	//spawnpoint bot will spawn
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFGateBot_Scout_Melee_Left	//This robot template from robot_trainyard.pop have tag bot_left in both Default and RevertGateBotsBehavior
+				//bot will ignore main path and instead takes flank above station
+			}
+		}
+				
+		WaveSpawn
+		{
+			Name	"w5_normal_flank"
+			WaitForAllDead	"w5_gatebot_left"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle	//spawnpoint bot will spawn
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+				Tag bot_flank	//bot will take any flank paths outside of station
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w5_boss"
+			WaitForAllDead	"w5_normal_flank"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target boss_relay_start		//relay to trigger when boss spawned
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier
+				Health 250
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name	"w5_last"
+			WaitForAllDead	"w5_boss"
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_middle
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			
+			FirstSpawnOutput
+			{
+				Target boss_relay_end	//relay to revert changes after boss killed
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+	}
+}
