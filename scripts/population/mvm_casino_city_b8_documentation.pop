@@ -1,0 +1,625 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+//Documentation Popfile
+//version b8
+//-Added 25 and 50 chips bot tags
+//-Added "nopath" wave end relays to allow popfiles to choose a specific bomb path
+//-Added a few more chips values relays for adding/subtracting chips
+
+
+//Made by BigfootBeto for mvm_casino_city_b8
+//https://steamcommunity.com/id/bigfootbeto/
+
+
+///// bot spawn names //////
+//
+// spawnbot
+// spawnbot_center
+// spawnbot_left
+// spawnbot_right
+// 
+// spawnbot_mission_sentrybuster
+// spawnbot_mission_sniper
+// spawnbot_mission_spy
+//
+// spawnbot_chips
+//
+//////////////////////////////
+
+////// relay names /////////
+//
+// wave_start_relay
+// wave_finished_relay
+// wave_finished_relay_nopath
+// 
+// wave_start_relay_ironman
+// wave_finished_relay_ironman
+// wave_finished_relay_ironman_nopath
+//
+// wave_start_relay_boss    (identical to wave_start_relay)
+// wave_finished_relay_boss (identical to wave_finished_relay)
+// wave_finished_relay_boss_nopath (identical to wave_finished_relay_nopath)
+// 
+// games_open_relay
+// games_close_relay
+//
+// upgrade_break_start_relay
+// upgrade_break_finished_relay
+// 
+// boss_spawn_relay
+// boss_spawn_relay_sentrytank
+// boss_dead_relay
+// boss_deploy_relay
+// 
+// chips_add_1_relay
+// chips_add_3_relay
+// chips_add_5_relay
+// chips_add_10_relay
+// chips_add_25_relay
+// chips_add_50_relay
+// chips_add_100_relay
+//
+// chips_subtract_1_relay
+// chips_subtract_3_relay
+// chips_subtract_5_relay
+// chips_subtract_10_relay
+// chips_subtract_25_relay
+// chips_subtract_50_relay
+// chips_subtract_100_relay
+// 
+//
+////////////////////////////////////
+
+////// bot tag names /////////
+//
+// chips_count_3
+// chips_count_5
+// chips_count_10
+// chips_count_25
+// chips_count_50
+//
+// chips_boss
+//
+////////////////////////////////////
+
+
+////// tank path names /////////
+//
+// tank_path_a_1
+// tank_path_b_1
+//
+// tank_path_sentrytank
+//
+////////////////////////////////////
+
+
+// If you wish to manually add chips in-game use the following commands:
+//
+// sv_cheats 1
+// ent_fire chips_override add #
+//
+// replace # with the number of chips you want
+// ( don't put anything at or above 999 or you risk crashing the game :P )
+//
+
+
+
+WaveSchedule
+{
+	
+	
+	StartingCurrency		1000
+	RespawnWaveTime 		4
+	CanBotsAttackWhileInSpawnRoom no
+
+	
+//WAVE 1  /////////////////////////////////////////////////////////////////
+//
+// Simple Chipsbot Setup
+//
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action Trigger
+			}
+		
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn //WAVE 01chips: Spawns 1 chipsbot every 25 seconds. Each bot carries 1 chip.
+		{
+			Name "wave01chips"
+			
+			Where spawnbot_chips				//VERY IMPORTANT. Otherwise the bot will spawn without the chips case.
+			
+			TotalCount 2
+			
+			MaxActive 1							//There can be as many MaxActive at once as you like. However, more than 1 will cause the hud to be confused.
+			
+			
+			SpawnCount 1						//DO NOT SPAWN MORE THAN ONE CHIPSBOT AT A TIME!!
+			
+			
+			WaitBeforeStarting 25 				//must spawn after first regular bot. Chips bot cannot be the first bot to spawn!
+			
+			WaitBetweenSpawns 25				//Allow a minimum of at least 3 seconds between spawns.
+			
+			TotalCurrency 0						//Currency is not recommended since the bots will drop chips instead.
+			
+			Support 1							//Not necessary, but provides infinite spawning
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee	
+				ClassIcon chip 					//the name of the custom hud icon
+				Name "Chips Runner" 			//can be whatever name you like
+				Item "MvM GateBot Light Scout" 	//make sure to use the correct hat for the class
+												//the gatebot hat is not required, but it makes the bot more noticeable
+			}
+		}
+		
+		WaveSpawn //WAVE 01a: Scouts to spawn the bomb first
+		{
+			Name "wave01a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5 //starts before chips bot
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Health 15
+			}
+		}
+		
+	}	
+//WAVE 2  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 
+// Using Chipsbot Tags
+//
+//////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action Trigger
+			}
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn //WAVE 02chips: Chipsbot using tags
+		{
+			Name "wave02chips"
+			Where spawnbot_chips
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 20
+			TotalCurrency 0
+			
+			//Support 1
+			
+			RandomChoice								//On Wave start, one of the following bots will be chosen to run during the wave
+			{
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					ClassIcon chip
+					Name "Bonus Chips Runner"
+					Item "MvM GateBot Light Scout"
+					Tag chips_count_3					//The dropped chips case will award 3 chips instead of 1.
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					ClassIcon chip
+					Name "Big Bonus Chips Runner"
+					Item "MvM GateBot Light Scout"
+					Tag chips_count_5					//The dropped chips case will award 5 chips instead of 1.
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					ClassIcon chip
+					Name "Bigger Bonus Chips Runner"
+					Item "MvM GateBot Light Scout"
+					Tag chips_count_10					//The dropped chips case will award 10 chips instead of 1.
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Scout_Melee
+					ClassIcon chip
+					Name "Biggest Bonus Chips Runner"
+					Item "MvM GateBot Light Scout"
+					Tag chips_count_25					//The dropped chips case will award 25 chips instead of 1.
+				}
+			}
+		}
+		
+		
+		//CHIPS BOSS
+		// (it's called a chips boss but really it's just a chips bot with urgency)
+		// The chips bot will spawn like normal, however the pickup timer will be active on the bot.
+		// If the bot is not killed before the timer runs out, the chips disappear.
+		// If the bot is killed in time, the timer resets to normal pickup time.
+		// 
+		// Note: The boss tag does not add chips. It only enables the timer functionality.
+		
+		WaveSpawn //WAVE 02chipsboss: Chipsbot boss
+		{
+			Name "wave02chipsboss"
+			WaitForAllDead "wave02chips" 		//spawns after the first two chips bot die in this wave
+			Where spawnbot_chips
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 20
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Scale 1.5
+				ClassIcon chip
+				Name "Chips Boss"
+				Item "MvM GateBot Light Scout"
+				Tag chips_count_25					//The dropped chips case will award 25 chips instead of 1.
+				Tag chips_boss						//Enables the chips counter countdown
+			}
+		}
+		
+		WaveSpawn //WAVE 02a: Scouts to spawn the bomb first
+		{
+			Name "wave02a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Health 15
+			}
+		}
+		
+	}	
+//WAVE 3  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 
+// Creating chips with relays
+//
+//////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action Trigger
+			}
+		
+		InitWaveOutput  //Adds 1 chip when the wave loads
+			{
+				Target chips_add_1_relay //this can be swapped out with a different number chips relay
+				Action Trigger
+			}
+
+		/////////////////////////////////////// The following don't work because only one DoneOutput can trigger at a time.
+		// DoneOutput //Adds 19 chips when the wave ends
+			// {
+				// Target chips_add_1_relay
+				// Action Trigger
+			// }
+		// DoneOutput					
+			// {
+				// Target chips_add_3_relay
+				// Action Trigger
+			// }
+		// DoneOutput					
+			// {
+				// Target chips_add_5_relay
+				// Action Trigger
+			// }
+		// DoneOutput					
+			// {
+				// Target chips_add_10_relay
+				// Action Trigger
+			// }
+		////////////////////////////////////////		
+
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn //WAVE 03a: Scouts
+		{
+			Name "wave03a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			//Regular bots can be used to add bonus chips.
+			//However, there will be no visual indication such as the chips case that the bot has chips.
+				
+			FirstSpawnOutput
+			{
+				Target chips_add_1_relay
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Health 15		
+			}
+		}
+		
+	}
+	
+//WAVE 4  /////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+// 
+// Sentry Tank Setup
+//
+// You can have as many sentry tanks spawned at the same as you want.
+// Given that there's some time between spawns so that they dont end up stacked.
+//
+//
+// If you wish to incoperate sentry tanks into your own map, a prefab is available
+// here: https://tf2maps.net/downloads/sentry-tank-prefab.7662/
+//
+//////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action Trigger
+			}		
+
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		
+		WaveSpawn //WAVE 04tank: [SENTRY TANK]
+		{
+			Name "wave04tank"
+			TotalCount 1
+			WaitBeforeStarting 15
+			TotalCurrency 100
+			
+			FirstSpawnOutput
+				{
+					Target boss_spawn_relay_sentrytank			//REQUIRED
+					Action Trigger
+				}
+				
+			Tank
+			{
+				Health 12500									//choose desired health
+				Speed 75										//choose desired speed
+				
+				Name "tankboss_sentrytank"						//REQUIRED
+				StartingPathTrackNode "tank_path_sentrytank"	//REQUIRED
+			
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput                                  
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn //WAVE 04a: Scouts
+		{
+			Name "wave04a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Health 15
+			}
+		}
+		
+	}
+//WAVE 5  /////////////////////////////////////////////////////////////////
+//
+// Ironman wave and casino games open/close relay usage
+//
+//
+// upgrade_break_start_relay - Opens the games AND enable the forward upgrade station
+//
+// games_open_relay - Only opens the casino games and not the forward upgrade station
+//
+//
+//
+// WARNING  Avoid spawning chipsbots while the bomb is reset. 
+//			The bomb has priority over the chipscase, so the bomb
+//			will teleport to the chipsbot before it has a chance to pick
+//			up the chipscase. The chipscase will spawn anyway, and it
+//			remain uncollected. Luckily the case will despawn automatically
+//			if it is not picked up within 1 second.
+//
+///////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay_ironman //starts a wave with a bomb that resets after 60 seconds 
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay_ironman
+				Action Trigger
+			}
+		
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn //WAVE 05chips: Spawns 1 chipsbot every 25 seconds. Each bot carries 1 chip.
+		{
+			Name "wave05chips"
+			Where spawnbot_chips				//VERY IMPORTANT
+			TotalCount 2
+			MaxActive 2							//There can be as many MaxActive at once as you like.
+			SpawnCount 1						//DO NOT SPAWN MORE THAN ONE CHIPSBOT AT A TIME
+			WaitBeforeStarting 25 				//must spawn after first regular bot. Chips bot cannot be the first bot to spawn!
+			WaitBetweenSpawns 25				//Allow a minimum of at least 3 seconds between spawns.
+			TotalCurrency 0						//Currency is not recommended since the bots will drop chips instead.
+			
+			Support 1							//Not necessary, but provides infinite spawning
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ClassIcon chip 					//the name of the custom hud icon
+				Name "Chips Runner" 			//can be whatever name you like
+				Item "MvM GateBot Light Scout" 	//make sure to use the correct hat for the class
+			}
+		}
+		
+		WaveSpawn //WAVE 01a: Scouts to spawn the bomb first
+		{
+			Name "wave01a"
+			Where spawnbot
+			TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				Health 15
+			}
+		}
+		
+		
+		//Opening the games:
+		
+		WaveSpawn //WAVE 05b: Heavy, when spawned, the casino games are OPENED
+		{
+			Name "wave05b"
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 60
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+
+			FirstSpawnOutput
+			{
+				Target games_open_relay  //replace with upgrade_break_start_relay if you also want to enable the forward upgrade station
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+			}
+		}
+		
+		//The games will remain open until they are force closed or until the next wave starts
+		
+		//TIP: The wave should be relatively calm or even paused to allow players to enjoy the games.
+		
+		
+		
+		//WARNING   Watch the edict limit while the games are open. Do not spawn spammy enemies
+		//			because that could reach the edict limit while all 3 casino games are 
+		//			active.
+		//          Check active edicts with the "status" command. There are only 2048 available
+		//			to use until the game crashes.
+		
+		
+		
+		//Closing the games:
+		
+		//Allow plenty of time before closing them or it will be jarring to players.
+		
+		WaveSpawn //WAVE 5c: Pyro, when spawned, the casino games are CLOSED
+		{
+			Name "wave05c"
+			WaitForAllDead "wave05b"	//spawns after heavy is killed
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 60		//spawns 60 seconds after heavy is killed
+			WaitBetweenSpawns 15
+			TotalCurrency 100
+
+			FirstSpawnOutput
+			{
+				Target games_close_relay //replace with upgrade_break_finished_relay if you also want to disable the forward upgrade station
+				Action Trigger
+			}
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro
+			}
+		}
+		
+	}
+
+}
