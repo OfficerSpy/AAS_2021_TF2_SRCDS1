@@ -1,0 +1,1351 @@
+//	mvm_kelly_rc1 by Mikroscopic
+//	Expert mission: "Andromeda Armada"
+//
+//	Changelog 7/28/17:
+//	Wave 2: Increased speed of soldier squad spawning
+//	Wave 4: Increased rate of support spawn
+
+
+
+
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_kelly.pop
+
+population
+{
+	StartingCurrency	400
+	RespawnWaveTime	6
+	CanBotsAttackWhileInSpawnRoom	no
+	
+// Missions ////////////////////////////////////////////////////
+	
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot_mission_sentrybuster
+		BeginAtWave	1
+		RunForThisManyWaves	7
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission			// waves 1 - 3
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	3
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	4
+		TFBot
+		{
+			Template	Alien_Spy
+		}
+	}
+	Mission			// wave 6
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	40
+		DesiredCount	3
+		TFBot
+		{
+			Template	Alien_Spy
+		}
+	}
+	Mission			// waves 3 - 7
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	3
+		RunForThisManyWaves	5
+		InitialCooldown	30
+		CooldownTime	36
+		DesiredCount	2
+		TFBot
+		{
+			Template	Alien_Sniper
+		}
+	}
+	
+// WAVE 1 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $400
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave1_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1A-1
+			TotalCurrency	100
+			TotalCount	30
+			MaxActive	10
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			
+				TFBot
+				{
+					Template	Alien_Pyro
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	1A-2
+			TotalCurrency	50
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1B
+			WaitForAllDead	1A-1
+			TotalCurrency	100
+			TotalCount	32
+			MaxActive	12
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1B
+			WaitForAllDead	1A-1
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	1A-1
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	10
+			Where	spawnbot_any
+			
+			Support 1
+				TFBot
+				{
+					Template	Alien_Scout_Mini
+				}
+		}
+	}
+	
+// WAVE 2 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $550
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	2A-1
+			TotalCurrency	150
+			TotalCount	30
+			MaxActive	20
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Buff
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2A-2
+			TotalCurrency	100
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	30
+			Where	spawnbot
+
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Heavy_Giant
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2B
+			WaitForAllSpawned	2A-2
+			TotalCurrency	200
+			TotalCount	36
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Heavy_Vacuum
+				}
+				TFBot
+				{
+					Template	Alien_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+				TFBot
+				{
+					Template	Alien_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+				TFBot
+				{
+					Template	Alien_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2B
+			WaitForAllSpawned	2A-2
+			TotalCurrency	25
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	8
+			Where	spawnbot_left
+			
+				TFBot
+				{
+					Template	Alien_Soldier
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	2B
+			WaitForAllSpawned	2A-2
+			TotalCurrency	25
+			TotalCount	8
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	8
+			Where	spawnbot_right
+			
+				TFBot
+				{
+					Template	Alien_Soldier
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	2C
+			WaitForAllSpawned	2B
+			TotalCurrency	50
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	10
+			Where	spawnbot
+
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Heavy_Giant
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+	}
+	
+// WAVE 3 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $500
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	3A-1
+			TotalCurrency	100
+			TotalCount	40
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot_any
+			
+				TFBot
+				{
+					Template	Alien_Scout_Mini
+					Attributes	"AlwaysCrit"
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	3A-2
+			TotalCurrency	170
+			TotalCount	32
+			MaxActive	12
+			SpawnCount	2
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	7
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Heavy_Steel
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	3B-1
+			WaitForAllSpawned	3A-1
+			TotalCurrency	50
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	2
+			Where	spawnbot_aerial
+			
+			StartWaveOutput
+			{
+				Target saucer_airraid_relay				// start the saucer moving to drop the soldiers
+				Action Trigger
+			}
+			
+				TFBot
+				{
+					Template	Alien_Soldier_Air
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	3B-2
+			WaitForAllSpawned	3A-2
+			TotalCurrency	130
+			TotalCount	30
+			MaxActive	18
+			SpawnCount	6
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Buff
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+				TFBot
+				{
+					Template	Alien_Soldier_Bison
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	3B-3
+			WaitForAllSpawned	3A-2
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	54
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			
+				TFBot
+				{
+					BehaviorModifiers	Push
+					Template	Alien_Scout_Giant_Fast
+					Tag nav_prefer_flank_left
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	3B-3
+			WaitForAllSpawned	3A-2
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	54
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			
+				TFBot
+				{
+					BehaviorModifiers	Push
+					Template	Alien_Scout_Giant_Fast
+					Tag nav_prefer_flank_right
+				}
+			
+		}
+	}
+	
+// WAVE 4 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $450
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	4A-1
+			TotalCurrency	75
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+			}
+		}
+		WaveSpawn				//TANK
+		{
+			
+			Name 4A-2
+			WaitForAllSpawned	4A-1
+			TotalCount 1
+			WaitBeforeStarting 6
+			TotalCurrency 100
+
+			StartWaveOutput
+			{
+				Target saucer_tank_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 27000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a"
+
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+
+			}			
+		}
+		WaveSpawn
+		{
+			Name	4B-1
+			WaitForAllDead 4A-2
+			TotalCurrency	75
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	14
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant_Crit
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+			}
+		}
+		WaveSpawn				//TANK
+		{
+			
+			Name 4B-2
+			WaitForAllSpawned	4B-1
+			TotalCount 1
+			WaitBeforeStarting 6
+			TotalCurrency 100
+
+			StartWaveOutput
+			{
+				Target saucer_tank_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 27000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a"
+
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+
+			}			
+		}
+		WaveSpawn
+		{
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	12
+			SpawnCount	1
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	5
+			Where	spawnbot
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Pyro
+				}
+		}
+	}
+	
+// WAVE 5 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $500
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	5A
+			TotalCurrency	10
+			TotalCount	18
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot_right
+			
+				TFBot
+				{
+					Template	Alien_Scout_Mini_Shooter
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	5A
+			TotalCurrency	10
+			TotalCount	18
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot_left
+			
+				TFBot
+				{
+					Template	Alien_Scout_Mini_Shooter
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	5A
+			TotalCurrency	50
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			
+				TFBot
+				{
+					Template	Alien_Heavy_Giant
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	5B-1
+			WaitForAllSpawned	5A
+			TotalCurrency	200
+			TotalCount	48
+			MaxActive	24
+			SpawnCount	6
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	10
+			Where	spawnbot_any
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Buff
+				}
+				TFBot
+				{
+					Template	Alien_Demo
+				}
+				TFBot
+				{
+					Template	Alien_Demo
+				}
+				TFBot
+				{
+					Template	Alien_Demo
+				}
+				TFBot
+				{
+					Template	Alien_Demo
+				}
+				TFBot
+				{
+					Template	Alien_Demo
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	5B-2
+			WaitForAllSpawned	5B-1
+			TotalCurrency	30
+			TotalCount	12
+			MaxActive	12
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	2
+			Where	spawnbot_aerial
+			
+			StartWaveOutput
+			{
+				Target saucer_airraid_relay				// start the saucer moving to drop the soldiers
+				Action Trigger
+			}
+			
+				TFBot
+				{
+					Template	Alien_Soldier_Air
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	5C-1
+			WaitForAllDead	5B-1
+			TotalCurrency	50
+			TotalCount	24
+			MaxActive	16
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			
+				TFBot
+				{
+					Template	Alien_Scout_Mini
+					Attributes	"AlwaysCrit"
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	5C-2
+			WaitForAllDead	5B-1
+			TotalCurrency	50
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	18
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			
+				TFBot
+				{
+					Template	Alien_Scout_Giant_Fast
+				}
+			
+		}
+		WaveSpawn
+		{
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Jarate
+				}
+			
+		}
+		
+		
+	}
+	
+// WAVE 6 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $500
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	6A-1
+			TotalCurrency	100
+			TotalCount	50
+			MaxActive	20
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot_any
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Scout_Mini
+					Attributes	"AlwaysCrit"
+				}
+			
+		}
+		WaveSpawn
+		{
+			Name	6A-2
+			TotalCurrency	100
+			TotalCount	9
+			MaxActive	6
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Heavy_Giant_Deflector
+				}
+				TFBot
+				{
+					Template	Alien_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+				TFBot
+				{
+					Template	Alien_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	6A-3
+			WaitForAllSpawned	6A-2
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	32
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			
+				TFBot
+				{
+					ClassIcon	sniper
+					Health	4000
+					Name	"Noscoper 4200"
+					Class	Sniper
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"MiniBoss"
+					Attributes	"AlwaysFireWeapon"
+					ItemAttributes
+					{
+						ItemName	tf_weapon_sniperrifle
+						"fire rate bonus"	0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.6
+						"damage bonus"	1.5
+						"damage force reduction"	0.6
+						"airblast vulnerability multiplier"	0.6
+						"override footstep sound set"	6
+					}
+					Item	"corona australis"
+					BehaviorModifiers	Push
+					Tag nav_prefer_flank_left
+				}
+		}
+		WaveSpawn
+		{
+			Name	6A-3
+			WaitForAllSpawned	6A-2
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	32
+			WaitBetweenSpawns	10
+			Where	spawnbot_right
+			
+				TFBot
+				{
+					ClassIcon	sniper
+					Health	4000
+					Name	"Noscoper 4200"
+					Class	Sniper
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Attributes	"MiniBoss"
+					Attributes	"AlwaysFireWeapon"
+					ItemAttributes
+					{
+						ItemName	tf_weapon_sniperrifle
+						"fire rate bonus"	0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.6
+						"damage bonus"	1.5
+						"damage force reduction"	0.6
+						"airblast vulnerability multiplier"	0.6
+						"override footstep sound set"	6
+					}
+					Item	"corona australis"
+					BehaviorModifiers	Push
+					Tag nav_prefer_flank_right
+				}
+		}
+		WaveSpawn
+		{
+			Name	6A-4
+			WaitForAllDead	6A-3
+			TotalCurrency	150
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant_Spammer
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Jarate
+				}
+			
+		}
+	}
+	
+// WAVE 7 ///////////////////////////////////////////////////////////////////////////////////////////////////
+// 
+// $850
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn				//TANK
+		{
+			
+			Name 7A-1
+			TotalCount 1
+			WaitBeforeStarting 6
+			TotalCurrency 100
+
+			StartWaveOutput
+			{
+				Target saucer_tank_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "tank_path_a"
+
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+
+			}			
+		}
+		WaveSpawn
+		{
+			Name	7A-2
+			WaitForAllSpawned	7A-1
+			TotalCurrency	200
+			TotalCount	12
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			
+			Squad
+			{
+				TFBot
+				{
+					Template	Alien_Soldier_Giant_Spammer
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+				TFBot
+				{
+					Template	Alien_Medic_Uber
+				}
+			}
+		}
+		WaveSpawn				//TANK
+		{
+			
+			Name 7B-1
+			WaitForAllSpawned	7A-2
+			TotalCount 1
+			WaitBeforeStarting 6
+			TotalCurrency 100
+
+			StartWaveOutput
+			{
+				Target saucer_tank_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				Skin 1
+				StartingPathTrackNode "tank_path_a"
+
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+
+			}			
+		}
+		WaveSpawn
+		{
+			Name	7B-2
+			WaitForAllSpawned	7B-1
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	14
+			WaitBetweenSpawns	8
+			Where	spawnbot_any
+			
+				TFBot
+				{
+					Template	Alien_Scout_Giant_Fast
+				}
+		}
+		WaveSpawn
+		{
+			Name	7C-1
+			WaitForAllDead	7B-2
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			
+				TFBot
+				{
+					ClassIcon	heavy_grapple_giant
+					Health	50000
+					Name	"Mama"
+					Class	HeavyWeapons
+					Skill	Expert
+					Attributes	"MiniBoss"
+					Attributes	"UseBossHealthBar"
+					Scale	2.0
+					WeaponRestrictions PrimaryOnly
+					MaxVisionRange 2000
+					ItemAttributes
+					{
+						ItemName	"ttg max hat"
+						"set item tint RGB"	8421376
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.4
+						"damage bonus"	1.5
+						"damage force reduction"	0.3
+						"airblast vulnerability multiplier"	0.3
+						"override footstep sound set"	2
+						"attach particle effect static"	71
+						"apply look velocity on damage"	-120
+						"apply z velocity on damage" 50
+					}
+					Item	"ttg max hat"
+				}
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned	7C-1
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	12
+			SpawnCount	1
+			WaitBeforeStarting	16
+			WaitBetweenSpawns	10
+			Where	spawnbot_any
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Medic_QF
+				}
+			
+		}
+		WaveSpawn
+		{
+			WaitForAllSpawned	7C-1
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	10
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	8
+			Where	spawnbot_any
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Demo_Knight
+					BehaviorModifiers	Mobber
+				}
+			
+		}
+		WaveSpawn
+		{
+			TotalCurrency	50
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	25
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			
+			Support 1
+			
+				TFBot
+				{
+					Template	Alien_Jarate
+				}
+			
+		}
+	}
+}
