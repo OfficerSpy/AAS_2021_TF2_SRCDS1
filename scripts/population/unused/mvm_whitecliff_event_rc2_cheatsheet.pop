@@ -1,0 +1,237 @@
+
+WaveSpawn{
+    StartingCurrency				1600
+	RespawnWaveTime 				5
+	CanBotsAttackWhileInSpawnRoom 	No
+	Advanced 						1 
+	FixedRespawnWaveTime Yes
+	EventPopFile halloween
+    // Spellbot infomation
+    // The main feature of whitecliff event is the implementation of spellbots. These are bots that will upon spawning be given
+    // a custom intel that upon being dropped can then be picked up by players on the red team. When picked up they can give you
+    // 1 of 4 effects based upon what the bot was tagged as. How these bots look and act is upto your decision.
+    //
+    // Bots set to be spellbot must use spawn_spellbot and must include one of the following tags
+    // spell_haste 		- Fire speed/reload speed buff (uses addcond 113)
+    // spell_regen 		- heal effect akin to the regen spell (uses addcond 73)
+    // spell_crits 		- crits (uses addcond 34)
+    // spell_underworld - warps the player on pickup to a secondary underworld
+    //
+    // Below is examples of some boiler plate spellbots I have utilised in the past.
+    //// Please keep in mind that if the bots are not minibosses they will upgrade over time. This can only be mitigated on servers with plugins like sigmod when using "NoBombUpgrades 1 [$SIGSEGV]"
+    Templates{
+        spell_scout_haste{
+            Name "Hastebound Scout"
+            Class Scout
+            Skill Easy
+            Health 650
+            scale 1.4
+            Tag spell_haste
+            Item "The Shortstop"
+            Item "Point and Shoot"
+            ItemAttributes{
+                ItemName "Point and Shoot"
+                "attach particle effect" 149
+            }
+            CharacterAttributes
+            {
+                "head scale" 0.7
+                "move speed bonus" 1.25
+            }
+        }
+        spell_demo_crits{
+            Name "Critbound Demoman"
+            Class Demoman
+            ClassIcon demo_giant
+            Tag spell_crits
+            Health 750
+            Skill Expert
+            WeaponRestrictions PrimaryOnly
+            Attributes HoldFireUntilFullReload
+            Attributes AlwaysCrit
+            Scale 1.5
+            Item "Point and Shoot"
+            ItemAttributes{
+                ItemName "Point and Shoot"
+                "attach particle effect" 150
+            }
+            ItemAttributes
+            {
+                ItemName "TF_WEAPON_GRENADELAUNCHER"
+                "fire rate bonus" 0.5
+                "damage force reduction" 0.5
+            }
+
+            CharacterAttributes
+            {
+                "move speed bonus"	0.8
+                "airblast vulnerability multiplier" 0.5
+                "override footstep sound set" 4
+            }
+        }
+        spell_medic_regen{
+            Name "LifeBound Medic"
+            Class Medic
+            ClassIcon medic
+            Tag spell_regen
+            health 650
+            Skill Expert
+            WeaponRestrictions MeleeOnly
+            Attributes HoldFireUntilFullReload
+            Attributes AlwaysFireWeapon
+            MaxVisionRange 1600
+            Scale 1.5
+            Item "Point and Shoot"
+            Item "the vita-saw"
+            ItemAttributes{
+                ItemName "Point and Shoot"
+                "attach particle effect" 147
+            }
+            ItemAttributes
+            {
+                ItemName "the vita-saw"
+                "enables aoe heal" 1
+            }
+            Item "the crusader's crossbow"
+            ItemAttributes
+            {
+                ItemName "the crusader's crossbow"
+                "clip size upgrade atomic" 5
+                "damage bonus" 0.33
+                "fire rate bonus" 0.001
+                "faster reload rate" 0.8
+                "heal on hit for rapidfire" 60
+                "is_passive_weapon" 1
+            }
+            CharacterAttributes
+            {
+                "move speed bonus"	0.7
+            }
+        }
+        spell_giant_heavy_underworld{
+            Name "Hellbound Giant Heavy"
+            Class HeavyWeapons
+            ClassIcon spellbook_lite_giant
+            Tag spell_underworld
+            Health 5000
+            Skill Expert
+            Attributes MiniBoss
+            Scale 1.9
+            MaxVisionRange 1200
+            WeaponRestrictions MeleeOnly
+            Item "Spine-Chilling Skull"
+            Item "bone-cut belt"
+            Item "Warrior's Spirit"
+            ItemAttributes
+            {
+                ItemName "Warrior's Spirit"
+                "damage causes airblast" 1
+                "Set DamageType Ignite" 1
+                "fire rate bonus" 0.6
+                "damage bonus" 0.6
+            }
+            CharacterAttributes
+            {
+                "move speed bonus"	0.5
+                "damage force reduction" 0.3
+                "airblast vulnerability multiplier" 0.5
+                "override footstep sound set" 2
+                "attach particle effect" 2
+            }
+        }
+    }
+
+    Wave {// for starting ironman based missions with bomb reset timers.
+	  	StartWaveOutput {
+			Target wave_start_ironman_relay
+			Action Trigger
+		}
+        DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+    }
+    Wave {// for starting non ironman based missions that don't have bomb reset timers.
+	  	StartWaveOutput {
+			Target wave_start_relay
+			Action Trigger
+		}
+        DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+    }
+    Wave {// example of spellbots in action
+	  	StartWaveOutput {
+			Target wave_start_ironman_relay
+			Action Trigger
+		}
+        DoneOutput {
+			Target wave_finished_relay
+			Action Trigger
+		}
+        WaveSpawn {
+			Name "spellbot_random"
+			Where spawnbot_spell
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 55
+			Support 1
+            RandomChoice{
+                TFBot{
+                    Template spell_scout_haste
+                }
+                TFBot
+                {
+                    Template spell_demo_crits
+                }
+                TFBot
+                {
+                    Template spell_medic_regen
+                }
+            }
+		}
+        WaveSpawn {
+			Name "spellbot_fixed"
+			Where spawnbot_spell
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 45
+			WaitBetweenSpawns 62
+			Support 1
+            TFBot{
+                Template spell_giant_heavy_underworld
+            }
+		}
+        //Spawn locations
+        // spawnbot_spell [ONLY FOR USE WITH SPELLBOTS]
+        // spawnbot
+        // flankers
+        // spawnbot_mission_sniper
+        // spawnbot_chief
+        // spawnbot_mission_spy
+        // spawnbot_mission_sentry_buster
+        //
+        WaveSpawn {
+			Name "mainSpawn"
+			Where spawnbot
+            TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+            TFBot{
+                Class Scout
+            }
+		}
+        WaveSpawn {
+			Name "flankersSpawn"
+			Where flankers
+            TotalCount 10
+			MaxActive 1
+			SpawnCount 1
+            TFBot{
+                Class Scout
+            }
+		}
+    }
+}

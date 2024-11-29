@@ -18,6 +18,11 @@ WaveSchedule
 				"critboost on kill" 5
 				"damage bonus" 1.5
 			}
+			CharacterAttributes
+			{
+				"cancel falling damage" 1
+				"no self blast dmg" 2
+			}
 		}
 		T_TFBot_Giant_Soldier_Miner
 		{
@@ -91,7 +96,11 @@ WaveSchedule
 			ItemAttributes
 			{
 				ItemName "The Ullapool Caber"
-				"damage bonus" 1.5
+				"damage bonus" 1.7
+			}
+			CharacterAttributes
+			{
+				"cancel falling damage" 1
 			}
 		}
 		T_TFBot_Demoman_Excavation_Rapid
@@ -109,10 +118,11 @@ WaveSchedule
 			ItemAttributes
 			{
 				ItemName "The Ullapool Caber"
-				"damage bonus" 1.3
+				"damage bonus" 1.5
 			}
 			CharacterAttributes
 			{
+				"cancel falling damage" 1
 				"move speed bonus" 1.1
 			}
 		}

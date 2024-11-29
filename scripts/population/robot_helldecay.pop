@@ -1,0 +1,95 @@
+WaveSchedule
+{
+	Templates
+	{
+		// Sweet Sins
+		// Wave 1
+		T_TFBot_Soldier_Stun
+		{
+			Class Soldier
+			ClassIcon soldier_stun
+			Name "Stunner Soldier"
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Item "The Lucky Shot"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"rocket specialist" 2
+				"Projectile speed decreased" 0.75
+			}
+		}
+		T_TFBot_Heavy_Heal
+		{
+			Class Heavy
+			ClassIcon heavy_healonkill
+			Name "Heal-on-Hit Heavy"
+			Skill Hard
+			Item "Tough Guy's Toque"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"heal on hit for rapidfire" 5
+			}
+		}
+		T_TFBot_Giant_Medic_Kritz
+		{
+			Class Medic
+			ClassIcon medic_kritz_giant
+			Health 4500
+			Name "Giant Kritzkrieg Medic"
+			Skill Expert
+			WeaponRestrictions SecondaryOnly
+			Attributes MiniBoss
+			Attributes SpawnWithFullCharge
+			Item "The Kritzkrieg"
+			Item "Platinum Pickelhaube"
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"ubercharge rate bonus"	200
+				"uber duration bonus" 200
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"bot medic uber health threshold" 5000
+			}
+		}
+		T_TFBot_Chief_Heavyweapons_SelfHeal
+		{
+			Class Heavyweapons
+			ClassIcon heavy_healonkill
+			Health 40000
+			Name "Giant Self-Healing Heavy"
+			Skill Expert
+			Scale 2
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes UseBossHealthBar
+			Attributes AlwaysCrit
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+			Item "The Tungsten Toque"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MINIGUN"
+				"is australium item" 1
+				"item style override" 1
+				"dmg bonus while half dead" 1.5
+				"heal on hit for rapidfire" 100
+				"heal on kill" 5000
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.4
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.4
+				"airblast vertical vulnerability multiplier" 0.1
+				"rage giving scale"	0.1
+				"override footstep sound set" 2
+			}
+		}
+	}
+}

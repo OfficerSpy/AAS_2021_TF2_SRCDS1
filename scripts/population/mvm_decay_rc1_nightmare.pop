@@ -1,0 +1,906 @@
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_helldecay.pop
+
+WaveSchedule
+{
+
+	StartingCurrency		3500
+	RespawnWaveTime 		6
+	CanBotsAttackWhileInSpawnRoom no
+	FixedRespawnWaveTime Yes
+	EventPopfile Halloween
+	
+	Mission // Sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 0
+		
+		Where spawnbot
+		CooldownTime 60            
+
+        TFBot
+		{
+			Template T_TFBot_SentryBuster
+        }
+	}
+	Mission // Sniper - W1
+	{
+		Objective Sniper
+
+		InitialCooldown 40
+		CooldownTime 40
+		DesiredCount 2
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+
+        TFBot
+		{
+			Template T_TFBot_Sniper
+        }
+	}
+	Mission // Sniper - W2
+	{
+		Objective Sniper
+
+		InitialCooldown 40
+		CooldownTime 40
+		DesiredCount 3
+		Where spawnbot_mission_sniper           
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		
+        TFBot
+		{
+			Template T_TFBot_Sniper_Razorback
+        }
+	}
+	Mission // Sniper - W3
+	{
+		Objective Sniper
+
+		InitialCooldown 300
+		CooldownTime 30
+		DesiredCount 3
+		Where spawnbot_mission_sniper           
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		
+        TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+        }
+	}
+	Mission // Spy - W3
+	{
+		Objective Spy
+
+		InitialCooldown 300
+		CooldownTime 90
+		DesiredCount 3
+		Where spawnbot_mission_spy          
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		
+        TFBot
+		{
+			Class Spy
+			Skill Expert
+			Item "The Counterfeit Billycock"
+        }
+	}
+	Mission // Engi - W2,3
+	{
+		Objective Engineer
+		
+		InitialCooldown 90
+		CooldownTime 30
+		DesiredCount 1
+		Where spawnbot
+		BeginAtWave 2
+		RunForThisManyWaves 2
+		
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere spawnbot_invasion
+			TeleportWhere spawnbot_left
+			TeleportWhere spawnbot_right
+			Item "Mining Light"
+		}
+	}
+	///////////////////////////////////////////////////////
+	// Decay Nightmare (Sweet Sins)
+	// Payouts:
+	// W1: 2000$   W2: 2000$   W3: 1000$
+	// Start Payout : 3500$
+	// Max possible: 8700$
+	///////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_im
+			Action Trigger
+		}
+	    DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		Checkpoint Yes
+		
+		// Subwave 1:1 - [Giant] 2 Super Scouts
+		// Warning: 0.1s delays are here to assure that both bombs spawn
+		WaveSpawn
+		{
+			Name "group1_scouts"
+			
+			Where spawnbot
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0.1
+			WaitBetweenSpawns 0
+			TotalCurrency 150
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		// Subwave 1:2 - Bonk scouts stream from top
+		// Subwave 1:3 - Small Stunners soldier from bottom in packs of 3
+		WaveSpawn
+		{
+			Name "group1_main"
+			WaitForAllDead "group1_scouts"
+			
+			Where spawnbot_left
+			Where spawnbot_right
+			
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 1
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+				Name "Bonk Scout"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group1_main"
+			WaitForAllDead "group1_scouts"
+			
+			Where spawnbot
+			
+			TotalCount 30
+			MaxActive 9
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 150
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Stun
+			}
+		}
+		
+		// Subwave 2:1 - 5 Combos - Giant Pyro + Giant Med (No Uber)
+		WaveSpawn
+		{
+			Name "group2"
+			WaitForAllDead "group1_main"
+			
+			Where spawnbot
+			
+			TotalCount 6
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 35
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Item "The Vicious Visage"
+					Item "The Abhorrent Appendages"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Teutonkahmun"
+					Item "Ramses' Regalia"
+				}
+			}
+		}
+		// Subwave 2:2 - "support" - stream of flare pyros
+		WaveSpawn
+		{
+			Name "group2"
+			WaitForAllDead "group1_main"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			MaxActive 18
+			SpawnCount 2
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 3
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				Skill Expert
+				Item "Burny's Boney Bonnet"
+				Item "The Cauterizer's Caudal Appendage"
+				Item "The Monster's Stompers"
+			}
+		}
+		
+		// Subwave 3:1 - 2 Tanks
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2"
+			
+			TotalCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 25000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "path1"
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2"
+			
+			TotalCount 1
+			WaitBeforeStarting 10
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Skin 1
+				Name "boss"
+				StartingPathTrackNode "path2"
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		// Subwave 3:2 - tank support in form of demoknight spam
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			TotalCurrency 300
+			
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Attributes AlwaysCrit
+				Item "The Squid's Lid"
+				Item "Cap'n Calamari"
+			}
+		}
+		
+		// Subwave 4:1 - Pressure Engies
+		WaveSpawn
+		{
+			Name "group4"
+			WaitForAllDead "group3"
+			
+			Where spawnbot
+			
+			TotalCount 20
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 0
+			TotalCurrency 0
+			Support Limited
+			
+			TFBot
+			{
+				Template T_TFBot_Engineer_Sentry_Teleporter
+				Health 300
+				Item "Mining Light"
+			}
+		}
+		// Subwave 4:2 - Black Box + Heal On Hit heavys
+		WaveSpawn
+		{
+			Name "group4"
+			WaitForAllDead "group3"
+			
+			Where spawnbot
+			
+			TotalCount 80
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 5
+			TotalCurrency 500
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_RocketShotgun
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Heal
+				}
+			}
+		}	
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_im_2bomb
+			Action Trigger
+		}
+	    DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		Checkpoint Yes
+		
+		// Subwave 1:1, 1:2 - Hoovy streamoroonie w/ cheesy tanks
+		WaveSpawn
+		{
+			Name "group1"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 200
+			MaxActive 22
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 400
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ_Fast
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Heavyweight_Champ
+				}
+				TFBot
+				{	
+					Template T_TFBot_Scout_Melee
+					ClassIcon scout_bat
+				}
+				TFBot
+				{	
+					Template T_TFBot_Scout_Melee
+					ClassIcon scout_bat
+				}
+				TFBot
+				{	
+					Template T_TFBot_Scout_Sandman
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "group1"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 30
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 40000
+				Speed 75
+				Skin 0
+				Name "boss"
+				StartingPathTrackNode "path2"
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+			
+		}
+		WaveSpawn
+		{
+			Name "group1"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 1
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 30
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 40000
+				Speed 75
+				Skin 0
+				Name "boss"
+				StartingPathTrackNode "path1"
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		// Wave 2:1, 2:2 - Gianteroni, Battalion + Krit/Burst combos
+		WaveSpawn
+		{
+			Name "group2"
+			WaitForAllDead "group1"
+			
+			Where spawnbot
+			
+			TotalCount 4
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 15
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Extended_Concheror
+				Item "The Hidden Dragon"
+				Item "The Faux Manchu"
+				Item "The Shaolin Sash"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2"
+			WaitForAllDead "group1"
+			
+			Where spawnbot
+			
+			TotalCount 8
+			MaxActive 6
+			SpawnCount 2
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 15
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_Burst
+					Item "Forgotten King's Restless Head"
+					Item "Forgotten King's Pauldrons"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Kritz
+				}
+			}
+		}
+		// Wave 3:1, 3:2 - scout spam to break the fronts before final subwave
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2"
+			
+			Where spawnbot_left
+			Where spawnbot_right
+			
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 1
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 2
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Jumping_Sandman
+				Name "Jumping League Scout"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2"
+			
+			Where spawnbot
+			
+			TotalCount 10
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 6
+			TotalCurrency 300
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Baseball_Armored
+			}
+		}
+		// wave 4:1 - final breach, buff banners w/ Giant Conch+Crit
+		WaveSpawn
+		{
+			Name "group4"
+			WaitForAllDead "group3"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 33
+			MaxActive 9
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 5
+			TotalCurrency 200
+	
+			Squad
+			{	
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+					Item "The Hidden Dragon"
+					Item "The Faux Manchu"
+					Item "The Shaolin Sash"
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Hard
+					Item "Hellhunter's Headpiece"
+					Item "Supernatural Stalker"
+					Item "Ghoul Gibbin' Gear"
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Hard
+					Item "Hellhunter's Headpiece"
+					Item "Supernatural Stalker"
+					Item "Ghoul Gibbin' Gear"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "group4"
+			WaitForAllDead "group3"
+			
+			Where spawnbot
+			
+			TotalCount 3
+			MaxActive 3 
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 15
+			TotalCurrency 300
+	
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Extended_Battalion
+				Attributes AlwaysCrit
+				Item "The Hidden Dragon"
+				Item "The Faux Manchu"
+				Item "The Shaolin Sash"
+			}
+		}
+	}
+	
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_im_3bomb
+			Action Trigger
+		}
+	    DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		Checkpoint Yes
+		
+		// 1:1, 1:2 - blatant coaltown ripoff
+		WaveSpawn
+		{
+			Name "group1"
+			TotalCount 1
+			WaitBeforeStarting 0
+			TotalCurrency 200
+			
+			Tank
+			{
+				Health 40000
+				Speed 70 // a bit slower
+				Name "boss"
+				StartingPathTrackNode "path1" // longest path
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}	
+		}
+		WaveSpawn
+		{
+			Name "group1"
+			TotalCount 1
+			WaitBeforeStarting 30
+			TotalCurrency 200
+			
+			Tank
+			{
+				Health 40000
+				Speed 70 // a bit slower
+				Skin 1
+				Name "boss"
+				StartingPathTrackNode "path2" // longest path
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}	
+		}
+		WaveSpawn
+		{
+			Name "group1"
+			
+			Where spawnbot
+			
+			TotalCount 66
+			SpawnCount 6
+			MaxActive 18
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 3
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Spy
+				Skill Expert
+				Attributes IgnoreFlag
+				Item "The Candyman's Cap"
+				Item "The Bountiful Bow"
+				Item "Bozo's Brogues"
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "group2_1"
+			WaitForAllDead "group1"
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman
+				Name "Spam League Scout"
+				Attributes AlwaysCrit
+				Item "Nugget Noggin"
+				Item "Fowl Fists"
+				Item "Talon Trotters"
+				ItemAttributes
+				{
+					ItemName "The Sandman"
+					"effect bar recharge rate increased" 0.1
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2_2"
+			WaitForAllSpawned "group2_1"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Attributes AlwaysCrit
+				Item "The Fruit Shoot"
+				ItemAttributes
+				{
+					ItemName "The Huntsman"
+					"fire rate bonus" 0.4
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2_3"
+			WaitForAllSpawned "group2_2"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Blazing Bull"
+				Item "Fallen Angel"
+				Item "Tail from the Crypt"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2_4"
+			WaitForAllSpawned "group2_3"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Stun
+				Attributes AlwaysCrit
+				Item "The Hardium Helm"
+				Item "The Jupiter Jumpers"
+				Item "The Space Bracers"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2_5"
+			WaitForAllSpawned "group2_4"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Demo_Burst
+				Attributes AlwaysCrit
+				Item "Hair of the Dog"
+				Item "Scottish Snarl"
+				Item "Pickled Paws"
+			}
+		}
+		WaveSpawn
+		{
+			Name "group2_6"
+			WaitForAllSpawned "group2_5"
+			
+			Where spawnbot_invasion
+			
+			TotalCount 66
+			SpawnCount 3
+			MaxActive 9
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 0
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Sniper
+				Name "SMG Sniper"
+				ClassIcon sniper_smg
+				WeaponRestrictions SecondaryOnly
+				Skill Expert
+				Attributes AlwaysCrit
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "group3"
+			WaitForAllDead "group2_6"
+			
+			Where spawnbot
+			
+			StartWaveOutput //enabling not reset bomb to carry for hoovy
+			{
+				Target intel
+				Action Enable
+			}
+			
+			TotalCount 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Template T_TFBot_Chief_Heavyweapons_SelfHeal
+			}
+		}
+	}
+}

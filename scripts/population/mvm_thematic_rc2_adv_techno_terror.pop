@@ -1,0 +1,2009 @@
+#base robot_giant.pop
+#base robot_standard.pop
+population
+{
+	StartingCurrency	400
+	RespawnWaveTime	8
+	CanBotsAttackWhileInSpawnRoom	no
+	Advanced	1
+	Templates
+	{
+		T_TFBot_Soldier_Bison_Burstfire
+		{
+			Class Soldier
+			Name "Bison Rapid Fire" //Intended to be Burst Fire, but the attribute doesn't work on bison :(
+			Item "The Righteous Bison"
+			ClassIcon soldier_bison
+			Skill Hard
+			Health 1350
+			scale 1.5
+			Attributes HoldFireUntilFullReload
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Righteous Bison"
+				"fire rate bonus" 0.6
+				"faster reload rate" -0.6
+				"clip size bonus" 2
+			}
+			CharacterAttributes
+			{
+				"head scale" 0.7
+				"move speed bonus"	0.8
+			}
+		}
+		T_TFBot_Giant_Heavyweapons_Natascha_Hatted
+		{
+			Class Heavyweapons
+			Name "Giant Natascha Heavy"
+			ClassIcon heavy_natascha_nys
+			Item "Natascha"
+			Item "Der Maschinensoldaten-Helm"
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "Natascha"
+				"damage penalty"	1.125
+				//"minigun spinup time increased" 1
+				"spunup_damage_resistance" 1
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+        T_TFBot_Giant_Heavyweapons_Superheater
+		{
+			Class HeavyWeapons
+			Name "Giant Superheater Heavy"
+			ClassIcon heavy_heater_giant
+			Skill Expert
+			Health 5000
+            //Tag bot_giant
+			WeaponRestrictions PrimaryOnly
+			Item "The Huo Long Heatmaker"
+			Item "The Bunsen Brave"
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"damage penalty"	1.5
+                "weapon burn dmg increased" 3
+                "Set DamageType Ignite" 1
+                //"crit mod disabled" 0
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.2
+				"airblast vulnerability multiplier" 0.2
+				"override footstep sound set" 2
+			}
+		}
+        T_TFBot_Giant_Sniper_Hipfire
+		{
+			Class Sniper
+            ClassIcon sniper_alwaysfire
+			Name "Giant Hipfire Sniper"
+			Item "Shooter's Tin Topi"
+			Item "The Machina"
+			Skill Expert
+			Health 3600
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes AlwaysFireWeapon
+			ItemAttributes
+			{
+				ItemName "The Machina"
+				"sniper only fire zoomed" 0
+				"faster reload rate" 1.15
+                "damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.5
+				"override footstep sound set" 3
+				"head scale" 0.7
+			}
+		}
+        T_TFBot_Giant_Heavyweapons_Superheater
+		{
+			Class Heavyweapons
+            Name "Giant Superheater Heavy"
+			ClassIcon heavy_heater_giant
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			Item "The Huo Long Heatmaker"
+            Item "The Bunsen Brave"
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "The Huo Long Heatmaker"
+				"damage penalty"	1
+                "Set DamageType Ignite" 1
+                "weapon burn dmg increased" 3
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.3
+				"override footstep sound set" 2
+			}
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	20
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+    Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	1
+		RunForThisManyWaves	1
+		InitialCooldown	45
+		CooldownTime	30
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Sniper_Sydney_Sleeper
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	10
+		CooldownTime	24
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_mission_sniper
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	50
+		CooldownTime	90
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Sniper
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mission_spy
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	55
+		CooldownTime	70
+		DesiredCount	3
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot
+		BeginAtWave	1
+		RunForThisManyWaves	8
+		InitialCooldown	5
+		CooldownTime	27
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+    Mission
+	{
+		Objective	Engineer
+		Where	spawnbot
+		BeginAtWave	8
+		RunForThisManyWaves	1
+		InitialCooldown	75
+		CooldownTime	120
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere spawnbot
+			TeleportWhere spawnbot_mid
+			TeleportWhere spawnbot_invasion
+			TeleportWhere spawnbot_left
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1a
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+		WaveSpawn
+		{
+			Name	1a
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_right
+					Class	HeavyWeapons
+					Skill	Normal
+				}
+                TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_left
+					Class	HeavyWeapons
+					Skill	Normal
+				}
+                TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_high_left
+					Class	HeavyWeapons
+					Skill	Normal
+				}
+                TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+				}
+                TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+				}
+                TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Hard
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1b
+			TotalCurrency	300
+			TotalCount	18
+			MaxActive	18
+			SpawnCount	3
+			WaitBeforeStarting	22
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Battalion
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Heavyweight_Champ
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	2a
+			TotalCurrency	60
+			TotalCount	28
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_right
+					Class	Scout
+					Skill	Easy
+				}
+                TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_left
+					Class	Scout
+					Skill	Easy
+				}
+                TFBot
+				{
+					BehaviorModifiers Push
+                    Tag nav_prefer_flank_high_left
+					Class	Scout
+					Skill	Easy
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Easy
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2a
+			TotalCurrency	60
+			TotalCount	27
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	1
+			Where	spawnbot
+            TFBot
+			{
+				Class	Pyro
+				Skill	Easy
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+		WaveSpawn
+		{
+			Name	2b
+			TotalCurrency	280
+			TotalCount	18
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	21
+			WaitBetweenSpawns	3.75
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison_Burstfire
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2c
+			TotalCurrency	200
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	42
+			WaitBetweenSpawns	14.4
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        WaveSpawn
+		{
+			Where spawnbot_hidden
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 60000
+			TotalCurrency 0		
+			
+			FirstSpawnOutput
+			{
+				Target aggressiveengienests_enable
+				Action trigger
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency	450
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				Tank
+				{
+					Health	22000
+					Name	tankboss
+					Speed	75
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	3a
+			TotalCurrency	100
+			TotalCount	30
+			MaxActive	12
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			RandomChoice
+			{
+					TFBot
+					{
+						Tag nav_prefer_flank_right
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_high_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_right
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_high_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_right
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_high_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Easy
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Easy
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Hard
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_right
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+					}
+                    TFBot
+					{
+						Tag nav_prefer_flank_high_left
+                        BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+					}
+			}
+		}
+        WaveSpawn
+		{
+			TotalCurrency	50
+			TotalCount	5
+			MaxActive	5
+			SpawnCount	3
+			WaitBeforeStarting	40
+			WaitBetweenSpawns	20
+			Support	Limited
+			Where	spawnbot
+            TFBot
+            {
+                Template	T_TFBot_Engineer_Sentry_Battle_TeleIn
+                Attributes	IgnoreFlag
+            }
+		}
+		WaveSpawn
+		{
+			Name	3a
+			TotalCurrency	150
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Scout_Fast
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	4a
+			TotalCurrency	300
+			TotalCount	12
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	20
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Natascha_Hatted
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	4a
+			TotalCurrency	200
+			TotalCount	22
+			MaxActive	11
+			SpawnCount	11
+			WaitBeforeStarting	13
+			WaitBetweenSpawns	1
+			Where	spawnbot_mid
+			RandomChoice
+			{
+				TFBot
+				{
+                    Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+                    Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+                    Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	5a
+			TotalCurrency	200
+			TotalCount	14
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison_Burstfire
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	5a
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			LastSpawnOutput                                                                                                                                                            
+			{
+				 Target tank_uber_start_relay                                            
+				 Action trigger                         
+			}
+			Squad
+			{
+				Tank
+				{
+					Health	19000
+					Name	tankboss_uber
+					Speed	75
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_hidden
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBeforeStarting 55
+			WaitBetweenSpawns 60000
+			TotalCurrency 0		
+			
+			FirstSpawnOutput
+			{
+				Target tank_uber_stop_relay
+				Action trigger
+			}
+			//RandomChoice
+			//{
+			//	Squad
+			//	{
+			//		TFBot
+			//		{
+			//			Class Scout
+			//			CharacterAttributes
+			//			{
+			//				"health regen" -10000
+			//			}
+			//		}
+			//	}
+			//}
+		}
+		WaveSpawn
+		{
+			Name	5a
+			TotalCurrency	100
+			TotalCount	36
+			MaxActive	12
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_left
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_left
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_left
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_right
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_high_left
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_high_left
+					Class	Scout
+					Skill	Expert
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Expert
+                    Tag norampflank
+                    Tag nostairflank
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Expert
+                    Tag norampflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	5b
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	15
+			SpawnCount	6
+			WaitBeforeStarting	80
+			WaitBetweenSpawns	5
+			Where	spawnbot
+            DoneOutput
+			{
+				Target tank_uber_forcestop_relay_2
+				Action trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Battalion
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Class	HeavyWeapons
+					Skill	Normal
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	5b
+			TotalCurrency	100
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	85
+			WaitBetweenSpawns	8
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Bison_Burstfire
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_hidden
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+            WaitForAllSpawned 5c
+			WaitBeforeStarting 60
+			WaitBetweenSpawns 60000
+			TotalCurrency 0		
+			
+			FirstSpawnOutput
+			{
+				Target tank_uber_stop_relay_2
+				Action trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name	5c
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	90
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			LastSpawnOutput                                                                                                                                                            
+			{
+				 Target tank_uber_start_relay_2                                            
+				 Action trigger                         
+			}
+			Tank
+			{
+				Health	17000
+				Name	tankboss_uber_2
+                Speed	75
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	6a
+			TotalCurrency	1000
+			TotalCount	20
+			MaxActive	20
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	3
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_DemoMan_PrinceTavish
+                    Attributes AlwaysCrit
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	6b
+			//WaitForAllSpawned	6a
+			TotalCurrency	300
+			TotalCount	48
+			MaxActive	16
+			SpawnCount	2
+			WaitBeforeStarting	34
+			WaitBetweenSpawns	1
+			Where	spawnbot
+            Support 1
+			RandomChoice
+			{
+					TFBot
+					{
+						//Tag nav_prefer_flank_right
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_left
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_high_left
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Expert
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Expert
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_right
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_left
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_high_left
+                        //BehaviorModifiers push
+                        Tag norampflank
+                        Tag nostairflank
+						Class	Demoman
+						Skill	Normal
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Normal
+                        Tag norampflank
+                        Tag nostairflank
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_right
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_left
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_high_left
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Easy
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Easy
+                        Tag norampflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Easy
+                        Tag norampflank
+					}
+                    TFBot
+					{
+						Class	Demoman
+						Skill	Hard
+                        Tag norampflank
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_right
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+                        Tag norampflank
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_left
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+                        Tag norampflank
+					}
+                    TFBot
+					{
+						//Tag nav_prefer_flank_high_left
+                        //BehaviorModifiers push
+						Class	Demoman
+						Skill	Hard
+                        Tag norampflank
+					}
+			}
+		}
+		WaveSpawn
+		{
+			Name	6b
+			TotalCurrency	500
+			TotalCount	5
+			MaxActive	5
+			SpawnCount	1
+			WaitBeforeStarting	32
+			WaitBetweenSpawns	13
+			Where	spawnbot_mid
+			Where	spawnbot_left
+			TFBot
+			{
+				Template T_TFBot_Giant_Sniper_Hipfire
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			TotalCurrency	120
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	14
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_Fast
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+        WaveSpawn
+		{
+			TotalCurrency	60
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0.1
+			WaitBetweenSpawns	7
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_FAN
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+		WaveSpawn
+		{
+			Name	7a
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	51
+			Where	spawnbot_mid
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons
+                    BehaviorModifiers Push
+                    Tag nav_prefer_flank_high_left
+				}
+			}
+		}
+        WaveSpawn
+		{
+			Name	7a
+			TotalCurrency	50
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	26.5
+			WaitBetweenSpawns	51
+			Where	spawnbot_mid
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	7a
+			TotalCurrency	110
+			TotalCount	32
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	1
+			Where	spawnbot
+            TFBot
+            {
+                Class Soldier
+                ClassIcon soldier_spammer
+                Skill Hard
+                Attributes AlwaysCrit
+                ItemAttributes 
+                {
+                    ItemName "TF_WEAPON_ROCKETLAUNCHER"
+                    "faster reload rate" -0.8
+                    "fire rate bonus" 0.6	
+                }
+                Tag norampflank
+            }
+		}
+		WaveSpawn
+		{
+			TotalCurrency	100
+			TotalCount	28
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	22
+			WaitBetweenSpawns	11.8
+			Where	spawnbot
+			TFBot
+			{
+				Class	Scout
+				Skill	Expert
+                Tag norampflank
+			}
+		}
+        WaveSpawn
+		{
+			WaitForAllSpawned	7a
+            TotalCurrency	20
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	13
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_FAN
+                Tag norampflank
+                Tag nostairflank
+                Tag nav_prefer_flank_high_left
+			}
+		}
+        WaveSpawn
+		{
+			WaitForAllSpawned	7a
+            TotalCurrency	20
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	13
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_FAN
+                Tag norampflank
+                Tag nostairflank
+                Tag nav_prefer_flank_left
+			}
+		}
+        WaveSpawn
+		{
+			WaitForAllSpawned	7a
+            TotalCurrency	20
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	13
+			Where	spawnbot
+			TFBot
+			{
+				Template	T_TFBot_Giant_Scout_FAN
+                Tag norampflank
+                Tag nostairflank
+                Tag nav_prefer_flank_right
+			}
+		}
+		WaveSpawn
+		{
+			Name	7b
+			WaitForAllSpawned	7a
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	2
+			WaitBetweenSpawns	1
+			Where	spawnbot_mid
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+                    Tag nav_prefer_flank_right
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	7b
+			WaitForAllSpawned	7a
+			TotalCurrency	25
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	1
+			WaitBetweenSpawns	10
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+                    Tag nav_prefer_flank_left
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+        WaveSpawn
+		{
+			Where spawnbot_hidden
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 60000
+			TotalCurrency 0		
+			
+			FirstSpawnOutput
+			{
+				Target aggressiveengienests_disable
+				Action trigger
+			}
+		}
+        WaveSpawn
+		{
+			Where spawnbot_hidden
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			Support 1
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 60000
+			TotalCurrency 0		
+			
+			FirstSpawnOutput
+			{
+				Target tank_uber_stop_relay
+				Action trigger
+			}
+		}
+        WaveSpawn
+		{
+			//Name	8a
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+            LastSpawnOutput                                                                                                                                                            
+			{
+				 Target tank_uber_start_relay                                            
+				 Action trigger                         
+			}
+            Tank
+            {
+                Health	32500
+                Name	tankboss_uber
+                Speed	75
+                OnKilledOutput
+                {
+                    Target	boss_dead_relay
+                    Action	Trigger
+                }
+                OnBombDroppedOutput
+                {
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	8a
+            TotalCurrency	200
+			TotalCount	18
+			MaxActive	15
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_DemoMan_PrinceTavish
+					Attributes	"AlwaysCrit"
+                    Tag norampflank
+                    Tag nostairflank
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	12
+			WaitBetweenSpawns	12
+			Where	spawnbot
+			RandomChoice
+			{
+				TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_high_left
+					Class	Scout
+					Skill	Hard
+                    Attributes "AlwaysCrit"
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_left
+					Class	Scout
+					Skill	Hard
+                    Attributes "AlwaysCrit"
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_right
+					Class	Scout
+					Skill	Hard
+                    Attributes "AlwaysCrit"
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Hard
+                    Attributes "AlwaysCrit"
+                    Tag norampflank
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Expert
+                    Attributes "AlwaysCrit"
+                    Tag norampflank
+				}
+                TFBot
+				{
+					Class	Scout
+					Skill	Expert
+                    Attributes "AlwaysCrit"
+                    Tag norampflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	8b
+			WaitForAllDead	8a
+			TotalCurrency	200
+			TotalCount	30
+			MaxActive	6
+			SpawnCount	1
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	2
+			Where	spawnbot
+            Support Limited
+			RandomChoice
+			{
+				TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_high_left
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Hard
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_left
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Hard
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_right
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Normal
+				}
+                TFBot
+				{
+                    Class	Pyro
+                    Attributes AlwaysCrit
+					Skill	Normal
+                    Tag norampflank
+				}
+                TFBot
+				{
+                    Class	Pyro
+                    Attributes AlwaysCrit
+					Skill	Normal
+                    Tag norampflank
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+                    Class	Pyro
+					Skill	Normal
+                    Attributes AlwaysCrit
+                    Tag norampflank
+				}
+                TFBot
+				{
+                    Class	Pyro
+					Skill	Expert
+                    Attributes AlwaysCrit
+                    Tag norampflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	8b_b
+			WaitForAllDead	8a
+			TotalCurrency	200
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			Where	spawnbot
+            Support Limited
+			TFBot
+			{
+				Template	T_TFBot_Soldier_Bison_Burstfire
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+		WaveSpawn
+		{
+            WaitForAllDead	8a
+			TotalCurrency	400
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	30
+			WaitBetweenSpawns	8.6
+			Where	spawnbot_mid
+			Where	spawnbot_left
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Natascha_Hatted
+                    //Attributes AlwaysCrit
+                    Tag norampflank
+                    Tag nostairflank
+				}
+			}
+		}
+        WaveSpawn
+		{
+			WaitForAllDead	8b
+			TotalCurrency	0
+			TotalCount	45
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			Where	spawnbot
+            Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_high_left
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Hard
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_left
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Hard
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+					//BehaviorModifiers Push
+                    //Tag nav_prefer_flank_right
+                    Tag norampflank
+                    Attributes AlwaysCrit
+                    Class	Pyro
+					Skill	Normal
+				}
+                TFBot
+				{
+                    Class	Pyro
+                    Attributes AlwaysCrit
+					Skill	Normal
+                    Tag norampflank
+				}
+                TFBot
+				{
+                    Class	Pyro
+                    Attributes AlwaysCrit
+					Skill	Normal
+                    Tag norampflank
+                    CharacterAttributes
+                    {
+                        "airblast disabled" 1
+                    }
+				}
+                TFBot
+				{
+                    Class	Pyro
+					Skill	Normal
+                    Attributes AlwaysCrit
+                    Tag norampflank
+				}
+                TFBot
+				{
+                    Class	Pyro
+					Skill	Expert
+                    Attributes AlwaysCrit
+                    Tag norampflank
+				}
+			}
+		}
+		WaveSpawn
+		{
+			WaitForAllDead	8b_b
+			TotalCurrency	0
+			TotalCount	32
+			MaxActive	8
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	6.25
+			Where	spawnbot
+            Support 1
+			TFBot
+			{
+				Template	T_TFBot_Soldier_Bison_Burstfire
+                Tag norampflank
+                Tag nostairflank
+			}
+		}
+		WaveSpawn
+		{
+			Name	8c
+			WaitForAllDead	8a
+			TotalCurrency	0
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	128
+			WaitBetweenSpawns	10
+			Where	spawnbot
+			Squad
+			{
+				Tank
+				{
+					Health	35000
+					Name	tankboss
+					Speed	75
+					Skin	1
+					OnKilledOutput
+					{
+						Target	boss_dead_relay
+						Action	Trigger
+					}
+					OnBombDroppedOutput
+					{
+						Target	boss_deploy_relay
+						Action	Trigger
+					}
+				}
+			}
+		}
+	}
+}

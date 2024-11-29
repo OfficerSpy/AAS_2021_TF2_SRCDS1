@@ -1,0 +1,834 @@
+//Underworld
+//Unfortunate Undertaking
+//Nightmare Difficulty
+
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_underground.pop
+
+WaveSchedule
+{
+	StartingCurrency 4800
+	RespawnWaveTime 2
+	FixedRespawnWaveTime Yes
+	CanBotsAttackWhileInSpawnRoom No
+	EventPopfile Halloween
+	Advanced 0
+	
+	Templates
+	{
+		T_TFBot_Demoman_Knight_Burning
+		{
+			Name "Burning Demoknight"
+			Class Demoman
+			Skill Expert
+			ClassIcon demoman_fireknight
+			WeaponRestrictions MeleeOnly
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			Item "The Glasgow Great Helm"
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"damage penalty" 0.75
+				"max health additive penalty" 0
+				"ragdolls become ash" 1
+				"Set DamageType Ignite" 1
+				"weapon burn dmg increased" 1.3
+				"weapon burn time increased" 1.3
+			}
+		}
+	}
+	
+	Mission
+	{
+		Where spawnbot_side
+		Objective DestroySentries
+		InitialCooldown 45
+		CooldownTime 45
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Attributes DisableDodge
+		}
+	}
+	Mission
+	{
+		Where spawnbot_mission_sniper
+		Objective Sniper
+		InitialCooldown 60
+		CooldownTime 40
+		DesiredCount 3
+		TFBot
+		{
+			Template T_TFBot_Sniper_Camper
+			MaxVisionRange 3000
+			Item "Holy Hunter"
+			Item "The Carious Chameleon"
+		}
+	}
+	Mission
+	{
+		Where spawnbot_mission_spy
+		Objective Spy
+		InitialCooldown 30
+		CooldownTime 50
+		DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Spy
+			Item "The Dead Head"
+		}
+	}
+	
+	//$5000 CREDITS (666)
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay_ironman
+			Action Trigger
+		}
+		DoneOutput
+		{
+			Target wave_finished_relay
+			Action Trigger
+		}
+		
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_01"
+			TotalCount 76
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Scout_FAN
+				Name "FAN Scout"
+				WeaponRestrictions PrimaryOnly
+				Item "B'aaarrgh-n-Bicorne"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_side
+			Name "W666_01"
+			TotalCount 6
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 20
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro
+				Attributes AlwaysCrit
+				Attributes AlwaysFireWeapon
+				Item "Neptune's Nightmare"
+				Item "Arsonist Apparatus"
+				Item "Moccasin Machinery"
+				Tag nav_prefer_main_back
+				Tag nav_prefer_main_front
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_01"
+			TotalCount 30
+			MaxActive 12
+			SpawnCount 3
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 6
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Soldier_Miner
+				Skill Expert
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_invasion
+			Name "W666_02"
+			TotalCount 80
+			MaxActive 16
+			SpawnCount 4
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 5
+			WaitForAllSpawned "W666_01"
+			TotalCurrency 400
+			TFBot
+			{
+				Template T_TFBot_Demoman_Excavation_Rapid
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Spirit of the Bombing Past"
+				Tag nav_prefer_main_back
+				Tag nav_prefer_main_front
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_02"
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 18
+			WaitForAllSpawned "W666_01"
+			TotalCurrency 200
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+				WeaponRestrictions PrimaryOnly
+				Item "Hellhunter's Headpiece"
+				Item "Supernatural Stalker"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_02"
+			TotalCount 6
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 20
+			WaitForAllSpawned "W666_01"
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_Burst
+				Name "Giant Burst Fire Demoman"
+				Item "Forgotten King's Restless Head"
+				Item "Forgotten King's Pauldrons"
+			}
+		}
+		WaveSpawn
+		{
+			Name "W666_03_A"
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 0
+			WaitForAllDead "W666_02"
+			TotalCurrency 300
+			
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			
+			Tank
+			{
+				Name "Tank"
+				Health 22000
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				Skin 0
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_invasion
+			Name "W666_03_A"
+			TotalCount 48
+			MaxActive 12
+			SpawnCount 3
+			WaitBeforeStarting 8
+			WaitBetweenSpawns 6
+			WaitForAllDead "W666_02"
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_ScorchShot_FastShot
+				Name "Fast Pusher Pyro"
+				Item "The Wraith Wrap"
+				Tag nav_prefer_main_back
+				Tag nav_prefer_flank_front
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_03_A"
+			TotalCount 14
+			MaxActive 14
+			SpawnCount 7
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 25
+			WaitForAllDead "W666_02"
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Item "Minsk Beef"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W666_03_B"
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 0
+			WaitForAllSpawned "W666_03_A"
+			TotalCurrency 300
+			
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			
+			Tank
+			{
+				Name "Tank"
+				Health 22000
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				Skin 0
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_03_B"
+			TotalCount 45
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 8
+			WaitForAllSpawned "W666_03_A"
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight_Burning
+				Tag nav_prefer_flank_back
+				Tag nav_prefer_main_front
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_03_B"
+			TotalCount 14
+			MaxActive 14
+			SpawnCount 7
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 25
+			WaitForAllDead "W666_03_A"
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Item "Minsk Beef"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_invasion
+			Name "W666_04"
+			TotalCount 60
+			MaxActive 15
+			SpawnCount 5
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 5
+			WaitForAllDead "W666_03_B"
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Heavy_Dwarf
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_04"
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 60
+			WaitBetweenSpawns 60
+			WaitForAllDead "W666_03_B"
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_SlowBarrage
+					Name "Giant Barrage Soldier"
+					Attributes AlwaysCrit
+					Item "Idiot Box"
+					Item "Shoestring Budget"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Dr. Gogglestache"
+					Item "Emerald Jarate"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Dr. Gogglestache"
+					Item "Emerald Jarate"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_side
+			Name "W666_04"
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 65
+			WaitBetweenSpawns 6
+			WaitForAllDead "W666_03_B"
+			TotalCurrency 200
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+				Name "Bonk Scout"
+				Skill Expert
+				Attributes AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_05"
+			TotalCount 45
+			MaxActive 15
+			SpawnCount 5
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 6
+			WaitForAllDead "W666_04"
+			TotalCurrency 100
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight_Burning
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_05"
+			TotalCount 28
+			MaxActive 14
+			SpawnCount 7
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 25
+			WaitForAllDead "W666_04"
+			TotalCurrency 100
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavy_Booster
+					ClassIcon heavy_booster_giant
+					Item "Minsk Beef"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Battalion
+					Name "Battalion Soldier"
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "Hellhunter's Headpiece"
+					Item "Supernatural Stalker"
+				}
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Battalion
+					Name "Battalion Soldier"
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "Hellhunter's Headpiece"
+					Item "Supernatural Stalker"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+					Item "Templar's Spirit"
+					Item "Wings of Purity"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_side
+			Name "W666_06"
+			TotalCount 78
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 6
+			WaitForAllSpawned "W666_05"
+			TotalCurrency 300
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman
+				Skill Expert
+				Item "Larrikin Robin"
+				Item "Huntsman's Essentials"
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_invasion
+			Name "W666_06"
+			TotalCount 12
+			MaxActive 8
+			SpawnCount 1
+			WaitBeforeStarting 25
+			WaitBetweenSpawns 10
+			WaitForAllSpawned "W666_05"
+			TotalCurrency 200
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Item "Idiot Box"
+					Item "Shoestring Budget"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Item "Idiot Box"
+					Item "Shoestring Budget"
+					Tag nav_prefer_flank_back
+					Tag nav_prefer_flank_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Attributes AlwaysCrit
+					Item "Idiot Box"
+					Item "Shoestring Budget"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W666_07_A"
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 20
+			WaitBetweenSpawns 0
+			WaitForAllDead "W666_06"
+			TotalCurrency 800
+			
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			
+			Tank
+			{
+				Name "Tank"
+				Health 36000
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				Skin 0
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_invasion
+			Name "W666_07_B"
+			TotalCount 88
+			MaxActive 16
+			SpawnCount 4
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 7
+			WaitForAllSpawned "W666_07_A"
+			TotalCurrency 200
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					Item "Hellhunter's Headpiece"
+					Item "Supernatural Stalker"
+					Tag nav_prefer_flank_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Class Heavy
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					Attributes AlwaysCrit
+					Item "Large Luchadore"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_flank_front
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot
+			Name "W666_07_B"
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 16
+			WaitBetweenSpawns 15
+			WaitForAllSpawned "W666_07_A"
+			TotalCurrency 200
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_SlowBarrage
+					Name "Giant Barrage Soldier"
+					Attributes AlwaysCrit
+					Item "Idiot Box"
+					Item "Shoestring Budget"
+					Tag nav_prefer_flank_back
+					Tag nav_prefer_main_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_Burst
+					Name "Giant Burst Fire Demoman"
+					Attributes AlwaysCrit
+					Item "Forgotten King's Restless Head"
+					Item "Forgotten King's Pauldrons"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_flank_front
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Attributes AlwaysCrit
+					Item "Minsk Beef"
+					Tag nav_prefer_main_back
+					Tag nav_prefer_main_front
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name "W666_07_C"
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 0
+			WaitForAllSpawned "W666_07_B"
+			TotalCurrency 0
+			
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			
+			Tank
+			{
+				Name "Tank"
+				Health 50000
+				Speed 75
+				StartingPathTrackNode boss_path_1
+				Skin 1
+				OnKilledOutput
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+	}
+}

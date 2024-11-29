@@ -1,0 +1,4276 @@
+//Mission made by Remilia
+#base robot_transmission.pop
+#base robot_radiobot_lower.pop
+#base robot_radiobot_upper.pop
+population
+{
+	Templates
+	{
+		T_TFBot_SentryBuster
+		{
+			Class Demoman
+			Name "Sentry Buster"
+			Skill Expert
+			Health 2500
+			Item "The Ullapool Caber"
+			WeaponRestrictions MeleeOnly
+			ClassIcon sentry_buster
+			Attributes MiniBoss
+			Attributes DisableDodge
+			Attributes IgnoreEnemies
+			Attributes SuppressFire
+			Tag bot_giant
+			Tag bot_sentrybuster
+			CharacterAttributes
+			{
+				"move speed bonus" 2
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.2
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+				"rage giving scale" 0.1
+			}
+		}
+		T_TFBot_Sniper_Sydney_Sleeper
+		{
+			Class Sniper
+			Name "Sydney Sniper"
+			Skill Hard
+			ClassIcon sniper_sydneysleeper
+			Item "The Sydney Sleeper"
+			MaxVisionRange 3000
+		}
+		T_TFBot_Spy
+		{
+			Class Spy
+			Skill Expert
+			Name "Mary-san"
+		}
+		T_TFBot_Medic_QuickUber
+		{
+			Class Medic
+			Name "Quick-Uber Medic"
+			ClassIcon medic_uber
+			Skill Normal
+			Attributes SpawnWithFullCharge
+			Tag bot_squad_member
+			Item "The Byte'd Beak"
+			Item "Upgradeable TF_WEAPON_MEDIGUN" // no way to see it
+			Item "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MEDIGUN"
+				"ubercharge rate bonus" 5
+				"uber duration bonus" -3
+				"heal rate penalty" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+		}
+		T_TFBot_Giant_Heavyweapons
+		{
+			Class Heavyweapons
+			Name "Giant Heavy"
+			ClassIcon heavy_giant
+			Skill Expert
+			Health 5000
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Item "Upgradeable TF_WEAPON_MINIGUN"
+			Tag bot_giant
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_MINIGUN"
+				"damage bonus"	1.5
+			}
+			CharacterAttributes
+			{
+				"move speed penalty"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 2
+			}
+		}
+		T_TFBot_inf_krit
+		{
+			Class Medic
+			Health	150
+			Name	"Kritzkrieg Medic"
+			ClassIcon	medic_kritz
+			Skill	Easy
+			Item	"The Kritzkrieg"
+			Item	"Titanium Tyrolean"
+			Attributes AlwaysCrit
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName	"The Kritzkrieg"
+				"ubercharge rate bonus" 3
+				"bot medic uber health threshold" 400
+				"uber duration bonus" -200
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+			CharacterAttributes
+			{
+				"heal rate bonus" 0.1
+			}
+		}
+		T_TFGateBot_Soldier_Normal
+		{
+			Class Soldier
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					BehaviorModifiers Push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag			// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank 		// having these will cause bots to run towards gates
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+
+					Item "MvM GateBot Light Soldier"
+					Skill Normal
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Soldier"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Soldier"
+						"item style override" 1
+					}
+					Skill Normal
+				}
+			}
+		}
+		T_TFBot_Demo_Burst
+		{
+			Class Demoman
+			Name "Burst Fire Demoman"
+			ClassIcon demo_burst
+			Skill Expert
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "Tartan Tyrolean"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"reload time increased" 1.75
+				"fire rate bonus" 0.05
+				"clip size penalty" 0.5
+				"projectile spread angle penalty" 3
+				//"Projectile speed increased"	1.1
+			}
+		}
+		T_TFBot_Demoman_Knight
+		{
+			Class Demoman
+			Name "Demoknight"
+			Health 150
+			ClassIcon demoknight
+			Skill Hard
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			WeaponRestrictions MeleeOnly
+			Item "The Chargin' Targe"
+			Item "The Eyelander"
+			WeaponRestrictions MeleeOnly
+			ItemAttributes
+			{
+				ItemName "The Eyelander"
+				"critboost on kill" 3
+				"max health additive penalty" -0
+			}
+		}
+		T_TFGateBot_Pyro_Dragon_Fury_Normal
+		{
+			Class Pyro
+			Name "Fireball Pyro"
+			//ClassIcon pyro_dragon_fury_swordstone
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank		// having these will cause bots to run towards gates
+					BehaviorModifiers Push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag 			// having these will cause bots to run towards gates
+
+					Item "MvM GateBot Light Pyro"
+					Skill Normal
+					MaxVisionRange 800
+					Item "The Dragon's Fury"
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Pyro"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Pyro"
+						"item style override" 1
+					}
+					Skill Normal
+					MaxVisionRange 800
+					Item "The Dragon's Fury"
+				}
+			}
+		}
+		T_TFGateBot_Heavy_Normal
+		{
+			Class Heavy
+			Name "Heavyweapons"
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					BehaviorModifiers Push			// having these will cause bots to run towards gates
+					Attributes IgnoreFlag			// having these will cause bots to run towards gates
+					Tag nav_prefer_gate1_flank 		// having these will cause bots to run towards gates
+					Tag bot_gatebot 				// having these will cause bots to run towards gates
+
+					Item "MvM GateBot Light Heavy"
+					Skill Normal
+				}
+				RevertGateBotsBehavior
+				{
+					Item "MvM GateBot Light Heavy"
+					ItemAttributes               // turn off light hat
+					{
+						ItemName "MvM GateBot Light Heavy"
+						"item style override" 1
+					}
+					Skill Normal
+				}
+			}
+		}
+		T_TFBot_Giant_Medic
+		{
+			Class Medic
+			Name "Giant Medic"
+			ClassIcon medic_giant
+			Skill Expert
+			Health 4500
+			Attributes SpawnWithFullCharge
+			Item "The Quick-Fix"
+			Attributes MiniBoss
+			Tag bot_giant
+			Tag bot_squad_member
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"heal rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"move speed penalty"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.25
+				"airblast vertical vulnerability multiplier" 0.5
+			}
+		}
+		T_TFBot_Heavyweapons_Fist
+		{
+			Class Heavyweapons
+			Name "Steel Gauntlet"
+			Skill Hard
+			ClassIcon heavy_steelfist
+			//Attributes DefensiveBuffHigh	// Passive damage reduction, replaces high health
+			Health 900
+			Scale 1.5						// Force scale to 1 when "Health" set high
+			WeaponRestrictions MeleeOnly
+			Item "Fists of Steel"
+			Tag bot_giant
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.5
+				"airblast vertical vulnerability multiplier" 0.75
+			}
+		}
+		T_TFBot_Giant_Scout_Fast // high movement speed, melee only
+		{
+			Class Scout
+			Name "Super Scout"
+			ClassIcon scout_giant_fast
+			Skill Easy
+			Item "Bonk Boy"
+			Item "The Holy Mackerel"
+			Health 1200
+			WeaponRestrictions MeleeOnly
+			Attributes MiniBoss
+			Tag bot_giant
+			CharacterAttributes
+			{
+				"move speed bonus"	1.3
+				"damage force reduction" 0.7
+				"airblast vulnerability multiplier" 0.3
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 5
+			}
+		}
+		T_TFBot_Heavyweapons_Deflector_N
+		{
+			Class Heavyweapons
+			Name "Deflector Heavy"
+			ClassIcon heavy_deflector
+			Skill Hard
+			Item "The U-clank-a"
+			Item "Deflector"
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"damage penalty"	0.8 // copied from base mighty heavy
+				"attack projectiles" 1	// force ability to shoot down projectiles
+			}
+		}
+		T_TFBot_Medic_QuickFix_Shield
+		{
+			Class Medic
+			Name "Quick-Fix Shield Medic"
+			ClassIcon medic_shield_qf
+			Skill Normal
+			Attributes SpawnWithFullCharge
+			Attributes ProjectileShield
+			Attributes IgnoreEnemies
+			Tag bot_squad_member
+			Item "The Quick-Fix"
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"ubercharge rate penalty" -100
+				"generate rage on heal" 2
+			}
+			ItemAttributes
+			{
+				ItemName TF_WEAPON_SYRINGEGUN_MEDIC
+				"damage penalty" 0.1
+			}
+			CharacterAttributes
+			{
+				"increase buff duration" 2
+			}
+		}
+		T_TFBot_Giant_Heavyweapons_Deflector
+		{
+			Class Heavyweapons
+			Name "Giant Deflector Heavy"
+			ClassIcon heavy_deflector
+			Skill Expert
+			Health 5000
+			Item "The U-clank-a"
+			Item "Deflector"
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1200
+			Attributes MiniBoss
+			Tag bot_giant
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"damage bonus"	1.5 // copied from base mighty heavy
+				"attack projectiles" 1	// force ability to shoot down projectiles
+			}
+			CharacterAttributes
+			{
+				"move speed penalty"	0.5
+				"damage force reduction" 0.3
+				"airblast vulnerability multiplier" 0.1
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 2
+			}
+		}
+		Teletank_Spawn_Disable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		10s_Teletank_75spd_Enable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 10
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		28s_Teletank_75spd_Disable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			WaitBeforeStarting 28
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		31s_Teletank_75spd_Enable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 31
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		35s_Teletank_75spd_Disable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			WaitBeforeStarting 35
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		41s_Teletank_75spd_Enable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 41
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		58s_Teletank_75spd_Disable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			WaitBeforeStarting 58
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		65s_Teletank_75spd_Enable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 65.5
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		100s_Teletank_75spd_Disable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			WaitBeforeStarting 100
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		106s_Teletank_75spd_Enable
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 106
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		113s_Teletank_75spd_Disable	// Avoid bot stucking by the hatch
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Disable
+            }
+			Support 1
+			WaitBeforeStarting 113
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		115s_Teletank_75spd_Enable	// Don't use this if you don't want the hatch to have teleporting bots
+		{
+			FirstSpawnOutput
+            {
+                Target spawnbot_teletank 
+                Action Enable
+            }
+			Support 1
+			WaitBeforeStarting 115
+			TFBot
+			{
+				ClassIcon teleporter
+			}
+		}
+		
+		T_TFBot_Sentry_Buster_Sandman_Extended_Concheror_MC
+		{
+			Class Scout
+			Name "Conk and Ball Buster"
+			Skill Expert
+			Health 2500
+			Attributes SpawnWithFullCharge
+			Item "The Concheror"
+			Item "The Sandman"
+			Item "Batter's Helmet" 
+			WeaponRestrictions MeleeOnly
+			ClassIcon sentry_buster
+			Attributes MiniBoss
+			Attributes DisableDodge
+			Tag bot_giant
+			Tag bot_sentrybuster
+			ItemAttributes
+			{
+				ItemName "The Concheror"
+				"deploy time increased" 1.34
+			}
+			ItemAttributes
+			{
+				ItemName "The Sandman"
+				"effect bar recharge rate increased" 0.3
+			}
+			CharacterAttributes
+			{
+			
+				"gesture speed increase" 1.7
+				"increase buff duration" 1001
+				"move speed bonus" 2
+				"damage force reduction" 0.5
+				"airblast vulnerability multiplier" 0.25
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 7
+				"cannot be backstabbed" 1
+				"rage giving scale" 0.1
+				"voice pitch scale" 0
+				"head scale" 2.5
+			}
+		}
+
+		Scout_Transmission_W1	// Fuck there was a word I forgot, "lower" isn't the word... A non-simple word that wouldn't always be expected to be used with armored bots... was there a -less behind it?
+								// AH YES HOLY SHIT I REMEMBERED ITS "lesser", but does it fit the theme??
+		{
+			Class Scout
+			Name "Lesser Transmitter"			// makes sense for combat, but not for signal
+		//	Name "Maintence Required Transmitter"	// name does not feel worded correctly, don't have the 
+													// connection to browse the internet...
+			Item "Upgradeable TF_WEAPON_SCATTERGUN"
+			Item "Lo-Fi Longwave"
+			Skill Hard
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_SCATTERGUN"
+				"damage penalty"	0.3
+				"clip size penalty"	0.67
+				"faster reload rate"	0.6
+				"fire rate bonus"	0.8
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_PISTOL"
+				"is_passive_weapon" 1
+				"fire rate penalty" 22222		// no console spam
+				"override projectile type"	0	// no fire sounds
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Scout_Transmission_W2	// Decorated Scatters to fix deathcam bugs
+		{
+			Class Scout
+			Name "Less Consistent Transmitter"
+			Item "craftsmann_scattergun_backcountryblaster"
+			Item "Lo-Fi Longwave"
+		//	ClassIcon scout_spammer
+			Skill Hard
+			ItemAttributes
+			{
+				ItemName "craftsmann_scattergun_backcountryblaster"
+				"set_item_texture_wear" 0.2
+				"damage penalty"	0.5
+				"reload time increased hidden" -0.1
+				"mod no reload DISPLAY ONLY" 1
+				"fire rate penalty"	1.2
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Scout_Transmission_W5	// Not the correct word!!!! Need a suitable word!!!
+		{
+			Class Scout
+			Name "Unstable Connection Transmitter"	// word needed for "Signal Dropping" / "Occasionaly signal / data loss"
+			Item teufort_scattergun_sprucedeuce
+			Item "Lo-Fi Longwave"
+			Skill Normal
+			ItemAttributes
+			{
+				ItemName teufort_scattergun_sprucedeuce
+				"set_item_texture_wear" 0.2
+				"reload time increased hidden" -0.1
+				"mod no reload DISPLAY ONLY" 1
+				"weapon spread bonus"	0.0001
+				"fire rate penalty"	1.5
+				"damage bonus"	0.7
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Scout_Transmission_W6
+		{
+			Class Scout
+			Name "Consistent Transmitter"
+			Item "craftsmann_scattergun_backcountryblaster"
+			Item "Lo-Fi Longwave"
+		//	ClassIcon scout_spammer
+			Skill Hard
+			ItemAttributes
+			{
+				ItemName "craftsmann_scattergun_backcountryblaster"
+				"set_item_texture_wear" 0.2
+				"faster reload rate"	-0.1
+				"fire rate bonus"	0.8
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Scout_Transmission_W5_Bonk
+		{
+			Class Scout
+			classicon scout_bonk
+			Name "Potentially Fast Transmitter"
+			Item "The Soda Popper"
+			Item "Bonk! Atomic Punch"
+			Item "Lo-Fi Longwave"
+			ItemAttributes
+			{
+				ItemName "Bonk! Atomic Punch"
+				"deploy time increased" 1.34
+			}
+			Skill Hard
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Soldier_Transmission_W2
+		{
+			Class Soldier
+			Name "Corrupted Signal"
+			Item "The Original"
+			Item "Lo-Fi Longwave"
+			classicon soldier_rocketrain
+			Skill Hard
+			Health 750
+			Scale 1.3
+			Tag MiniBoss
+			Attributes	HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Original"
+				"Projectile speed decreased" 0.4
+				"fire rate bonus" 0.2
+				"projectile spread angle penalty" 5
+				"clip size upgrade atomic" 4
+				"damage bonus" 1.3
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Soldier_Transmission_W6
+		{
+			Class Soldier
+			Name "Corrupted Signal"
+			Item "The Direct Hit"
+			Item "Lo-Fi Longwave"
+			classicon soldier_rocketrain
+			Skill Hard
+			Health 750
+			Scale 1.3
+			Tag MiniBoss
+			Attributes	HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "The Direct Hit"
+				"damage bonus" 1			// feels like reading this in-game is like info clutter?
+				"damage penalty"	0.7
+				"Projectile speed decreased" 0.8
+				"fire rate bonus" 0.2
+				"projectile spread angle penalty" 2
+				"faster reload rate"	0.7
+				"clip size upgrade atomic" 5
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Soldier_Charged
+		{
+			Class Soldier
+			Name "Charged Soldier"
+			Item "The Original"
+			classicon soldier_crit
+			Skill Normal
+			ItemAttributes
+			{
+				ItemName "The Original"
+				"Projectile speed decreased"	0.5
+				"reload time increased HIDDEN"	-0.1
+				"mod no reload DISPLAY ONLY" 1
+				"fire rate penalty" 2
+				"damage bonus" 1.3
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Sniper_jarate
+		{
+			Class Sniper
+			classicon sniper_jarate
+			Name "Jarate Rainer"
+			Skill Easy
+			MaxVisionRange 1000
+			WeaponRestrictions	SecondaryOnly
+			Attributes	"AlwaysFireWeapon"
+			Item jarate
+			ItemAttributes
+			{
+				ItemName	jarate
+				"effect bar recharge rate increased"	0.125
+				"deploy time increased" 0.0
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		Scout_Milk
+		{
+			Class Scout
+			classicon scout_milk
+			Name "Mad Milk Rainer"
+			Skill Easy
+			MaxVisionRange 1000
+			WeaponRestrictions	SecondaryOnly
+			Item "Mad Milk"
+			Attributes	"AlwaysFireWeapon"
+			ItemAttributes
+			{
+				ItemName	"Mad Milk"
+				"effect bar recharge rate increased"	0.125
+				"deploy time increased" 0.0
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+			}
+		}
+		G_Demoman_Spammer
+		{
+			Class Demoman
+			Name "Giant Rapid Fire Demoman"
+			Health 3300
+			ClassIcon demo_giant
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Attributes	"MiniBoss"
+			Item "Lo-Fi Longwave"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"fire rate bonus" 0.5
+				"faster reload rate" -0.1
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+				"move speed bonus"	0.5
+				"damage force reduction"	0.5
+				"airblast vulnerability multiplier"	0.25
+				"override footstep sound set"	5
+				"airblast vertical vulnerability multiplier"	0.5
+			}
+		}
+		G_Soldier_Charged_Spammer
+		{
+			Class Soldier
+			classicon soldier_spammer
+			Health 4200
+			Attributes	MiniBoss
+			Name "Giant Rapid Crocket Soldier"
+			Item "The Original"
+			Attributes	AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "The Original"
+				"reload time increased hidden" -0.1
+				"mod no reload DISPLAY ONLY" 1
+				"fire rate bonus" 0.9
+				"damage bonus" 2
+				"Projectile speed decreased" 0.5
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+				"move speed bonus"	0.5
+				"damage force reduction"	0.4
+				"airblast vulnerability multiplier"	0.2
+				"override footstep sound set"	5
+				"airblast vertical vulnerability multiplier"	0.5
+			}
+		}
+		
+		G_Heavy_Natascha
+		{
+			Class Heavy
+			Health 5000
+			//Classicon heavy_natascha_slow_nys_giant	// HEAVY ICON WITH SLOW SHOE
+			Name "Giant Natascha Heavy"
+			Attributes	MiniBoss
+			Skill	Hard
+			tag bot_giant
+			Item Natascha
+			ItemAttributes
+			{
+				ItemName "Natascha"
+				"damage bonus"	1.25
+				"slow enemy on hit major" 1		// make up for 25% less damage
+				"killstreak tier" 2				// addicted was here
+				"killstreak idleeffect" 3
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+				"move speed bonus"	0.5
+				"damage force reduction"	0.3
+				"airblast vulnerability multiplier"	0.15
+				"override footstep sound set"	5
+				"airblast vertical vulnerability multiplier"	0.5
+			}
+		}
+		G_Sniper_Bomb_Knockback
+		{
+			Class	Sniper
+			Health	3300
+			Attributes	MiniBoss
+			Tag bot_giant
+			Item "The Huntsman"
+			Skill Normal
+			classicon demo_loosecannon_giant
+			Name "Giant Blind Cannonball Bowman"
+			WeaponRestrictions	PrimaryOnly
+			Item "Jarate"
+		//	Item "The Bearded Bombardier"	// lmao moustache at the mouth
+			Item "The Buccaneer's Bicorne"
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"override projectile type" 17 //cannon ball attribute
+				"damage bonus HIDDEN"	1.5
+				"fire rate bonus" 0.001
+				"gesture speed increase" 2
+				"damage blast push"	30
+			}
+			ItemAttributes
+			{
+				ItemName "Jarate"
+				"override projectile type" 17
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				no_duck 1
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.3
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 6
+			}
+		}
+		G_Sniper_Rocket_Blast
+		{
+			Class	Sniper
+			Health	3300
+			Attributes	MiniBoss
+			Tag bot_giant
+			Item "The Huntsman"
+			Item "Lord Cockswain's Novelty Mutton Chops and Pipe"
+			Name "Giant Blast Bowman"
+			Skill Expert
+			ClassIcon soldier_blast
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+			//	"override projectile type" 2	// lol game crashers
+				"override projectile type" 12	// cm5k doesn't crash
+				"damage bonus HIDDEN"	0.7
+				"fire rate bonus" 0.4
+				"damage blast push" 5
+				"Blast radius increased"	1.15
+				"projectile speed decreased" 0.65	// gahhh it doesnt work with overriden projectiles
+				"gesture speed increase" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				no_duck 1
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.3
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 6
+			}
+		}
+		G_Sniper_Bullet_Trace
+		{
+			Class	Sniper
+			Health	3300
+			Attributes	MiniBoss
+			Item "The Fortified Compound"
+			Item "Sniper's Snipin' Glass"
+			Skill Expert
+			Tag bot_giant
+			ClassIcon sniper_bow
+			Name "Giant Laser Bowman"
+			ItemAttributes
+			{
+				ItemName "The Fortified Compound"
+				"override projectile type" 1
+				"damage bonus"	1.25
+				"fire rate bonus" 0.01
+				"sniper fires tracer" 1
+				"projectile penetration" 1	// has tracer, makes sense
+				"gesture speed increase" 2
+				"ragdolls become ash" 1
+			}
+			CharacterAttributes		// Lets give him Pyro res and stuff
+									// Or Demoman Res? No that wouldn't make any sense to the players...
+			{
+				"move speed bonus"	0.5
+				no_duck 1
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.3
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 6
+			}
+		}
+		GB_Demo_Boomer
+		{
+			Class Demoman
+			Name "Minefield Boom-berman"
+			ClassIcon demo_burst
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Attributes	HoldFireUntilFullReload
+					Tag	"bot_gatebot"
+					Attributes	"IgnoreFlag"
+					WeaponRestrictions	PrimaryOnly
+					Item "The Iron Bomber"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "The Iron Bomber"
+						"damage penalty"	0.5
+						"fire rate bonus"	0.5
+						"reload time increased"	1.2
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"clip size bonus"	1.25
+						"fuse bonus"	1.5
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					WeaponRestrictions	PrimaryOnly
+					Attributes	HoldFireUntilFullReload
+					Item "The Iron Bomber"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "The Iron Bomber"
+						"damage penalty"	0.5
+						"fire rate bonus"	0.5
+						"reload time increased"	1.2
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"clip size bonus"	1.25
+						"fuse bonus"	1.5
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Sniper_Bow
+		{
+			Class Sniper
+			Classicon sniper_bow
+			name "Bowman"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Attributes	"IgnoreFlag"
+					MaxVisionRange 2000
+					Item "The Huntsman"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"damage penalty"	0.5
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "The Huntsman"
+					Skill Hard
+					MaxVisionRange 2000
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"damage penalty"	0.5
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Sniper_Bow_Multi
+		{
+			Class Sniper
+			Classicon sniper_bow_multi
+			name "Rapid Fire Bowman"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Attributes	"IgnoreFlag"
+					Item "The Huntsman"
+					Item "Starduster"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"dmg penalty vs players" 0.125
+						"dmg penalty vs buildings" 0.125
+						"attach particle effect" 13
+						"Set DamageType Ignite" 1
+						"fire rate bonus" 0.1
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "The Huntsman"
+					Skill Hard
+					Item "Starduster"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "The Huntsman"
+						"dmg penalty vs players" 0.125
+						"dmg penalty vs buildings" 0.125
+						"attach particle effect" 13
+						"Set DamageType Ignite" 1
+						"fire rate bonus" 0.1
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Heavy_W3
+		{
+			Class Heavy
+			Classicon heavy_healonkill
+			name "Heal-on-hit Heavy"
+			Health	450
+			Scale	1.2
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Attributes	"IgnoreFlag"
+					MaxVisionRange 1200
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					WeaponRestrictions	PrimaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_MINIGUN"
+						"heal on hit for rapidfire"	3
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					Skill Hard
+					WeaponRestrictions	PrimaryOnly
+					MaxVisionRange 1200
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_MINIGUN"
+						"heal on hit for rapidfire"	3
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Heavy
+		{
+			Class Heavy
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					MaxVisionRange 1200
+					Attributes	"IgnoreFlag"
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					WeaponRestrictions	PrimaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					Skill Hard
+					MaxVisionRange 1200
+					WeaponRestrictions	PrimaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Heavy_Crit
+		{
+			Class Heavy
+			name "Crit-boosted Heavy"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					MaxVisionRange 1200
+					Attributes	"IgnoreFlag"
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					WeaponRestrictions	PrimaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Attributes	AlwaysCrit
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					Skill Hard
+					MaxVisionRange 1200
+					Attributes	AlwaysCrit
+					WeaponRestrictions	PrimaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Pyro_Flare
+		{
+			Class Pyro
+			Name "Raining Flare Pyro"
+			classicon pyro_flare_rain_nys
+			Health	350
+			Scale	1.2
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot 				
+					Tag nav_prefer_gate1_flank	
+					BehaviorModifiers Push			
+					Attributes IgnoreFlag
+
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Skill Expert
+					Item "The Scorch Shot"
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Scorch Shot"
+						"fire rate bonus" 0.3
+						"damage penalty"	0.7
+						"damage causes airblast" 1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					Skill Expert
+					Item "The Scorch Shot"
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Scorch Shot"
+						"fire rate bonus" 0.3
+						"damage penalty"	0.7
+						"damage causes airblast" 1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		Medic_Shield
+		{
+			Template T_TFBot_Medic_QuickFix_Shield
+			Name "Love Train"
+			CharacterAttributes
+					{
+						no_duck 1
+					}
+		}
+		G_Demoman_Carpet
+		{
+			Class Demoman
+			Name "Carpet Bomber"
+			Health 3300
+			classicon demo_scatter_giant
+			Skill	Hard
+			WeaponRestrictions	PrimaryOnly
+			Tag	"bot_giant"
+			Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+			Attributes	"MiniBoss"
+			Item "Lo-Fi Longwave"
+			ItemAttributes
+			{
+				ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+				"damage penalty"	0.4
+				"auto fires full clip" 1
+				"auto fires when full" 1
+				"clip size upgrade atomic" 36
+				"faster reload rate"	0.15
+				"projectile spread angle penalty" 30
+				"fire rate bonus"	0.1
+				"fuse bonus"	2.5
+			}
+			CharacterAttributes
+			{
+				no_duck 1
+				"move speed bonus"	0.5
+				"damage force reduction"	0.7
+				"airblast vulnerability multiplier"	0.25
+				"override footstep sound set"	5
+				"airblast vertical vulnerability multiplier"	0.5
+			}
+		}
+		GB_Sniper_jarate
+		{
+			Class Sniper
+			classicon sniper_jarate
+			Name "Jarate Rainer"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					MaxVisionRange 1000
+					Attributes	"IgnoreFlag"
+					WeaponRestrictions	SecondaryOnly
+					Item "Lo-Fi Longwave"
+					Item jarate
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Attributes	"AlwaysFireWeapon"
+					ItemAttributes
+					{
+						ItemName	jarate
+						"effect bar recharge rate increased"	0.1
+						"deploy time increased" 0.0
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill Easy
+					WeaponRestrictions	SecondaryOnly
+					MaxVisionRange 1000
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					Attributes	"AlwaysFireWeapon"
+					Item jarate
+					ItemAttributes
+					{
+						ItemName	jarate
+						"effect bar recharge rate increased"	0.1
+						"deploy time increased" 0.0
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Scout_Milk
+		{
+			Class Scout
+			classicon scout_milk
+			Name "Mad Milk Rainer"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill Easy
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Attributes	"IgnoreFlag"
+					WeaponRestrictions	SecondaryOnly
+					Item "Lo-Fi Longwave"
+					Item "Mad Milk"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Attributes	"AlwaysFireWeapon"
+					MaxVisionRange 1000
+					ItemAttributes
+					{
+						ItemName	"Mad Milk"
+						"effect bar recharge rate increased"	0.1
+						"deploy time increased" 0.0
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill Easy
+					WeaponRestrictions	SecondaryOnly
+					Item "Lo-Fi Longwave"
+					Item "Mad Milk"
+					MaxVisionRange 1000
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					Attributes	"AlwaysFireWeapon"
+					ItemAttributes
+					{
+						ItemName	"Mad Milk"
+						"effect bar recharge rate increased"	0.1
+						"deploy time increased" 0.0
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Soldier_Buff
+		{
+			Class Soldier
+			Name "Extended Buff Soldier"
+			ClassIcon soldier_buff
+			Health	450
+			Scale 1.3
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					BehaviorModifiers push			
+					Attributes IgnoreFlag			
+					Tag nav_prefer_gate1_upper 		
+					Tag bot_gatebot 				
+
+					Item "The Buff Banner"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Skill Normal
+					Attributes SpawnWithFullCharge
+					CharacterAttributes
+					{
+						"increase buff duration"	1001
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "The Buff Banner"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					Skill Normal
+					Attributes SpawnWithFullCharge
+					CharacterAttributes
+					{
+						"increase buff duration"	1001
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Heavy_Shotgun
+		{
+			Class Heavy
+			Name "Shotgun Heavy"
+			ClassIcon heavy_shotgun
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					MaxVisionRange 1500
+					Attributes	"IgnoreFlag"
+					Item "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+					WeaponRestrictions	SecondaryOnly
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill Hard
+					Item "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+					WeaponRestrictions	SecondaryOnly
+					MaxVisionRange 1500
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_Heavy_Shotgun_Crit
+		{
+			Class Heavy
+			Name "Shotgun Heavy"
+			ClassIcon heavy_shotgun
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					MaxVisionRange 1500
+					Attributes	"IgnoreFlag"
+					Item "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+					WeaponRestrictions	SecondaryOnly
+					Attributes	AlwaysCrit
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill Hard
+					Item "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+					WeaponRestrictions	SecondaryOnly
+					Item "Lo-Fi Longwave"
+					MaxVisionRange 1500
+					Attributes	AlwaysCrit
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_SHOTGUN_PRIMARY"
+						"faster reload rate" 0.1
+						"fire rate penalty" 2.5
+						"bullets per shot bonus" 3
+						"damage penalty" 0.33
+					}
+					CharacterAttributes
+					{
+						no_duck 1
+					}
+				}
+			}
+		}
+		GB_G_Soldier_Spammer_Conch
+		{
+			Class Soldier
+			Health 4200
+			classicon soldier_banner_trio
+			Name "Giant Rapid Fire Soldier"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Concheror"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName  "The Concheror"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						no_duck 1
+						"damage force reduction"	0.4
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Hard
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Concheror"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName  "The Concheror"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction"	0.4
+						no_duck 1
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+			}
+		}
+		GB_G_Soldier_Spammer_Buff
+		{
+			Class Soldier
+			Health 4200
+			classicon soldier_banner_trio
+			Name "Giant Rapid Fire Soldier"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Buff Banner"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName  "The Buff Banner"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						no_duck 1
+						"damage force reduction"	0.4
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Hard
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Buff Banner"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName  "The Buff Banner"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction"	0.4
+						no_duck 1
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+			}
+		}
+		GB_G_Soldier_Spammer_Backup
+		{
+			Class Soldier
+			Health 4200
+			classicon soldier_banner_trio
+			Name "Giant Rapid Fire Soldier"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Battalion's Backup"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName  "The Battalion's Backup"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						no_duck 1
+						"damage force reduction"	0.4
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Hard
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"MiniBoss"
+					Attributes	SpawnWithFullCharge
+					Item "The Battalion's Backup"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName  "The Battalion's Backup"
+						"deploy time increased" 1.34
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction"	0.4
+						no_duck 1
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+						"increase buff duration"	1001
+					}
+				}
+			}
+		}
+		GB_G_Demoman_Carpet
+		{
+			Class Demoman
+			Name "Carpet Bomber"
+			Health 3300
+			classicon demo_scatter_giant
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"damage penalty"	0.4
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"clip size upgrade atomic" 36
+						"faster reload rate"	0.15
+						"projectile spread angle penalty" 30
+						"fire rate bonus"	0.1
+						"fuse bonus"	2.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction"	0.5
+						no_duck 1
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Hard
+					WeaponRestrictions	PrimaryOnly
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"damage penalty"	0.4
+						"clip size upgrade atomic" 36
+						"faster reload rate"	0.15
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"projectile spread angle penalty" 30
+						"fire rate bonus"	0.1
+						"fuse bonus"	2.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction"	0.5
+						"airblast vulnerability multiplier"	0.25
+						no_duck 1
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+		}
+		GB_G_Demoman_Carpet_Crit
+		{
+			Class Demoman
+			Name "Carpet Bomber"
+			Health 3300
+			classicon demo_scatter_giant
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Hard
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes	AlwaysCrit
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"damage penalty"	0.4
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"clip size upgrade atomic" 36
+						"faster reload rate"	0.15
+						"projectile spread angle penalty" 30
+						"fire rate bonus"	0.1
+						"fuse bonus"	2.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						no_duck 1
+						"damage force reduction"	0.5
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Hard
+					WeaponRestrictions	PrimaryOnly
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"MiniBoss"
+					Attributes	AlwaysCrit
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"damage penalty"	0.4
+						"clip size upgrade atomic" 36
+						"auto fires full clip" 1
+						"auto fires when full" 1
+						"faster reload rate"	0.15
+						"projectile spread angle penalty" 30
+						"fire rate bonus"	0.1
+						"fuse bonus"	2.5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						no_duck 1
+						"damage force reduction"	0.5
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+		}
+		GB_G_Medic_Krit
+		{
+			Class Medic
+			classicon medic_kritz
+			Name "Giant Kritzkrieg Medic"
+			Health 4500
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Easy
+					BehaviorModifiers	Push
+					WeaponRestrictions	SecondaryOnly
+					Tag	"nav_prefer_gate1_upper"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "The Kritzkrieg"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes AlwaysCrit
+					Attributes SpawnWithFullCharge
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"heal rate bonus" 10
+						"bot medic uber health threshold" 4600
+						"uber duration bonus" -200
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.6
+						"airblast vulnerability multiplier"	0.3
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Easy
+					WeaponRestrictions	SecondaryOnly
+					Tag	"bot_giant"
+					
+					Item "The Kritzkrieg"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "The Kritzkrieg"
+						"heal rate bonus" 10
+						"bot medic uber health threshold" 4600
+						"uber duration bonus" -200
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.6
+						"airblast vulnerability multiplier"	0.3
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+		}
+		
+		GB_G_Heavy_Tracer
+		{
+			Class Heavy
+			Health	5000
+			classicon heavy_pierce
+			Name "Giant Armor Pierce Heavy"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_upper"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					MaxVisionRange 1200
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_MINIGUN"
+						"fire rate penalty" 2
+						"dmg pierces resists absorbs"	1
+						"sniper fires tracer HIDDEN"	1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.3
+						"airblast vulnerability multiplier"	0.15
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Tag	"bot_giant"
+					MaxVisionRange 1200
+					Item "Upgradeable TF_WEAPON_MINIGUN"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_MINIGUN"
+						"fire rate penalty" 2
+						"dmg pierces resists absorbs"	1
+						"sniper fires tracer HIDDEN"	1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.3
+						"airblast vulnerability multiplier"	0.15
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+		}
+		GB_G_Soldier_Spammer
+		{
+			Class Soldier
+			Health 4200
+			classicon soldier_spammer
+			Name "Giant Rapid Fire Soldier"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.4
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Tag	"bot_giant"
+					
+					Item "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+						"Projectile speed decreased" 0.65
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction"	0.4
+						no_duck 1
+						"airblast vulnerability multiplier"	0.2
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+		}
+		GB_G_Demoman_Spammer_U
+		{
+			Class Demoman
+			Name "Giant Rapid Fire Demoman"
+			Health 3300
+			classicon demo_giant
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_upper"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction"	0.5
+						no_duck 1
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction"	0.5
+						no_duck 1
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+			
+		}
+		GB_G_Demoman_Spammer
+		{
+			Class Demoman
+			Name "Giant Rapid Fire Demoman"
+			Health 3300
+			ClassIcon demo_giant
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction"	0.5
+						no_duck 1
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					Tag	"bot_giant"
+					Item "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					ItemAttributes
+					{
+						ItemName "Upgradeable TF_WEAPON_GRENADELAUNCHER"
+						"fire rate bonus" 0.5
+						"reload time increased hidden" -0.1
+						"mod no reload DISPLAY ONLY" 1
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						no_duck 1
+						"damage force reduction"	0.5
+						"airblast vulnerability multiplier"	0.25
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.5
+					}
+				}
+			}
+			
+		}
+		G_Soldier_Black_Box
+		{
+			Class Soldier
+			Health 4200
+			Name "Giant Black Box Soldier"
+			ClassIcon soldier_blackbox_giant
+			Skill	Expert
+			WeaponRestrictions	PrimaryOnly
+			Attributes	HoldFireUntilFullReload
+			Tag	"bot_giant"
+			Attributes	"MiniBoss"
+			Item "The Black Box"
+			ItemAttributes
+			{
+				ItemName "The Black Box"
+				"projectile spread angle penalty" 25
+				"heal on hit for rapidfire" 400
+				"fire rate bonus" -0.1
+				"reload time increased" 0.6
+				"damage penalty"	0.7
+				"Projectile speed decreased" 0.5
+				"clip size upgrade atomic"	5
+			}
+			CharacterAttributes
+			{
+				"move speed penalty"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.2
+				no_duck 1
+				"airblast vertical vulnerability multiplier" 0.5
+				"override footstep sound set" 3
+			}
+		}
+		GB_G_Soldier_Black_Box
+		{
+			Class Soldier
+			Health 4200
+			Name "Giant Black Box Soldier"
+			ClassIcon soldier_blackbox_giant
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Attributes	HoldFireUntilFullReload
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					Item "The Black Box"
+					ItemAttributes
+					{
+						ItemName "The Black Box"
+						"projectile spread angle penalty" 25
+						"heal on hit for rapidfire" 400
+						"fire rate bonus" -0.1
+						"reload time increased" 0.6
+						"damage penalty"	0.7
+						"Projectile speed decreased" 0.5
+						"clip size upgrade atomic"	5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction" 0.4
+						no_duck 1
+						"airblast vulnerability multiplier" 0.2
+						"airblast vertical vulnerability multiplier" 0.5
+						"override footstep sound set" 3
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					WeaponRestrictions	PrimaryOnly
+					Attributes	HoldFireUntilFullReload
+					Tag	"bot_giant"
+					Attributes	"MiniBoss"
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					Item "The Black Box"
+					ItemAttributes
+					{
+						ItemName "The Black Box"
+						"projectile spread angle penalty" 25
+						"heal on hit for rapidfire" 400
+						"fire rate bonus" -0.1
+						"reload time increased" 0.6
+						"damage penalty"	0.7
+						"Projectile speed decreased" 0.5
+						"clip size upgrade atomic"	5
+					}
+					CharacterAttributes
+					{
+						"move speed penalty"	0.5
+						"damage force reduction" 0.4
+						no_duck 1
+						"airblast vulnerability multiplier" 0.2
+						"airblast vertical vulnerability multiplier" 0.5
+						"override footstep sound set" 3
+					}
+				}
+			}
+		}
+		
+		GB_G_Scout_Grapple_Knock
+		{
+			Class Scout
+			Health	32500
+			Name "Abnormal Knockback Scout"
+			EventChangeAttributes
+			{
+				Default
+				{
+					Skill	Expert
+					MaxVisionRange	1200
+					BehaviorModifiers	Push
+					WeaponRestrictions	PrimaryOnly
+					Tag	"nav_prefer_gate1_flank"
+					Tag	"bot_gatebot"
+					Tag	"bot_giant"
+					Attributes	"IgnoreFlag"
+					Attributes	"MiniBoss"
+					Attributes	UseBossHealthBar
+					Item craftsmann_scattergun_tartantorpedo
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 15185211
+					}
+					ItemAttributes
+					{
+						ItemName craftsmann_scattergun_tartantorpedo
+						"damage blast push"	20
+						"damage bonus"	1.5
+						"spread penalty"	0.0001
+						"fire rate bonus"	1.5
+						"faster reload rate"	-0.1
+						"set_item_texture_wear" 0.2
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.4
+						no_duck 1
+						"damage force reduction"	0.0
+						"airblast vulnerability multiplier"	0.0
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.0
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Skill	Expert
+					MaxVisionRange	800
+					WeaponRestrictions	PrimaryOnly
+					Tag	"bot_giant"
+					Attributes	"MiniBoss"
+					Attributes	UseBossHealthBar
+					Attributes	"HoldFireUntilFullReload"
+					Item craftsmann_scattergun_tartantorpedo
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_BAT"
+						"is_passive_weapon" 1
+						"damage blast push"	5000
+						"damage bonus"	1.5
+					}
+					ItemAttributes
+					{
+						ItemName craftsmann_scattergun_tartantorpedo
+						"damage blast push"	-50
+						"damage penalty"	0.2
+						"clip size bonus"	2.5
+						"faster reload rate" 0.15
+						"fire rate bonus"	0.7
+						"attach particle effect"	3030
+						"set_item_texture_wear" 0.2
+					}
+					Item "Lo-Fi Longwave"
+					ItemAttributes
+					{
+						ItemName "Lo-Fi Longwave"
+						"set item tint rgb" 6773060
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.4
+						"damage force reduction"	0.0
+						no_duck 1
+						"airblast vulnerability multiplier"	0.0
+						"override footstep sound set"	5
+						"airblast vertical vulnerability multiplier"	0.0
+					}
+				}
+			}
+		}
+	}
+	
+	StartingCurrency	800
+	RespawnWaveTime	4
+	CanBotsAttackWhileInSpawnRoom	no
+	FixedRespawnWaveTime	Yes
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot_main0
+		Where	spawnbot_main1
+		BeginAtWave	1
+		RunForThisManyWaves	6
+		CooldownTime	30
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_upper0
+		Where	spawnbot_main1
+		BeginAtWave	1
+		DesiredCount	2
+		RunForThisManyWaves	3
+		CooldownTime	45
+		TFBot
+		{
+			Template	T_TFBot_Sniper_Sydney_Sleeper
+			Name	"Patchouli Sleeper"
+			Skill	Expert
+			ItemAttributes
+			{
+				ItemName	"The Sydney Sleeper"
+				"sniper charge per sec"	100
+				"damage bonus"	0.2
+				"Reload time increased"	0.5
+			}
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_upper0
+		Where	spawnbot_main1
+		BeginAtWave	5
+		DesiredCount	1
+		RunForThisManyWaves	2
+		CooldownTime	45
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	1A
+			TotalCurrency	100
+			TotalCount	18
+			MaxActive	9
+			SpawnCount	3
+			WaitBetweenSpawns	1.5
+			Where	spawnbot_main1
+			Where	spawnbot_main0
+			TFBot
+			{
+				Template Scout_Transmission_W1
+			}
+		}
+		WaveSpawn
+		{
+			Name	1A
+			TotalCurrency	100
+			TotalCount	14
+			MaxActive	8
+			SpawnCount	2
+			WaitBetweenSpawns	2.5
+			Where	spawnbot_main0
+			Where	spawnbot_upper1
+			TFBot
+			{
+				Template GB_Demo_Boomer
+			}
+		}
+		WaveSpawn
+		{
+			Name	1B
+			WaitForAllDead	1A
+			TotalCurrency	100
+			TotalCount	18
+			MaxActive	12
+			SpawnCount	6
+			WaitBetweenSpawns	12
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Demoman_Spammer
+				}
+				TFBot
+				{
+					Template GB_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template GB_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template GB_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template GB_Heavy_Shotgun
+				}
+				TFBot
+				{
+					Template GB_Heavy_Shotgun
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1B
+			WaitForAllDead	1A
+			TotalCurrency	100
+			TotalCount	15
+			MaxActive	5
+			SpawnCount	1
+			WaitBetweenSpawns	2
+			Where	spawnbot_main1
+			Where	spawnbot_main0
+			TFBot
+			{
+				Class Soldier
+				Skill	Hard
+			}
+		}
+		WaveSpawn
+		{
+			Name	1C
+			WaitForAllDead	1B
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			FirstSpawnOutput
+            {
+                Target boss_spawn_relay
+                Action Trigger
+            }
+			Tank
+			{
+				Health	25000
+				Name	tank
+				Speed	75
+				StartingPathTrackNode tank_path
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1CGiant
+			WaitForAllDead	1B
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting 7
+			WaitBetweenSpawns	8
+			Where	spawnbot_flank0
+			Where spawnbot_upper1
+			Squad
+			{
+				TFBot
+				{
+					Template G_Demoman_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	1C
+			WaitForAllDead	1B
+			TotalCurrency	100
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	1
+			WaitBetweenSpawns	3
+			Where	spawnbot_main0
+			Where spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Class Soldier
+			}
+		}
+		WaveSpawn
+		{
+			Name	1C
+			WaitForAllDead	1CGiant
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	1
+			WaitBetweenSpawns	3
+			Where	spawnbot_flank0
+			Where	spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Template Scout_Transmission_W2
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name	2AGiant
+			TotalCurrency	100
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	4
+			WaitBetweenSpawns	30
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2A
+			TotalCurrency	100
+			TotalCount	64
+			MaxActive	8
+			SpawnCount	4
+			WaitBetweenSpawns	2
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+				}
+				TFBot
+				{
+					Template GB_Sniper_jarate
+				}
+				TFBot
+				{
+					Template GB_Scout_Milk
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	2BGiant
+			WaitForAllDead	2AGiant
+			TotalCurrency	100
+			TotalCount	8
+			MaxActive	8
+			SpawnCount	4
+			WaitBetweenSpawns	20
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Demoman_Carpet
+					classicon demo_scatter
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 2B
+			WaitForAllDead	2A
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	4
+			SpawnCount	2
+			WaitBetweenSpawns	10
+			Where	spawnbot_upper0
+			Where	spawnbot_upper1
+			TFBot
+			{
+				Template Soldier_Transmission_W2
+			}
+		}
+		WaveSpawn
+		{
+			Name 2S
+			TotalCurrency	100
+			TotalCount	18
+			MaxActive	4
+			SpawnCount	1
+			WaitBetweenSpawns	1
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Class Demoman
+			}
+		}
+		WaveSpawn
+		{
+			Name 2C
+			WaitForAllDead	2A
+			TotalCurrency	100
+			TotalCount	18
+			MaxActive	5
+			SpawnCount	1
+			WaitBetweenSpawns	1
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Template Scout_Transmission_W2
+			}
+		}
+		WaveSpawn
+		{
+			Name 2CGiant
+			WaitForAllDead	2BGiant
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBetweenSpawns	15
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template G_Soldier_Charged_Spammer
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name 3S
+			MaxActive	2
+			SpawnCount	2
+			Support 1
+			TFBot
+			{
+				Template	T_TFBot_Demo_Burst
+			}
+		}
+		WaveSpawn
+		{
+			Name 3S
+			MaxActive	3
+			SpawnCount	3
+			Support 1
+			TFBot
+			{
+				Template	T_TFBot_Demoman_Knight
+			}
+		}
+		WaveSpawn
+		{
+			Name	3ATank
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health	25000
+				Name	Tank
+				Speed	75
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	3BTank
+			WaitForAllDead	3A
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			FirstSpawnOutput
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+			Tank
+			{
+				Health	22500
+				Name	Tank
+				Speed	75
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3A
+			TotalCurrency	100
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	3
+			WaitBetweenSpawns	10
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template G_Sniper_Bomb_Knockback
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3ASupport
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	3
+			WaitBetweenSpawns	5
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support Limited
+			Squad
+			{
+				TFBot
+				{
+					Template GB_Pyro_Flare
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Pyro_Dragon_Fury_Normal
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Pyro_Dragon_Fury_Normal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3B
+			WaitForAllDead	3A
+			TotalCurrency	100
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	3
+			WaitBetweenSpawns	10
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template G_Sniper_Rocket_Blast
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3BSupport
+			WaitForAllDead	3ASupport
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	3
+			WaitBetweenSpawns	5
+			Where	spawnbot_upper0
+			Where	spawnbot_upper1
+			Support Limited
+			Squad
+			{
+				TFBot
+				{
+					Template GB_Soldier_Buff
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3C
+			WaitForAllDead	3B
+			TotalCurrency	100
+			TotalCount	9
+			MaxActive	9
+			SpawnCount	3
+			WaitBetweenSpawns	10
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template G_Sniper_Bullet_Trace
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 3CSupport
+			WaitForAllDead	3BSupport
+			TotalCurrency	100
+			TotalCount	18
+			MaxActive	6
+			SpawnCount	3
+			WaitBetweenSpawns	5
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_Heavy_W3
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Normal
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Normal
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name Boss
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			Where	spawnbot_main0
+			TFBot
+			{
+				Template GB_G_Scout_Grapple_Knock
+			}
+		}
+		WaveSpawn
+		{
+			Name 4AGiant
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	42
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template G_Soldier_Black_Box
+			}
+		}
+		WaveSpawn
+		{
+			Name 4AGiant
+			TotalCurrency	50
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	57
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template GB_G_Soldier_Black_Box
+			}
+		}
+		WaveSpawn
+		{
+			Name 4A
+			TotalCurrency	50
+			TotalCount	24
+			MaxActive	12
+			SpawnCount	2
+			WaitBeforeStarting	50
+			WaitBetweenSpawns	5
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template Soldier_Charged
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 4ASoldier
+			TotalCurrency	50
+			TotalCount	7
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	55
+			WaitBetweenSpawns	10
+			Where	spawnbot_upper0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template Soldier_Transmission_W6
+			}
+		}
+		WaveSpawn
+		{
+			Name 4B
+			WaitForAllDead	4A
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	4
+			WaitBetweenSpawns	15
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 4B
+			WaitForAllDead	4A
+			TotalCurrency	100
+			TotalCount	21
+			MaxActive	3
+			SpawnCount	1
+			WaitBetweenSpawns	4
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template Scout_Milk
+				}
+				TFBot
+				{
+					Template Sniper_jarate
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 4B
+			WaitForAllDead	4BSmall
+			TotalCurrency	100
+			TotalCount	21
+			MaxActive	8
+			SpawnCount	4
+			WaitBetweenSpawns	4
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template Scout_Milk
+				}
+				TFBot
+				{
+					Template Sniper_jarate
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 4BSmall
+			WaitForAllDead	4A
+			TotalCurrency	100
+			TotalCount	21
+			MaxActive	6
+			SpawnCount	3
+			WaitBetweenSpawns	4
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template GB_Demo_Boomer
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name 5A
+			TotalCurrency	100
+			TotalCount	14
+			MaxActive	8
+			SpawnCount	2
+			WaitBetweenSpawns	3
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template GB_Heavy_Crit
+			}
+		}
+		WaveSpawn
+		{
+			Name 5A
+			TotalCurrency	100
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	15
+			Where	spawnbot_upper0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Demoman_Spammer_U
+					classicon demo_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 5B
+			WaitForAllDead	5A
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	5
+			Where	spawnbot_upper0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Soldier_Spammer_Backup
+				}
+				TFBot
+				{
+					Template GB_G_Soldier_Spammer_Buff
+				}
+				TFBot
+				{
+					Template GB_G_Soldier_Spammer_Conch
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 5C
+			WaitForAllDead	5B
+			TotalCurrency	100
+			TotalCount	14
+			MaxActive	4
+			SpawnCount	2
+			WaitBetweenSpawns	3
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template GB_Sniper_Bow_Multi
+			}
+		}
+		WaveSpawn
+		{
+			Name 5C
+			WaitForAllDead	5B
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	4
+			SpawnCount	2
+			WaitBetweenSpawns	3
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template Scout_Transmission_W5_Bonk
+			}
+		}
+		WaveSpawn
+		{
+			Name 5C
+			WaitForAllDead	5B
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	1
+			WaitBetweenSpawns	7
+			Where	spawnbot_flank0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Name	5D
+			WaitForAllDead	5C
+			TotalCurrency	100
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			FirstSpawnOutput
+            {
+                Target boss_spawn_relay_teletank
+                Action Trigger
+            }
+			Tank
+			{
+				Health	35000
+				Name	teletank
+				Speed	65
+				StartingPathTrackNode tank_path
+				OnKilledOutput
+				{
+					Target	boss_kill_relay_teletank
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 5Support
+			WaitForAllDead	5C
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	25
+			Where	spawnbot_teletank
+			Support 1
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					name "I TELEPORTED BREAD!!!!"
+					Classicon teleporter
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+					Classicon teleporter
+					name "I TELEPORTED BREAD!!!!"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 5Support
+			WaitForAllDead	5C
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	11
+			WaitBetweenSpawns	10
+			Where	spawnbot_teletank
+			Support 1
+			TFBot
+			{
+				Template Soldier_Charged
+				Attributes AlwaysCrit
+				Classicon teleporter
+				name "I TELEPORTED BREAD!!!!"
+			}
+		}
+		WaveSpawn
+		{
+			Name 5Support
+			WaitForAllDead	5C
+			TotalCurrency	50
+			TotalCount	10
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	11
+			WaitBetweenSpawns	5
+			Where	spawnbot_teletank
+			Support 1
+			TFBot
+			{
+				Template GB_Heavy_Shotgun_Crit
+				Classicon teleporter
+				name "I TELEPORTED BREAD!!!!"
+			}
+		}
+		WaveSpawn
+		{
+			Name 5Support
+			TotalCurrency	50
+			TotalCount	24
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	4
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Template Scout_Transmission_W5
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{    
+			Name 5Support
+			WaitForAllDead	5B
+			TotalCurrency	50
+			TotalCount	24
+			MaxActive	4
+			SpawnCount	4
+			WaitBetweenSpawns	4
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support 1
+			TFBot
+			{
+				Template Scout_Transmission_W5
+				Item "The Buff Banner"
+				Attributes	SpawnWithFullCharge
+				CharacterAttributes
+				{
+					"increase buff duration" 1001
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	Trigger
+		}
+		WaveSpawn
+		{
+			Name 6A
+			TotalCurrency	100
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	25
+			Where	spawnbot_upper0
+			Where	spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Heavy_Tracer
+				}
+				TFBot
+				{
+					Template GB_G_Medic_Krit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 6A
+			TotalCurrency	100
+			TotalCount	6
+			MaxActive	4
+			SpawnCount	2
+			WaitBetweenSpawns	10
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template Soldier_Transmission_W6
+			}
+		}
+		WaveSpawn
+		{
+			Name 6A
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	7
+			SpawnCount	1
+			WaitBetweenSpawns	1
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template Scout_Transmission_W6
+				Attributes	AlwaysCrit
+			}
+		}
+		WaveSpawn
+		{
+			Name 6BDemo
+			WaitForAllDead	6A
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	15
+			Where	spawnbot_teletank
+			FirstSpawnOutput
+			{
+				Target bot_boss_spawn_relay
+				Action Trigger
+			}
+			Squad
+			{
+				TFBot
+				{
+					Template GB_G_Demoman_Carpet
+					classicon demo_scatter_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_inf_krit
+					classicon medic_kritz_giant
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name 6B
+			WaitForAllDead	6A
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	1
+			WaitBetweenSpawns	14
+			Where	spawnbot_upper0
+			Where 	spawnbot_upper1
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn
+		{
+			Name 6B
+			WaitForAllDead	6A
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	4
+			SpawnCount	2
+			WaitBetweenSpawns	5
+			Where	spawnbot_flank0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Deflector_N
+			}
+		}
+		WaveSpawn
+		{
+			Name 6B
+			WaitForAllDead	6A
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	5
+			SpawnCount	1
+			WaitBetweenSpawns	1
+			Where	spawnbot_flank0
+			Where	spawnbot_main1
+			TFBot
+			{
+				Template GB_Sniper_jarate
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_upper0
+			Where	spawnbot_upper1
+			Support	1
+			TFBot
+			{
+				Template Medic_Shield
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_upper0
+			Where	spawnbot_main1
+			Support	1
+			TFBot
+			{
+				Template GB_Heavy_Shotgun
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support	1
+			TFBot
+			{
+				Template GB_Demo_Boomer
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_main0
+			Where	spawnbot_main1
+			Support	1
+			TFBot
+			{
+				Template Medic_Shield
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_teletank
+			Support	1
+			TFBot
+			{
+				Template Scout_Transmission_W1
+			}
+		}
+		WaveSpawn
+		{
+			Name 6CS
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	2
+			SpawnCount	2
+			WaitBetweenSpawns	6
+			Where	spawnbot_teletank
+			Support	1
+			TFBot
+			{
+				Template Medic_Shield
+			}
+		}
+		WaveSpawn
+		{
+			Name 6C
+			WaitForAllDead	6B
+			TotalCurrency	100
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	15
+			Where	spawnbot_teletank
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+			}
+		}
+		WaveSpawn
+		{
+			Name 6D
+			WaitForAllDead	6C
+			TotalCurrency	100
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	4
+			Where	spawnbot_teletank
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					classicon heavy_deflector_giant
+				}
+				TFBot
+				{
+					Template GB_G_Medic_Krit
+				}
+				TFBot
+				{
+					Template G_Demoman_Carpet
+					Attributes	AlwaysCrit
+					CLASSICON demo_scatter_giant
+				}
+				TFBot
+				{
+					Template G_Demoman_Carpet
+					Attributes	AlwaysCrit
+					CLASSICON demo_scatter_giant
+				}
+			}
+		}
+	}
+}

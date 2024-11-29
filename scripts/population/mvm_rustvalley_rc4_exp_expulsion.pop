@@ -1,0 +1,1092 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_gatebot.pop
+#base robot_rustvalley.pop
+population
+{
+	StartingCurrency	800
+	RespawnWaveTime	4
+	CanBotsAttackWhileInSpawnRoom	no
+	AddSentryBusterWhenDamageDealtExceeds	15000
+	AddSentryBusterWhenKillCountExceeds	15
+	Templates
+	{
+		T_TFBot_Giant_Soldier_SlowBarrage //regular version of colonel barrage, used for major shits on w5
+		{
+			ClassIcon	soldier_barrage
+			WeaponRestrictions	PrimaryOnly
+			Health	4000
+			Skill	Expert
+			Name	"Colonel Barrage"
+			Class	Soldier
+			Tag	"bot_giant"
+			Attributes	"MiniBoss"
+			Attributes	"HoldFireUntilFullReload"
+			ItemAttributes
+			{
+				ItemName	tf_weapon_rocketlauncher
+				"fire rate bonus"	0.2
+				"faster reload rate"	0.22
+				"projectile spread angle penalty"	5
+				"clip size upgrade atomic"	26.0
+			}
+			CharacterAttributes
+			{
+				"override footstep sound set"	3
+				"move speed bonus"	0.5
+				"airblast vulnerability multiplier"	0.4
+				"damage force reduction"	0.4
+				"damage bonus"	1.5
+				"Projectile speed increased"	0.4
+				"airblast vertical vulnerability multiplier"	0.1
+				"health regen"	40
+			}
+		}
+	}
+	Mission
+	{
+		Objective	DestroySentries
+		Where	spawnbot_scattered0
+		Where   spawnbot_main1
+		BeginAtWave	1
+		RunForThisManyWaves	6
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_SentryBuster
+		}
+	}
+	Mission
+	{
+		Objective	Spy
+		Where	spawnbot_mid0
+		Where   spawnbot_main1
+		BeginAtWave	3
+		RunForThisManyWaves	1
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	2
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_scattered0
+		Where   spawnbot_main1
+		BeginAtWave	3
+		RunForThisManyWaves	2
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	4
+		TFBot
+		{
+			Template	T_TFBot_Sniper
+		}
+	}
+	Mission
+	{
+		Objective	Engineer
+		Where	spawnbot_scattered0
+		Where   spawnbot_main1
+		BeginAtWave	3
+		RunForThisManyWaves	3
+		InitialCooldown	30
+		CooldownTime	30
+		DesiredCount	1
+		TFBot
+		{
+			Template	T_TFBot_Engineer_Sentry_Teleporter
+		}
+	}
+	Mission
+	{
+		Objective	Sniper
+		Where	spawnbot_scattered0
+		Where   spawnbot_main1
+		BeginAtWave	6
+		RunForThisManyWaves	1
+		InitialCooldown	20
+		CooldownTime	10
+		DesiredCount	6
+		TFBot
+		{
+			Template	T_TFBot_Sniper
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	hellw1
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_mid0
+			Where   spawnbot_main1
+			FirstSpawnWarningSound "goldpipe_pack/Goldpipe_MissionIntro.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	awfuck
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			DoneWarningSound   "goldpipe_pack/Goldpipe_W1B_Dead.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Caber_Kamikaze
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	ohfuck
+			TotalCurrency	200
+			TotalCount	5
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Giant_Heavyweapons
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Apocalyptic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Apocalyptic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Apocalyptic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_Apocalyptic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	trunk
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	hellw1
+			DoneWarningSound "goldpipe_pack/Goldpipe_W1D_Dead.mp3"
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			
+			Tank
+			{
+				Health	20000
+				Name	Tank
+				Speed	60
+				StartingPathTrackNode  path_tank_1
+				OnKilledOutput
+				{
+					Action	Trigger
+					Target	boss_dead_relay
+				}
+				OnBombDroppedOutput
+				{
+					Action	Trigger
+					Target	boss_deploy_relay
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	holybandits
+			TotalCurrency	100
+			TotalCount	36
+			MaxActive	12
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			WaitForAllSpawned	trunk
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bandit
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw1
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			WaitForAllSpawned   trunk
+			Support	1
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Scout_FAN
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw1b
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			WaitForAllSpawned   trunk
+			Support	1
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	soldier
+					Health	200
+					Skill	Normal
+					Name	Soldier
+					Class	Soldier
+					Item	"the original"
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	armoredrush
+			TotalCurrency	100
+			TotalCount	25
+			MaxActive	10
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			FirstSpawnWarningSound  "goldpipe_pack/Goldpipe_W2_Start.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Soldier_Extended_Battalion_Hard
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	ohshit
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	6
+			SpawnCount	2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	8
+			Where	spawnbot_mid_slow0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demo_RapidFire
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	hevvi
+			TotalCurrency	100
+			TotalCount	12
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	armoredrush
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			DoneWarningSound "goldpipe_pack/Goldpipe_W2C_Dead.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Scout_FAN
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	aaaaaasticks
+			TotalCurrency	100
+			TotalCount	25
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			WaitForAllDead	armoredrush
+			Where	spawnbot_mid0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Winbomber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	ohfortheloveoffu
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	aaaaaasticks
+			Where	spawnbot_mid_slow0
+			Where   spawnbot_main_slow1
+			FirstSpawnWarningSound "goldpipe_pack/Goldpipe_W2E_Spawn.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer_Reload
+					Attributes  "AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	morepain
+			TotalCurrency	100
+			TotalCount	16
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	ohfortheloveoffu
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Loch_Atomic
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw2
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Shotgun
+				}
+			}
+		}
+	}
+	Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	havefun
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	bustem
+			TotalCurrency	100
+			TotalCount	24
+			MaxActive	8
+			SpawnCount	8
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_left0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Heavyweapons_Shotgun
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	heretheycome
+			TotalCurrency	100
+			TotalCount	30
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	1
+			WaitForAllDead	bustem
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Sniper_Huntsman
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+				TFBot
+				{
+					Skill	Expert
+					Template	T_TFBot_Pyro
+					Attributes	"AlwaysFireWeapon"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	nopenope
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			WaitForAllDead    havefun 
+			Where	spawnbot_scattered0
+			Where   spawnbot_main_slow1
+			Squad
+			{
+				TFBot
+				{
+					Template   T_TFBot_Scout_Giant_Backscatter_Rapidfire
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	COMEGETSOME.
+			TotalCurrency	400
+			TotalCount	6
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	20
+			WaitForAllSpawned	nopenope
+			Where	spawnbot_mid0
+			Where   spawnbot_left0
+			Where   spawnbot_main_slow1
+			DoneWarningSound "goldpipe_pack/Goldpipe_W3_End.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw3
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_RocketShotgun
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	rammstein.
+			TotalCurrency	300
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Where	spawnbot_mid0
+			Where   spawnbot_mid_slow0
+			Where   spawnbot_main1
+			Where   spawnbot_main_slow1
+			FirstSpawnWarningSound "goldpipe_pack/Goldpipe_W4_Confusion.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demo_Burst
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	whatthefu
+			TotalCurrency	100
+			TotalCount	40
+			MaxActive	8
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Burst
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demo_Loch_Atomic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Shotgun_Rusted
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demoman_Winbomber
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	titanium
+			TotalCurrency	200
+			TotalCount	3
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	rammstein.
+			Where	spawnbot_mid_slow0
+			Where   spawnbot_main_slow1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Giant_Shotgun_Expert
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	ohshit
+			TotalCurrency	100
+			TotalCount	20
+			MaxActive	5
+			SpawnCount	5
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllSpawned	titanium
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro
+					Skill  Hard
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	no.
+			TotalCurrency	200
+			TotalCount	2
+			MaxActive	2
+			SpawnCount	2
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	10
+			WaitForAllDead	titanium
+			Where	spawnbot_mid_slow0
+			Where   spawnbot_main_slow1
+			DoneWarningSound "goldpipe_pack/Goldpipe_W4_End.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Demoman_Winbomber
+					Attributes	"AlwaysCrit"
+				}
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Shield
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw4
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	3
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			Support	1
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Demo_Burst_Normal
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	nowitsangry
+			TotalCurrency	200
+			TotalCount	4
+			MaxActive	4
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			FirstSpawnWarningSound "goldpipe_pack/Goldpipe_W5_Start.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFGateBot_Giant_Heavyweapons_Shotgun
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	finaltank
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	8
+			WaitBetweenSpawns	10
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			
+			Tank
+			{
+				Health	30000
+				Name	Tank
+				Speed	60
+				Skin 1
+				StartingPathTrackNode path_tank_1
+				OnKilledOutput
+				{
+					Action	Trigger
+					Target	boss_dead_relay
+				}
+				OnBombDroppedOutput
+				{
+					Action	Trigger
+					Target	boss_deploy_relay
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	timetofight
+			TotalCurrency	100
+			TotalCount	36
+			MaxActive	9
+			SpawnCount	3
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	4
+			WaitForAllSpawned	finaltank
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Shotgun_Rusted
+				}
+				TFBot
+				{
+					Template	T_TFBot_Demo_Loch_Atomic
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Shotgun_Plasma
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bandit
+				}
+				TFBot
+				{
+					Template	T_TFBot_Scout_Bandit_Vulture
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	OHFUCKRUN
+			TotalCurrency	200
+			TotalCount	6
+			MaxActive	2
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			WaitForAllDead	finaltank
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Where   spawnbot_main_slow1
+			FirstSpawnWarningSound "goldpipe_pack/Goldpipe_W5_BarrageStart.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Name	"Major Crits"
+					Template	T_TFBot_Giant_Soldier_SlowBarrage
+					Attributes	"AlwaysCrit"
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	yourjudgementendshere
+			TotalCurrency	100
+			TotalCount	48
+			MaxActive	8
+			SpawnCount	4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			WaitForAllDead	finaltank
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					ClassIcon	heavy
+					Health	300
+					Skill	Expert
+					Name	HeavyWeapons
+					Class	HeavyWeapons
+				}
+			}
+		}
+		WaveSpawn
+		{
+		    Name  Surprisefuckyou!
+			TotalCurrency	200
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			WaitForAllSpawned yourjudgementendshere
+			Where	spawnbot_mid_slow0
+			Where   spawnbot_main1
+			FirstSpawnWarningSound    "MVM.GiantHeavyEntrance"
+			DoneWarningSound "goldpipe_pack/Goldpipe_W5_End.mp3"
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavy_MiniBoss_Devastation
+				}	
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw5
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	4
+			SpawnCount	2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	2
+			Support	1
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Buff_Banner
+					ItemAttributes
+					{
+						ItemName	"the buff banner"
+						"deploy time decreased"	0.5
+					}
+				}
+			}
+		}
+	}
+	Wave
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Action	Trigger
+			Target	wave_start_relay_expert
+		}
+		DoneOutput
+		{
+			Action	Trigger
+			Target	wave_finished_relay
+		}
+		WaveSpawn
+		{
+			Name	andnowyerded
+			TotalCurrency	1
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	10
+			Where	spawnbot_mid_slow0
+			StartWaveWarningSound  "goldpipe_pack/Goldpipe_Summon.mp3"
+			RandomChoice
+			{
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry_Sword
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry
+				}
+				TFBot
+				{
+					Template	T_TFBot_Boss_BigIndustry_Sword
+				}
+				TFBot
+				{
+					Template	T_TFBot_Pyro_Giant_Secret
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Name	supportw6
+			TotalCurrency	0
+			TotalCount	10
+			MaxActive	6
+			SpawnCount	6
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	5
+			Support	1
+			Where	spawnbot_scattered0
+			Where   spawnbot_main1
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Spy
+				}
+			}
+		}
+	}
+}
+

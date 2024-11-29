@@ -1,0 +1,2516 @@
+//Created by Yoovy: https://steamcommunity.com/profiles/76561198017198600/
+
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency 5000
+	RespawnWaveTime 3
+	CanBotsAttackWhileInSpawnRoom no
+	FixedRespawnWaveTime Yes
+	EventPopfile Halloween
+	
+	Templates
+	{
+		ZombieGate_Scout_Normal_Crit
+		{
+			Class Scout
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Normal
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Normal
+				}
+			}
+		}
+		T_TFBot_Giant_Pyro_Airblast
+		{
+			Name "Giant Airblast Pyro"
+			Class Pyro
+			Skill Expert
+			Health 3000
+			ClassIcon pyro_reflect_daan_giant
+			Attributes MiniBoss
+			Tag bot_giant
+			Item "The Scorched Skirt"
+			Item "Traffic Cone"
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+				"damage force reduction" 0.6
+				"move speed bonus" 0.5
+			}
+		}
+		ZombieGate_Demoman_Normal_Crit
+		{
+			Class Demoman
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Normal
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Normal
+				}
+			}
+		}
+		T_TFBot_Medic_Uber_Quick
+		{
+			Class Medic
+			Name "Quick-Uber Medic"
+			ClassIcon medic_uber
+			Skill Normal
+			Attributes SpawnWithFullCharge
+			Item "Einstein"
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MEDIGUN"
+				"ubercharge rate bonus" 5
+				"uber duration bonus" -3
+			}
+			CharacterAttributes
+			{
+				"heal rate bonus" 0.1
+			}
+		}
+		ZombieGate_Pyro_Expert_NoAirblast
+		{
+			Class Pyro
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName TF_WEAPON_FLAMETHROWER
+						"airblast disabled" 1
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName TF_WEAPON_FLAMETHROWER
+						"airblast disabled" 1
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		T_TFBot_Soldier_Extended_Buff_DirectHit
+		{
+			Class Soldier
+			Name "Extended Buff Soldier"
+			ClassIcon soldier_directhit_buff_lite
+			Item "Defiant Spartan"
+			Item "The Buff Banner"
+			Item "The Direct Hit"
+			Skill Expert
+			Attributes SpawnWithFullCharge
+			CharacterAttributes
+			{
+				"increase buff duration" 9.0
+			}
+		}
+		ZombieGate_Heavy_SteelFist
+		{
+			Class Heavy
+			ClassIcon heavy_steelfist
+			Name "Steel Gauntlet"
+			Health 900
+			Scale 1.5
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					Tag bot_giant
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Item "Misfortune Fedora"
+					Item "Fists of Steel"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Tag bot_giant
+					Item "Misfortune Fedora"
+					Item "Fists of Steel"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Giant_Heavy_SteelFist
+		{
+			Class Heavy
+			ClassIcon heavy_steelfist_giant
+			Name "Giant Steel Gauntlet"
+			Health 6000
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					Tag bot_giant
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes MiniBoss
+					Item "Misfortune Fedora"
+					Item "Fists of Steel"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Fists of Steel"
+						"dmg bonus vs buildings" 1.5
+						"fire rate penalty" 2
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Tag bot_giant
+					Attributes MiniBoss
+					Item "Misfortune Fedora"
+					Item "Fists of Steel"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Fists of Steel"
+						"dmg bonus vs buildings" 1.5
+						"fire rate penalty" 2
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Demoman_Knight_Crit
+		{
+			Class Demoman
+			ClassIcon demoknight_headtaker_nys
+			Name "Demoknight"
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "The Horseless Headless Horseman's Headtaker"
+					Item "The Chargin' Targe"
+					Item "Misfortune Fedora"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "The Horseless Headless Horseman's Headtaker"
+					Item "The Chargin' Targe"
+					Item "Misfortune Fedora"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Heavy_KGB_Crit
+		{
+			Class Heavy
+			ClassIcon heavy_champ
+			Name "Deadweight Champ"
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "The Killing Gloves of Boxing"
+					Item "Misfortune Fedora"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "The Killing Gloves of Boxing"
+					Item "Misfortune Fedora"
+					WeaponRestrictions MeleeOnly
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Pyro_Scorchshot_Normal
+		{
+			Class Pyro
+			ClassIcon pyro_scorch
+			Name "Pocket Rocket Pyro"
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Item "Misfortune Fedora"
+					Item "The Scorch Shot"
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Scorch Shot"
+						"override projectile type" 2
+						"attach particle effect" 701
+						"set damagetype ignite" 1
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Misfortune Fedora"
+					Item "The Scorch Shot"
+					WeaponRestrictions SecondaryOnly
+					ItemAttributes
+					{
+						ItemName "The Scorch Shot"
+						"override projectile type" 2
+						"attach particle effect" 701
+						"set damagetype ignite" 1
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Giant_Pyro_Airblast
+		{
+
+			Class Pyro
+			Name "Giant Airblast Pyro"
+			ClassIcon pyro_reflect_daan_giant
+			Health 3000
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Item "Misfortune Fedora"
+					Skill Expert
+					Attributes MiniBoss
+					Tag bot_giant
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"damage force reduction" 0.6
+						"move speed bonus"	0.5
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+					Attributes MiniBoss
+					Tag bot_giant
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.6
+						"override footstep sound set" 6
+						"damage force reduction" 0.6
+						"move speed bonus"	0.5
+					}
+				}
+			}
+		}
+		ZombieGate_Soldier_Extended_Buff_DirectHit
+		{
+			Class Soldier
+			Name "Extended Buff Soldier"
+			ClassIcon soldier_directhit_buff_lite
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Item "Misfortune Fedora"
+					Item "The Buff Banner"
+					Item "The Direct Hit"
+					Skill Expert
+					Attributes SpawnWithFullCharge
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					CharacterAttributes
+					{
+						"increase buff duration" 9.0
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Misfortune Fedora"
+					Item "The Buff Banner"
+					Item "The Direct Hit"
+					Skill Expert
+					Attributes SpawnWithFullCharge
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					CharacterAttributes
+					{
+						"increase buff duration" 9.0
+					}
+				}
+			}
+		}
+		ZombieGate_Giant_Heavy
+		{
+			Class Heavy
+			ClassIcon heavy_giant
+			Name "Giant Heavy"
+			Health 5000
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					Tag bot_giant
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes MiniBoss
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Tag bot_giant
+					Attributes MiniBoss
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_MINIGUN"
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Giant_Soldier_RapidFire
+		{
+			Class Soldier
+			Name "Giant Rapid Fire Soldier"
+			ClassIcon soldier_d
+			Health 3800
+
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag bot_gatebot
+					Tag nav_prefer_gate1_flank
+					BehaviorModifiers push
+					Attributes IgnoreFlag 
+
+					Item "Misfortune Fedora"
+					Item "craftsmann_rocketlauncher_americanpastoral"
+					Skill Expert
+					Attributes MiniBoss
+					Tag bot_giant
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					ItemAttributes
+					{
+						ItemName "craftsmann_rocketlauncher_americanpastoral"
+						"projectile speed decreased" 0.65
+						"set_item_texture_wear" 0
+						"faster reload rate" -0.8
+						"fire rate bonus" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+						"Projectile speed increased" 0.65
+					}
+				}
+				RevertGateBotsBehavior
+				{
+					Item "Misfortune Fedora"
+					Item "craftsmann_rocketlauncher_americanpastoral"
+					Skill Expert
+					Attributes MiniBoss
+					Tag bot_giant
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					ItemAttributes
+					{
+						ItemName "craftsmann_rocketlauncher_americanpastoral"
+						"projectile speed decreased" 0.65
+						"set_item_texture_wear" 0
+						"faster reload rate" -0.8
+						"fire rate bonus" 0.5
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.4
+						"airblast vulnerability multiplier" 0.4
+						"override footstep sound set" 3
+						"Projectile speed increased" 0.65
+					}
+				}
+			}
+		}
+		ZombieGate_Soldier_Expert_Crit
+		{
+			Class Soldier
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Giant_Heavy_Deflector_Crit
+		{
+			Class Heavy
+			ClassIcon heavy_deflector
+			Name "Giant Deflector Heavy"
+			Health 5000
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					Tag bot_giant
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Attributes MiniBoss
+					Item "Misfortune Fedora"
+					Item "Deflector"
+					ItemAttributes
+					{
+						ItemName "Deflector"
+						"attack projectiles" 2
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "The U-Clank-A"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+				RevertGateBotsBehavior
+				{
+					Tag bot_giant
+					Attributes AlwaysCrit
+					Attributes MiniBoss
+					Item "The U-Clank-A"
+					Item "Deflector"
+					ItemAttributes
+					{
+						ItemName "Deflector"
+						"attack projectiles" 2
+						"damage bonus" 1.5
+					}
+					ItemAttributes
+					{
+						ItemName "The U-Clank-A"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.3
+						"override footstep sound set" 2
+						"damage force reduction" 0.3
+						"move speed bonus" 0.5
+					}
+					Skill Expert
+				}
+			}
+		}
+		ZombieGate_Demoman_Hard_Crit
+		{
+			Class Demoman
+			EventChangeAttributes
+			{
+				Default
+				{
+					Tag nav_prefer_gate1_flank
+					Tag bot_gatebot
+					BehaviorModifiers push
+					Attributes IgnoreFlag
+					
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 163
+						"set item tint RGB"	15185211
+					}
+					Skill Hard
+				}
+				RevertGateBotsBehavior
+				{
+					Attributes AlwaysCrit
+					Item "Misfortune Fedora"
+					ItemAttributes
+					{
+						ItemName "Misfortune Fedora"
+						"attach particle effect" 103
+						"set item tint RGB"	8208497
+					}
+					Skill Hard
+				}
+			}
+		}
+		T_TFBot_Giant_Medic_Regen_Yoovy
+		{
+			Name "Giant Regen Medic"
+			Class Medic
+			Skill Expert
+			Health 4500
+			ClassIcon medic_giant
+			Item "Derangement Garment"
+			Item "The Quick-Fix"
+			Item "Optic Nerve"
+			Attributes MiniBoss
+			Tag bot_giant
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"ubercharge rate bonus" 0.01
+				"heal rate bonus" 200
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 2 //Medic has legs in Wave 666
+				"damage force reduction" 0.6
+				"move speed penalty" 0.5
+				"health regen" 50
+			}
+		}
+		T_TFBot_Scout_Bigrock
+		{
+			Name "Tainted Scout"
+			Class Scout
+			Skill Expert
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SCATTERGUN"
+				"attach particle effect" 704
+				"damage bonus" 1.5
+			}
+		}
+		T_TFBot_Heavy_Bigrock
+		{
+			Name "Tainted Heavy"
+			Class Heavy
+			Skill Expert
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"attach particle effect" 704
+				"damage bonus" 1.5
+			}
+		}
+		T_TFBot_Pyro_Bigrock
+		{
+			Name "Tainted Pyro"
+			Class Pyro
+			ClassIcon pyro_reflect_daan
+			Skill Expert
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_FLAMETHROWER"
+				"attach particle effect" 704
+				"damage bonus" 1.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+			}
+		}
+		T_TFBot_Soldier_Bigrock
+		{
+			Name "Tainted Soldier"
+			Class Soldier
+			Skill Expert
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"attach particle effect" 704
+				"reload time decreased" -0.8
+				"damage bonus" 1.5
+			}
+		}
+		T_TFBot_Demoman_Bigrock
+		{
+			Name "Tainted Demoman"
+			Class Demoman
+			Skill Expert
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_GRENADELAUNCHER"
+				"attach particle effect" 704
+				"reload time decreased" -0.8
+				"damage bonus" 1.5
+			}
+		}
+		T_TFBot_Giant_Soldier_RapidFire
+		{
+			Name "Giant Rapid Fire Soldier"
+			Class Soldier
+			Skill Expert
+			Health 3800
+			ClassIcon soldier_d
+			Attributes HoldFireUntilFullReload
+			Attributes MiniBoss
+			Tag	bot_giant
+			Item "craftsmann_rocketlauncher_americanpastoral"
+			Item "Bucket Hat"
+			ItemAttributes
+			{
+				ItemName "craftsmann_rocketlauncher_americanpastoral"
+				"projectile speed decreased" 0.65
+				"set_item_texture_wear" 0
+				"faster reload rate" -0.8
+				"fire rate bonus" 0.5
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+				"damage force reduction" 0.4
+				"move speed bonus" 0.5
+			}
+		}
+		T_TFBot_Heavy_KGB_Bigrock
+		{
+			Name "Tainted Heavyweight Champ"
+			Class Heavy
+			Skill Expert
+			ClassIcon heavy_champ
+			Item "The Killing Gloves of Boxing"
+			Item "Big Steel Jaw of Summer Fun"
+			Item "The Hellmet"
+			Attributes AlwaysCrit
+			WeaponRestrictions	MeleeOnly
+			ItemAttributes
+			{
+				ItemName "The Killing Gloves of Boxing"
+				"fire rate bonus" 0.5
+				"damage bonus" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus" 1.5
+			}
+		}
+	}
+	
+	//SentryBuster
+	Mission
+	{
+		Objective DestroySentries
+
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 1
+
+		InitialCooldown 60
+		CooldownTime 60
+		
+		DesiredCount 1
+
+        TFBot
+		{
+			Template T_TFBot_SentryBuster
+			Item "The Tartantaloons"
+			Name "Grave Buster"
+			Tag bot_giant
+        }
+	}
+	//WAVE 666 //Currency $7,000 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_ironman_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		// SUBWAVE 1/16 /////////////// $600 ///////////////
+		//
+		///////////////
+		// 48 Gatebot Scouts /// $240
+		//
+		// 14 Heavies /// $60
+		//
+		// 6 Giant Airblast Pyros /// $300
+		///////////////
+		
+		WaveSpawn //scouts
+		{
+			Name part1
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 160
+			FirstSpawnWarningSound "#ui\holiday\gamestartup_halloween.mp3"
+			
+			TFBot
+			{
+				Template ZombieGate_Scout_Normal_Crit
+			}
+		}
+		
+		WaveSpawn //heavies
+		{
+			Name part1
+			Where spawnbot_right
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Class Heavy
+				Attributes AlwaysCrit
+				Item "The Crone's Dome"
+			}
+		}
+		
+		WaveSpawn //giant airblast pyros
+		{
+			Name part1
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 21
+			
+			TotalCurrency 380
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Airblast
+			}
+		}
+		
+		// SUBWAVE 2/16 /////////////// $575 ///////////////
+		//
+		///////////////
+		// 35 Gatebot Demomen /// $175
+		//
+		// 6 Gatebot Giant Soldiers /// $400
+		// Paired with a Quick-Uber Medic each (6 Quick-Uber Medics)
+		///////////////
+		
+		WaveSpawn //demomen
+		{
+			Name part2
+			
+			WaitForAllDead part1
+			
+			Where spawnbot
+			TotalCount 35
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 175
+			
+			TFBot
+			{
+				Template ZombieGate_Demoman_Normal_Crit
+			}
+		}
+		
+		WaveSpawn //giant soldiers uber medic group
+		{
+			Name part2
+			
+			WaitForAllDead part1
+			
+			Where spawnbot
+			TotalCount 12
+			MaxActive 12
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 400
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "Stainless Pot"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber_Quick
+				}
+			}
+		}
+		
+		// SUBWAVE 3/16 /////////////// $440 ///////////////
+		//
+		///////////////
+		// 1 Tank (35,000 Health, Same path) /// $160
+		//
+		// 24 Gatebot Pyros /// $120
+		//
+		// 24 Extended Buff Soldiers (Direct Hit) /// $120
+		// 
+		// 8 Gatebot Steel Gauntlets /// $40
+		///////////////
+		
+		WaveSpawn //35,000 health tank
+		{
+			Name part3
+			
+			WaitForAllDead part2
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 160
+			
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode tank_path_bomb_start
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		
+		WaveSpawn //pyros
+		{
+			Name part3
+			
+			WaitForAllDead part2
+			
+			Where spawnbot_left
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 120
+			
+			TFBot
+			{
+				Template ZombieGate_Pyro_Expert_NoAirblast
+			}
+		}
+		
+		WaveSpawn //extended buff soldiers (direct hit)
+		{
+			Name part3
+			
+			WaitForAllDead part2
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 120
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Buff_DirectHit
+			}
+		}
+		
+		WaveSpawn //steel gauntlets
+		{
+			Name part3
+			
+			WaitForAllDead part2
+			
+			Where spawnbot_right
+			TotalCount 8
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 40
+			
+			TFBot
+			{
+				Template ZombieGate_Heavy_SteelFist
+			}
+		}
+		
+		// SUBWAVE 3/16 /////////////// $440 ///////////////
+		//
+		///////////////
+		// 28 Concheror Soldiers /// $140
+		//
+		// 24 Gatebot Demoknights /// $120
+		//
+		// 3 Gatebot Giant Steel Gauntlets /// $110
+		// 
+		// 3 Giant Rapid Fire Demomen /// $95
+		///////////////
+		
+		WaveSpawn //concheror soldiers
+		{
+			Name part4
+			
+			WaitForAllDead part3
+			
+			Where spawnbot
+			TotalCount 28
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 140
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Extended_Concheror
+				Name "Concheror Soldier"
+				Item "Soldier Samurai Hat"
+				CharacterAttributes
+				{
+					"increase buff duration" 1
+				}
+			}
+		}
+		WaveSpawn //demoknights
+		{
+			Name part4
+			
+			WaitForAllDead part3
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 120
+			
+			TFBot
+			{
+				Template ZombieGate_Demoman_Knight_Crit
+			}
+		}
+		WaveSpawn //giant steel gauntlets
+		{
+			Name part4
+			
+			WaitForAllDead part3
+			
+			Where spawnbot_right
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 21
+			
+			TotalCurrency 110
+			
+			TFBot
+			{
+				Template ZombieGate_Giant_Heavy_SteelFist
+			}
+		}
+		WaveSpawn //giant rapid fire demomen
+		{
+			Name part4
+			
+			WaitForAllDead part3
+			
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 21
+			
+			TotalCurrency 95
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+				ClassIcon demo_spammer
+				Item "Demoman Tricorne"
+				Tag bot_giant
+			}
+		}
+		
+		// SUBWAVE 4/16 /////////////// $940 ///////////////
+		//
+		///////////////
+		// 40 Scouts /// $200
+		//
+		// 32 Gatebot Heavyweight Champs /// $160
+		//
+		// 16 Giant Soldiers /// $580
+		///////////////
+		
+		WaveSpawn //scouts
+		{
+			Name part5
+			
+			WaitForAllDead part4
+			
+			Where spawnbot
+			TotalCount 40
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+				Attributes AlwaysCrit
+				Item "Point and Shoot"
+			}
+		}
+		
+		WaveSpawn //heavyweight champs
+		{
+			Name part5
+			
+			WaitForAllDead part4
+			
+			Where spawnbot
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			
+			TotalCurrency 160
+			
+			TFBot
+			{
+				Template ZombieGate_Heavy_KGB_Crit
+			}
+		}
+		
+		WaveSpawn //giant soldiers
+		{
+			Name part5
+			
+			WaitForAllDead part4
+			
+			Where spawnbot
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 18
+			
+			TotalCurrency 580
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "The Full Head of Steam"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "The Gentle Munitionne of Leisure"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "Ghostly Gibus"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "Modest Pile of Hat"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "Ghastly Gibus"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "The Galvanized Gibus"
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					ClassIcon soldier_d
+					Item "The Haunted Hat"
+					Tag bot_giant
+				}
+			}
+		}
+		
+		// SUBWAVE 6/16 /////////////// $360 ///////////////
+		//
+		///////////////
+		// 28 Pyros /// $140
+		//
+		// 6 Steel Gauntlets /// $30
+		//
+		// 3 Gatebot Giant Airblast Pyros /// $75
+		//
+		// 3 Giant Heavies /// $75
+		///////////////
+		
+		WaveSpawn //pyros
+		{
+			Name part6
+			
+			WaitForAllDead part5
+			
+			Where spawnbot
+			TotalCount 28
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			
+			TotalCurrency 140
+			
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Item "The Scorched Skirt"
+				ItemAttributes
+				{
+					ItemName TF_WEAPON_FLAMETHROWER
+					"airblast disabled" 1
+				}
+			}
+		}
+		
+		WaveSpawn //steel gauntlets
+		{
+			Name part6
+			
+			WaitForAllDead part5
+			
+			Where spawnbot
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 6
+			
+			TotalCurrency 30
+			
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+				Item "Mooshanka"
+				Tag bot_giant
+			}
+		}
+		
+		WaveSpawn //giant airblast pyros
+		{
+			Name part6
+			
+			WaitForAllDead part5
+			
+			Where spawnbot
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 18
+			
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template ZombieGate_Giant_Pyro_Airblast
+			}
+		}
+		
+		WaveSpawn //giant heavies
+		{
+			Name part6
+			
+			WaitForAllDead part5
+			
+			Where spawnbot_right
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 18
+			
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Item "The Crone's Dome"
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Name midwavebreak
+			WaitForAllDead	part6
+			FirstSpawnWarningSound "vo\mvm_wave_end08.mp3"
+			FirstSpawnOutput
+			{
+				Target upgradestationfront_on
+				Action Trigger
+			}
+		}
+		WaveSpawn
+		{
+			Name midwavebreak
+			WaitForAllDead	part6
+			FirstSpawnWarningSound "vo\mvm_get_to_upgrade07.mp3"
+			WaitBeforeStarting	3.5
+		}
+		WaveSpawn
+		{
+			Name midwavebreak
+			WaitForAllDead	part6
+			FirstSpawnWarningSound "vo\announcer_begins_20sec.mp3"
+			WaitBeforeStarting	10
+		}
+		WaveSpawn
+		{
+			Name midwavebreak
+			WaitForAllDead	part6
+			FirstSpawnWarningSound "vo\announcer_begins_10sec.mp3"
+			WaitBeforeStarting	20
+		}
+		WaveSpawn
+		{
+			Name midwavebreak
+			WaitForAllDead	part6
+			FirstSpawnWarningSound "vo\mvm_general_wav_start08.mp3"
+			WaitBeforeStarting	25
+		}
+		
+		// SUBWAVE 7/16 /////////////// $200 ///////////////
+		//
+		///////////////
+		// 10 Gatebot Extended Buff Soldiers (Direct Hit) /// $100
+		// Paired with a Quick-Uber Medic each (10 Quick-Uber Medics)
+		//
+		// 1 Tank (35,000 Health, Opposite path) /// $100
+		///////////////
+		
+		WaveSpawn //extended buff soldiers (direct hit) uber medic group
+		{
+			Name part7
+			
+			WaitForAllDead part6
+			
+			Where spawnbot
+			TotalCount 20
+			MaxActive 20
+			SpawnCount 2
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 2
+			
+			TotalCurrency 100
+			FirstSpawnWarningSound "ui\halloween_boss_player_becomes_it.wav"
+			FirstSpawnOutput
+			{
+				Target upgradestationfront_off
+				Action Trigger
+			}
+			
+			Squad
+			{
+				TFBot
+				{
+					Template ZombieGate_Soldier_Extended_Buff_DirectHit
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Uber_Quick
+				}
+			}
+		}
+		
+		WaveSpawn //35,000 health tank
+		{
+			Name part7tank
+			
+			WaitForAllDead part6
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 100
+			FirstSpawnWarningSound "#ui\holiday\gamestartup_halloween1.mp3"
+			
+			Tank
+			{
+				Health 35000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode tank_path_flank_start
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		
+		// SUBWAVE 8/16 /////////////// $200 ///////////////
+		//
+		///////////////
+		// 14 Gatebot Heavyweight Champs /// $70
+		//
+		// 35 Soldiers /// $175
+		//
+		// 9 Giant Rapid Fire Demomen /// $370
+		///////////////
+		
+		WaveSpawn //heavyweight champs
+		{
+			Name part8
+			
+			WaitForAllDead part7
+			
+			Where spawnbot_left
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 70
+			
+			TFBot
+			{
+				Template ZombieGate_Heavy_KGB_Crit
+			}
+		}
+		
+		WaveSpawn //soldiers
+		{
+			Name part8
+			
+			WaitForAllDead part7
+			
+			Where spawnbot
+			TotalCount 35
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 175
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+				Attributes AlwaysCrit
+				Item "Tyrant's Helm"
+			}
+		}
+		
+		WaveSpawn //giant rapid fire demomen
+		{
+			Name part8
+			
+			WaitForAllDead part7
+			
+			Where spawnbot
+			TotalCount 9
+			MaxActive 9
+			SpawnCount 3
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 21
+			
+			TotalCurrency 370
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+				ClassIcon demo_spammer
+				Item "Demoman Tricorne"
+				Tag bot_giant
+			}
+		}
+		
+		// SUBWAVE 9/16 /////////////// $520 ///////////////
+		//
+		///////////////
+		// 32 Heavies /// $160
+		//
+		// 32 Soldiers /// $160
+		//
+		// 4 Gatebot Giant Heavies /// $100
+		//
+		// 4 Gatebot Giant Rapid Fire Soldiers /// $100
+		///////////////
+		
+		WaveSpawn //heavies
+		{
+			Name part9
+			
+			WaitForAllDead part8
+			
+			Where spawnbot_left
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 80
+			
+			TFBot
+			{
+				Class Heavy
+				Attributes AlwaysCrit
+				Item "The Crone's Dome"
+			}
+		}
+		
+		WaveSpawn //soldiers
+		{
+			Name part9
+			
+			WaitForAllDead part8
+			
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 80
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+				Attributes AlwaysCrit
+				Item "Tyrant's Helm"
+			}
+		}
+		
+		WaveSpawn //giant heavies
+		{
+			Name part9
+			
+			WaitForAllDead part8
+			
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 18
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template ZombieGate_Giant_Heavy
+			}
+		}
+		
+		WaveSpawn //giant rapid fire soldiers
+		{
+			Name part9
+			
+			WaitForAllDead part8
+			
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 18
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template ZombieGate_Giant_Soldier_RapidFire
+			}
+		}
+		
+		// SUBWAVE 10/16 /////////////// $600 ///////////////
+		//
+		///////////////
+		// 2 Tanks (40,000 health, Same path) /// $200
+		//
+		// 1 Tank (40,000 health, Opposite path) /// $200
+		//
+		// 30 Soldiers /// $150
+		//
+		// 30 Gatebot Soldiers /// $150
+		///////////////
+		
+		WaveSpawn //40,000 health tank
+		{
+			Name part10
+			
+			WaitForAllDead part9
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 40000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode tank_path_bomb_start
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		
+		WaveSpawn //40,000 health tank
+		{
+			Name part10
+			
+			WaitForAllDead part9
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 34
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 100
+			
+			Tank
+			{
+				Health 40000
+				Speed 75
+				Name "tankboss"
+				StartingPathTrackNode tank_path_flank_start
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		
+		WaveSpawn //soldiers
+		{
+			Name part10
+			
+			WaitForAllDead part9
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 60
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 6
+			
+			TotalCurrency 300
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "Tyrant's Helm"
+				}
+				TFBot
+				{
+					Template ZombieGate_Soldier_Expert_Crit
+				}
+			}
+		}
+		
+		// SUBWAVE 11/16 /////////////// $185 ///////////////
+		//
+		///////////////
+		// 1 Gatebot Giant Deflector Heavy /// $125
+		// Paired with 4 Gatebot Giant Rapid Fire Soldiers (4 Gatebot Giant Rapid Fire Soldiers)
+		//
+		// 12 Airblast Pyros /// $60
+		///////////////
+		
+		WaveSpawn //giant deflector heavy giant rapid fire soldiers group
+		{
+			Name part11
+			
+			WaitForAllDead part10
+			
+			Where spawnbot
+			TotalCount 5
+			MaxActive 5
+			SpawnCount 5
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 125
+			
+			Squad
+			{
+				TFBot
+				{
+					Template ZombieGate_Giant_Heavy_Deflector_Crit
+				}
+				TFBot
+				{
+					Template ZombieGate_Giant_Soldier_RapidFire
+				}
+				TFBot
+				{
+					Template ZombieGate_Giant_Soldier_RapidFire
+				}
+				TFBot
+				{
+					Template ZombieGate_Giant_Soldier_RapidFire
+				}
+				TFBot
+				{
+					Template ZombieGate_Giant_Soldier_RapidFire
+				}
+			}
+		}
+		
+		WaveSpawn //airblast pyros
+		{
+			Name part11
+			
+			WaitForAllDead part10
+			
+			Where spawnbot
+			TotalCount 12
+			MaxActive 12
+			SpawnCount 3
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 5
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Class Pyro
+				Skill Expert
+				Attributes AlwaysCrit
+				ClassIcon pyro_reflect_daan
+				Name "Airblast Pyro"
+				Item "The Scorched Skirt"
+				Item "Traffic Cone"
+			}
+		}
+		
+		// SUBWAVE 12/16 /////////////// $435 ///////////////
+		//
+		///////////////
+		// 35 Scouts /// $175
+		//
+		// 12 Gatebot Demomen /// $60
+		//
+		// 2 Giant Deflector Heavies /// $200
+		// Paired with a Giant Regen Medic each (2 Giant Regen Medics)
+		///////////////
+		
+		WaveSpawn //scouts
+		{
+			Name part12
+			
+			WaitForAllDead part11
+			
+			Where spawnbot_left
+			TotalCount 21
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 105
+			
+			TFBot
+			{
+				Class Scout
+				Skill Normal
+				Attributes AlwaysCrit
+				Item "Point and Shoot"
+			}
+		}
+		
+		WaveSpawn //demomen
+		{
+			Name part12
+			
+			WaitForAllDead part11
+			
+			Where spawnbot_left
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template ZombieGate_Demoman_Hard_Crit
+			}
+		}
+		
+		WaveSpawn //giant deflector heavies giant regen medic group
+		{
+			Name part12
+			
+			WaitForAllDead part11
+			
+			Where spawnbot
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 11
+			WaitBetweenSpawns 21
+			
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Item "Mooshanka"
+					Attributes AlwaysCrit
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen_Yoovy
+				}
+			}
+		}
+		
+		// SUBWAVE 13/16 /////////////// $420 ///////////////
+		//
+		///////////////
+		// 1 Tank (60,000 Health, Same path) /// $100
+		//
+		// 12 Tainted Scouts /// $60
+		//
+		// 12 Tainted Heavies /// $60
+		//
+		// 12 Tainted Pyros /// $60
+		//
+		// 12 Tainted Soldiers /// $60
+		//
+		// 12 Tainted Demomen /// $60
+		///////////////
+		
+		WaveSpawn //60,000 health tank
+		{
+			Name part13tank
+			
+			WaitForAllDead part12
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 0
+			
+			TotalCurrency 100
+			FirstSpawnWarningSound "#ui\gamestartup18.mp3"
+			
+			Tank
+			{
+				Health 60000
+				Speed 75
+				Name "tankbossfinale"
+				Skin 1
+				StartingPathTrackNode tank_path_flank_start
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}		
+		}
+		
+		WaveSpawn //tainted scouts
+		{
+			Name part13
+			
+			WaitForAllDead part12
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Bigrock
+			}
+		}
+		
+		WaveSpawn //tainted heavies
+		{
+			Name part13
+			
+			WaitForAllDead part12
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Heavy_Bigrock
+			}
+		}
+		
+		WaveSpawn //tainted pyros
+		{
+			Name part13
+			
+			WaitForAllDead part12
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro_Bigrock
+			}
+		}
+		
+		WaveSpawn //tainted soldiers
+		{
+			Name part13
+			
+			WaitForAllDead part12
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Bigrock
+			}
+		}
+		
+		WaveSpawn //tainted demomen
+		{
+			Name part13
+			
+			WaitForAllDead part12
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 9
+			WaitBetweenSpawns 7
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Demoman_Bigrock
+			}
+		}
+		
+		// SUBWAVE 14/16 /////////////// $200 ///////////////
+		//
+		///////////////
+		// 4 Gatebot Giant Steel Gauntlets /// $200
+		// Paired with a Giant Regen Medic each (4 Giant Regen Medics)
+		///////////////
+		
+		WaveSpawn //giant steel gauntlets giant regen medic group
+		{
+			Name part14
+			
+			WaitForAllDead part13
+			
+			Where spawnbot
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 15
+			
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template ZombieGate_Giant_Heavy_SteelFist
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen_Yoovy
+				}
+			}
+		}
+		
+		// SUBWAVE 15/16 /////////////// $380 ///////////////
+		//
+		///////////////
+		// 4 Giant Airblast Pyros /// $100
+		//
+		// 4 Giant Rapid Fire Soldiers /// $100
+		//
+		// 4 Giant Heavies /// $100
+		//
+		// 16 Tainted Heavyweight Champs /// $80
+		///////////////
+		
+		WaveSpawn //giant airblast pyros
+		{
+			Name part15
+			
+			WaitForAllDead part14
+			
+			Where spawnbot_left
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro_Airblast
+			}
+		}
+		
+		WaveSpawn //giant rapid fire soldiers
+		{
+			Name part15
+			
+			WaitForAllDead part14
+			
+			Where spawnbot
+			TotalCount 8
+			MaxActive 8
+			SpawnCount 2
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_RapidFire
+			}
+		}
+		
+		WaveSpawn //giant heavies
+		{
+			Name part15
+			
+			WaitForAllDead part14
+			
+			Where spawnbot_right
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 4
+			WaitBetweenSpawns 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+				Item "The Crone's Dome"
+				Tag bot_giant
+			}
+		}
+		
+		WaveSpawn //tainted heavyweight champs
+		{
+			Name part15_heavychamps
+			
+			WaitForAllDead part14
+			
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 14
+			WaitBetweenSpawns 5
+			
+			TotalCurrency 80
+			
+			TFBot
+			{
+				Template T_TFBot_Heavy_KGB_Bigrock
+			}
+		}
+		
+		WaveSpawn //last subwave support
+		{
+			Name part15_support
+			
+			WaitForAllDead part15_heavychamps
+			
+			Where spawnbot
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			TotalCount 91
+			MaxActive 4
+			SpawnCount 1
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 2
+			
+			TotalCurrency 455
+			
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				Item "The Scorched Skirt"
+				Item "Skullbrero"
+			}
+		}
+	}
+}
