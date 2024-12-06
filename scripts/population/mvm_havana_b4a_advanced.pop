@@ -1,0 +1,1767 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+// HAVANA ADVANCED - Cuban Calamity
+
+// IDEAS DUMP //
+
+
+
+WaveSchedule													
+{
+
+	StartingCurrency		1200		// revisit this
+	
+	RespawnWaveTime 4
+	
+	CanBotsAttackWhileInSpawnRoom no
+	
+	
+
+	
+	
+/////////////////
+//MISSIONS
+/////////////////	
+
+
+
+
+
+	Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 5
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 2
+		RunForThisManyWaves 11
+		CooldownTime 35
+		
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+	
+	
+	
+	
+	Mission // Sniper - wave 1-3
+	{
+		Objective Sniper
+
+		InitialCooldown 30
+		Where spawnbot_mission_sniper
+		BeginAtWave 1
+		RunForThisManyWaves 3
+		CooldownTime 60
+		DesiredCount 2
+
+		TFBot
+		{
+			Class Sniper
+			Skill Hard
+			Item "The Sydney Sleeper"
+			Item "The Bushwacka"
+			ClassIcon sniper_sydneysleeper
+			Name "Sleeper Sniper"
+			MaxVisionRange 3000
+		}
+	}
+	
+	
+	
+	
+	
+	Mission // Sniper - wave 4-6
+	{
+		Objective Sniper
+
+		InitialCooldown 40
+		Where spawnbot_mission_sniper
+		BeginAtWave 4
+		RunForThisManyWaves 3
+		CooldownTime 40
+		DesiredCount 5  
+
+		TFBot
+		{
+			Class Sniper
+			Skill Expert
+			Item "The Sydney Sleeper"
+			Item "Darwin's Danger Shield"
+			Item "The Bushwacka"
+			Item "Ol' Snaggletooth"
+			ClassIcon sniper_sydneysleeper
+			Name "Sleeper Sniper"
+			MaxVisionRange 4000
+		}
+	}
+	
+	
+	
+	
+	
+	Mission // Spy - wave 3
+	{
+		Objective Spy  
+
+		InitialCooldown 20
+		Where spawnbot_mission_spy
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 15
+		DesiredCount 4
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}	
+	
+	
+
+	
+	
+	
+	
+	Mission // Engineer - wave 3
+	{
+		Objective Engineer  
+
+		InitialCooldown 60
+		Where spawnbot
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		CooldownTime 60
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+		}
+	}
+	
+	
+	
+	
+	
+	Mission // Engineer - wave 4-6
+	{
+		Objective Engineer  
+
+		InitialCooldown 90
+		Where spawnbot
+		BeginAtWave 4
+		RunForThisManyWaves 3
+		CooldownTime 30  
+		DesiredCount 1
+
+		TFBot
+		{
+			Template T_TFBot_Engineer_Sentry_Teleporter
+		}
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+/////////////////
+//WAVES
+/////////////////	
+
+
+
+
+
+	
+//WAVE 1 	Giant Demoman + Uber Medics, Crit Pyros
+// 			Support: Fan Scouts, Sleeper Snipers
+//			Credits: 900
+
+
+
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes											
+		
+
+
+
+
+		WaveSpawn 	
+		{
+			Name "wave1_fanscouts"
+			Where spawnbot	
+			TotalCount 	1																	
+			MaxActive 6							
+			SpawnCount 3	
+			
+			Support 1								
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Fan Scout"
+				Health 150
+				Item "The Fan o'War"
+				ClassIcon scout_fanowar
+				WeaponRestrictions MeleeOnly
+			}
+		}
+			
+			
+			
+			
+			
+		
+		WaveSpawn 	
+		{
+			Name "wave1a_demos"
+			Where spawnbot										
+			TotalCount 	12								
+			MaxActive 6							
+			SpawnCount 3									
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 300		
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Item "Allbrero"
+				}	
+				TFBot
+				{	
+					Template T_TFBot_Medic
+				}
+				TFBot
+				{	
+					Template T_TFBot_Medic
+				}
+			}
+		}
+		
+		WaveSpawn
+		{
+			Name "wave1a_giant_soldiers"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 6
+			SpawnCount 3
+			
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 7
+				
+			TotalCurrency 200
+			
+			WaitForAllDead "wave1a_demos"
+			Squad 
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					Item "Tyrantium Helmet"
+				}
+				TFBot
+				{	
+					Template T_TFBot_Medic
+				}
+				TFBot
+				{	
+					Template T_TFBot_Medic
+				}
+			}
+		}
+			
+		WaveSpawn	
+		{
+			Name "wave1a_pyros"
+			Where spawnbot										
+			TotalCount 	20								
+			MaxActive 8											
+			SpawnCount 2			
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 8									
+			
+			TotalCurrency 400									
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Pyro"
+				Item "Old Guadalajara"
+				WeaponRestrictions PrimaryOnly
+				Attributes AlwaysFireWeapon
+				Skill Normal
+			}
+		}
+	}
+		
+	
+	
+	
+	
+	
+	
+// WAVE 2: 	Rocket Launcher Soldiers, SMG Snipers
+//			Tank, Giant Shotgun Heavies, Quick-Fix Medics, Tank
+//			Support: Fan Scouts, Sleeper Snipers, Engineers
+//			Credits: 1200
+			
+
+
+
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes											
+		
+
+
+		WaveSpawn 	
+		{
+			Name "wave2_fanscouts"
+			Where spawnbot	
+			TotalCount 	6																	
+			MaxActive 6							
+			SpawnCount 3	
+			
+			Support 1								
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 6									
+			
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Fan Scout"
+				Health 150
+				Item "The Fan o'War"
+				ClassIcon scout_fanowar
+				WeaponRestrictions MeleeOnly
+			}
+		}
+		
+		
+
+
+		WaveSpawn
+		{
+			Name "wave2a_soldiers"
+			Where spawnbot										
+			TotalCount 	24									
+			MaxActive 12										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 300									
+		
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave2a_smg"
+			Where spawnbot										
+			TotalCount 	12									
+			MaxActive 4										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 4									
+			
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Sniper
+				Name "SMG Sniper"
+				Classicon sniper_smg
+				Item "SMG"
+				Skill Hard
+				WeaponRestrictions SecondaryOnly
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave2b_heavies"
+			WaitForAllSpawned "wave2a_soldiers"
+			Where spawnbot										
+			TotalCount 	6									
+			MaxActive 2										
+			SpawnCount 2										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 9								
+			
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Shotgun
+					Item "One-Man Army"
+				}
+			}
+		}
+		
+		WaveSpawn 
+		{			
+			WaitForAllSpawned "wave2a_soldiers"
+			
+			TotalCount 1
+			WaitBeforeStarting 15								
+			TotalCurrency 400
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 25000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+	}
+	
+	
+	
+	
+	
+	
+// WAVE 3:	Giant Heavies, Giant Quick-Fix Medics, Bonk Scouts
+//			Boss Soldier, Giant Quick-Fix Medics, Soldiers (+ Battalion's)
+//			Support: Snipers, Spies, Engineers
+//			Credits: 1400
+	
+	
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes											
+		
+
+
+		WaveSpawn
+		{
+			Name "wave3a_soldiers"
+			Where spawnbot	
+			TotalCount 	12																	
+			MaxActive 12									
+			SpawnCount 4	
+			
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 10		
+	
+			Support 1								
+			
+
+		
+			TFBot
+			{
+				Class Soldier
+				Item "The Escape Plan"
+				Item "Stainless Pot"
+				Classicon soldier_escape
+				WeaponRestrictions MeleeOnly
+				CharacterAttributes
+				{
+					"move speed bonus"	3
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name "wave3a_soldiers"
+			Where spawnbot										
+			TotalCount 	16									
+			MaxActive 8										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 5								
+			WaitBetweenSpawns 8		
+			
+			TotalCurrency 500
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+					Name "Big Shotgun Soldier"
+					WeaponRestrictions SecondaryOnly
+					
+					 
+					Scale 1.5
+					Health 600
+				}
+			}
+		}
+				
+		
+		
+		
+		WaveSpawn						
+		{
+			Name "wave3b_soldiers"
+			WaitForAllSpawned "wave3a_giantheavy"
+			Where spawnbot										
+			TotalCount 	2					
+			MaxActive 2	
+			SpawnCount 2									
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 30									
+			
+			TotalCurrency 700
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Name "Giant Soldier"
+					ClassIcon soldier_giant
+					Item "Tyrantium Helmet"
+					Skill Expert
+					WeaponRestrictions PrimaryOnly
+					Attributes MiniBoss
+					Attributes HoldFireUntilFullReload
+					Attributes AlwaysCrit
+					ItemAttributes
+					{
+						ItemName "Rocket Launcher"
+						"faster reload rate" 0.5
+						"fire rate bonus" 0.75
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.5
+						"airblast vulnerability multiplier" 0.5
+						"override footstep sound set" 4
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave3b_soldiers"
+			WaitForAllSpawned "wave3a_giantheavy"
+			Where spawnbot										
+			TotalCount 	32									
+			MaxActive 12						
+			SpawnCount 6										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 6									
+			
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+			}
+		}
+	}
+	
+	
+	
+	
+// WAVE 4: 	Battalion Soldiers, Giant Demomen, Giant Medics, 2 Tanks
+//			Giant Force-a-Nature Scouts, Giant Demomen, Crit Huntsman Snipers (w/ Danger Shield), Tank
+//			Crit Heavies, Pyros + Medics, Giant Demomen
+//			Support: Spies, Snipers, Engineers, Fan Scouts
+//			Credits: 1600
+
+
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes											
+		
+		
+		WaveSpawn 	
+		{
+			Name "wave4_fanscouts"
+			Where spawnbot	
+			TotalCount 	1																	
+			MaxActive 8							
+			SpawnCount 4	
+			
+			Support 1								
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 6									
+			
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Fan Scout"
+				Health 150
+				Item "The Fan o'War"
+				ClassIcon scout_fanowar
+				WeaponRestrictions MeleeOnly
+			}
+		}
+		
+		
+
+
+		WaveSpawn 	
+		{
+			Name "wave4a_soldiers"
+			Where spawnbot										
+			TotalCount 	16									
+			MaxActive 12										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 10								
+			WaitBetweenSpawns 9									
+			
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Battalion 
+					 
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave4a_giantdemo"
+			Where spawnbot										
+			TotalCount 	12									
+			MaxActive 4										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 300
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demoman
+					Item "Allbrero"
+					Attributes AlwaysCrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		WaveSpawn 
+		{				
+			Name "wave4a_tank1"
+			TotalCount 1
+			WaitBeforeStarting 15								
+			TotalCurrency 300
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+		
+		
+		
+		
+		
+		
+		WaveSpawn		
+		{
+			Name "wave4b_giantpyro"
+			WaitForAllDead "wave4a_giantdemo"
+			Where spawnbot										
+			TotalCount 	2									
+			MaxActive 2									
+			SpawnCount 2			
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 6		
+			
+			TotalCurrency 300
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Item "Old Guadalajara"
+					Attributes AlwaysCrit
+				}
+				TFBot
+				{
+					
+					Name "Giant Shield Medic"
+					Class Medic
+					Skill Expert
+					Health 4700
+					ClassIcon medic_shield_qf
+					WeaponRestrictions SecondaryOnly
+					Item "The Quick-Fix"
+					Item "Surgeon's Stahlhelm"
+					Attributes MiniBoss
+					Attributes ProjectileShield
+					ItemAttributes
+					{
+						ItemName "The Quick-Fix"
+						"generate rage on heal" 2
+						"heal rate bonus" 100
+					}
+					CharacterAttributes
+					{
+						"airblast vulnerability multiplier" 0.6
+						"damage force reduction" 0.6
+						"move speed bonus" 0.5
+						"ubercharge rate bonus" 0.25
+						"increase buff duration" 2
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		WaveSpawn 
+		{				
+			TotalCount 1
+			WaitForAllDead "wave4a_giantdemo"
+			WaitBeforeStarting 5								
+			TotalCurrency 200
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+		
+		
+		
+		
+		
+		
+		
+
+		
+		WaveSpawn		
+		{
+			Name "wave4c_giantheavy"
+			WaitForAllDead "wave4a_giantdemo"
+			Where spawnbot										
+			TotalCount  4									
+			MaxActive 4									
+			SpawnCount 4			
+	
+			WaitBeforeStarting 8								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 300
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+					Item "Bunsen Brave"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+			}
+		}
+	}
+
+		
+		
+		
+		
+
+	
+	
+	
+//	WAVE 5:		SMG Snipers, Soldiers, Medics
+//				Giant Demos + Medics, Pyros, Crit Huntsman Snipers
+//				Giant Force-a-Nature Scouts + Quick-Fix Medics, Pyros, Tank
+//				Support: ???
+//				Credits: 1800
+
+
+
+
+
+
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes	
+
+
+
+
+
+		WaveSpawn 	
+		{
+			Name "wave5_fanscouts"
+			Where spawnbot	
+			TotalCount 	1																	
+			MaxActive 8							
+			SpawnCount 6	
+			
+			Support 1								
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Fan Scout"
+				Health 150
+				Item "The Fan o'War"
+				ClassIcon scout_fanowar
+				WeaponRestrictions MeleeOnly
+			}
+		}
+
+
+
+
+		WaveSpawn
+		{
+			Name "wave5a_giantscouts"
+			Where spawnbot										
+			TotalCount 	12									
+			MaxActive 4										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 7								
+			WaitBetweenSpawns 12									
+			
+			TotalCurrency 400
+		
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_FAN
+				Item "Bonk Leadwear"
+			}
+			TFBot
+			{
+				Class Medic
+			}
+			TFBot
+			{
+				Class Medic
+			}
+			TFBot
+			{
+				Class Medic
+			}
+		}
+
+
+
+
+
+										
+		
+		
+		
+		
+
+
+		WaveSpawn
+		{
+			Name "wave5a_smg"
+			Where spawnbot										
+			TotalCount 	24									
+			MaxActive 12										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 7									
+			
+			TotalCurrency 150
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Sniper
+					Name "SMG Sniper"
+					Classicon sniper_smg
+					Item "SMG"
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+				}
+			}
+		}
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave5a_soldier"
+			Where spawnbot										
+			TotalCount 	30									
+			MaxActive 12										
+			SpawnCount 6										
+	
+			WaitBeforeStarting 6								
+			WaitBetweenSpawns 4									
+			
+			TotalCurrency 250
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+				
+		
+		
+		
+		
+
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave5c_soldiers"
+			WaitForAllDead "wave5b_snipers"
+			Where spawnbot										
+			TotalCount 	28									
+			MaxActive 8										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 4								
+			WaitBetweenSpawns 4									
+			
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Battalion
+					 
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+				TFBot
+				{
+					Class Soldier
+					Skill Expert
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave5c_heavyshotgun"
+			WaitForAllDead "wave5b_snipers"
+			Where spawnbot										
+			TotalCount 	18									
+			MaxActive 12										
+			SpawnCount 6										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 6									
+			
+			TotalCurrency 500
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					 
+					
+					Health 6000
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun
+					 
+					
+					Health 1000
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun
+					 
+					
+					Health 1000
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun
+					 
+					
+					Health 1000
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Shotgun
+					 
+					
+					Health 1000
+				}
+			}
+		}
+	}
+		
+		
+		
+	
+
+
+
+
+
+
+
+// 	WAVE 6: Giant Soldiers + Medics, Crit Huntsmans + Pyros
+//			Minigun Heavy + Shotgun Heavies, 3 Tanks, Giant FaN Scouts + Giant QF Medics
+//			MUDDY! + Boss Medic + Boss Battalion Soldier
+//			Support: Snipers, Engineers, Fan Scouts
+//			Credits: 2000
+
+
+
+
+	Wave
+	{
+		StartWaveOutput											
+		{
+			Target wave_start_relay								
+			Action Trigger										
+		}
+		DoneOutput												
+		{
+			Target wave_finished_relay							
+			Action trigger										
+		}
+		
+		Checkpoint Yes		
+
+
+		
+		
+		
+		WaveSpawn 	
+		{
+			Name "wave6_fanscouts"
+			Where spawnbot	
+			TotalCount 	1																	
+			MaxActive 4							
+			SpawnCount 4	
+			
+			Support 1								
+	
+			WaitBeforeStarting 2								
+			WaitBetweenSpawns 5									
+			
+			TotalCurrency 0
+			
+			TFBot
+			{
+				Class Scout
+				Name "Fan Scout"
+				Health 150
+				Item "The Fan o'War"
+				ClassIcon scout_fanowar
+				WeaponRestrictions MeleeOnly
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave6_soldiers"
+			Where spawnbot	
+			TotalCount 	12																	
+			MaxActive 12									
+			SpawnCount 4	
+			
+			WaitBeforeStarting 10								
+			WaitBetweenSpawns 8		
+	
+			Support 1								
+			
+			TotalCurrency 400
+		
+			TFBot
+			{
+				Class Soldier
+				Item "The Escape Plan"
+				Item "Stainless Pot"
+				WeaponRestrictions MeleeOnly
+				Classicon soldier_escape
+				CharacterAttributes
+				{
+					"move speed bonus"	2
+				}
+			}
+		}
+		
+		
+		
+		
+
+		WaveSpawn
+		{
+			Name "wave6a_snipers"
+			Where spawnbot										
+			TotalCount 	20									
+			MaxActive 12										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 4					
+			
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman_Spammer
+					Scale 1
+
+					Attributes AlwaysCrit
+					Attributes HoldFireUntilFullReload
+				}
+				TFBot
+				{
+					Class Pyro
+					Name "Crit Pyro"
+					Item "Old Guadalajara"
+					Item "Gas Guzzler"
+					WeaponRestrictions PrimaryOnly
+					Attributes AlwaysFireWeapon
+					Attributes AlwaysCrit
+					Skill Expert
+					ItemAttributes
+					{
+						ItemName "Flamethrower"
+						"damage bonus" 1.25
+					}
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave6b_scouts"
+			WaitForAllDead "wave6a_snipers"
+			Where spawnbot										
+			TotalCount 	32									
+			MaxActive 8										
+			SpawnCount 2										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 1					
+			
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Expert
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave6b_giantsoldiers"
+			WaitForAllDead "wave6a_snipers"
+			Where spawnbot										
+			TotalCount 	8
+			MaxActive 4									
+			SpawnCount 2										
+	
+			WaitBeforeStarting 8							
+			WaitBetweenSpawns 5					
+			
+			TotalCurrency 400
+			
+			
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer_Reload
+					Item "Tyrantium Helmet"
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+					Item "Surgeon's Stahlhelm"
+				}
+			}
+		}
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave6b_heavies"
+			WaitForAllSpawned "wave6b_giantsoldiers"
+			Where spawnbot										
+			TotalCount 	24									
+			MaxActive 12										
+			SpawnCount 4										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 5									
+			
+			TotalCurrency 500
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+
+					Attributes AlwaysCrit
+				}
+				TFBot
+				{
+					Class Heavy
+					Name "Shotgun Heavy"
+					ClassIcon heavy_shotgun
+					 
+					
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+				}
+				TFBot
+				{
+					Class Heavy
+					Name "Shotgun Heavy"
+					ClassIcon heavy_shotgun
+					 
+					
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+				}
+				TFBot
+				{
+					Class Heavy
+					Name "Shotgun Heavy"
+					ClassIcon heavy_shotgun
+					 
+					
+					Skill Expert
+					WeaponRestrictions SecondaryOnly
+				}
+			}
+		}
+		
+		
+		
+		
+
+
+
+
+
+		WaveSpawn 
+		{				
+			TotalCount 1
+			WaitBeforeStarting 35								
+			TotalCurrency 300
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 35000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+		
+		
+		
+		
+		
+		WaveSpawn 
+		{				
+			TotalCount 1
+			WaitBeforeStarting 55								
+			TotalCurrency 250
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 30000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+		
+		
+		
+		WaveSpawn 
+		{				
+			TotalCount 1
+			WaitBeforeStarting 70								
+			TotalCurrency 400
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 35000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}			
+		}
+		
+		
+		
+		
+		
+
+		
+
+
+
+		WaveSpawn
+		{
+			Name "wave6_muddy"
+			WaitForAllDead "wave6b_heavies"
+			Where spawnbot
+			TotalCount 	3									
+			MaxActive 3										
+			SpawnCount 3										
+	
+			WaitBeforeStarting 0								
+			WaitBetweenSpawns 1									
+			
+			TotalCurrency 300	
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Demoman
+					Skill Expert
+					Name "THE MALICIOUS MUDDY"
+					Health 60000
+					Scale 1.8
+					WeaponRestrictions PrimaryOnly
+					Classicon muddy_boss
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Item "The Iron Bomber"
+					Item "The Splendid Screen"
+					Item "Pirate Bandana"
+					Item "A Whiff Of The Old Brimstone"
+					Item "Catastrophic Companions"
+					ItemAttributes
+					{
+						ItemName "The Iron Bomber"
+						"damage bonus" 2
+						"critboost on kill" 12
+						"clip size bonus" 20
+						"fire rate bonus" 0.2
+						"projectile spread angle penalty" 1.2
+						"faster reload rate" 0.25
+						"heal on kill" 3000
+					}
+					CharacterAttributes
+					{
+						"move speed bonus"	0.4
+						"damage force reduction" 0.3
+						"airblast vulnerability multiplier" 0.1
+						"airblast vertical vulnerability multiplier" 0
+						"rage giving scale"	0.9
+						"override footstep sound set" 2
+					}
+				}
+				
+				TFBot
+				{
+					Class Medic
+					Name "Muddy's Medic"
+					ClassIcon medic_giant
+					Skill Expert
+					Health 10000
+					Scale 1.6
+					Attributes SpawnWithFullCharge
+					Item "The Quick-Fix"
+					Item "Das Ubersternmann"
+					Item "Steam Pipe"
+					WeaponRestrictions SecondaryOnly
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					CharacterAttributes
+					{
+						"move speed bonus"	0.5
+						"damage force reduction" 0.6
+						"airblast vulnerability multiplier" 0.6
+						"heal rate bonus" 200
+					}
+				}
+				
+				
+				TFBot
+				{
+					Class Soldier
+					Name "Muddy's Backup Soldier"
+					Skill Expert
+					Health 15000
+					Scale 1.6
+					ClassIcon soldier_backup
+					Attributes SpawnWithFullCharge
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Item "Killer Exclusive"
+					 
+					Item "The Liberty Launcher"
+					Item "The Battalion's Backup"
+					ItemAttributes
+					{
+						ItemName "The Liberty Launcher"
+						"damage bonus" .5
+						"fire rate bonus" .3
+						"clip size upgrade atomic" 20
+						"projectile spread angle penalty" 2
+					}						
+					CharacterAttributes
+					{
+						"increase buff duration"	9.0
+					}
+				}
+			}
+		}
+	}
+}
+
+
+

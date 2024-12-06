@@ -1,0 +1,732 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+// HAVANA NORMAL - Danzon Destruction
+
+WaveSchedule													
+{
+
+	StartingCurrency		600		
+	
+	RespawnWaveTime 10
+	
+	CanBotsAttackWhileInSpawnRoom no
+	
+/////////////////
+//MISSIONS
+/////////////////	
+
+
+
+
+
+	Mission
+	{
+		Objective DestroySentries
+		InitialCooldown 5
+		Where spawnbot_mission_sentrybuster
+		BeginAtWave 2
+		RunForThisManyWaves 11
+		CooldownTime 40
+		
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+	
+	
+	
+	
+	
+	Mission // Sniper - wave 5
+	{
+		Objective Sniper
+
+		InitialCooldown 4
+		Where spawnbot_mission_sniper
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 50
+		DesiredCount 2
+
+		TFBot
+		{
+			Class Sniper
+			Skill Hard
+			Item "The Sydney Sleeper"
+			Item "The Bushwacka"
+			ClassIcon sniper_sydneysleeper
+			Name "Sleeper Sniper"
+			MaxVisionRange 3000
+		}
+	}
+	
+	
+	
+	Mission // Spy - wave 5
+	{
+		Objective Spy  
+
+		InitialCooldown 30
+		Where spawnbot_mission_spy
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		CooldownTime 40
+		DesiredCount 1
+
+		TFBot
+		{
+			Class Spy
+			Skill Expert
+			Name Spy
+		}
+	}	
+	
+	
+	
+	Mission // Fan o' War Scout - wave 3-5
+	{
+		Objective Spy  
+
+		InitialCooldown 0
+		Where spawnbot
+		BeginAtWave 3
+		RunForThisManyWaves 3
+		CooldownTime 20
+		DesiredCount 4
+
+		TFBot
+		{
+			Class Scout
+			Name "Fan Scout"
+			Item "The Fan o'War"
+			WeaponRestrictions MeleeOnly
+		}
+	}
+	
+	
+	
+	
+	
+// WAVE 1: 	melee scouts, pyros
+//			currency: 600
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		WaveSpawn
+		{
+			Name "wave1a_pyros"
+			
+			Where spawnbot
+			TotalCount 16
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 350
+			
+	
+			TFBot
+			{
+				Class Pyro
+				Skill Easy
+			}
+		}
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave1b_scouts"
+			
+			Where spawnbot
+			WaitForAllSpawned "wave1a_pyros"
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 7
+			TotalCurrency 250
+			
+	
+			TFBot
+			{
+				Class Scout
+				WeaponRestrictions MeleeOnly
+				Skill Normal
+			}
+		}
+	}
+	
+// WAVE 2:	sollies, smg snipers
+//			currency: 600
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		WaveSpawn
+		{
+			Name "wave2a_snipers"
+			
+			Where spawnbot
+			TotalCount 12
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Sniper
+				Skill Normal
+				WeaponRestrictions SecondaryOnly
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave2b_soldiers"
+			
+			Where spawnbot
+			WaitForAllSpawned "wave2a_snipers"
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 4
+			TotalCurrency 400
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+	}
+	
+	
+	
+	
+// WAVE 3: 	giant pyro, soldiers
+//			support: fan scouts
+//			currency: 700
+
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		WaveSpawn
+		{
+			Name "wave3a_soldiers"
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 6
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Hard
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave3a_pyro"
+			
+			Where spawnbot
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 4
+			TotalCurrency 500
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Pyro
+			}
+		}
+	}
+	
+	
+	
+// WAVE 4: 	Pyros, Steel Fist Heavies, Tank
+//			currency: 700
+
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		WaveSpawn
+		{
+			Name "wave4a_pyros"
+			
+			Where spawnbot
+			TotalCount 32
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 5
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Skill Normal
+			}
+		}
+		
+		
+		WaveSpawn
+		{
+			Name "wave4a_heavies"
+			
+			Where spawnbot
+			TotalCount 8
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Fist
+			}
+		}
+	
+	
+	
+	
+		WaveSpawn 
+		{			
+			TotalCount 1
+			WaitBeforeStarting 45								
+			TotalCurrency 400
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 20000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}	
+		}
+	}
+	
+	
+// WAVE 5: 	giant demoman, soldiers
+//			support: fan scouts 
+//			currency: 800
+
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave5a_demoman"
+			
+			Where spawnbot
+			TotalCount 3
+			MaxActive 1
+			SpawnCount 1
+			WaitBeforeStarting 10
+			WaitBetweenSpawns 12
+			TotalCurrency 500
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demoman
+			}
+		}
+		
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave5a_soldier"
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 18
+			SpawnCount 6
+			WaitBeforeStarting 3
+			WaitBetweenSpawns 8
+			TotalCurrency 300
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Normal
+			}
+		}
+	}	
+	
+	
+	
+	
+// WAVE 6:	giant pyro + medics
+//			smg snipers, soldiers
+//			currency: 800
+
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave6a_pyros"
+			
+			Where spawnbot
+			WaitForAllSpawned "wave6b_soldiers"
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 8
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Skill Hard
+				}
+				TFBot
+				{
+					Class Medic
+				}
+				TFBot
+				{
+					Class Medic
+				}
+				TFBot
+				{
+					Class Medic
+				}
+			}
+		}
+	
+	
+	
+	
+		WaveSpawn
+		{
+			Name "wave6b_soldiers"
+			
+			Where spawnbot
+			TotalCount 18
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 7
+			WaitBetweenSpawns 10
+			TotalCurrency 400
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Hard
+			}
+		}
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave6b_sniper"
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 7
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Sniper
+				WeaponRestrictions MeleeOnly
+				Skill Hard
+			}
+		}
+	}
+
+
+// WAVE 7:	scouts, pyros
+//			tank, demomen
+//			giant heavy + giant medic
+//			support: fan scouts, snipers
+//			currency: 600
+
+
+
+	Wave
+	{
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		Checkpoint Yes
+		
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave7a_scouts"
+			
+			Where spawnbot
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 8
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+			}
+		}
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave7a_pyros"
+			
+			Where spawnbot
+			TotalCount 32
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 10
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Pyro
+				Skill Hard
+			}
+		}
+		
+		
+		WaveSpawn 
+		{			
+			TotalCount 1
+			WaitForAllDead "wave7a_pyros"								
+			TotalCurrency 400
+
+			FirstSpawnOutput   
+			{
+				Target boss_spawn_relay
+				Action Trigger
+			}
+
+			Tank
+			{
+				Health 24000
+				Speed 75
+				Name "boss"
+				StartingPathTrackNode "boss_path_1"
+
+				OnKilledOutput 
+				{
+					Target boss_dead_relay
+					Action Trigger
+				}
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave7b_sniper"
+			
+			Where spawnbot
+			WaitForAllSpawned "wave6a_pyros"
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 6
+			WaitBeforeStarting 2
+			WaitBetweenSpawns 8
+			TotalCurrency 200
+			
+			TFBot
+			{
+				Class Sniper
+				Name "SMG Sniper"
+				Classicon sniper_smg
+				WeaponRestrictions SecondaryOnly
+				Skill Hard
+			}
+		}
+		
+		
+		
+		WaveSpawn
+		{
+			Name "wave7c_heavy"
+			
+			Where spawnbot
+			WaitForAllDead "wave7b_sniper"
+			TotalCount 1
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 6
+			WaitBetweenSpawns 12
+			TotalCurrency 200
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Item "Football Helmet"
+					Name "Big Heavy"
+					Health 3000
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic
+				}
+			}
+		}
+	}
+}
+		
+		
+		
+	
+			
