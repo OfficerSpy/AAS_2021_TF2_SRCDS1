@@ -1,0 +1,2035 @@
+// mission by randomguy
+#base	robot_standard.pop
+#base	robot_giant.pop
+// BETA BUFFDATE CHANGELOG:
+// w1:
+// Steel Gauntlet Umed pair uses T_TFBot_Medic instead of T_TFBot_Medic_QuickUber
+// Steel Gauntlet Umed pair WaitBetweenSpawns 30 -> 45
+// All Bigheals now Popping Bigheals.
+// Gpyros have only 1 Bigheal instead of 2.
+// w2:
+// Huntsman Snipers given penetration to troll medics.
+// w3:
+// BIG Gun AI level Easy -> Expert
+// Gave tag halfflank to BIG Guns (new tag in rc2) so BIG Gun flank a *bit* but not too much.
+// w4:
+// Gave tag halfflank to common pyros (new tag in rc2) so pyros flank a *bit* but not too much.
+// T_TFBot_Giant_Medic replaced with T_TFBot_Giant_Medic_QuickUber for more consistent but weaker ucharge.
+// Final duo WaitBeforeStarting	115 -> 105
+// w5:
+// Final tank hp 25k -> 30k.
+
+map_by_eyes
+{
+	CanBotsAttackWhileInSpawnRoom			no
+	RespawnWaveTime							4
+	StartingCurrency						400
+	Advanced								1
+	AddSentryBusterWhenDamageDealtExceeds	3000
+	AddSentryBusterWhenKillCountExceeds		15
+
+	Templates
+	{
+		T_TFBot_Giant_Soldier_Spammer_Hyper
+		{
+			Class				Soldier
+			Name				"Giant Hyper Fire Soldier"
+			ClassIcon			soldier_spammer_hyper_lite
+			Health				4200
+			Skill				Expert
+			WeaponRestrictions	PrimaryOnly
+			Attributes			MiniBoss
+
+			ItemAttributes
+			{
+				ItemName				TF_WEAPON_ROCKETLAUNCHER
+				"faster reload rate"	-1
+				"fire rate bonus"		0.3
+			}
+
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+				"Projectile speed decreased"		0.65
+			}
+		}
+
+		T_TFBot_Giant_Soldier_Burstfire_Fakerock
+		{
+			Class				Soldier
+			Name				"Giant Burst Hyper Soldier"
+			ClassIcon			soldier_burstfire_hyper_lite
+			Health				4200
+			Skill				Expert
+			WeaponRestrictions	PrimaryOnly
+			Attributes			MiniBoss
+			Attributes			HoldFireUntilFullReload
+
+			ItemAttributes
+			{
+				ItemName						TF_WEAPON_ROCKETLAUNCHER
+				// "damage bonus" 2.0
+				"faster reload rate"			0.4
+				"fire rate bonus"				0.2
+				"clip size upgrade atomic"		5.0
+				"Projectile speed increased"	0.9
+			}
+
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		3
+			}
+		}
+
+		T_TFBot_Pyro_DragonFury	// cosmetics from this reddit thread: https://www.reddit.com/r/tf2/comments/qbfls2/best_dragon_loadout_for_pyro/
+		{
+			Class		Pyro
+			Skill		Easy
+			ClassIcon	pyro_dragon_fury_swordstone	// custom icon
+			Name		"Dragonic Fury"
+			Item		"The Dragon's Fury"
+			Item		"Feathered Fiend"	// Feathered Fiend
+			Item		"Deity's Dress"	// Deity's Dress
+			Item		"Loaf Loafers"	// Loaf Loafers
+
+			ItemAttributes
+			{
+				ItemName				"Loaf Loafers"	// LL
+				"set item tint rgb"		5801378	// Team Spirit BLU
+				"item style override"	1	// alt style "freshly baked"
+			}
+			// painting items is the most painful thing i hate this.
+			// this took ten minutes.
+		}
+
+		T_TFBot_Giant_Pyro_Airblast
+		{
+			Template	T_TFBot_Giant_Pyro
+			Item		"Traffic Cone"
+			Item		"The Degreaser"
+			Name		"Super Giant Airblast Pyro"
+			ClassIcon	pyro_reflect_daan
+
+			ItemAttributes
+			{
+				ItemName					"The Degreaser"
+				"airblast pushback scale"	5
+				"mult airblast refire time"	0.001
+				"attach particle effect"	3085
+			}
+		}
+
+		T_TFBot_Heavyweapons_Heavyweight_Champ_Steel
+		{
+			Class				Heavyweapons
+			Name				"Steel Manlet"
+			Skill				Easy
+			ClassIcon			heavy_steelfist
+			WeaponRestrictions	MeleeOnly
+			Item				"Fists of Steel"
+			Item				"The U-clank-a"
+		}
+
+		T_TFBot_Giant_Heavyweapons_LaserRocket	// By me, used in Caster ages ago lol.
+		{
+			Name				"Giant Rocket Beam Heavy"
+			Class				Heavyweapons
+			ClassIcon			heavy_atomic_rocket
+			Skill				Expert
+			Health				5000
+			Attributes			MiniBoss
+			WeaponRestrictions	PrimaryOnly
+			MaxVisionRange		1200
+			Item				"the mk 50"
+
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.3
+				"airblast vulnerability multiplier"	0.3
+				"override footstep sound set"		2
+			}
+
+			ItemAttributes
+			{
+				ItemName					TF_WEAPON_MINIGUN
+				"attach particle effect"	704
+				"override projectile type"	13
+				"energy weapon penetration"	1
+			}
+
+			ItemAttributes
+			{
+				ItemName						TF_WEAPON_SHOTGUN_HWG
+				"override projectile type"		2
+				"mini rockets"					1
+				"damage bonus"					8
+				is_passive_weapon				1
+				"Projectile speed decreased"	0.3
+				"faster reload rate"			-1
+			}
+		}
+
+		T_TFBot_Giant_Medic_QuickUber
+		{
+			Name				"Giant Quick-Uber Medic"
+			Item				"The Byte'd Beak"
+			Class				Medic
+			Skill				Expert
+			Health				4500
+			ClassIcon			medic_uber
+			WeaponRestrictions	SecondaryOnly
+			Attributes			MiniBoss
+			Attributes			SpawnWithFullCharge
+
+			ItemAttributes
+			{
+				ItemName				TF_WEAPON_MEDIGUN
+				"heal rate bonus"		200
+				"ubercharge rate bonus"	5
+				"uber duration bonus"	-3
+			}
+
+			CharacterAttributes
+			{
+				"move speed bonus"						0.5
+				"damage force reduction"				0.6
+				"airblast vulnerability multiplier"		0.6
+				"bot medic uber health threshold"		3500
+				"bot medic uber deploy delay duration"	5
+			}
+		}
+
+		T_TFBot_Giant_Bowman_Rapid_Fire_Bleed_Penetration	// absolutely diabolical custom bot i cooked. i am cooked.
+		{
+			Class		Sniper
+			Name		"Biblically Accurate Bowman"
+			Item		"The Huntsman"
+			Item		"Rifleman's Regalia"
+			ClassIcon	sniper_bow_multi_bleed_penetrator
+			Skill		Expert
+			Health		2500
+			Attributes	MiniBoss
+
+			ItemAttributes
+			{
+				ItemName					"The Huntsman"
+				"bleeding duration"			5
+				"fire rate bonus"			0.6
+				"projectile penetration"	1
+				"dmg bonus vs buildings"	2
+			}
+
+			CharacterAttributes
+			{
+				"move speed bonus"					0.5
+				"damage force reduction"			0.4
+				"airblast vulnerability multiplier"	0.4
+				"override footstep sound set"		4
+				"head scale"						0.7
+			}
+		}
+
+		T_TFBot_Medic_Bigheal_Popping
+		{
+			Template	T_TFBot_Medic_Bigheal
+			Name		"Popping Bigheal Medic"
+			Item		"Otolaryngologist's Mirror"
+			ClassIcon	medic_pop
+			Attributes	SpawnWithFullCharge
+		}
+
+		T_TFBot_Sniper_Huntsman_Penetrator
+		{
+			Template	T_TFBot_Sniper_Huntsman
+			Name		"Penetrator Bowman"
+			ClassIcon	sniper_bow_penetrator
+
+			ItemAttributes
+			{
+				ItemName					"The Huntsman"
+				"projectile penetration"	1
+			}
+		}
+	}
+
+	Mission
+	{
+		Objective			Spy
+		InitialCooldown		30
+		Where				spawnbot_mission_spy
+		BeginAtWave			4
+		RunForThisManyWaves	1
+		CooldownTime		30
+		DesiredCount		4
+
+		TFBot
+		{
+			Template	T_TFBot_Spy
+		}
+	}
+
+	Mission
+	{
+		Objective			Sniper
+		Where				spawnbot_mission_sniper
+		Where				spawnbot_mission_sniper2
+		BeginAtWave			2
+		RunForThisManyWaves	1
+		InitialCooldown		30
+		CooldownTime		45
+		DesiredCount		2
+
+		TFBot
+		{
+			Template	T_TFBot_Sniper
+		}
+	}
+
+	Mission
+	{
+		Objective			Sniper
+		Where				spawnbot_mission_sniper
+		Where				spawnbot_mission_sniper2
+		BeginAtWave			5
+		RunForThisManyWaves	1
+		InitialCooldown		5
+		CooldownTime		35
+		DesiredCount		2
+
+		TFBot
+		{
+			Template	T_TFBot_Sniper_Sydney_Sleeper
+		}
+	}
+	// Meow, meow, i'm a cow. meow meow im a cow.
+
+	Mission
+	{
+		Objective			Engineer
+		Where				spawnbot_mission_sentrybuster
+		BeginAtWave			1
+		RunForThisManyWaves	3
+		InitialCooldown		30
+		CooldownTime		45
+		DesiredCount		1
+
+		TFBot
+		{
+			Template		T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_invasion
+			TeleportWhere	spawnbot_farleft
+			TeleportWhere	spawnbot_farright
+			TeleportWhere	spawnbot_left
+			TeleportWhere	spawnbot_right
+			TeleportWhere	spawnbot_main
+			// disposables
+			TeleportWhere	spawnbot_disposable
+			TeleportWhere	spawnbot_farleft_disposable
+			TeleportWhere	spawnbot_farright_disposable
+			TeleportWhere	spawnbot_left_disposable
+			TeleportWhere	spawnbot_right_disposable
+			TeleportWhere	spawnbot_main_disposable
+			// missions
+			TeleportWhere	spawnbot_mission_sniper
+			TeleportWhere	spawnbot_mission_sniper2
+			TeleportWhere	spawnbot_mission_sentrybuster
+			// not giving it para spawns for now...
+		}
+	}
+
+	Mission
+	{
+		Objective			Engineer
+		Where				spawnbot_mission_sentrybuster
+		BeginAtWave			5
+		RunForThisManyWaves	1
+		InitialCooldown		15
+		CooldownTime		30
+		DesiredCount		1
+
+		TFBot
+		{
+			Template		T_TFBot_Engineer_Sentry_Teleporter
+			TeleportWhere	spawnbot
+			TeleportWhere	spawnbot_invasion
+			TeleportWhere	spawnbot_farleft
+			TeleportWhere	spawnbot_farright
+			TeleportWhere	spawnbot_left
+			TeleportWhere	spawnbot_right
+			TeleportWhere	spawnbot_main
+			// disposables
+			TeleportWhere	spawnbot_disposable
+			TeleportWhere	spawnbot_farleft_disposable
+			TeleportWhere	spawnbot_farright_disposable
+			TeleportWhere	spawnbot_left_disposable
+			TeleportWhere	spawnbot_right_disposable
+			TeleportWhere	spawnbot_main_disposable
+			// missions
+			TeleportWhere	spawnbot_mission_sniper
+			TeleportWhere	spawnbot_mission_sniper2
+			TeleportWhere	spawnbot_mission_sentrybuster
+			// not giving it para spawns for now...
+		}
+	}
+
+	Mission
+	{
+		Objective			DestroySentries
+		Where				spawnbot_mission_sentrybuster
+		InitialCooldown		30
+		CooldownTime		30
+		BeginAtWave			1
+		RunForThisManyWaves	8
+
+		TFBot
+		{
+			Class				Soldier
+			ClassIcon			sentry_buster
+			Name				"Sentry Buster With The Concheror"
+			Health				2500
+			Item				"The Concheror"
+			Attributes			SpawnWithFullCharge
+			Attributes			MiniBoss
+			WeaponRestrictions	MeleeOnly
+
+			CharacterAttributes
+			{
+				"move speed bonus"					1
+				"damage force reduction"			0.5
+				"airblast vulnerability multiplier"	0.5
+				"override footstep sound set"		7
+				"cannot be backstabbed"				1
+				"increase buff duration"			9
+				"deploy time increased"				.5
+			}
+		}
+	}
+	// WAVE 1 //////////CURRENCY 600///////////////////////////////////
+
+	Wave
+	{
+		InitWaveOutPut
+		{
+			Target	wave_start_relay
+			Action	RunScriptCode
+			Param	"
+			// local ent = Entities.FindByClassname(null, `tf_objective_resource`)
+            //     if (ent)
+            //     {
+            //         NetProps.SetPropString(ent, `m_iszMvMPopfileName`, `Robotic Typhoon (Expert)`)
+            //     } //^ sets mission name
+			
+			EntFire(`bombpath_choose_left_relay`,`Trigger`)
+			"
+		}
+
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	trigger
+		}
+
+		WaveSpawn
+		{
+			Name			stage1
+			Where			spawnbot_main
+			TotalCount		2
+			MaxActive		2
+			SpawnCount		2
+			TotalCurrency	60
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_RocketShotgun
+					Name		"Yummy Yummy Feeders!"
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Extended_Concheror
+					Name		"Be nice it's his first day."
+
+					CharacterAttributes
+					{
+						"deploy time increased"	.5
+					}
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/soldier_mvm_m_taunts17.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/soldier_mvm_m_taunts17.mp3
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_invasion
+			TotalCount			6
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	3
+			WaitBetweenSpawns	45	// 30
+			TotalCurrency		15
+			RandomSpawn			1
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Heavyweapons_Fist
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic	// _QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage1
+			Where				spawnbot_invasion
+			TotalCount			10
+			MaxActive			6
+			SpawnCount			2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	3
+			TotalCurrency		25
+
+			TFBot
+			{
+				Class	Demoman
+				Skill	Normal
+			}
+		}
+
+		WaveSpawn
+		{
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		30
+			TotalCurrency			100
+			FirstSpawnWarningSound	mvm/mvm_tank_start.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					15000
+				Speed					75
+				StartingPathTrackNode	tank_path_opp_b1
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 15k (15000) HP!`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			WaitForAllSpawned	stage1
+			Where				spawnbot_main
+			TotalCount			9
+			MaxActive			6
+			SpawnCount			3
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	20
+			TotalCurrency		90
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer_Reload
+					Tag			nav_prefer_left	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal_Popping
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal_Popping
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			WaitForAllSpawned	stage1
+			Where				spawnbot_farleft
+			Where				spawnbot_farright
+			TotalCount			40
+			MaxActive			12
+			SpawnCount			4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	5
+			TotalCurrency		100
+
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ_Steel
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_farleft
+			Where				spawnbot_farright
+			TotalCount			26
+			MaxActive			8
+			SpawnCount			2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	3
+			TotalCurrency		75
+
+			TFBot
+			{
+				Template	T_TFBot_Heavyweapons_Heavyweight_Champ_Steel
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_left
+			Where				spawnbot_right
+			TotalCount			26
+			MaxActive			8
+			SpawnCount			2
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	3
+			TotalCurrency		75
+
+			TFBot
+			{
+				Class	Demoman
+				Skill	Normal
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_farleft
+			Where				spawnbot_farright
+			TotalCount			9
+			MaxActive			6
+			SpawnCount			3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	25
+			TotalCurrency		60
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Pyro_Airblast
+					Tag			nav_prefer_left	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal_Popping
+				}
+				// TFBot
+				// {
+				// Template	T_TFBot_Medic_Bigheal_Popping
+				// }
+
+				TFBot
+				{
+					Template	T_TFBot_Soldier_Extended_Concheror
+
+					CharacterAttributes
+					{
+						"deploy time increased"	.5
+					}
+				}
+			}
+		}
+	}
+	// WAVE 2 //////////CURRENCY 600///////////////////////////////////
+
+	Wave
+	{
+		InitWaveOutPut
+		{
+			Target	wave_start_relay
+			Action	RunScriptCode
+			Param	"
+			// local ent = Entities.FindByClassname(null, `tf_objective_resource`)
+            //     if (ent)
+            //     {
+            //         NetProps.SetPropString(ent, `m_iszMvMPopfileName`, `Robotic Typhoon (Expert)`)
+            //     } //^ sets mission name
+			
+			EntFire(`bombpath_choose_right_relay`,`Trigger`)
+			"
+		}
+
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	trigger
+		}
+
+		WaveSpawn
+		{
+			Name				stage1
+			Where				spawnbot_main
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_HeavyWeapons
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage1
+			Where				spawnbot_farright
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_HeavyWeapons
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/heavy_mvm_m_taunts12.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/heavy_mvm_m_taunts12.mp3
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			WaitForAllDead		stage1
+			Where				spawnbot	// actually using this oml
+			TotalCount			20
+			MaxActive			12
+			SpawnCount			4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	10
+			TotalCurrency		100
+
+			Squad
+			{
+				TFBot
+				{
+					Class	Pyro
+					// Skill Expert
+					// ClassIcon pyro_reflect_daan
+					// Item "Traffic Cone"
+					// Item "The Degreaser" //normally i would but it's 10 pm, i have a headache and i'm feeling evil >:3
+					// also the cone and icon and eyes are indication enough lo
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_BigHeal	// _QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			WaitForAllDead		stage1
+			Where				spawnbot_farleft
+			TotalCount			2	// 3
+			MaxActive			2	// 3
+			SpawnCount			1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	15
+			TotalCurrency		100
+
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier	// _Crit
+				Attributes	AlwaysCrit
+				Tag			nav_prefer_right	// should fix them going the wrong way
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_invasion
+			TotalCount			40	// 50 //40
+			MaxActive			15
+			SpawnCount			5
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	4
+			TotalCurrency		200	// change to 100 if give support cash
+
+			TFBot
+			{
+				Template	T_TFBot_Sniper_Huntsman_Penetrator
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					stage3g
+			WaitForAllSpawned		stage2
+			Where					spawnbot_plane_behind
+			TotalCount				2	// 3
+			MaxActive				2	// 3
+			SpawnCount				1
+			WaitBeforeStarting		15
+			WaitBetweenSpawns		15
+			TotalCurrency			50
+			FirstSpawnWarningSound	ambient_mp3/siren.mp3
+
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier	// _Crit
+				Attributes	AlwaysCrit
+				Tag			nav_prefer_right	// should fix them going the wrong way
+				// para
+				// Attributes Parachute
+				// Item "the b.a.s.e. jumper"
+				// no more para i just want chaos
+
+				CharacterAttributes
+				{
+					"cancel falling damage"	1
+				}
+			}
+		}
+
+		WaveSpawn	// please for the love of god stop stacking
+		{
+			Name				stage4
+			WaitForAllSpawned	stage3g
+			Where				spawnbot_main
+			TotalCount			4	// 6
+			MaxActive			4	// 6
+			SpawnCount			2
+			WaitBeforeStarting	10	// 0
+			WaitBetweenSpawns	20
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_HeavyWeapons
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			WaitForAllSpawned		stage3g
+			Support					Limited
+			WaitBeforeStarting		11
+			FirstSpawnWarningSound	vo/mvm/mght/heavy_mvm_m_domination08.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			WaitForAllSpawned		stage3g
+			Support					Limited
+			WaitBeforeStarting		11
+			FirstSpawnWarningSound	vo/mvm/mght/heavy_mvm_m_domination08.mp3
+		}
+
+		WaveSpawn
+		{
+			Name				stsupp
+			WaitForAllSpawned	stage3
+			Where				spawnbot_invasion
+			TotalCount			40
+			MaxActive			12
+			SpawnCount			4
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	4
+			// TotalCurrency 100 //i really don't know if i should have this here, i feel like you can DEFO kill all the giants and commons before this triggers (effectively deleting the cash from the mission)
+			Support				1
+
+			TFBot
+			{
+				Class	Demoman
+				Skill	Normal
+			}
+		}
+	}
+	// WAVE 3 //////////CURRENCY 600///////////////////////////////////
+
+	Wave	// inspired by an old exp i made. the first subwave anyway.
+	{
+		InitWaveOutPut
+		{
+			// Target bombpath_choose_left_relay
+			// Action Trigger
+			Target	wave_start_relay
+			Action	RunScriptCode
+			Param	"
+			EntFire(`bombpath_choose_left_relay`,`Trigger`)
+			ClientPrint(null,3,`\x07FFEA00A tank will teleport in during this wave!`)
+			//teletank indicator prop & particle
+			//inspired by Coastal Cashout
+			SpawnEntityFromTable(`info_particle_system`,
+			{
+				targetname = `teletank_indicator`
+				origin = `-2880 1088 30`
+				start_active = 1,
+				effect_name = `teleporter_mvm_bot_persist`
+			})
+			SpawnEntityFromTable(`prop_dynamic`,
+			{
+				targetname = `teletank_indicator`
+				origin = `-2880 1088 30`
+				model = `models/pickups/emitter.mdl`
+				skin = 1
+			})
+
+			// local ent = Entities.FindByClassname(null, `tf_objective_resource`)
+            //     if (ent)
+            //     {
+            //         NetProps.SetPropString(ent, `m_iszMvMPopfileName`, `Robotic Typhoon (Expert)`)
+            //     } //^ sets mission name
+			"
+		}
+
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	trigger
+		}
+
+		WaveSpawn
+		{
+			Name				stage1
+			Where				spawnbot_main
+			TotalCount			6	// 9
+			MaxActive			6	// 9
+			SpawnCount			1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	10	// 5 (was too spammy lmfao) //hope this isn't TOO too spammy... change to 10 if it is...
+			TotalCurrency		100
+
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier_RocketPush
+				Tag			nav_prefer_left	// should fix them going the wrong way
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_dominationscout03.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_dominationscout03.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		5.5
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_laughevil01.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		5.5
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_laughevil01.mp3
+		}
+
+		WaveSpawn
+		{
+			Name				stage1a
+			Where				spawnbot_farleft
+			TotalCount			20
+			MaxActive			8
+			SpawnCount			4
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	12	// 10
+			TotalCurrency		100
+
+			TFBot	// i should make this a template huh.
+			{
+				Class	Scout
+				Skill	Expert	// Surely, this is tolerable :clueless:
+				Health	300
+				Scale	1.5
+				Name	"BIG Gun"
+				Tag		halfflank
+
+				ItemAttributes
+				{
+					itemName		tf_weapon_scattergun
+					"damage bonus"	1.5
+				}
+
+				CharacterAttributes
+				{
+					"hand scale"	2
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		5
+			TotalCurrency			100
+			FirstSpawnWarningSound	mvm/mvm_tele_deliver.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					20000	// 25000
+				Speed					75
+				StartingPathTrackNode	tank_path_right_b8
+				Skin					0
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				if(Entities.FindByName(null, `teletank_hintAW3`) == null) //create telein tank hint
+				{
+						SpawnEntityFromTable(`training_annotation`, {
+							targetname = `teletank_hintAW3`
+							origin = `-2880 1088 128`
+							angles = `0 0 0`
+							lifetime = `5`
+							display_text = `A tank has teleported in!`
+						})
+				}
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 20k (20000) HP!`)
+				EntFire(`teletank_hintAW3`,`Show`)
+				"
+			}
+
+			DoneOutput
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				EntFire(`teletank_hintAW3`,`kill`);
+				EntFire(`teletank_indicator`,`kill`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			WaitForAllDead		stage1
+			Where				spawnbot_main
+			TotalCount			8
+			MaxActive			6
+			SpawnCount			2
+			WaitBeforeStarting	0	// 15
+			WaitBetweenSpawns	20
+			TotalCurrency		100
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_RocketPush
+					Tag			nav_prefer_left	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2a
+			WaitForAllSpawned	stage1a
+			Where				spawnbot_invasion
+			TotalCount			28
+			MaxActive			10
+			SpawnCount			4
+			WaitBeforeStarting	20	// 10
+			WaitBetweenSpawns	5
+			TotalCurrency		100
+
+			TFBot
+			{
+				Class	Soldier
+				Skill	Normal
+				// Item "The Direct Hit"
+				// ClassIcon soldier_dh_nys
+				// Name "dodge"
+			}
+		}
+
+		WaveSpawn
+		{
+			WaitForAllSpawned		stage1
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		45
+			TotalCurrency			100
+			FirstSpawnWarningSound	mvm/mvm_tank_start.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					20000
+				Speed					75
+				StartingPathTrackNode	tank_path_opp_b1
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 20k (20000) HP!`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage999999
+			WaitForAllSpawned	stage2a
+			Where				spawnbot_invasion
+			TotalCount			28
+			MaxActive			10
+			SpawnCount			1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	0.5	// S P A M!!!!!
+			// TotalCurrency 100 //idk you might be able to lose this .w.
+			Support				1
+
+			TFBot
+			{
+				Template	T_TFBot_Demoman_Knight
+			}
+		}
+	}
+	// WAVE 4 //////////CURRENCY 600///////////////////////////////////
+
+	Wave
+	{
+		InitWaveOutPut
+		{
+			Target	wave_start_relay
+			Action	RunScriptCode
+			Param	"
+			// local ent = Entities.FindByClassname(null, `tf_objective_resource`)
+            //     if (ent)
+            //     {
+            //         NetProps.SetPropString(ent, `m_iszMvMPopfileName`, `Robotic Typhoon (Expert)`)
+            //     } //^ sets mission name
+			
+			EntFire(`bombpath_choose_right_relay`,`Trigger`)
+			"
+		}
+
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	trigger
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_left
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Burstfire_Fakerock
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Regen
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_battlecry03.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/soldier_mvm_m_battlecry03.mp3
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_farright
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	5
+			WaitBetweenSpawns	0
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Burstfire_Fakerock
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Regen
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_farright
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	0
+			TotalCurrency		100
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Soldier_Spammer_Hyper
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Regen
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_farright
+			TotalCount			4
+			MaxActive			4
+			SpawnCount			2
+			WaitBeforeStarting	65
+			WaitBetweenSpawns	25
+			TotalCurrency		200
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Bowman_Rapid_Fire_Bleed_Penetration
+					// Attributes AlwaysCrit
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_Regen
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		67
+			FirstSpawnWarningSound	vo/mvm/norm/sniper_mvm_meleedare05.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		67
+			FirstSpawnWarningSound	vo/mvm/norm/sniper_mvm_meleedare05.mp3
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_farright
+			TotalCount			2
+			MaxActive			2
+			SpawnCount			2
+			WaitBeforeStarting	105	// 115
+			WaitBetweenSpawns	0
+			TotalCurrency		100
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_LaserRocket
+					Attributes	AlwaysCrit
+					Tag			nav_prefer_right	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Giant_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot
+			TotalCount			50
+			MaxActive			4
+			SpawnCount			1
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	4
+			TotalCurrency		100
+			Support				1
+
+			TFBot
+			{
+				Class		Pyro
+				Skill		Expert
+				Attributes	AlwaysFireWeapon
+				Tag			halfflank
+			}
+		}
+	}
+	// WAVE 5 //////////CURRENCY 600///////////////////////////////////
+
+	Wave
+	{
+		InitWaveOutPut
+		{
+			// Target bombpath_choose_left_relay
+			// Action Trigger
+			Target	wave_start_relay
+			Action	RunScriptCode
+			Param	"
+			EntFire(`bombpath_choose_left_relay`,`Trigger`)
+			ClientPrint(null,3,`\x07FFEA00Four tanks will teleport in during this wave!`)
+			//teletank indicator prop & particle A
+			SpawnEntityFromTable(`info_particle_system`,
+			{
+				targetname = `teletank_indicatorA`
+				origin = `-2880 1088 30`
+				start_active = 1,
+				effect_name = `teleporter_mvm_bot_persist`
+			})
+			SpawnEntityFromTable(`prop_dynamic`,
+			{
+				targetname = `teletank_indicatorA`
+				origin = `-2880 1088 30`
+				model = `models/pickups/emitter.mdl`
+				skin = 1
+			})
+			
+			//teletank indicator prop & particle B
+			SpawnEntityFromTable(`info_particle_system`,
+			{
+				targetname = `teletank_indicatorB`
+				origin = `-1536 1024 20`
+				start_active = 1,
+				effect_name = `teleporter_mvm_bot_persist`
+			})
+			SpawnEntityFromTable(`prop_dynamic`,
+			{
+				targetname = `teletank_indicatorB`
+				origin = `-1536 1024 20`
+				model = `models/pickups/emitter.mdl`
+				skin = 1
+			})
+			
+			//teletank indicator prop & particle D
+			SpawnEntityFromTable(`info_particle_system`,
+			{
+				targetname = `teletank_indicatorD`
+				origin = `-1280 2368 -72`
+				start_active = 1,
+				effect_name = `teleporter_mvm_bot_persist`
+			})
+			SpawnEntityFromTable(`prop_dynamic`,
+			{
+				targetname = `teletank_indicatorD`
+				origin = `-1280 2368 -72`
+				model = `models/pickups/emitter.mdl`
+				skin = 1
+			})
+			
+			//teletank indicator prop & particle E
+			SpawnEntityFromTable(`info_particle_system`,
+			{
+				targetname = `teletank_indicatorE`
+				origin = `-1280 3776 -64`
+				start_active = 1,
+				effect_name = `teleporter_mvm_bot_persist`
+			})
+			SpawnEntityFromTable(`prop_dynamic`,
+			{
+				targetname = `teletank_indicatorE`
+				origin = `-1280 3776 -64`
+				model = `models/pickups/emitter.mdl`
+				skin = 1
+			})
+
+			// local ent = Entities.FindByClassname(null, `tf_objective_resource`)
+            //     if (ent)
+            //     {
+            //         NetProps.SetPropString(ent, `m_iszMvMPopfileName`, `Robotic Typhoon (Expert)`)
+            //     } //^ sets mission name
+			"
+		}
+
+		StartWaveOutput
+		{
+			Target	wave_start_relay
+			Action	Trigger
+		}
+
+		DoneOutput
+		{
+			Target	wave_finished_relay
+			Action	trigger
+		}
+
+		WaveSpawn
+		{
+			Where				spawnbot_main
+			TotalCount			4
+			MaxActive			4
+			SpawnCount			4
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+					Tag			nav_prefer_left	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				if(Entities.FindByName(null, `teletank_hintAW5`) == null) //create telein tank hint
+				{
+						SpawnEntityFromTable(`training_annotation`, {
+							targetname = `teletank_hintAW5`
+							origin = `-2880 1088 128`
+							angles = `0 0 0`
+							lifetime = `5`
+							display_text = `A tank has teleported in!`
+						})
+				}
+				if(Entities.FindByName(null, `teletank_hintBW5`) == null) //create telein tank hint
+				{
+						SpawnEntityFromTable(`training_annotation`, {
+							targetname = `teletank_hintBW5`
+							origin = `-1536 1024 112`
+							angles = `0 0 0`
+							lifetime = `5`
+							display_text = `A tank has teleported in!`
+						})
+				}
+				//RIP hint C, gone with the tank i spawned it with.
+				//wanted it to be symmetrical also this one was causing issues with the tanks merging into it.
+				//not *technically* an issue but i don't care.
+				if(Entities.FindByName(null, `teletank_hintDW5`) == null) //create telein tank hint
+				{
+						SpawnEntityFromTable(`training_annotation`, {
+							targetname = `teletank_hintDW5`
+							origin = `-1280 2368 128`
+							angles = `0 0 0`
+							lifetime = `5`
+							display_text = `A tank has teleported in!`
+						})
+				}
+				if(Entities.FindByName(null, `teletank_hintEW5`) == null) //create telein tank hint
+				{
+						SpawnEntityFromTable(`training_annotation`, {
+							targetname = `teletank_hintEW5`
+							origin = `-1280 3776 112`
+							angles = `0 0 0`
+							lifetime = `5`
+							display_text = `A tank has teleported in!`
+						})
+				}
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/heavy_mvm_m_taunts18.mp3
+		}
+
+		WaveSpawn
+		{
+			Name					dummysound
+			Support					Limited
+			WaitBeforeStarting		2
+			FirstSpawnWarningSound	vo/mvm/mght/taunts/heavy_mvm_m_taunts18.mp3
+		}
+
+		WaveSpawn
+		{
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		5
+			TotalCurrency			25
+			FirstSpawnWarningSound	mvm/mvm_tele_deliver.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					13000
+				Speed					75
+				StartingPathTrackNode	tank_path_right_b8
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 13k (13000) HP!`)
+				EntFire(`teletank_hintAW5`,`Show`)
+				"
+			}
+
+			DoneOutput
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				EntFire(`teletank_hintAW5`,`kill`);
+				EntFire(`teletank_indicatorA`,`kill`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		7
+			TotalCurrency			25
+			FirstSpawnWarningSound	mvm/mvm_tele_deliver.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					13000
+				Speed					75
+				StartingPathTrackNode	tank_path_left_b7
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 13k (13000) HP!`)
+				EntFire(`teletank_hintBW5`,`Show`)
+				"
+			}
+
+			DoneOutput
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				EntFire(`teletank_hintBW5`,`kill`);
+				EntFire(`teletank_indicatorB`,`kill`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		9
+			TotalCurrency			25
+			FirstSpawnWarningSound	mvm/mvm_tele_deliver.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					7000
+				Speed					75
+				StartingPathTrackNode	tank_path_right_b19
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 7k (7000) HP!`)
+				EntFire(`teletank_hintDW5`,`Show`)
+				"
+			}
+
+			DoneOutput
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				EntFire(`teletank_hintDW5`,`kill`);
+				EntFire(`teletank_indicatorD`,`kill`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			TotalCount			1
+			SpawnCount			1
+			WaitBeforeStarting	9
+			TotalCurrency		25
+			// FirstSpawnWarningSound mvm/mvm_tele_deliver.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					7000
+				Speed					75
+				StartingPathTrackNode	tank_path_left_b16
+				Skin					0
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 7k (7000) HP!`)
+				EntFire(`teletank_hintEW5`,`Show`)
+				"
+			}
+
+			DoneOutput
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				EntFire(`teletank_hintEW5`,`kill`);
+				EntFire(`teletank_indicatorE`,`kill`)
+				"
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage2
+			Where				spawnbot_invasion
+			TotalCount			32
+			MaxActive			12
+			SpawnCount			4
+			WaitBeforeStarting	45
+			WaitBetweenSpawns	6
+			TotalCurrency		100
+			RandomSpawn			1
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Demo_Burst
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal	// _Popping
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage1234
+			Where				spawnbot_farright
+			TotalCount			8
+			MaxActive			3
+			SpawnCount			1
+			WaitBeforeStarting	50
+			WaitBetweenSpawns	20
+			TotalCurrency		80
+
+			TFBot
+			{
+				Template	T_TFBot_Giant_Soldier_Spammer	// _Hyper //too scared to do this yet
+				Tag			nav_prefer_left	// should fix them going the wrong way
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_invasion
+			TotalCount			42
+			MaxActive			14
+			SpawnCount			6
+			WaitBeforeStarting	15
+			WaitBetweenSpawns	8
+			TotalCurrency		80
+
+			TFBot
+			{
+				Template	T_TFBot_Pyro_DragonFury
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage3
+			WaitForAllSpawned	stage2
+			Where				spawnbot_right
+			TotalCount			9
+			MaxActive			6
+			SpawnCount			3
+			WaitBeforeStarting	10
+			WaitBetweenSpawns	25
+			TotalCurrency		90
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_Deflector
+					Tag			nav_prefer_left	// should fix them going the wrong way
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal_Popping
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_Bigheal_Popping
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			Name				stage4
+			WaitForAllSpawned	stage3
+			Where				spawnbot_main
+			TotalCount			12
+			MaxActive			12
+			SpawnCount			2
+			WaitBeforeStarting	20
+			WaitBetweenSpawns	10
+			TotalCurrency		50
+
+			Squad
+			{
+				TFBot
+				{
+					Template	T_TFBot_Giant_Heavyweapons_LaserRocket
+					Tag			nav_prefer_left	// should fix them going the wrong way
+					Attributes	AlwaysCrit
+				}
+
+				TFBot
+				{
+					Template	T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+
+		WaveSpawn
+		{
+			WaitForAllSpawned		stage3
+			TotalCount				1
+			SpawnCount				1
+			WaitBeforeStarting		15
+			TotalCurrency			50
+			FirstSpawnWarningSound	mvm/mvm_tank_start.wav
+
+			Tank
+			{
+				Name					Tankboss
+				Health					30000	// 25000
+				Speed					75
+				StartingPathTrackNode	tank_path_opp_b1
+				Skin					1
+
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+
+			FirstSpawnOutPut
+			{
+				Target	wave_start_relay
+				Action	RunScriptCode
+				Param	"
+				ClientPrint(null,3,`\x0799CCFFTank deployed with 30k (30000) HP!`)
+				"
+			}
+		}
+	}
+}

@@ -1,0 +1,756 @@
+// -- These attributes must attached to a weapon using ItemAttributes and then ItemName --
+
+// "Blast radius decreased"
+// "Reload time decreased"
+// "airblast pushback scale"
+// "arrow mastery"
+// "attack projectiles"
+// "bullets per shot bonus"
+// "clip size bonus"
+// "clip size penalty"
+// "clip size upgrade atomic"
+// "cloak consume rate increased"
+// "critboost on kill"
+// "damage bonus"
+// "damage causes airblast"
+// "damage penalty"
+// "effect bar recharge rate increased"
+// "faster reload rate"
+// "fire rate bonus"
+// "fire rate penalty"
+// "flame life bonus"
+// (not sure about this one -- can't even find where it gets used at a glance) "multiple sentries"
+// "projectile penetration"
+// "projectile spread angle penalty"
+// "scattergun knockback mult"
+// "uber duration bonus"
+// "ubercharge rate bonus"
+// "use large smoke explosion"
+// ----------------------------------------------------
+WaveSchedule
+{
+	Templates
+	{
+		// Soldier
+		T_TFBot_Giant_Soldier_Spammer_Burst
+		{
+			Class Soldier
+			Name "Giant Rapid Fire Soldier"
+			ClassIcon soldier_spammer_burstfire
+			Health 3800
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			Attributes HoldFireUntilFullReload
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_ROCKETLAUNCHER"
+				"faster reload rate" 0.2
+				"fire rate bonus" -1
+				"projectile speed increased" 0.65
+
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.4
+				"airblast vulnerability multiplier" 0.4
+				"override footstep sound set" 3
+			}
+		}
+		T_TFBot_Soldier_Bobby_A
+		{
+			Class Soldier
+			Name Bob-Bot
+			Skill Normal
+			WeaponRestrictions SecondaryOnly
+			Item "Bobby Bonnet"
+			ClassIcon heavy_shotgun
+		}
+		T_TFBot_Soldier_Bobby_B
+		{
+			Class Soldier
+			Name Bob-Bot
+			Skill Normal
+			WeaponRestrictions MeleeOnly
+			Item "Bobby Bonnet"
+			ClassIcon soldier_shovel
+		}
+		// Sniper
+		T_TFBot_Sniper_Huntsman_Ignite
+		{
+			Class Sniper
+			Name "Bowman"
+			Skill Hard
+			ClassIcon sniper_bow_ignite
+			WeaponRestrictions PrimaryOnly
+			Item "The Huntsman"
+
+			ItemAttributes
+			{
+				ItemName "The Huntsman"
+				"damage bonus" 0.5
+				"Set DamageType Ignite" 1
+				"attach particle effect" 13
+			}
+		}
+		T_TFBot_Sniper_Melee_Bleed
+		{
+			Class Sniper
+			Name "Bushman"
+			Skill Hard
+			ClassIcon sniper //Needs own icon
+			WeaponRestrictions MeleeOnly
+			Item "The Tribalman's Shiv"
+		}
+		T_TFBot_Sniper_Melee_Bushwack
+		{
+			Class Sniper
+			Name "Bushman"
+			Skill Hard
+			ClassIcon sniper_bushwacka //Needs own icon
+			WeaponRestrictions MeleeOnly
+			Item "The Bushwacka"
+		}
+		T_TFBot_Sniper_SMG
+		{
+			Class Sniper
+			Name "Gunman"
+			Skill Hard
+			ClassIcon sniper_smg
+			WeaponRestrictions SecondaryOnly
+		}
+		T_TFBot_Sniper_SMG_Carbine
+		{
+			Class Sniper
+			Name "Gunman"
+			Skill Hard
+			ClassIcon sniper_carbine
+			WeaponRestrictions SecondaryOnly
+			Item "The Cleaner's Carbine"
+		}
+		T_TFBot_Sniper_Magnum // Pierces resistances, always deals 60 damage.
+		{
+			ClassIcon	sniper_ap
+			Health	200
+			Skill	Hard
+			Name	"Armor Piercing Sniper"
+			Class	sniper
+			MaxVisionRange	2000
+			ItemAttributes
+			{
+				ItemName    "the awper hand"
+				"damage bonus"	1.2
+				"sniper charge per sec"  0 //No charge on rifle means no increased damage.
+				"dmg pierces resists absorbs" 1
+			}
+			CharacterAttributes
+			{
+				"airblast vulnerability multiplier"	0
+				"damage force reduction"	0
+				"rage giving scale"	0.2
+				"override footstep sound set"  10
+			}
+		}
+		T_TFBot_Sniper_Silent_Assassin // AlwaysCrit, silent kills
+		{
+			Class Sniper
+			Skill Hard
+			MaxVisionRange 2500
+			Item "The Hitman's Heatmaker"
+			Attributes AlwaysCrit
+			ItemAttributes
+			{
+				ItemName "The Hitman's Heatmaker"
+				"silent killer" 1
+			}
+		}
+		//Spy
+		T_TFBot_Spy_Grease
+		{
+			Class Spy
+			Skill Expert
+			Item "The Big Earner"
+			Item "Punk's Pomp"
+		}
+		//Scout
+		T_TFBot_Scout_Scatter
+		{
+			Class Scout
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Attributes HoldFireUntilFullReload
+			Item "The Back Scatter"
+			MaxVisionRange 200
+			ItemAttributes
+			{
+				ItemName "The Back Scatter"
+				"faster reload rate" 0.5
+			}
+		}
+		T_TFBot_Scout_Hund
+		{
+			Class Scout
+			Skill Easy
+			WeaponRestrictions MeleeOnly
+	//		Attributes SuppressFire
+			Health 70
+			Scale 0.7
+	//		Item "Sidekick's Side Slick"
+			Item "War Dog"
+			Name "Hampshire Hound"
+			CharacterAttributes
+			{
+				"torso scale" 0.3
+				"voice pitch scale" 0
+				"damage bonus" 0.5
+			}
+		}
+		// Medic
+		T_TFBot_Medic_Kritz_Short //Pops Kritz on entering field, has to recharge
+		{
+			Name "Kritzkrieg Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_kritz
+			Attributes SpawnWithFullCharge
+			WeaponRestrictions SecondaryOnly
+			Item "The Kritzkrieg"
+			ItemAttributes
+			{
+				ItemName "The Kritzkrieg"
+				"ubercharge rate bonus"	10
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Bullet_Vaccinator //Self-explanatory
+		{
+			Name "Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_bullet
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBullets
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"medigun charge is resists" 3
+				"medigun bullet resist deployed" 2
+				"medigun bullet resist passive" 2
+				"ubercharge rate bonus"	200
+	//			"uber duration bonus" 200
+				"heal rate bonus" 10
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Blast_Vaccinator //Self-explanatory
+		{
+			Name "Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_blast
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorBlast
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"medigun charge is resists" 4
+				"medigun blast resist deployed" 2
+				"medigun blast resist passive" 2
+				"ubercharge rate bonus"	200
+	//			"uber duration bonus" 200
+				"heal rate bonus" 10
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Fire_Vaccinator //Self-explanatory
+		{
+			Name "Vaccinator Medic"
+			Class Medic
+			Skill Expert
+			ClassIcon medic_fire
+			Attributes SpawnWithFullCharge
+			Attributes VaccinatorFire
+			WeaponRestrictions SecondaryOnly
+			Item "The Vaccinator"
+			ItemAttributes
+			{
+				ItemName "The Vaccinator"
+				"medigun charge is resists" 5
+				"medigun fire resist deployed" 2
+				"medigun fire resist passive" 2
+				"ubercharge rate bonus"	200
+	//			"uber duration bonus" 200
+				"heal rate bonus" 10
+			}
+			CharacterAttributes
+			{
+				"bot medic uber health threshold" 500
+			}
+		}
+		T_TFBot_Medic_Shield //Small ProjectileShield
+		{
+			Class Medic
+			Name "Shield Medic"
+			ClassIcon medic_shield_qf
+			Skill Easy
+			Item "The Quick-Fix"
+			WeaponRestrictions SecondaryOnly
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 1
+			}
+		}
+		T_TFBot_Medic_Shield_Extended //Really long-lasting Shield
+		{
+			Class Medic
+			Name "Extended Shield Medic"
+			ClassIcon medic_shield_qf
+			Skill Easy
+			Item "The Quick-Fix"
+			WeaponRestrictions SecondaryOnly
+			Attributes ProjectileShield
+			Attributes SpawnWithFullCharge
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 1
+				"increase buff duration"	9.0
+			}
+		}
+		T_TFBot_Giant_Medic_Shield // Big ProjectileShield, no Ubercharge
+		{
+			Class Medic
+			Name "Giant Shield Medic"
+			ClassIcon medic_shield_qf
+			Skill Expert
+			Health 4500
+			Attributes MiniBoss
+			Attributes ProjectileShield
+			//Attributes SpawnWithFullCharge
+			Item "The Quick-Fix"
+			WeaponRestrictions SecondaryOnly
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"generate rage on heal" 2
+				"ubercharge rate bonus" 0.01 // pretty much disables ubercharge
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"heal rate bonus" 10 // only works on mediguns that have this attribute ie quickfix
+			}
+		}
+		T_TFBot_Medic_Supercharge //200% OH, fast heal and OH-decay
+		{
+			Class Medic
+			Name "Supercharge Medic"
+			Skill Normal
+			ClassIcon medic_quickfix
+			Item "The Quick-Fix"
+			ItemAttributes
+			{
+				ItemName "The Quick-Fix"
+				"ubercharge rate bonus" 0.1
+				"heal rate bonus" 5
+				"overheal bonus" 3
+				"overheal decay penalty" 0.1
+			}
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_SYRINGEGUN_MEDIC"
+				"damage penalty" 0.1
+			}
+		}
+		// Demoman
+		T_TFBot_Demo_Burst_Loch
+		{
+			Class Demoman
+			Name "Burst Fire Demo"
+	//		WeaponRestrictions PrimaryOnly
+	//		Item "The Loch-n-Load"
+			Item "Bobby Bonnet"
+			Item "The Juggernaut Jacket"
+			Skill Normal
+			Attributes HoldFireUntilFullReload
+			ClassIcon demo_burst
+			CharacterAttributes
+			{
+				"fire rate bonus" 0.25
+				"Projectile speed increased" 0.75
+				"projectile spread angle penalty" 1.5
+			}
+		}
+		T_TFBot_Demoman_Knight_Bottle
+		{
+			Class Demoman
+			Name "Bottleknight"
+			ClassIcon demoknight_bottle_lite
+			Skill Hard
+			Health 200
+			Item "Ali Baba's Wee Booties"
+			WeaponRestrictions MeleeOnly
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_BOTTLE"
+				"critboost on kill" 3
+			}
+		}
+		//HeavyWeapons
+		T_TFBot_Heavy_Deflector
+		{
+			Class Heavy
+			ClassIcon heavy_deflector
+			Name "Deflector Heavy"
+			Skill Hard
+			Item "Deflector"
+			Item "The U-Clank-A"
+			ItemAttributes
+			{
+				ItemName "Deflector"
+				"attack projectiles" 1
+			}
+		}
+		//Pyro
+		T_TFBot_Pyro_Gascan //Passes gas, 'nuff said
+		{
+			Class Pyro
+			ClassIcon pyro_gascann //Find this icon
+			Name "Gas Can Pyro"
+			Skill Hard
+			WeaponRestrictions SecondaryOnly
+			Item "The Gas Passer"
+			ItemAttributes
+			{
+				ItemName "The Gas Passer"
+				//"explode_on_ignite" 1
+				"mult_item_meter_charge_rate" 0.1
+				//"effect bar recharge rate increased" -1
+			}
+		}
+		T_TFBot_Pyro_Gascan_Explode //Explode on Ignite
+		{
+			Class Pyro
+			ClassIcon pyro_gascann_explode //Use diff icon?
+			Name "Gas Can Pyro"
+			Skill Hard
+			WeaponRestrictions SecondaryOnly
+			Item "The Gas Passer"
+			ItemAttributes
+			{
+				ItemName "The Gas Passer"
+				"explode_on_ignite" 1
+				"mult_item_meter_charge_rate" 0.1
+				//"effect bar recharge rate increased" -1
+			}
+		}
+		T_TFBot_Pyro_Fury
+		{
+			Class Pyro
+			Skill Normal
+			WeaponRestrictions PrimaryOnly
+			Item "The Dragon's Fury"
+			Item "The Firefly"
+			ClassIcon pyro_dragon_fury_swordstone
+			MaxVisionRange 500
+		}
+		T_TFBot_Giant_Pyro_Fury
+		{
+			Class Pyro
+			Skill Expert
+			Health 3200
+			WeaponRestrictions PrimaryOnly
+			Item "The Dragon's Fury"
+			Item "The Firefly"
+			ItemAttributes
+			{
+				ItemName "The Dragon's Fury"
+				"damage bonus" 1.33
+			}
+			Name "Giant Pyro"
+			ClassIcon pyro_dragon_fury_swordstone
+			MaxVisionRange 500
+			Attributes MiniBoss
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+			}
+		}
+		T_TFBot_Giant_Pyro_AB // modded robot_giant temp
+		{
+			Class Pyro
+			Name "Giant Airblast Pyro"
+			Skill Expert
+			Item "The Degreaser"
+			Item "Traffic Cone"
+			Health 3000
+			WeaponRestrictions PrimaryOnly
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "The Degreaser"
+				"damage bonus"	0.5
+				"fire rate bonus" 1
+				"airblast pushback scale" 5
+				"mult airblast refire time" 0.5
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0.6
+				"airblast vulnerability multiplier" 0.6
+				"override footstep sound set" 6
+			}
+		}
+		//engineer
+		// lol maybe someday
+		//Boss Robots
+	    T_TFBot_Soldier_Boss_Constable
+		{
+			ClassIcon	soldier_bobby
+			Scale  1.8 // test later to see what scale can move around on this map best
+			Health	40000
+			Name	"Chief Constable"
+			Class	Soldier
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					WeaponRestrictions	PrimaryOnly
+					Skill	Expert
+					Item	"upgradeable TF_WEAPON_ROCKETLAUNCHER"
+					Item	"Bobby Bonnet"
+					Attributes "MiniBoss"
+					Attributes "UseBossHealthBar"
+					Attributes "HoldFireUntilFullReload"
+					ItemAttributes
+					{
+						ItemName	"upgradeable TF_WEAPON_ROCKETLAUNCHER"
+						"clip size upgrade atomic" 11
+						"faster reload rate" 0.22
+						"fire rate bonus" 0.4
+						"projectile spread angle penalty" 2
+						"damage bonus" 1.25
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.35
+						"blast dmg to self increased" 0
+						"health regen"	200
+					}
+				}
+				Event1
+				{
+					WeaponRestrictions	SecondaryOnly
+					Skill	Expert
+					Item "The Righteous Bison"
+					Item "Bobby Bonnet"
+					Attributes "MiniBoss"
+					Attributes "UseBossHealthBar"
+					Attributes "HoldFireUntilFullReload"
+					Attributes AlwaysCrit
+					ItemAttributes
+					{
+						ItemName "The Righteous Bison"
+						"faster reload rate" -0.8
+						"fire rate bonus" 0.3
+						"projectile spread angle penalty" 4
+						"damage bonus" 1.5
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.35
+						"blast dmg to self increased" 0
+						"health regen"	200
+					}
+				}
+				Event2
+				{
+					WeaponRestrictions	MeleeOnly
+					Skill	Expert
+					Item "The Escape Plan"
+					Item "Bobby Bonnet"
+					Attributes "MiniBoss"
+					Attributes "UseBossHealthBar"
+					Attributes "HoldFireUntilFullReload"
+		//			Attributes SuppressFire
+		//			Attributes IgnoreEnemies
+					ItemAttributes
+					{
+						ItemName "The Escape Plan"
+						"damage bonus" 1.5
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.8
+						"blast dmg to self increased" 0
+						"health regen"	200
+					}
+				}
+			}
+		}
+		T_TFBot_Heavy_Boss_Hampshire
+		{
+			ClassIcon	heavy_posh
+			Scale  1.8
+			Health	40000
+			Name	"Lord Hampshire"
+			Class HeavyWeapons
+			
+			EventChangeAttributes
+			{
+				Default
+				{
+					WeaponRestrictions SecondaryOnly
+					Skill Expert
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Item "Sophisticated Smoker"
+					ItemAttributes
+					{
+						ItemName	"TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.75
+			//			"fire rate bonus" 0.01
+						"bullets per shot bonus" 7
+						"damage bonus" 0.8
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.4
+						"blast dmg to self increased" 0
+						"health regen"	200
+						"cannot pick up intelligence" 1
+					}
+				}
+				Event1
+				{
+					WeaponRestrictions SecondaryOnly
+					Skill Hard
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Item "Sophisticated Smoker"
+					ItemAttributes
+					{
+						ItemName	"TF_WEAPON_SHOTGUN_HWG"
+						"faster reload rate" 0.25
+						"fire rate bonus" 0.01
+						"bullets per shot bonus" 7
+						"damage bonus" 0.8
+						"auto fires full clip" 1
+						"auto fires when full" 1
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.4
+						"blast dmg to self increased" 0
+						"health regen"	200
+						"cannot pick up intelligence" 1
+					}
+				}
+				Event2
+				{
+					WeaponRestrictions MeleeOnly
+					Skill Hard
+					Attributes MiniBoss
+					Attributes UseBossHealthBar
+					Attributes HoldFireUntilFullReload
+					Item "Sophisticated Smoker"
+					ItemAttributes
+					{
+						ItemName	"TF_WEAPON_FISTS"
+						"fire rate bonus" 0.5
+						"damage bonus" 1.5
+						"gesture speed increase" 1.5
+					}
+					CharacterAttributes
+					{ 
+						"override footstep sound set"	3
+						"airblast vulnerability multiplier"	0
+						"damage force reduction"	0
+						"rage giving scale"	0
+						"move speed penalty"	0.4
+						"blast dmg to self increased" 0
+						"health regen"	200
+						"cannot pick up intelligence" 1
+					}
+				}
+			}
+		}
+		T_TFBot_Giant_Heavyweapons_Stoner
+		{
+			Class Heavyweapons
+			Name "Stone Colossus"
+			ClassIcon heavy_statue
+			Skill Expert
+			Health 40000
+			Scale 2
+			WeaponRestrictions PrimaryOnly
+			MaxVisionRange 1500
+			Attributes MiniBoss
+			ItemAttributes
+			{
+				ItemName "TF_WEAPON_MINIGUN"
+				"damage bonus"	1.5
+				"fire rate penalty" 2
+				"minigun spinup time increased" 1.5
+				"bullets per shot bonus" 2
+				"attack projectiles" 2
+			}
+			CharacterAttributes
+			{
+				"move speed bonus"	0.5
+				"damage force reduction" 0
+				"airblast vulnerability multiplier" 0
+				"dmg from ranged reduced" 0.5
+				"override footstep sound set" 7
+				"voice pitch scale" 0
+				"health regen"	200
+			}
+		}
+	}
+}
