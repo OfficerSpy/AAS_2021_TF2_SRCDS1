@@ -1,0 +1,1228 @@
+#base robot_giant.pop
+#base robot_standard.pop
+
+WaveSchedule
+{
+	StartingCurrency 600
+	RespawnWaveTime 7
+	FixedRespawnWaveTime Yes
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced 1
+	
+	Templates
+	{
+		// Standard
+		// Heavy
+		
+		T_TFBot_Brass_Heavy // Hibernating Bear Heavy
+		{
+			Class Heavyweapons
+			Name "Hibernating Bear Heavy"
+			Skill Hard
+			Scale 1.25
+			Health 600
+			WeaponRestrictions PrimaryOnly
+			Item "The Brass Beast"
+			Item "Big Chief"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.75
+				"dmg taken from crit reduced" 0.75
+				"damage force reduction" 0.6
+			}
+		}
+		
+		T_TFBot_Bear_Heavy // Hibernating Bear Heavy
+		{
+			Class Heavyweapons
+			Name "Hibernating Bear Heavy"
+			Skill Expert
+			Scale 1.25
+			Health 600
+			WeaponRestrictions MeleeOnly
+			Attributes AlwaysCrit
+			Item "Warrior's Spirit"
+			Item "Big Chief"
+			CharacterAttributes
+			{
+				"move speed bonus" 0.75
+				"dmg taken from crit reduced" 0.75
+				"damage force reduction" 0.6
+			}
+		}
+		
+		// Spy
+		
+		T_TFBot_Spy_Saharan // Saharan Spy
+		{
+			Class Spy
+			Name "Saharan Spy"
+			Skill Expert
+			Item "L'Etranger"
+			Item "Your Eternal Reward"
+			Item "The Familiar Fez"
+			CharacterAttributes
+			{
+				"quiet unstealth" 1
+				"cloak blink time penalty" 0.5
+			}
+		}
+	}
+
+	// Missions
+	// Sentry Buster
+	
+	Mission // Sentry Busters
+	{
+		Objective DestroySentries
+		Where spawnbot
+		InitialCooldown 45
+		CooldownTime 30
+		BeginAtWave 1
+		RunForThisManyWaves 6
+		
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+
+	// Sniper
+	
+	Mission // Wave 2 // 2 Spawned, Sydney Snipers
+	{
+		Objective Sniper
+		Where spawnbot
+		BeginAtWave 2
+		RunForThisManyWaves 1
+		InitialCooldown 30
+		CooldownTime 45
+		DesiredCount 2
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+			CharacterAttributes
+			{
+				"jarate backstabber" 1
+			}
+		}
+	}
+	
+	Mission // Wave 4 // 2 Spawned, Sydney Snipers
+	{
+		Objective Sniper
+		Where spawnbot
+		BeginAtWave 4
+		RunForThisManyWaves 1
+		InitialCooldown 20
+		CooldownTime 60
+		DesiredCount 2
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+			CharacterAttributes
+			{
+				"jarate backstabber" 1
+			}
+		}
+	}
+	
+	// Spy
+	
+	Mission // Wave 3 // 6 Spawned, Saharan Spies
+	{
+		Objective Spy
+		Where spawnbot_mission_spy
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		InitialCooldown 30
+		CooldownTime 30
+		DesiredCount 6
+		
+		TFBot
+		{
+			Template T_TFBot_Spy_Saharan
+		}
+	}
+	
+	Mission // Wave 6 // 3 Spawned, Saharan Spies
+	{
+		Objective Spy
+		Where spawnbot_mission_spy
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		InitialCooldown 45
+		CooldownTime 45
+		DesiredCount 3
+		
+		TFBot
+		{
+			Template T_TFBot_Spy_Saharan
+		}
+	}
+	
+	Wave // Wave 1 // Currency 800 // Hibernating Bear Heavies, Minor League Scouts, Backburner Pyros, Giant Deflector Heavy/Uber Medic Squads - Demoknights
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action PickRandom
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 1a // 25 Total, 10 Active, 5 Spawned, Hibernating Bear Heavies
+		{
+			Name "Wave 1a"
+			Where spawnbot
+			TotalCount 25
+			SpawnCount 5
+			MaxActive 10
+			WaitBetweenSpawns 10
+			TotalCurrency 125
+			
+			TFBot
+			{
+				Template T_TFBot_Bear_Heavy
+			}
+		}
+		
+		WaveSpawn // Wave 1b // 10 Total, 10 Active, 10 Spawned, Minor League Scouts
+		{
+			Name "Wave 1b"
+			Where spawnbot
+			TotalCount 10
+			SpawnCount 10
+			WaitForAllDead "Wave 1a"
+			TotalCurrency 40
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman
+				Health 110
+			}
+		}
+		
+		WaveSpawn // Wave 1c // 10 Total, 10 Active, 10 Spawned, Backburner Pyros
+		{
+			Name "Wave 1c"
+			Where spawnbot
+			TotalCount 10
+			SpawnCount 10
+			WaitForAllDead "Wave 1b"
+			TotalCurrency 40
+		
+			TFBot
+			{
+				Class Pyro
+				Name "Backburner Pyro"
+				Attributes AlwaysFireWeapon
+				Item "The Wraith Wrap"
+				Item "The Backburner"
+			}
+		}
+		
+		WaveSpawn // Wave 1d // 4 Total, 4 Active, 4 Spawned, Giant Deflector Heavy/Uber Medic Squad
+		{
+			Name "Wave 1d"
+			Where spawnbot
+			TotalCount 4
+			SpawnCount 4
+			WaitForAllDead "Wave 1c"
+			TotalCurrency 40
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 1e // 25 Total, 5 Active, 5 Spawned, Hibernating Bear Heavies
+		{
+			Name "Wave 1e"
+			Where spawnbot
+			TotalCount 25
+			SpawnCount 5
+			MaxActive 5
+			WaitForAllDead "Wave 1d"
+			WaitBetweenSpawns 20
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Brass_Heavy
+				ClassIcon heavy_giant
+			}
+		}
+		
+		WaveSpawn // Wave 1f // 10 Total, 10 Active, 10 Spawned, Minor League Scouts
+		{
+			Name "Wave 1f"
+			Where spawnbot
+			TotalCount 10
+			SpawnCount 10
+			WaitForAllDead "Wave 1e"
+			TotalCurrency 40
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Sandman
+				Health 110
+			}
+		}
+		
+		WaveSpawn // Wave 1g // 10 Total, 10 Active, 10 Spawned, Backburner Pyros
+		{
+			Name "Wave 1g"
+			Where spawnbot
+			TotalCount 10
+			SpawnCount 10
+			WaitForAllDead "Wave 1f"
+			TotalCurrency 25
+		
+			TFBot
+			{
+				Class Pyro
+				Name "Backburner Pyro"
+				Skill Expert
+				Attributes AlwaysFireWeapon
+				Item "The Wraith Wrap"
+				Item "The Backburner"
+			}
+		}
+		
+		WaveSpawn // Wave 1h // 4 Total, 4 Active, 4 Spawned, Giant Deflector Heavy/Uber Medic Squad
+		{
+			Where spawnbot
+			TotalCount 4
+			SpawnCount 4
+			WaitForAllDead "Wave 1g"
+			TotalCurrency 40
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 1i // 8 Active, 8 Spawned, Demoknights
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 8
+			MaxActive 8
+			WaitBetweenSpawns 30
+			Support 1
+
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Health 160
+				Item "The Claidheamohmor"
+				Item "Glengarry Bonnet"
+				CharacterAttributes
+				{
+					"charge recharge rate increased" 2
+				}
+			}		
+		}
+	}
+	
+	Wave // Wave 2 // Currency 1100 // Extended Buff Soldier/Liberty Launcher Soldier Squads, Giant Direct Hit Soldier/Extended Buff Soldier/Extended Conch Soldier/Pyro Squad - Hibernating Bear Heavies, Sydney Snipers
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action PickRandom
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 2a // 15 Total, 3 Active, 3 Spawned, Extended Buff Soldier/Liberty Launcher Soldier Squads
+		{
+			Name "Wave 2a"
+			Where spawnbot
+			TotalCount 15
+			SpawnCount 3
+			MaxActive 3
+			WaitBetweenSpawns 30
+			TotalCurrency 300
+
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+				}
+				
+				TFBot
+				{
+					Class Soldier
+					Name "Liberty Launcher Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Liberty Launcher"
+				}
+				
+				TFBot
+				{
+					Class Soldier
+					Name "Liberty Launcher Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Liberty Launcher"
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 2b // 7 Total, 7 Active, 7 Spawned, Giant Direct Hit Soldier/Extended Buff Soldier/Extended Conch Soldier/Pyro Squad
+		{
+			Where spawnbot
+			TotalCount 5
+			SpawnCount 5
+			WaitForAllDead "Wave 2a"
+			WaitBeforeStarting 30
+			TotalCurrency 250
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					Name "Giant Direct Hit Soldier"
+					Attributes AlwaysCrit
+					Item "The Direct Hit"
+					Item "Hero's Hachimaki"
+					CharacterAttributes
+					{
+						"faster reload rate" -0.8
+						"fire rate bonus" 1.5
+					}
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 2d // 10 Active, 5 Spawned, Hibernating Bear Heavies
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 5
+			MaxActive 10
+			WaitBetweenSpawns 10
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Bear_Heavy
+			}
+		}
+	}
+	
+	Wave // Wave 3 // Currency 1500 // Tank, Tank, Tank - Hibernating Bear Heavies, Saharan Spies
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action PickRandom
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 3a // Tank, 13000 Health, 225 Speed
+		{
+			Name "Wave 3a"
+			TotalCount 1
+			WaitBeforeStarting 60
+			TotalCurrency 200
+
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Name "tankboss"
+				Health 13000
+				Speed 225
+				StartingPathTrackNode "boss_path_left_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 3b // Tank, 18000 Health, 150 Speed
+		{
+			Name "Wave 3b"
+			TotalCount 1
+			WaitForAllDead "Wave 3a"
+			WaitBeforeStarting 30
+			TotalCurrency 200
+
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Name "tankboss"
+				Health 18000
+				Speed 150
+				StartingPathTrackNode "boss_path_left_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 3c // Tank, 23000 Health, 75 Speed
+		{
+			TotalCount 1
+			WaitForAllDead "Wave 3b"
+			WaitBeforeStarting 30
+			TotalCurrency 250
+
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Name "tankboss"
+				Health 23000
+				Speed 75
+				StartingPathTrackNode "boss_path_left_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 3d // 10 Active, 5 Spawned, Hibernating Bear Heavies
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 5
+			MaxActive 10
+			WaitBetweenSpawns 10
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Bear_Heavy
+			}
+		}
+	}
+	
+	Wave // Wave 4 // Currency 1750 // Tank, Giant Direct Hit Soldier/Giant Medic Squad, Heavyweight Champs, Hibernating Bear Heavies, Giant Deflector Heavy/Giant Medic Squad - Direct Hit Soldiers/Liberty Launcher Soldiers, Sydney Snipers
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action Trigger
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 4a // Tank, 20000 Health, 150 Speed
+		{
+			TotalCount 1
+			TotalCurrency 200
+
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+
+			Tank
+			{
+				Name "tankboss"
+				Health 20000
+				Speed 150
+				StartingPathTrackNode "boss_path_right_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 4b // 2 Total, 2 Active, 2 Spawned, Backburner Pyro/Pyro/Giant Direct Hit Soldier
+		{
+			Name "Wave 4b"
+			Where spawnbot
+			TotalCount 7
+			SpawnCount 7
+			TotalCurrency 210
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					Name "Giant Direct Hit Soldier"
+					Attributes AlwaysCrit
+					Item "The Direct Hit"
+					Item "Hero's Hachimaki"
+					CharacterAttributes
+					{
+						"faster reload rate" -0.8
+						"fire rate bonus" 1.5
+					}
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Concheror
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 4c // 40 Total, 8 Spawned, 8 Active - Heavyweight Champs
+		{
+			Where spawnbot
+			TotalCount 40
+			SpawnCount 8
+			MaxActive 8
+			WaitForAllDead "Wave 4b"
+			WaitBetweenSpawns 15
+			TotalCurrency 160
+			
+			TFBot
+			{
+				Template T_TFBot_Heavyweapons_Heavyweight_Champ
+			}
+		}
+		
+		WaveSpawn // Wave 4d // 25 Total, 5 Spawned, 5 Active - Hibernating Bear Heavies
+		{
+			Name "Wave 4d"
+			Where spawnbot
+			TotalCount 25
+			SpawnCount 5
+			MaxActive 5
+			WaitForAllDead "Wave 4b"
+			WaitBeforeStarting 15
+			WaitBetweenSpawns 15
+			TotalCurrency 160
+			
+			TFBot
+			{
+				Template T_TFBot_Brass_Heavy
+			}
+		}
+		
+		WaveSpawn // Wave 4e // 5 Total, 5 Active, 5 Spawned, Backburner Pyro/Pyro/Giant Deflector Heavy
+		{
+			Where spawnbot
+			TotalCount 7
+			SpawnCount 7
+			WaitForAllDead "Wave 4d"
+			TotalCurrency 210
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons_Deflector
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Buff_Banner
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Soldier_Extended_Concheror
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Name "Backburner Pyro"
+					Attributes AlwaysFireWeapon
+					Item "The Wraith Wrap"
+					Item "The Backburner"
+				}
+				
+				TFBot
+				{
+					Class Pyro
+					Skill Hard
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 4f // 6 Active, 6 Spawned, Direct Hit Soldiers/Liberty Launcher Soldiers
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 6
+			MaxActive 6
+			WaitBetweenSpawns 30
+			Support 1
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Soldier
+					Name "Direct Hit Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Direct Hit"
+				}
+				
+				TFBot
+				{
+					Class Soldier
+					Name "Liberty Launcher Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Liberty Launcher"
+				}
+			}
+		}
+	}
+	
+	Wave // Wave 5 // Currency 2100 // Tank, Hibernating Bear Heavy/Uber Medic Squads, Giant Direct Hit Soldier/Uber Medic Squads - Demoknights
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action PickRandom
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 5a // Tank, 25000 Health, Speed 75
+		{
+			TotalCount 1
+			TotalCurrency 200
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			
+			Tank
+			{
+				Name "tankboss"
+				Health 25000
+				Speed 75
+				StartingPathTrackNode "boss_path_left_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 5b // 32 Total, 8 Active, 8 Spawned, Hibernating Bear Heavy/Uber Medic Squads
+		{
+			Name "Wave 5b"
+			Where spawnbot
+			TotalCount 32
+			SpawnCount 8
+			MaxActive 8
+			WaitBetweenSpawns 20
+			TotalCurrency 320
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Brass_Heavy
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 5c // 12 Total, 4 Active, 4 Spawned, Giant Direct Hit Soldier/Uber Medic Squads
+		{
+			Where spawnbot
+			TotalCount 12
+			SpawnCount 4
+			MaxActive 4
+			WaitForAllDead "Wave 5b"
+			WaitBetweenSpawns 30
+			TotalCurrency 300
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier
+					Name "Giant Direct Hit Soldier"
+					Attributes AlwaysCrit
+					Item "The Direct Hit"
+					Item "Hero's Hachimaki"
+					CharacterAttributes
+					{
+						"faster reload rate" -0.8
+						"fire rate bonus" 1.5
+					}
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+				
+				TFBot
+				{
+					Template T_TFBot_Medic_QuickUber
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 5d // 8 Active, 8 Spawned, Demoknights
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 8
+			MaxActive 8
+			WaitBetweenSpawns 10
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+				Health 160
+				Item "The Claidheamohmor"
+				Item "Glengarry Bonnet"
+				CharacterAttributes
+				{
+					"charge recharge rate increased" 2
+				}
+			}
+		}
+	}
+	
+	Wave // Wave 6 // Currency 2500 // Tank, Hibernating Bear Heavies, Giant Direct Hit Soldier, Giant Deflector Heavy, Giant Burst Fire Soldier, Backburner Pyros, Tank - Hibernating Bear Heavies, Direct Hit Soldiers/Liberty Launcher Soldiers, Saharan Spies
+	{
+		InitWaveOutput
+		{
+			Target bombpath_choose_1_case
+			Action PickRandom
+		}
+		
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		
+		DoneOutput					
+		{
+			Target wave_finished_relay
+			Action trigger
+		}
+		
+		WaitWhenDone 60
+		Checkpoint Yes
+		
+		WaveSpawn // Wave 6a // Tank, 17000 Health, 225 Speed 
+		{
+			Name "Wave 6a"
+			TotalCount 1
+			TotalCurrency 200
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			
+			Tank
+			{
+				Name "tankboss"
+				Health 17000
+				Speed 225
+				StartingPathTrackNode "boss_path_right_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 6b // 25 Total, 5 Spawned, 5 Active - Hibernating Bear Heavy
+		{
+			Name "Wave 6b"
+			Where spawnbot
+			TotalCount 25
+			SpawnCount 5
+			MaxActive 5
+			WaitForAllDead "Wave 6a"
+			WaitBetweenSpawns 20
+			TotalCurrency 250
+			
+			TFBot
+			{
+				Template T_TFBot_Brass_Heavy
+			}
+		}
+		
+		WaveSpawn // Wave 6c // 1 Total, 1 Active, 1 Spawned - Giant Direct Hit Soldier
+		{
+			Where spawnbot
+			TotalCount 1
+			SpawnCount 1
+			WaitForAllDead "Wave 6a"
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier
+				Name "Giant Direct Hit Soldier"
+				Attributes AlwaysCrit
+				Item "The Direct Hit"
+				Item "Hero's Hachimaki"
+				CharacterAttributes
+				{
+					"faster reload rate" -0.8
+					"fire rate bonus" 1.5
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 6d // 1 Total, 1 Active, 1 Spawned - Giant Deflector Heavy
+		{
+			Where spawnbot
+			TotalCount 1
+			SpawnCount 1
+			WaitForAllDead "Wave 6a"
+			WaitBeforeStarting 15
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons_Deflector
+			}
+		}
+		
+		WaveSpawn // Wave 6e // 1 Total, 1 Active, 1 Spawned - Giant Burst Fire Soldier
+		{
+			Where spawnbot
+			TotalCount 1
+			SpawnCount 1
+			WaitForAllDead "Wave 6a"
+			WaitBeforeStarting 30
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_BurstFire
+			}
+		}
+		
+		WaveSpawn // Wave 6f // Tank, 28000 Health, Speed 75
+		{
+			TotalCount 1
+			WaitForAllDead "Wave 6b"
+			WaitBeforeStarting 30
+			TotalCurrency 200
+			
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				Target boss_spawn_relay                                            
+				Action Trigger                         
+			}
+			
+			Tank
+			{
+				Name "tankboss"
+				Health 28000
+				Speed 75
+				StartingPathTrackNode "boss_path_left_start"
+				
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+			}
+		}
+		
+		WaveSpawn // Wave 6g // 10 Total, 10 Spawned, 10 Active - Backburner Pyros
+		{
+			Where spawnbot
+			TotalCount 10
+			SpawnCount 10
+			WaitForAllDead "Wave 6b"
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Pyro
+				Name "Backburner Pyro"
+				Attributes AlwaysFireWeapon
+				Item "The Wraith Wrap"
+				Item "The Backburner"
+			}
+		}
+		
+		WaveSpawn // Wave 6h // 10 Active, 5 Spawned - Hibernating Bear Heavies
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 5
+			MaxActive 10
+			WaitBetweenSpawns 10
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Bear_Heavy
+			}			
+		}
+		
+		WaveSpawn // Wave 6i // 6 Active, 6 Spawned - Direct Hit Soldiers/Liberty Launcher Soldiers
+		{
+			Where spawnbot
+			TotalCount 100
+			SpawnCount 6
+			MaxActive 6
+			WaitBetweenSpawns 30
+			Support 1
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Soldier
+					Name "Direct Hit Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Direct Hit"
+				}
+				
+				TFBot
+				{
+					Class Soldier
+					Name "Liberty Launcher Soldier"
+					Skill Expert
+					Attributes HoldFireUntilFullReload
+					Item "The Liberty Launcher"
+				}
+			}
+		}
+	}
+}

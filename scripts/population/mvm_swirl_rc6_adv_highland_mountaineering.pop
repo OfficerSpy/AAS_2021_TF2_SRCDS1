@@ -1,0 +1,1932 @@
+// Swirl : Highland Mountaineering
+// (advanced2)
+// V2 : Now with real advanced! (I hope)
+
+// Map by Asd417 (https://steamcommunity.com/id/417hahahaha)
+// TF2Maps : https://tf2maps.net/downloads/mvm_swirl.8913/
+
+// Mission by Clickin (https://steamcommunity.com/id/clickin/)
+
+// ========== Spawnbot list ==========
+// spawnbot_upper
+// spawnbot_right
+// spawnbot_left
+// spawnbot_main
+// spawnbot_chief
+// spawnbot_sentrybuster
+//
+// spawnbot_flank: stays at the initial spawn after gate capture
+// spawnbot_dud_kill: Instantly dies. Useful for firing relays
+// spawnbot_dud: Traps the bot. Useful for Icon and relays
+// spawnbot_ambush_upper: Must be used with relay_open_ambush to open the spawn doors.
+// spawnbot_ambush_lower: Must be used with relay_open_ambush to open the spawn doors.
+
+// ========== Tank Path List ==========
+// path_tank_upper
+// path_tank_lower
+// path_tank_default
+// path_tank_reverse
+
+// ========== Relays ==========
+// wave_start_relay
+// wave_start_boss_relay
+// wave_init_relay
+// wave_init_lower_relay
+// wave_init_upper_relay
+// relay_add_bomb
+// relay_bomb_timer
+// relay_bomb_no_timer
+// relay_open_ambush
+// relay_close_ambush
+
+#base robot_standard.pop
+#base robot_giant.pop
+#base robot_gatebot.pop
+#base robot_swirl.pop
+
+WaveSchedule
+{
+    StartingCurrency		600
+	RespawnWaveTime 		2
+	CanBotsAttackWhileInSpawnRoom no
+	Advanced	1
+
+    //////////////
+    // MISSIONS
+    ////////////// 
+	
+	// Sentry Buster
+	Mission
+	{
+		Objective DestroySentries
+		Where spawnbot_sentrybuster
+		BeginAtWave 1
+		
+        InitialCooldown 40
+		CooldownTime 30
+		
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+
+	// WAVE 1
+	// Sniper
+	Mission
+	{
+		Objective Sniper
+		Where spawnbot_upper
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		
+		InitialCooldown	30
+		CooldownTime 60
+		DesiredCount 3
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper
+		}
+	}
+	// Spy
+	Mission
+	{
+		Objective Spy
+		Where spawnbot_main
+		BeginAtWave 1
+		RunForThisManyWaves 1
+		
+		InitialCooldown	45
+		CooldownTime 60
+		DesiredCount 3
+		
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+
+	// WAVE 3
+	// Sniper
+	Mission
+	{
+		Objective Sniper
+		Where spawnbot_upper
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		
+		InitialCooldown	60
+		CooldownTime 25
+		DesiredCount 2
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper
+		}
+	}
+
+	// WAVE 5
+	// Spy
+	Mission
+	{
+		Objective Spy
+		Where spawnbot_main
+		BeginAtWave 5
+		RunForThisManyWaves 1
+		
+		InitialCooldown	20
+		CooldownTime 30
+		DesiredCount 4
+		
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+	
+	// WAVE 6
+	// Sydney Sniper
+	Mission
+	{
+		Objective Sniper
+		Where spawnbot_upper
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		
+		InitialCooldown	40
+		CooldownTime 40
+		DesiredCount 2
+		
+		TFBot
+		{
+			Template T_TFBot_Sniper_Sydney_Sleeper
+		}
+	}
+	// Spy
+	Mission
+	{
+		Objective Spy
+		Where spawnbot_main
+		BeginAtWave 6
+		RunForThisManyWaves 1
+		
+		InitialCooldown	50
+		CooldownTime 45
+		DesiredCount 2
+		
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+
+    //////////
+	// WAVES
+	//////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 1/7
+	// Total $ in this wave : 700$
+	// Total $ when wave starts : 600$ (Starting money)
+	// Total $ when wave ends : 600$ (Starting money) + 700$ (Collected money) + 100$ (Bonus) = 1400$
+	// ------------------------------------------------------------------------------------------------
+	// Stage 1 : Giant Heavy [GateBot], Melee Scout
+    // Stage 2 : Heavy (Normal) [GateBot], Melee Scout
+    // Stage 3 : Demoman (Normal) [GateBot], Scout (Easy), Scout (Normal) [GateBot]
+    // Stage 4 : Soldier (Expert)
+    // Mission : Sniper, Spy
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			Name "W1_wave01"
+			
+			TotalCount 1
+			MaxActive 1
+			SpawnCount 1			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Heavyweapons
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			Name "W1_wave01"
+			
+			TotalCount 15
+			MaxActive 15
+			SpawnCount 5			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ClassIcon scout_bat
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W1_wave02"
+			WaitForAllDead "W1_wave01"
+			
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Heavy_Normal
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W1_support01"
+			WaitForAllDead "W1_wave01"
+			
+			TotalCount 25
+			MaxActive 10
+			SpawnCount 5			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Melee
+				ClassIcon scout_bat
+			}
+		}
+
+		// Stage 3
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W1_wave03"
+			WaitForAllSpawned "W1_wave02"
+			
+			TotalCount 15
+			MaxActive 10
+			SpawnCount 5			
+			WaitBetweenSpawns 7
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Demoman_Normal
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W1_support02"
+			WaitForAllSpawned "W1_wave02"
+			
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{	
+					Template T_TFGateBot_Scout_Normal
+				}
+				TFBot
+				{	
+					Class Scout
+					Skill Easy
+				}
+				TFBot
+				{	
+					Class Scout
+					Skill Easy
+				}
+				TFBot
+				{	
+					Class Scout
+					Skill Easy
+				}
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W1_wave04"
+			WaitForAllSpawned "W1_wave03"
+			
+			TotalCount 12
+			MaxActive 12
+			SpawnCount 12			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 7
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Class Soldier
+				Skill Expert
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 2/7
+	// Total $ in this wave : 700$
+	// Total $ when wave starts : 600$ (Starting money) + 700$ (Collected money) + 100$ (Bonus) = 1400$
+	// Total $ when wave ends : 600$ (Starting money) + 1400$ (Collected money) + 200$ (Bonus) = 2200$
+	// ------------------------------------------------------------------------------------------------
+	// Main Stage : Giant Freeze Flame Pyro [GateBot] + 2 Uber Medic + 2 Soldier
+    // Stage 1 : Heavy Shotgun [GateBot], Flare Pyro (Detonator, Hard)
+    // Stage 2 : Giant Frost Nuke Soldier [GateBot], Pyro (40% Easy + 60% Normal)
+    // Stage 3 : Extended Backup Soldier [GateBot]
+    // Stage 4 : Giant Frost Nuke Soldier + 3 Uber Medic
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Main Stage
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W2_giantpyro"
+			
+			TotalCount 25
+			MaxActive 5
+			SpawnCount 5			
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Giant_Pyro_Slow
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Normal
+					Tag bot_squad_member
+				}
+			}
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W2_wave01"
+			
+			TotalCount 18
+			MaxActive 6
+			SpawnCount 6			
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 0
+			
+			TotalCurrency 90
+			
+			TFBot
+			{
+				Template T_TFGateBot_Heavyweapons_Shotgun
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W2_wave01"
+			
+			TotalCount 30
+			MaxActive 12
+			SpawnCount 3			
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 0
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro_Flaregun
+				ClassIcon pyro_detonator
+				Skill Hard
+				Item "The detonator"
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			Name "W2_wave02"
+			WaitForAllSpawned "W2_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 30
+			WaitBeforeStarting 20
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Soldier_Crit_Slow
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			Name "W2_wave02"
+			WaitForAllSpawned "W2_wave01"
+			
+			TotalCount 25
+			MaxActive 15
+			SpawnCount 5			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Normal
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Easy
+				}
+				TFBot
+				{
+					Class Pyro
+					Skill Easy
+				}
+			}
+		}
+
+		// Stage 3
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W2_wave03a"
+			WaitForAllSpawned "W2_wave02"
+			
+			TotalCount 15
+			MaxActive 15
+			SpawnCount 15			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 20
+			
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template T_TFGateBot_Soldier_Extended_Battalion_Normal
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W2_wave03b"
+			WaitForAllDead "W2_wave03a"
+			
+			TotalCount 15
+			MaxActive 15
+			SpawnCount 1			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 5
+			
+			TotalCurrency 75
+			
+			TFBot
+			{
+				Template T_TFGateBot_Soldier_Extended_Battalion_Normal
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W2_wave04"
+			WaitForAllSpawned "W2_wave03b"
+			
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 15
+			
+			TotalCurrency 50
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit_Slow
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W2_wave04"
+			WaitForAllSpawned "W2_wave03b"
+			
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 4			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 25
+			
+			TotalCurrency 50
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit_Slow
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Tag bot_squad_member
+				}
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 3/7
+	// Total $ in this wave : 700$
+	// Total $ when wave starts : 600$ (Starting money) + 1400$ (Collected money) + 200$ (Bonus) = 2200$
+	// Total $ when wave ends : 600$ (Starting money) + 2100$ (Collected money) + 300$ (Bonus) = 3000$
+	// ------------------------------------------------------------------------------------------------
+	// Stage 1 : Tank (25000), Giant Scout [GateBot]
+    // Stage 2 : Demoman (Expert) [GateBot], Deflector Heavy
+    // Stage 3 : Giant Burst Fire Demo, SMGman (Normal) [GateBot], Persian Demoknight [50% GateBot]
+    // Stage 4 : Giant Scout
+    // Support : Powerjack Pyro
+    // Mission : Sniper
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Name	"W3_tank"
+			
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+
+            TotalCurrency	100
+					
+			Tank
+			{
+				Health	25000
+				Name	TankBoss
+				Speed	75
+				StartingPathTrackNode	path_tank_reverse
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W3_wave01"
+			
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 1			
+			WaitBetweenSpawns 8
+			WaitBeforeStarting 10
+			
+			TotalCurrency 60
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Scout
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W3_wave02"
+			WaitForAllSpawned "W3_wave01"
+			
+			TotalCount 18
+			MaxActive 12
+			SpawnCount 6			
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Demoman_Expert
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W3_wave02"
+			WaitForAllSpawned "W3_wave01"
+			
+			TotalCount 12
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 12
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Heavy_Deflector
+			}
+		}
+
+		// Stage 3
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W3_giantdemo"
+			WaitForAllSpawned "W3_wave02"
+			
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 15
+			
+			TotalCurrency 50
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_Burst
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W3_wave03"
+			WaitForAllSpawned "W3_wave02"
+			
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Sniper_SMG_Normal
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W3_wave03"
+			WaitForAllSpawned "W3_wave02"
+			
+			TotalCount 32
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoknight_Persian
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Demoknight_Persian
+				}
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			Name "W3_wave04"
+			WaitForAllSpawned "W3_wave03"
+			
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 2			
+			WaitBetweenSpawns 25
+			WaitBeforeStarting 20
+			
+			TotalCurrency 40
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout
+			}
+		}
+
+		// Support
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W3_support"
+			WaitForAllSpawned "W3_wave01"
+			
+			TotalCount 10
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 15
+			WaitBeforeStarting 15
+			
+			TotalCurrency 50
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Pyro_Powerjack
+				Tag bot_giant
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 4/7
+	// Total $ in this wave : 600$
+	// Total $ when wave starts : 600$ (Starting money) + 2100$ (Collected money) + 300$ (Bonus) = 3000$
+	// Total $ when wave ends : 600$ (Starting money) + 2700$ (Collected money) + 400$ (Bonus) = 3700$
+	// ------------------------------------------------------------------------------------------------
+    // Stage 1 : Giant Booster Heavy [GateBot] + Giant Uber Medic 
+    // Stage 2 : Soldier (Easy) + Kritzkrieg Medic, Flame Heavy [GateBot]
+    // Stage 3 : Soldier (Easy) [GateBot] + Kritzkrieg Medic, FaN Scout
+    // Stage 4 : Giant Booster Heavy + Giant Uber Medic
+    // Support : Bonk Scout
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W4_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			
+			TotalCurrency 90
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Giant_Heavy_Booster
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Uber
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W4_wave02_soldier"
+			WaitForAllDead "W4_wave01"
+			
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Class Soldier
+					Skill Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+					Tag bot_squad_member
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W4_wave02_heavy"
+			WaitForAllDead "W4_wave01"
+			
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Heavy_Flame
+			}
+		}
+
+		// Stage 3
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W4_wave03"
+			WaitForAllSpawned "W4_wave02_soldier"
+			
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 2			
+			WaitBetweenSpawns 5
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Easy
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Kritzkrieg
+					Tag bot_squad_member
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W4_fanscout"
+			WaitForAllSpawned "W4_wave02_heavy"
+			
+			TotalCount 36
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_FAN
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W4_wave04"
+			WaitForAllSpawned "W4_wave03"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 20
+			
+			TotalCurrency 90
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavy_Booster
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Uber
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Support
+		WaveSpawn
+		{
+			Where spawnbot_chief
+			Name "W4_support"
+			
+			TotalCount 20
+			MaxActive 4
+			SpawnCount 4			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			
+			TotalCurrency 20
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 5/7
+	// Total $ in this wave : 800$
+	// Total $ when wave starts : 600$ (Starting money) + 2700$ (Collected money) + 400$ (Bonus) = 3700$
+	// Total $ when wave ends : 600$ (Starting money) + 3500$ (Collected money) + 500$ (Bonus) = 4600$
+	// ------------------------------------------------------------------------------------------------
+	// Stage 1-a : Tank (15000), Giant Rapid Fire Soldier [GateBot] + Giant Shield Medic
+    // Stage 1-b : Giant Rapid Fire Soldier [GateBot] + Giant Kritzkrieg Medic (Shield)
+    // Stage 2-a : Tank (15000), Giant Rapid Fire Soldier + Giant Medic (Regen)
+    // Stage 2-b : Giant Rapid Fire Soldier + Giant Kritzkrieg Medic 
+    // Support : Freeze Flame Pyro [GateBot], Demoknight, Scout (Easy)
+    // Mission : Spy
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Stage 1-a
+		WaveSpawn
+		{
+			Name	"W5_tank01"
+			
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+
+            TotalCurrency	100
+					
+			Tank
+			{
+				Health	15000
+				Name	TankBoss
+				Speed	75
+				StartingPathTrackNode	path_tank_upper
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W5_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 5
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Shield
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Stage 1-b
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W5_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 45
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Giant_Soldier_Spammer
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Shield_Kritzkrieg
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Stage 2-a
+		WaveSpawn
+		{
+			Name	"W5_tank02"
+			WaitForAllDead "W5_wave01"
+			
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+
+            TotalCurrency	100
+					
+			Tank
+			{
+				Health	15000
+				Name	TankBoss
+				Speed	75
+				StartingPathTrackNode	path_tank_lower
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W5_wave02"
+			WaitForAllDead "W5_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Stage 2-b
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W5_wave02"
+			WaitForAllDead "W5_wave01"
+			
+			TotalCount 2
+			MaxActive 2
+			SpawnCount 2			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 30
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Kritzkrieg
+					Tag bot_squad_member
+					Tag bot_giant
+				}
+			}
+		}
+
+		// Support
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W5_gatepush"
+			
+			TotalCount 24
+			MaxActive 4
+			SpawnCount 4			
+			WaitBetweenSpawns 25
+			WaitBeforeStarting 25
+			
+			TotalCurrency 100
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFGateBot_Pyro_Slow
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_upper
+			Name "W5_support01"
+			
+			TotalCount 24
+			MaxActive 4
+			SpawnCount 4			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 20
+			
+			TotalCurrency 50
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFBot_Demoman_Knight
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W5_support02"
+			WaitForAllDead "W5_wave01"
+			
+			TotalCount 24
+			MaxActive 6
+			SpawnCount 6			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 0
+			
+			TotalCurrency 50
+			Support 1
+			
+			TFBot
+			{
+				Class Scout
+				Skill Easy
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 6/7
+	// Total $ in this wave : 800$
+	// Total $ when wave starts : 600$ (Starting money) + 3500$ (Collected money) + 500$ (Bonus) = 4600$
+	// Total $ when wave ends : 600$ (Starting money) + 4300$ (Collected money) + 600$ (Bonus) = 5500$
+	// ------------------------------------------------------------------------------------------------
+	// Stage 1 : Giant Heal-on-Hit Dragon Pyro [GateBot], Direct Hit Soldier
+	// Stage 2 : Super Scout, Penetrator Bowman (Crit) [GateBot] + 3 Deflector Heavy [GateBot]
+	// Stage 3 : Deflector Heavy (Expert, Crit) [50% GateBot]
+	// Stage 4 : Giant Demoman (Type 2), Penetrator Bowman (Crit)
+	// Mission : Sydney Sniper, Spy
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W6_wave01"
+			
+			TotalCount 4
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 25
+			WaitBeforeStarting 10
+			
+			TotalCurrency 80
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Pyro_Dragon_Heal
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W6_wave01"
+			
+			TotalCount 48
+			MaxActive 18
+			SpawnCount 6			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCurrency 120
+			
+			TFBot
+			{
+				Template T_TFBot_Soldier_Direct
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_chief
+			Name "W6_superscout"
+			WaitForAllSpawned "W6_wave01"
+			
+			TotalCount 5
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 25
+			WaitBeforeStarting 35
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Scout_Fast
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W6_wave02"
+			WaitForAllSpawned "W6_wave01"
+			
+			TotalCount 24
+			MaxActive 16
+			SpawnCount 4			
+			WaitBetweenSpawns 6
+			WaitBeforeStarting 20
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Sniper_Huntsman_Penetration_Crit
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector
+					Tag bot_squad_member
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector
+					Tag bot_squad_member
+				}
+			}
+		}
+	
+		// Stage 3
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W6_wave03"
+			WaitForAllDead "W6_wave02"
+			
+			TotalCount 32
+			MaxActive 16
+			SpawnCount 16			
+			WaitBetweenSpawns 0
+			WaitBeforeStarting 10
+			
+			TotalCurrency 200
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavy_Deflector
+					ClassIcon heavy_deflector
+					Attributes AlwaysCrit
+					Skill Expert
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Deflector
+					ClassIcon heavy_deflector
+					Attributes AlwaysCrit
+					Skill Expert
+					Tag bot_flank_l
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavy_Deflector
+					ClassIcon heavy_deflector
+					Attributes AlwaysCrit
+					Skill Expert
+					Tag bot_flank_r
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector_Crit
+					ClassIcon heavy_deflector
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector_Crit
+					ClassIcon heavy_deflector
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Heavy_Deflector_Crit
+					ClassIcon heavy_deflector
+				}
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W6_wave04"
+			WaitForAllDead "W6_wave03"
+			
+			TotalCount 4
+			MaxActive 4
+			SpawnCount 1			
+			WaitBetweenSpawns 7
+			WaitBeforeStarting 7
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Giant_Demo_RapidFire
+				Tag bot_giant
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W6_wave04"
+			WaitForAllDead "W6_wave03"
+			
+			TotalCount 24
+			MaxActive 12
+			SpawnCount 4			
+			WaitBetweenSpawns 4
+			WaitBeforeStarting 7
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFBot_Sniper_Huntsman_Penetration
+				Attributes AlwaysCrit
+			}
+		}
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+	// Wave 7/7
+	// Total $ in this wave : 700$
+	// Total $ when wave starts : 600$ (Starting money) + 4300$ (Collected money) + 600$ (Bonus) = 5500$
+	// Total $ when wave ends : 600$ (Starting money) + 5000$ (Collected money) + 600$ (Bonus) = 6200$
+	// ------------------------------------------------------------------------------------------------ 
+	// Main Stage : Giant Frost Nuke Soldier [GateBot]
+	// Stage 1 : Tank (30000), Frost Nuke Soldier [50% GateBot]
+	// Stage 2 : Freeze Flame Pyro [GateBot] + Shield Medic, Scout (Expert) [50% GateBot]
+	// Stage 3 : Final Tank (25000), Giant Pyro (Crit) [GateBot]
+	// Stage 4 : Giant Pyro (Crit) + Shield Medic
+	// Support : Demoman (Hard), Heavy (Hard) [GateBot]
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Wave 
+	{
+		WaitWhenDone	65
+		Checkpoint	Yes
+		StartWaveOutput
+		{
+			Target wave_start_relay
+			Action Trigger
+		}
+		InitWaveOutput
+		{
+			Target wave_init_relay
+			Action Trigger
+		}
+
+		// Main Stage
+		WaveSpawn
+		{
+			Where spawnbot_chief
+			Name "W7_giantsolly"
+			
+			TotalCount 12
+			MaxActive 2
+			SpawnCount 1			
+			WaitBetweenSpawns 15
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Soldier_Crit_Slow
+			}
+		}
+
+		// Stage 1
+		WaveSpawn
+		{
+			Name	"W7_tank01"
+			
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+
+            TotalCurrency	100
+					
+			Tank
+			{
+				Health	30000
+				Name	TankBoss
+				Speed	75
+				StartingPathTrackNode	path_tank_reverse
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Where spawnbot_right
+			RandomSpawn 1
+			Name "W7_wave01"
+			
+			TotalCount 32
+			MaxActive 20
+			SpawnCount 4			
+			WaitBetweenSpawns 2
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Soldier_Charged_Slow
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Soldier_Crit_Slow
+				}
+			}
+		}
+
+		// Stage 2
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Name "W7_wave02"
+			WaitForAllSpawned "W7_wave01"
+			
+			TotalCount 16
+			MaxActive 8
+			SpawnCount 4			
+			WaitBetweenSpawns 7
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFGateBot_Pyro_Slow
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Shield_Quickfix
+					Tag bot_squad_member
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_left
+			Name "W7_wave02"
+			WaitForAllSpawned "W7_wave01"
+			
+			TotalCount 48
+			MaxActive 12
+			SpawnCount 4			
+			WaitBetweenSpawns 3
+			WaitBeforeStarting 10
+			
+			TotalCurrency 100
+			
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Expert
+				}
+				TFBot
+				{
+					Template T_TFGateBot_Scout_Expert
+				}
+			}
+		}
+
+		// Stage 3
+		WaveSpawn
+		{
+			Name	"W7_tank02"
+			WaitForAllDead	"W7_wave02"
+			
+			TotalCount	1
+			MaxActive	1
+			SpawnCount	1
+			WaitBeforeStarting	0
+			WaitBetweenSpawns	0
+
+            TotalCurrency	100
+					
+			Tank
+			{
+				Health	25000
+				Name	TankBoss
+				Speed	75
+				Skin	1
+				StartingPathTrackNode	path_tank_default
+				OnKilledOutput
+				{
+					Target	boss_dead_relay
+					Action	Trigger
+				}
+				OnBombDroppedOutput
+				{
+					Target	boss_deploy_relay
+					Action	Trigger
+				}
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W7_wave03"
+			WaitForAllDead	"W7_wave02"
+			
+			TotalCount 3
+			MaxActive 3
+			SpawnCount 1			
+			WaitBetweenSpawns 17
+			WaitBeforeStarting 15
+			
+			TotalCurrency 100
+			
+			TFBot
+			{
+				Template T_TFGateBot_Giant_Pyro_Crit
+			}
+		}
+
+		// Stage 4
+		WaveSpawn
+		{
+			Where spawnbot_right
+			Where spawnbot_left
+			RandomSpawn 1
+			Name "W7_wave04"
+			WaitForAllSpawned	"W7_wave03"
+			
+			TotalCount 8
+			MaxActive 4
+			SpawnCount 2			
+			WaitBetweenSpawns 17
+			WaitBeforeStarting 20
+			
+			TotalCurrency 0
+			
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Pyro
+					Attributes AlwaysCrit
+					Tag bot_giant
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic_Shield_Quickfix
+					Tag bot_squad_member
+				}
+			}
+		}
+
+		// Support
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W7_bombpush"
+			WaitForAllDead "W7_wave02"
+			
+			TotalCount 50
+			MaxActive 10
+			SpawnCount 5			
+			WaitBetweenSpawns 10
+			WaitBeforeStarting 0
+			
+			TotalCurrency 0
+			Support 1
+			
+			TFBot
+			{
+				Class Demoman
+				Skill Hard
+			}
+		}
+		WaveSpawn
+		{
+			Where spawnbot_main
+			Name "W7_gatepush"
+			WaitForAllDead "W7_wave02"
+			
+			TotalCount 30
+			MaxActive 6
+			SpawnCount 6			
+			WaitBetweenSpawns 20
+			WaitBeforeStarting 10
+			
+			TotalCurrency 0
+			Support 1
+			
+			TFBot
+			{
+				Template T_TFGateBot_Heavy_Hard
+			}
+		}
+    }
+}
+
+

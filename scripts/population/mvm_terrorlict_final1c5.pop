@@ -1,0 +1,932 @@
+#base robot_giant.pop
+#base robot_standard.pop
+#base robot_derelict.pop
+
+
+
+WaveSchedule
+{
+
+	StartingCurrency		5000
+	RespawnWaveTime 		3
+	CanBotsAttackWhileInSpawnRoom no
+	FixedRespawnWaveTime Yes
+	EventPopfile Halloween
+	
+	Mission // sentry buster
+	{
+		Objective DestroySentries
+
+		InitialCooldown 20
+		Where spawnbot
+		BeginAtWave 1
+		RunForThisManyWaves 9
+
+		CooldownTime 25            
+
+            TFBot
+			{
+				Template T_TFBot_SentryBuster
+            }
+	}
+	Mission // Sniper
+	{
+		Objective Sniper
+
+		InitialCooldown 60
+		Where spawnbot_scattered
+		BeginAtWave 1
+		DesiredCount 2
+		RunForThisManyWaves 1
+
+		CooldownTime 60            
+
+            TFBot
+			{
+				Template T_TFBot_Sniper
+				Item "The Criminal Cloak"
+				Item "The Dread Hiding Hood"
+            }
+	}
+	Mission // Spy
+	{
+		Objective Spy
+
+		InitialCooldown 150
+		Where spawnbot_mission_spy
+		BeginAtWave 1
+		DesiredCount 2
+		RunForThisManyWaves 1
+
+		CooldownTime 60            
+
+            TFBot
+			{
+				Template T_TFBot_Spy
+				Item "facepeeler"
+            }
+	}
+	Mission // Engineer
+	{
+		Objective Engineer
+
+		InitialCooldown 150
+		Where spawnbot
+		BeginAtWave 1
+		DesiredCount 1
+		RunForThisManyWaves 1
+
+		CooldownTime 60            
+
+            TFBot
+			{
+				Template T_TFBot_Engineer_Sentry_Teleporter
+				Item "The Master Mind"
+				Item "Iron Fist"
+				//Item "The Grease Monkey"
+				TeleportWhere spawnbot_scattered
+				TeleportWhere spawnbot_tunnel
+				TeleportWhere spawnbot_invasion
+            }
+	}
+	/////////////////////////////////////////////////////////////////////////////////////
+	// Terrorlict 666 (Infernal Incursion)
+	// Cash given at start: $5000
+	// Stage Payouts:
+	// S1: $800
+	// S2: $800
+	// S3: $800
+	// S4: $800
+	// S5: $800
+	// S6: $1000
+	// S7: $1000
+	// Max amount of money: $11000
+	///////////////////////////////////////////////////////////////////////////////
+	//RELEASE THE FIENDS///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	Wave
+	{
+		StartWaveOutput
+			{
+				Target wave_start_relay
+				Action Trigger
+			}
+		DoneOutput					
+			{
+				Target wave_finished_relay
+				Action trigger
+			}
+		WaitWhenDone 65
+		Checkpoint Yes
+		
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage01"
+			Where spawnbot
+			TotalCount 52
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 10
+			TotalCurrency 300		
+		
+			TFBot
+			{
+				Class Demoman
+				Skill Normal
+				//Attributes AlwaysCrit
+				Item "Ethereal Hood"
+				Item "The Gaelic Garb"
+				Item "The Cool Breeze"
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage01"
+			Where spawnbot_scattered
+			TotalCount 48
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 12
+			WaitBetweenSpawns 17
+			TotalCurrency 300		
+		
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+				WeaponRestrictions PrimaryOnly
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage01"
+			Where spawnbot_tunnel
+			TotalCount 8
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 18
+			TotalCurrency 200		
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Item "The Manneater"
+					Item "Big Steel Jaw of Summer Fun"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage02"
+			Where spawnbot_tunnel
+			TotalCount 130
+			MaxActive 15
+			SpawnCount 3
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 2
+			WaitForAllDead "stage01"
+			TotalCurrency 400		
+		
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "The Persian Persuader"
+					ItemAttributes
+					{
+						ItemName "The Persian Persuader"
+						"critboost on kill" 3
+					}
+					Item "Cap'n Calamari"
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "The Persian Persuader"
+					ItemAttributes
+					{
+						ItemName "The Persian Persuader"
+						"critboost on kill" 3
+					}
+					Item "Cap'n Calamari"
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Battleaxe
+					Skill Expert
+					//Attributes AlwaysCrit
+					Item "Horsemann's Hand-Me-Down"
+					Item "The Bootlegger"
+					Item "Forgotten King's Restless Head"
+				}
+				TFBot
+				{
+					Template T_TFBot_Demoman_Knight
+					Skill Expert
+					Attributes AlwaysCrit
+					Item "The Persian Persuader"
+					ItemAttributes
+					{
+						ItemName "The Persian Persuader"
+						"critboost on kill" 3
+					}
+					Item "Cap'n Calamari"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage02"
+			Where spawnbot_invasion
+			TotalCount 10
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 40
+			WaitBetweenSpawns 25
+			WaitForAllDead "stage01"
+			TotalCurrency 400		
+		
+			TFBot
+			{
+				Template T_TFBot_Giant_DemoMan_PrinceTavish
+				Skill Expert
+				Attributes AlwaysCrit
+				Item "Forgotten King's Restless Head"
+				Item "Forgotten King's Pauldrons"
+				CharacterAttributes
+				{
+					"bombinomicon effect on death" 1
+				}
+			}
+		}
+		WaveSpawn //Tank
+		{
+			Name "stage03tank"
+			TotalCount 3
+			WaitBeforeStarting 70
+			WaitBetweenSpawns 35
+			WaitForAllDead "stage02"
+			TotalCurrency 200
+						
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 28000
+				Speed 60
+				Name "tankboss"
+				StartingPathTrackNode "tank_path_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage03"
+			Where spawnbot
+			TotalCount 55
+			MaxActive 10
+			SpawnCount 5
+			WaitBeforeStarting 45
+			WaitBetweenSpawns 10
+			WaitForAllDead "stage02"
+			TotalCurrency 200
+		
+			TFBot
+			{
+				Template T_TFBot_Soldier_Parachute
+				Item "The Freedom Feathers"
+				Item "The Caped Crusader"
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage03"
+			Where spawnbot
+			TotalCount 48
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 45
+			WaitBetweenSpawns 20
+			WaitForAllDead "stage02"
+			TotalCurrency 200
+		
+			TFBot
+			{
+				Template T_TFBot_Scout_Bonk
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage03"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 2
+			SpawnCount 2
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 45
+			WaitForAllDead "stage02"
+			TotalCurrency 200
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Spammer
+					Item "The Hellmet"
+					Item "The Caped Crusader"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage04a"
+			Where spawnbot
+			TotalCount 6
+			MaxActive 6
+			SpawnCount 2
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 9
+			WaitForAllDead "stage03"
+			TotalCurrency 100
+		
+			TFBot
+			{
+				Template T_TFBot_Giant_Soldier_Crit
+				Item "The Hellmet"
+				Item "The Caped Crusader"
+				CharacterAttributes
+				{
+					"bombinomicon effect on death" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage04b"
+			Where spawnbot
+			TotalCount 45
+			MaxActive 9
+			SpawnCount 9
+			WaitBeforeStarting 5
+			WaitBetweenSpawns 9
+			WaitForAllSpawned "stage04a"
+			TotalCurrency 200
+		
+			TFBot
+			{
+				Class Scout
+				Skill Hard
+				WeaponRestrictions MeleeOnly
+				Attributes AlwaysCrit
+				//ClassIcon scout_bat //wave bar is full
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage04b"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 20
+			WaitForAllSpawned "stage04a"
+			TotalCurrency 300
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Soldier_Crit
+					Item "The Hellmet"
+					Item "The Caped Crusader"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage04b"
+			Where spawnbot
+			TotalCount 36
+			MaxActive 6
+			SpawnCount 6
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 22
+			WaitForAllSpawned "stage04a"
+			TotalCurrency 100
+		
+			TFBot
+			{
+				Class Pyro
+				Skill Hard
+				WeaponRestrictions PrimaryOnly
+				//Item "The Hard-Headed Hardware"
+				Item "The Wraith Wrap"
+				Item "El Muchacho"
+			}
+		}
+		WaveSpawn //Tank
+		{
+			TotalCount 2
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 35
+			WaitForAllSpawned "stage04a"
+			TotalCurrency 100
+						
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 32000
+				Speed 60
+				Name "tankboss"
+				StartingPathTrackNode "tank_path_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage05"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 31
+			WaitBetweenSpawns 2
+			WaitForAllDead "stage04b"
+			TotalCurrency 200
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Attributes AlwaysCrit
+					Item "Sir Shootsalot"
+					Item "Mr. Mundee's Wild Ride"
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage05"
+			Where spawnbot
+			TotalCount 12
+			MaxActive 4
+			SpawnCount 4
+			WaitBeforeStarting 38
+			WaitBetweenSpawns 20
+			WaitForAllDead "stage04b"
+			TotalCurrency 100
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Demo_Burst
+					Item "The Mann-Bird of Aberdeen"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage05a"
+			Where spawnbot
+			TotalCount 40
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 33
+			WaitBetweenSpawns 4
+			WaitForAllDead "stage04b"
+			TotalCurrency 200
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Sniper_Huntsman
+					Attributes AlwaysCrit
+					Item "Sir Shootsalot"
+					Item "Mr. Mundee's Wild Ride"
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage05b"
+			Where spawnbot_scattered
+			TotalCount 9
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 0
+			WaitBetweenSpawns 14
+			WaitForAllSpawned "stage05a"
+			TotalCurrency 300
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Item "The Manneater"
+					Item "The Monstrous Mandible"
+					Attributes AlwaysCrit
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Blast_Vaccinator
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+				TFBot
+				{
+					Template T_TFBot_Bullet_Vaccinator
+					Item "The Second Opinion"
+					Item "The Trepanabotomizer"
+				}
+			}
+		}
+		WaveSpawn //Tank
+		{
+			Name "stage06tank"
+			TotalCount 3
+			WaitBeforeStarting 50
+			WaitBetweenSpawns 40
+			WaitForAllDead "stage05b"
+			TotalCurrency 200
+						
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 36000
+				Speed 60
+				Name "tankboss"
+				StartingPathTrackNode "tank_path_1"
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage06"
+			Where spawnbot
+			TotalCount 72
+			MaxActive 12
+			SpawnCount 4
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 7
+			WaitForAllDead "stage05b"
+			TotalCurrency 200
+		
+			RandomChoice
+			{
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Fist
+					Attributes AlwaysCrit
+					Item "Minsk Beef"
+					Item "Bone-Cut Belt"
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Fist
+					Attributes AlwaysCrit
+					Item "Minsk Beef"
+					Item "Bone-Cut Belt"
+				}
+				TFBot
+				{
+					Template T_TFBot_Heavyweapons_Fist
+					Attributes AlwaysCrit
+					Item "Minsk Beef"
+					Item "Bone-Cut Belt"
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Hard
+					//Attributes AlwaysCrit
+					WeaponRestrictions PrimaryOnly
+					Item "The Manneater"
+					Item "The Monstrous Mandible"
+				}
+				TFBot
+				{
+					Class Heavyweapons
+					Skill Hard
+					//Attributes AlwaysCrit
+					WeaponRestrictions PrimaryOnly
+					Item "The Manneater"
+					Item "The Monstrous Mandible"
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage06"
+			Where spawnbot
+			TotalCount 14
+			MaxActive 4
+			SpawnCount 2
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 25
+			WaitForAllDead "stage05b"
+			TotalCurrency 300
+		
+			TFBot
+			{
+				Template T_TFBot_Giant_DemoMan_PrinceTavish
+				Attributes AlwaysCrit
+				Item "Forgotten King's Restless Head"
+				Item "Forgotten King's Pauldrons"
+				CharacterAttributes
+				{
+					"bombinomicon effect on death" 1
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Where spawnbot
+			TotalCount 18
+			MaxActive 3
+			SpawnCount 3
+			WaitBeforeStarting 35
+			WaitBetweenSpawns 0
+			WaitForAllDead "stage05b"
+			TotalCurrency 300
+			RandomSpawn 1
+		
+			TFBot
+			{
+				Template T_TFBot_Medic
+				Item "The Second Opinion"
+				Item "The Trepanabotomizer"
+			}
+		}
+		WaveSpawn //Tank
+		{
+			Name "stage07tank"
+			TotalCount 1
+			WaitBeforeStarting 65
+			WaitBetweenSpawns 40
+			WaitForAllDead "stage06"
+			TotalCurrency 200
+						
+			FirstSpawnOutput                                                                                                                                                            
+			{
+				 Target boss_spawn_relay                                            
+				 Action Trigger                         
+			}
+
+			Tank
+			{
+				Health 50000
+				Speed 70
+				Name "tankboss"
+				StartingPathTrackNode "tank_path_1"
+				Skin 1
+
+				OnKilledOutput                                  
+				{
+					Target boss_dead_relay
+					Action Trigger                         
+				}
+				
+				OnBombDroppedOutput                             
+				{
+					Target boss_deploy_relay 
+					Action Trigger                         
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage07a"
+			Where spawnbot_tunnel
+			TotalCount 24
+			MaxActive 8
+			SpawnCount 8
+			WaitBeforeStarting 30
+			WaitBetweenSpawns 12
+			WaitForAllDead "stage06"
+			TotalCurrency 200		
+		
+			Squad
+			{
+				TFBot
+				{
+					Class Demoman
+					Skill Expert
+					Attributes AlwaysCrit
+					WeaponRestrictions PrimaryOnly
+					Item "The Mann-Bird of Aberdeen"
+					ItemAttributes
+					{
+						ItemName "TF_WEAPON_GRENADELAUNCHER"
+						"damage causes airblast" 1
+						"damage bonus" 1.3
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Medic 
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage07b"
+			Where spawnbot_scattered
+			TotalCount 72
+			MaxActive 8
+			SpawnCount 4
+			WaitBeforeStarting 36
+			WaitBetweenSpawns 5
+			WaitForAllDead "stage06"
+			TotalCurrency 300		
+		
+			RandomChoice
+			{
+				TFBot
+				{
+					Class Scout
+					Skill Hard
+					Attributes AlwaysCrit
+					WeaponRestrictions PrimaryOnly
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk
+					Attributes AlwaysCrit
+				}
+				TFBot
+				{
+					Template T_TFBot_Scout_Bonk
+					Attributes AlwaysCrit
+				}
+			}
+		}
+		WaveSpawn //WAVE 01a: 27 total, 9 active, Scout (melee only)
+		{
+			Name "stage07c"
+			Where spawnbot
+			TotalCount 15
+			MaxActive 6
+			SpawnCount 3
+			WaitBeforeStarting 50
+			WaitBetweenSpawns 30
+			WaitForAllDead "stage06"
+			TotalCurrency 300		
+		
+			Squad
+			{
+				TFBot
+				{
+					Template T_TFBot_Giant_Heavyweapons
+					Attributes AlwaysCrit
+					Item "The Chicken Kiev"
+					Item "Commissar's Coat"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Medimedes"
+					Item "The Smock Surgeon"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+				TFBot
+				{
+					Template T_TFBot_Giant_Medic_Regen
+					Item "Medimedes"
+					Item "The Smock Surgeon"
+					CharacterAttributes
+					{
+						"bombinomicon effect on death" 1
+					}
+				}
+			}
+		}
+	}	
+}
