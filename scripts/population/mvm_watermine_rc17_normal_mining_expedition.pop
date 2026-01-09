@@ -1,0 +1,1006 @@
+#base robot_standard.pop
+#base robot_giant.pop
+
+// Mining Expedition - Watermine Normal
+// Made by PDA Expert
+
+WaveSchedule
+{
+    StartingCurrency 400
+    RespawnWaveTime 2
+    CanBotsAttackWhileInSpawnRoom No
+
+    Templates
+    {
+        T_TFBot_Demoman_Sticky // Slightly weaker demo bot
+		{
+		    Class Demoman
+			Skill Normal
+			Name "Sticky Demoman"
+			WeaponRestrictions SecondaryOnly
+			ClassIcon demo_sticky_daan
+			
+			Item "Scotch Bonnet"
+			Item "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+			
+			Attributes HoldFireUntilFullReload
+			
+	       	ItemAttributes
+			{
+		   		ItemName "TF_WEAPON_GRENADELAUNCHER"
+		    	"fire rate bonus" 999999
+				"override projectile type" 27
+				"is_passive_weapon" 1
+			}
+			
+			ItemAttributes
+			{
+		   	    ItemName "Upgradeable TF_WEAPON_PIPEBOMBLAUNCHER"
+				"stickybomb charge rate" 0.01
+				"max pipebombs decreased" -6
+				"sticky arm time penalty" 0.5
+				"clip size penalty" 0.5
+				"Projectile range decreased" 0.5
+			}
+		}
+    }
+
+	Mission
+	{
+		Objective DestroySentries
+		
+		BeginAtWave 1
+		RunForThisManyWaves 8
+		
+		Where spawnbot
+		
+		CooldownTime 35
+		TFBot
+		{
+			Template T_TFBot_SentryBuster
+		}
+	}
+
+	Mission
+	{
+		Objective Spy
+		
+		BeginAtWave 3
+		RunForThisManyWaves 1
+		
+		Where spawnbot
+		
+        InitialCooldown 35
+		CooldownTime 45
+        DesiredCount 2
+		TFBot
+		{
+			Template T_TFBot_Spy
+		}
+	}
+
+    // Wave 1/6 ($600)
+
+    // 16 Soldiers
+    // 48 Pickaxe Soldiers (Randomized)
+    // 12 Heavies
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_main
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 16
+            MaxActive 4
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitBetweenSpawns 3.5
+            TotalCurrency 200
+            TFBot
+            {
+                Class Soldier
+                Skill Easy
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 48
+            MaxActive 10
+            SpawnCount 2
+
+            Where spawnbot
+            Where spawnbot_left
+            Where spawnbot_right
+
+            WaitBeforeStarting 3
+            WaitBetweenSpawns 4
+            TotalCurrency 200
+            RandomChoice
+            {
+                TFBot
+                {
+                    Name "Escape Plan Soldier"
+                    Class Soldier
+                    Skill Normal
+
+                    WeaponRestrictions MeleeOnly
+
+                    Item "The Escape Plan"
+                    Item "The Data Mining Light"
+                }
+                TFBot
+                {
+                    Name "Equalizer Soldier"
+                    Class Soldier
+                    Skill Normal
+
+                    WeaponRestrictions MeleeOnly
+
+                    Item "The Equalizer"
+                    Item "The Data Mining Light"
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 12
+            MaxActive 12
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 5
+            TotalCurrency 200
+            TFBot
+            {
+                Class Heavy
+                Skill Easy
+            }
+        }
+    }
+
+    // Wave 2/6 ($700)
+
+    // 2 Giant Charged Soldiers
+    // 1 Giant Concheror Soldier
+    // 50 Mitten Heavies
+
+    // Support : Heavyweight Champs
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_main
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 2
+            MaxActive 2
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 20
+            TotalCurrency 150
+            TFBot
+            {
+                Template T_TFBot_Giant_Soldier_Crit
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitForAllDead "wave01"
+            TotalCurrency 100
+            TFBot
+            {
+                Template T_TFBot_Giant_Soldier_Extended_Concheror
+                Skill Normal
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 50
+            MaxActive 15
+            SpawnCount 5
+
+            Where spawnbot
+            Where spawnbot_left
+            Where spawnbot_right
+            Where spawnbot_flank
+
+            WaitBetweenSpawns 7.5
+            TotalCurrency 300
+            TFBot
+            {
+                Template T_TFBot_Heavyweapons_Gnome
+                Item "Trapper's Flap"
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 25
+            MaxActive 8
+            SpawnCount 2
+
+            Where spawnbot
+            Where spawnbot_left
+            Where spawnbot_right
+
+            Support 1
+
+            WaitBeforeStarting 30
+            WaitBetweenSpawns 6
+            TotalCurrency 150
+            TFBot
+            {
+                Template T_TFBot_Heavyweapons_Heavyweight_Champ
+            }
+        }
+    }
+
+    // Wave 3/6 ($1000)
+
+    // 2 Tanks (7k)
+    // 30 Demoknights
+    // 16 Sticky Demomen
+    
+    // Support : Spies
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_alt
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+
+            TotalCurrency 300
+            Tank
+            {
+				Name   "tankboss"
+				Health 7000
+				Speed  75
+				StartingPathTrackNode "boss_path_1"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+
+            TotalCurrency 300
+            WaitBeforeStarting 25
+            Tank
+            {
+				Name   "tankboss"
+				Health 7000
+				Speed  75
+				StartingPathTrackNode "boss_path_2"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 6
+            MaxActive 6
+            SpawnCount 1
+
+            Where spawnbot_right
+
+            WaitBetweenSpawns 0.1
+            TotalCurrency 20
+            TFBot
+            {
+                Template T_TFBot_Demoman_Knight
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 24
+            MaxActive 10
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitBeforeStarting 8
+            WaitBetweenSpawns 4
+            TotalCurrency 140
+            RandomChoice
+            {
+                TFBot
+                {
+                    Class Demoman
+                    Name "Demoknight"
+                    ClassIcon demoknight
+                    Skill Normal
+                    Item "The Tide Turner"
+                    Item "The Eyelander"
+                    WeaponRestrictions MeleeOnly
+                    ItemAttributes
+                    {
+                        ItemName "The Eyelander"
+                        "critboost on kill" 3
+                    }
+                }
+                TFBot
+                {
+                    Class Demoman
+                    Name "Demoknight"
+                    ClassIcon demoknight
+                    Skill Normal
+                    Item "The Tide Turner"
+                    Item "The Eyelander"
+                    WeaponRestrictions MeleeOnly
+                    ItemAttributes
+                    {
+                        ItemName "The Eyelander"
+                        "critboost on kill" 3
+                    }
+                }
+                TFBot
+                {
+                    Template T_TFBot_Demoman_Knight
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 16
+            MaxActive 8
+            SpawnCount 4
+
+            Where spawnbot
+
+            WaitBeforeStarting 45
+            WaitBetweenSpawns 8
+            TotalCurrency 240
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Demoman_Sticky
+                }
+                TFBot
+                {
+                    Template T_TFBot_Demoman_Sticky
+                }
+                TFBot
+                {
+                    Template T_TFBot_Demoman_Sticky
+                }
+                TFBot
+                {
+                    Template T_TFBot_Demoman_Sticky
+                }
+            }
+        }
+    }
+
+    // Wave 4/6 ($800)
+
+    // 3 Giant Rapid Fire Demomen
+    // 24 Pyros (Easy AI)
+
+    // 2 Giant Deflector Pyros
+    // 1 Giant Rapid Fire Demoman & 3 Big Heal Medics
+
+    // Support : Bat Scouts
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_alt
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 3
+            MaxActive 2
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitBetweenSpawns 13
+            TotalCurrency 150
+            TFBot
+            {
+                Template T_TFBot_Giant_Demoman
+                ClassIcon demo_spammer
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 24
+            MaxActive 10
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 3
+            TotalCurrency 150
+            TFBot
+            {
+                Class Pyro
+                Skill Easy
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave02"
+            TotalCount 2
+            MaxActive 2
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitForAllDead "wave01"
+            WaitBeforeStarting 4
+            WaitBetweenSpawns 18
+            TotalCurrency 150
+            TFBot
+            {
+                Template T_TFBot_Giant_Pyro
+                Name "Giant Deflector Pyro"
+                ClassIcon pyro_reflect_daan
+
+                Item "The U-clank-a"
+                Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+
+                ItemAttributes
+                {
+                    ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+                    "airblast_destroy_projectile" 1
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave02"
+            TotalCount 4
+            MaxActive 4
+            SpawnCount 4
+
+            Where spawnbot
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 12
+            TotalCurrency 200
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Giant_Demoman
+                    ClassIcon demo_spammer
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_BigHeal
+                    Name "Big Heal Medic"
+
+                    Item "The Surgeon's Stahlhelm"
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_BigHeal
+                    Name "Big Heal Medic"
+
+                    Item "The Surgeon's Stahlhelm"
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_BigHeal
+                    Name "Big Heal Medic"
+
+                    Item "The Surgeon's Stahlhelm"
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 32
+            MaxActive 6
+            SpawnCount 1
+
+            Where spawnbot
+
+            Support 1
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 5
+            WaitBetweenSpawns 1
+            TotalCurrency 150
+            TFBot
+            {
+                Class Scout
+                ClassIcon scout_bat_nys
+                Skill Normal
+
+                WeaponRestrictions MeleeOnly
+            }
+        }
+    }
+
+    // Wave 5/6 ($1200)
+
+    // 2 Tanks (8k HP)
+    // 1 Drill Tank (7k HP)
+    // 16 Heavies (Normal AI)
+    // 32 Scouts (Easy AI)
+
+    // Support : Soldiers paired with a Big Heal Medic
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_main
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            TotalCount 32
+            MaxActive 10
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitBetweenSpawns 4.5
+            TotalCurrency 150
+            TFBot
+            {
+                Class Scout
+                Skill Easy
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 16
+            MaxActive 8
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitBeforeStarting 16
+            WaitBetweenSpawns 5
+            TotalCurrency 250
+            TFBot
+            {
+                Class Heavyweapons
+                Skill Normal
+                MaxVisionRange 1000
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 2
+            MaxActive 2
+            SpawnCount 1
+
+            TotalCurrency 300
+            WaitBetweenSpawns 8
+            Tank
+            {
+				Name   "tankboss"
+				Health 9000
+				Speed  75
+				StartingPathTrackNode "boss_path_1"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+
+            WaitForAllDead "wave01"
+            TotalCurrency 300
+            Tank
+            {
+				Name   "drilltank_watermine"
+				Health 11000
+				Speed  75
+				StartingPathTrackNode "tank_path_drill_1b"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 30
+            MaxActive 6
+            SpawnCount 2
+
+            Where spawnbot
+
+            Support 1
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 25
+            WaitBetweenSpawns 8
+            TotalCurrency 200
+            Squad
+            {
+                TFBot
+                {
+                    Class Soldier
+                    Skill Normal
+                }
+                TFBot
+                {
+                    Template T_TFBot_Medic_BigHeal
+                    Name "Big Heal Medic"
+
+                    Item "The Surgeon's Stahlhelm"
+                }
+            }
+        }
+    }
+
+    // Wave 6/6
+
+    // 4 Giant Mittens Heavies
+    // 27 Sticky Demomen
+    // 20 Pyros
+    
+    // 2 Giant Heavy & 2 Giant Mittens Heavy
+
+    // Railgun Tank (15k HP)
+    // 24 Deflector Pyros (Normal AI)
+
+    // Support : Cow Mangler Soldiers
+
+    Wave
+    {
+        StartWaveOutput
+        {
+            Target wave_start_relay
+            Action Trigger
+        }
+        InitWaveOutput
+        {
+            Target init_wave_relay_alt
+            Action Trigger
+		}
+        DoneOutput
+        {
+            Target wave_finished_relay
+            Action Trigger
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 4
+            MaxActive 2
+            SpawnCount 1
+
+            Where spawnbot
+
+            WaitBetweenSpawns 12
+            TotalCurrency 100
+            TFBot
+            {
+                Template T_TFBot_Giant_Heavyweapons
+                Name "Giant Mittens Heavy"
+                ClassIcon heavy_mittens
+                WeaponRestrictions MeleeOnly
+
+                Item "The Holiday Punch"
+                Item "Trapper's Flap"
+
+                ItemAttributes
+                {
+                    ItemName "The Holiday Punch"
+                    "fire rate bonus" 0.8
+                    "critboost on kill" 3
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 27
+            MaxActive 9
+            SpawnCount 3
+
+            Where spawnbot_left
+
+            WaitBeforeStarting 12
+            WaitBetweenSpawns 7
+            TotalCurrency 100
+            TFBot
+            {
+                Template T_TFBot_Demoman_Sticky
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave01"
+            TotalCount 20
+            MaxActive 6
+            SpawnCount 1
+
+            Where spawnbot
+            Where spawnbot_flank
+
+            WaitBetweenSpawns 3
+            TotalCurrency 100
+            TFBot
+            {
+                Class Pyro
+                Skill Easy
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave02_giantheavy"
+            TotalCount 4
+            MaxActive 3
+            SpawnCount 2
+
+            Where spawnbot
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 10
+            TotalCurrency 300
+            Squad
+            {
+                TFBot
+                {
+                    Template T_TFBot_Giant_Heavyweapons
+                }
+                TFBot
+                {
+                    Template T_TFBot_Giant_Heavyweapons
+                    Name "Giant Mittens Heavy"
+                    ClassIcon heavy_mittens
+                    WeaponRestrictions MeleeOnly
+
+                    Item "The Holiday Punch"
+                    Item "Trapper's Flap"
+
+                    ItemAttributes
+                    {
+                        ItemName "The Holiday Punch"
+                        "fire rate bonus" 0.8
+                        "critboost on kill" 3
+                    }
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            TotalCount 1
+            MaxActive 1
+            SpawnCount 1
+
+            WaitForAllDead "wave02_giantheavy"
+            FirstSpawnWarningSound "mvm/giant_heavy/giant_heavy_entrance.wav"
+            TotalCurrency 300
+            Tank
+            {
+				Name   "combattank_bomb|railgun|railgun"
+				Health 15000
+				Speed  50
+                Skin 1
+				StartingPathTrackNode "boss_path_2"
+
+				OnBombDroppedOutput
+				{
+					Target boss_deploy_relay
+					Action Trigger
+				}
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave03"
+            TotalCount 24
+            MaxActive 8
+            SpawnCount 2
+
+            Where spawnbot
+            Where spawnbot_boss
+
+            WaitForAllDead "wave02_giantheavy"
+            WaitBeforeStarting 10
+            WaitBetweenSpawns 2.75
+            TotalCurrency 50
+            TFBot
+            {
+                Class Pyro
+                Name "Deflector Pyro"
+                Skill Normal
+
+                MaxVisionRange 900
+
+                Item "The U-clank-a"
+                Item "Upgradeable TF_WEAPON_FLAMETHROWER"
+
+                ItemAttributes
+                {
+                    ItemName "Upgradeable TF_WEAPON_FLAMETHROWER"
+                    "airblast_destroy_projectile" 1
+                }
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave02_support"
+            TotalCount 15
+            MaxActive 4
+            SpawnCount 2
+
+            Where spawnbot
+            Where spawnbot_flank
+
+            Support 1
+
+            WaitForAllSpawned "wave01"
+            WaitBeforeStarting 20
+            WaitBetweenSpawns 8
+            TotalCurrency 50
+            TFBot
+            {
+                Class Soldier
+                Skill Hard
+
+                Item "The Cow Mangler 5000"
+            }
+        }
+
+        WaveSpawn
+        {
+            Name "wave03_extra"
+            TotalCount 15
+            MaxActive 4
+            SpawnCount 2
+
+            Where spawnbot_boss
+            Where spawnbot
+
+            Support 1
+
+            WaitForAllSpawned "wave03"
+            WaitBeforeStarting 4
+            WaitBetweenSpawns 9
+            TotalCurrency 100
+            TFBot
+            {
+                Class Soldier
+                Skill Hard
+
+                Item "The Cow Mangler 5000"
+            }
+        }
+    }
+}

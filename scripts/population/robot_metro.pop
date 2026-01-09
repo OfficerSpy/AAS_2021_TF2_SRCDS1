@@ -1,3 +1,6 @@
+//Metro Templates
+//Authors: Lamiiku, Signalmax
+
 WaveSchedule
 {
 	Templates
@@ -8,7 +11,7 @@ WaveSchedule
 		T_TFBot_Scout_Pistol
 		{
 			Class Scout
-			ClassIcon scout_pistol_2
+			ClassIcon scout
 			WeaponRestrictions SecondaryOnly
 			ItemAttributes
 			{
@@ -24,7 +27,7 @@ WaveSchedule
 		{
 			Class Pyro
 			Name "Detonator Pyro"
-			ClassIcon pyro_detonator
+			ClassIcon pyro_flare
 			Skill Easy
 			Item "The Detonator"
 			WeaponRestrictions SecondaryOnly
@@ -99,10 +102,10 @@ WaveSchedule
 		{
 			Class Soldier
 			Name "Bison Soldier"
-			ClassIcon bison
+			ClassIcon soldier_sergeant_crits
 			Skill Expert
 			WeaponRestrictions SecondaryOnly
-			Item "The Righteous Bison"
+			Item "Tyrant's Helm"
 			Item "Lord Cockswain's Pith Helmet"
 			Attributes HoldFireUntilFullReload
 			ItemAttributes
@@ -121,8 +124,8 @@ WaveSchedule
 		T_TFBot_Demo_Skullcutter
 		{
 			Class Demoman
-			Name "Skullcutter Demo"
-			ClassIcon demo_skullcutter
+			Name "Skullcutter"
+			ClassIcon demoknight
 			Skill Hard
 			Item "The Bootlegger"
 			Item "The Chargin' Targe"
@@ -134,7 +137,8 @@ WaveSchedule
 		T_TFBot_Demo_Persuader
 		{
 			Class Demoman
-			ClassIcon demo_sultan
+			Name "Persuader"
+			ClassIcon demoknight
 			Skill Hard	
 			Item "Ali Baba's Wee Booties"
 			Item "The Splendid Screen"
@@ -154,8 +158,8 @@ WaveSchedule
 		T_TFBot_Demoman_Golfer
 		{
 			Class Demoman
-			Name "Golf Knight"
-			ClassIcon demo_nine
+			Name "Golfer"
+			ClassIcon demoknight
 			Skill Hard
 			Item "The Chargin' Targe"
 			Item "Nessie's Nine Iron"
@@ -165,7 +169,7 @@ WaveSchedule
 			{
 				ItemName "Nessie's Nine Iron"
 				"damage causes airblast" 1
-				"airblast pushback scale" 10
+				"airblast pushback scale" 8
 			}
 		}
 		
@@ -175,7 +179,7 @@ WaveSchedule
 		{
 			Class heavyweapons
 			Name "Natascha Heavy"
-			ClassIcon heavy_natascha
+			ClassIcon heavy
 			Skill Hard
 			Item "Natascha"
 			WeaponRestrictions PrimaryOnly
@@ -185,7 +189,7 @@ WaveSchedule
 		{
 			Class heavyweapons
 			Name "Gangster Heavy"
-			ClassIcon heavy_tomislav
+			ClassIcon heavy
 			Skill Normal
 			Item "Tomislav"
 			Item "Capone's Capper"
@@ -200,16 +204,21 @@ WaveSchedule
 		{
 			Class heavyweapons
 			Name "Evictor"
-			ClassIcon heavy_mobster
+			ClassIcon heavy_champ
 			Skill Hard
-			Scale .75
+			Scale 1.0
 			Health 225
 			Item "The Eviction Notice"
+			ItemAttributes
+			{
+				Item "The Eviction Notice"
+				"mod_maxhealth_drain_rate" 0
+			}
 			Item "Capone's Capper"
 			WeaponRestrictions MeleeOnly
 			CharacterAttributes
 			{
-				"move speed bonus"	1.25
+				"move speed bonus"	1.20
 			}
 		}
 
@@ -229,7 +238,7 @@ WaveSchedule
 			}
 			CharacterAttributes
 			{
-				"move speed bonus"	1.25
+				"move speed bonus"	1.20
 			}
 		}
 
@@ -256,7 +265,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Vaccinator Medic"
-			ClassIcon medic_bullet
+			ClassIcon medic
 			Skill Normal
 			Item "The Vaccinator"
 			Attributes SpawnWithFullCharge
@@ -273,7 +282,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Vaccinator Medic"
-			ClassIcon medic_blast
+			ClassIcon medic
 			Skill Normal
 			Item "The Vaccinator"
 			Attributes SpawnWithFullCharge
@@ -290,7 +299,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Vaccinator Medic"
-			ClassIcon medic_fire
+			ClassIcon medic
 			Skill Normal
 			Item "The Vaccinator"
 			Attributes SpawnWithFullCharge
@@ -307,7 +316,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Kritz Medic"
-			ClassIcon medic_kritzkrieg
+			ClassIcon medic
 			Skill Hard
 			Item "The Kritzkrieg"
 			Attributes SpawnWithFullCharge
@@ -324,8 +333,8 @@ WaveSchedule
 		T_TFBot_Sniper_SMG
 		{
 			Class Sniper
-			Name "SMG Sniper"
-			ClassIcon sniper_smg
+			Name "Cleaner"
+			ClassIcon sniper
 			Skill Hard
 			WeaponRestrictions SecondaryOnly
 			ItemAttributes
@@ -338,8 +347,8 @@ WaveSchedule
 		T_TFBot_Sniper_SMG_Easy
 		{
 			Class Sniper
-			Name "SMG Sniper"
-			ClassIcon sniper_smg
+			Name "Cleaner"
+			ClassIcon sniper
 			Skill Easy
 			WeaponRestrictions SecondaryOnly
 			ItemAttributes
@@ -354,7 +363,7 @@ WaveSchedule
 		{
 			Class Sniper
 			Name "Hunter"
-			ClassIcon sniper_huntsman_bleed
+			ClassIcon sniper_bow
 			Skill Hard
 			Health 150
 			WeaponRestrictions PrimaryOnly
@@ -432,8 +441,8 @@ WaveSchedule
 				"set_item_texture_wear" .8
 				"damage bonus" 1.33
 				"weapon burn dmg increased" 1.25
-				"lunchbox adds minicrits" 2
 				"flame life bonus" 1.75
+				"flame_drag" 6
 			}
 			CharacterAttributes
 			{
@@ -480,7 +489,7 @@ WaveSchedule
 		{
 			Class Soldier
 			Name "Giant Rocket Sniper"
-			ClassIcon soldier_directhit
+			ClassIcon soldier_giant
 			Skill Expert
 			Health 5000
 			Item "The Direct Hit"
@@ -509,7 +518,7 @@ WaveSchedule
 		{
 			Class Demoman
 			Name "Juggernaut"
-			ClassIcon demo_atomic
+			ClassIcon demo_giant
 			Health 45000
 			Skill Expert
 			WeaponRestrictions PrimaryOnly
@@ -544,7 +553,7 @@ WaveSchedule
 		{
 			Class Heavyweapons
 			Name "Giant Gangster Heavy"
-			ClassIcon heavy_tomislav
+			ClassIcon heavy_giant
 			Skill Expert
 			Health 5000
 			Item "Tomislav"
@@ -603,7 +612,7 @@ WaveSchedule
 		T_TFBot_Heavyweapons_Potato
 		{
 			Class heavyweapons
-			Name "Mega Fister"
+			Name "Mega Fist"
 			ClassIcon heavy_champ_giant
 			Skill expert
 			Scale 1.9
@@ -697,7 +706,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Giant Vaccinator Medic"
-			ClassIcon medic_bullet
+			ClassIcon medic_giant
 			Health 4500
 			Skill Expert
 			Item "The Vaccinator"
@@ -723,7 +732,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Giant Vaccinator Medic"
-			ClassIcon medic_blast
+			ClassIcon medic_giant
 			Health 4500
 			Skill Expert
 			Item "The Vaccinator"
@@ -749,7 +758,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Giant Vaccinator Medic"
-			ClassIcon medic_fire
+			ClassIcon medic_giant
 			Health 4500
 			Skill Expert
 			Item "The Vaccinator"
@@ -775,7 +784,7 @@ WaveSchedule
 		{
 			Class Medic
 			Name "Giant Uber Medic"
-			ClassIcon medic_giant
+			ClassIcon medic_uber
 			Skill Expert
 			Health 4500
 			Item "Platinum Pickelhaube"
@@ -802,7 +811,7 @@ WaveSchedule
 		{
 			Class Sniper
 			Name "Giant Hunter"
-			ClassIcon sniper_huntsman_bleed
+			ClassIcon sniper_bow_multi
 			Skill Expert
 			Health 4000
 			WeaponRestrictions PrimaryOnly
